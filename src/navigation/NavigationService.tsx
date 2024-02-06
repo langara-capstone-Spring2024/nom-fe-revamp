@@ -3,39 +3,20 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
-  StripeCollection: undefined;
-  DropdownCollection: undefined;
-  CheckboxCollection: undefined;
-  TimePickerCollection: undefined;
-  TypographyCollection: undefined;
-  UserAvatarCollection: undefined;
-  SingleImagePickerCollection: undefined;
-  MultipleImagePickerCollection: undefined;
+ TestModuleCollection: undefined;
+ BaseCollection: undefined;
+ TestBaseCollection: undefined;
   ButtonCollection: undefined;
-  FormikTextInputFieldCollection: undefined;
-  LoadingAnimationCollection: undefined;
-  TextInputFieldCollection: undefined;
-};
-
-type ProductDetail = {
-  ProductDetail: {
-    product: {
-      id: number;
-      title: string;
-      price: number;
-      description: string;
-      image: string;
-    };
-  };
 };
 
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
-
+ TestScreen: undefined;
+  Stories: undefined;
   Login: undefined;
   SampleScreen: undefined;
-};
+} & Collections;
 
 export const navigationRef =
   React.createRef<NavigationContainerRef<RootStackParamList>>();

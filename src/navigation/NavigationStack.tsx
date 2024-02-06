@@ -8,14 +8,21 @@ import { navigationRef } from "./NavigationService";
 import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 
-import Button from "../components/base/Button";
+// PLOP_INJECT_COLLECTION_IMPORT
+
+import ButtonCollection from "../collections/base/Button";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
 const PrivateStack = createStackNavigator();
 
 const PrivateNavigator = () => {
-  const components = [{ func: SampleScreen, custom: false }];
+  const components = [
+    // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: SampleScreen, custom: false },
+    { func: ButtonCollection, custom: false },
+  ];
+
   return (
     <PrivateStack.Navigator>
       <Stack.Screen
