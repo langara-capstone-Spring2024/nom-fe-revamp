@@ -9,13 +9,18 @@ import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 
 import Button from "../components/base/Button";
+import ButtonCollection from "../collections/base/Button";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
 const PrivateStack = createStackNavigator();
 
 const PrivateNavigator = () => {
-  const components = [{ func: SampleScreen, custom: false }];
+  const components = [
+    { func: SampleScreen, custom: false },
+    { func: ButtonCollection, custom: false },
+  ];
+
   return (
     <PrivateStack.Navigator>
       <Stack.Screen
