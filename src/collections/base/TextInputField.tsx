@@ -7,10 +7,6 @@ const TextInputFieldCollection = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
 
-  const handleDelete = () => {
-    setValue("");
-  };
-
   const handleSearch = () => {
     console.log("Search");
   };
@@ -40,8 +36,6 @@ const TextInputFieldCollection = () => {
           value={value}
           setValue={setValue}
           leftIcon={<Ionicons name="person" size={24} />}
-          rightIcon={<Ionicons name="backspace" size={24} />}
-          onRightPress={handleDelete}
           isDarkMode={isDarkMode}
         />
         <Text style={{ color: isDarkMode ? "white" : "black" }}>

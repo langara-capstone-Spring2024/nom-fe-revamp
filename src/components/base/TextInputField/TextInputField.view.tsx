@@ -45,15 +45,18 @@ const TextInputField = (props: TextInputFieldProps) => {
           autoCapitalize="none"
           style={styles.textInputField}
         />
+        <Pressable onPress={() => setValue("")} style={{ marginLeft: 8 }}>
+          <Ionicons name="close-circle" size={18} style={{ color: "black" }} />
+        </Pressable>
         {secured && (
           <Pressable
             onPress={() => setIsVisible((oldValue) => !oldValue)}
             style={{ marginLeft: 8 }}
           >
             {isVisible ? (
-              <Ionicons name="eye" size={24} style={{ color: "black" }} />
+              <Ionicons name="eye" size={18} style={{ color: "black" }} />
             ) : (
-              <Ionicons name="eye-off" size={24} style={{ color: "black" }} />
+              <Ionicons name="eye-off" size={18} style={{ color: "black" }} />
             )}
           </Pressable>
         )}

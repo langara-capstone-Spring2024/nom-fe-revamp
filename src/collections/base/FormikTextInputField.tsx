@@ -40,7 +40,12 @@ const FormikTextInputFieldCollection = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: isDarkMode ? "black" : "white" },
+      ]}
+    >
       <View
         style={{
           marginBottom: 32,
@@ -67,9 +72,10 @@ const FormikTextInputFieldCollection = () => {
                 setValue={handleChange("name")}
                 leftIcon={<Ionicons name="person" size={24} />}
                 error={touched.name ? errors.name : ""}
+                isDarkMode={isDarkMode}
               />
             </View>
-            <View>
+            <View style={{ marginBottom: 32 }}>
               <TextInputField
                 label="Email"
                 placeholder="Email"
@@ -77,9 +83,10 @@ const FormikTextInputFieldCollection = () => {
                 setValue={handleChange("email")}
                 leftIcon={<Ionicons name="mail" size={24} />}
                 error={touched.email ? errors.email : ""}
+                isDarkMode={isDarkMode}
               />
-              <Button title="Submit" onPress={() => handleSubmit()} />
             </View>
+            <Button title="Submit" onPress={() => handleSubmit()} />
           </>
         )}
       </Formik>
@@ -97,6 +104,7 @@ export default FormikTextInputFieldCollection;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 16,
   },
 });
