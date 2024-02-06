@@ -1,5 +1,4 @@
-import { EntityState } from "@reduxjs/toolkit";
-import { apiSlice } from "../../app/api/apiSlice";
+import { apiSlice } from "../../service/api/apiSlice";
 import { logOut, setCredentials } from "./authSlice";
 import { AccessTokenProps, LoginProps } from "../../types/store/AuthState";
 
