@@ -11,6 +11,8 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 // PLOP_INJECT_COLLECTION_IMPORT
 
 import ButtonCollection from "../collections/base/Button";
+import TextInputFieldCollection from "../collections/base/TextInputField";
+import FormikTextInputFieldCollection from "../collections/base/FormikTextInputField";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -21,6 +23,8 @@ const PrivateNavigator = () => {
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: SampleScreen, custom: false },
     { func: ButtonCollection, custom: false },
+    { func: FormikTextInputFieldCollection, custom: false },
+    { func: TextInputFieldCollection, custom: false },
   ];
 
   return (

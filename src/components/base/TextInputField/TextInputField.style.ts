@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingVertical: 8,
     paddingHorizontal: 16,
+    borderColor: "lightgray",
+    borderWidth: 1,
   },
   textInputField: {
     flex: 1,
