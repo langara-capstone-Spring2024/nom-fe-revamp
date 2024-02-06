@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { QueryClientProvider, useMutation } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { RNQueryClient } from "./src/services/react-query/query-client";
-import { useStore } from "./src/store";
 import Navigator from "./src/navigation";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 const Entrypoint = () => {
   const [fontsLoaded] = useFonts({
@@ -20,10 +20,12 @@ const Entrypoint = () => {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
-
+  console.log(process.env.STRIPE_PB_KEY);
   return (
     <QueryClientProvider client={RNQueryClient}>
-      <Navigator />
+      <StripeProvider publishableKey={process.env.STRIPE_PB_KEY as string}>
+        <Navigator />
+      </StripeProvider>
     </QueryClientProvider>
   );
 };
