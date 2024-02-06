@@ -16,7 +16,7 @@
     "noEmit": true,
     "strict": true,
     "target": "es2017",
-    "types": ["react", "react-native", "node"]
+    "types": ["react", "react-native", "node", "env.d.ts"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
 

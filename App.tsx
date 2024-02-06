@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { RNQueryClient } from "./src/services/react-query/query-client";
 import Navigator from "./src/navigation";
 import { StripeProvider } from "@stripe/stripe-react-native";
+import { STRIPE_PB_KEY } from "@env";
 
 const Entrypoint = () => {
   const [fontsLoaded] = useFonts({
@@ -14,16 +15,14 @@ const Entrypoint = () => {
     PublicSansRegular: require("./assets/fonts/PublicSans-VariableFont_wght.ttf"),
     PublicSansItalic: require("./assets/fonts/PublicSans-Italic-VariableFont_wght.ttf"),
   });
-
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) await SplashScreen.hideAsync();
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
-  console.log(process.env.STRIPE_PB_KEY);
   return (
     <QueryClientProvider client={RNQueryClient}>
-      <StripeProvider publishableKey={process.env.STRIPE_PB_KEY as string}>
+      <StripeProvider publishableKey={STRIPE_PB_KEY}>
         <Navigator />
       </StripeProvider>
     </QueryClientProvider>

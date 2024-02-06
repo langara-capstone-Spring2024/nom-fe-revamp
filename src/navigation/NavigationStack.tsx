@@ -68,6 +68,10 @@ const App = () => {
     setIsLoggedIn: state.setIsLoggedIn,
   }));
 
+  React.useEffect(() => {
+    setIsLoggedIn(false);
+  }, []);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
