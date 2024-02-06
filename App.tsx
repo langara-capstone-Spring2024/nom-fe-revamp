@@ -3,13 +3,19 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { Provider } from "react-redux";
-import { store } from "./src/service/store";
-import { useLoginMutation } from "./src/features/auth/authApiSlice";
-import { useAppDispatch } from "./src/service/hooks";
-import { setCredentials } from "./src/features/auth/authSlice";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { RNQueryClient } from "./src/services/react-query/query-client";
+import { useStore } from "./src/store";
+
+// import { useLoginMutation } from "./src/services/react-query/queries/auth";
 
 export default function App() {
+  const { setTokens, setIsLoggedIn } = useStore((state) => ({
+    setTokens: state.setTokens,
+    setIsLoggedIn: state.setIsLoggedIn,
+    isLoggedIn: state.isLoggedIn,
+  }));
+
   const [fontsLoaded] = useFonts({
     bold: require("./assets/fonts/SF-Pro-Text-Bold.otf"),
     semiBold: require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
@@ -21,9 +27,6 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [login] = useLoginMutation();
-  const dispatch = useAppDispatch();
-
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) await SplashScreen.hideAsync();
   }, [fontsLoaded]);
@@ -31,20 +34,20 @@ export default function App() {
   const handleSubmit = async () => {
     // Here you can handle the submission of email and password, like sending them to a server
     try {
-      const { accessToken } = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ accessToken }));
+      console.log("Email:", email);
+      console.log("Password:", password);
       setEmail("");
       setPassword("");
-      console.log(accessToken);
     } catch (err: any) {
       console.log(err.data?.message);
     }
   };
 
   if (!fontsLoaded) return null;
+  // const loginMutation = useLoginMutation();
 
   return (
-    <Provider store={store}>
+    <QueryClientProvider client={RNQueryClient}>
       <View style={styles.container} onLayout={onLayoutRootView}>
         <TextInput
           style={styles.input}
@@ -64,7 +67,7 @@ export default function App() {
         <Button title="Submit" onPress={handleSubmit} />
         <StatusBar style="auto" />
       </View>
-    </Provider>
+    </QueryClientProvider>
   );
 }
 
