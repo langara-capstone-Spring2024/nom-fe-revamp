@@ -3,16 +3,18 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- TestModuleCollection: undefined;
- BaseCollection: undefined;
- TestBaseCollection: undefined;
+  TestModuleCollection: undefined;
+  BaseCollection: undefined;
+  TestBaseCollection: undefined;
   ButtonCollection: undefined;
+  FormikTextInputFieldCollection: undefined;
+  TextInputFieldCollection: undefined;
 };
 
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
- TestScreen: undefined;
+  TestScreen: undefined;
   Stories: undefined;
   Login: undefined;
   SampleScreen: undefined;

@@ -15,11 +15,12 @@ const TextInputField = (props: TextInputFieldProps) => {
     rounded,
     secured,
     error,
+    isDarkMode,
     onRightPress,
   } = props;
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const isDarkMode = false;
+
   return (
     <View>
       {label && (
@@ -31,12 +32,10 @@ const TextInputField = (props: TextInputFieldProps) => {
         style={[
           styles.textInputFieldContainer,
           { borderRadius: rounded ? 24 : 8 },
-        ]}>
+        ]}
+      >
         {leftIcon && (
-          <Text
-            style={{ marginRight: 8, color: isDarkMode ? "white" : "black" }}>
-            {leftIcon}
-          </Text>
+          <Text style={{ marginRight: 8, color: "black" }}>{leftIcon}</Text>
         )}
         <TextInput
           placeholder={placeholder}
@@ -49,28 +48,18 @@ const TextInputField = (props: TextInputFieldProps) => {
         {secured && (
           <Pressable
             onPress={() => setIsVisible((oldValue) => !oldValue)}
-            style={{ marginLeft: 8 }}>
+            style={{ marginLeft: 8 }}
+          >
             {isVisible ? (
-              <Ionicons
-                name="eye"
-                size={24}
-                style={{ color: isDarkMode ? "white" : "black" }}
-              />
+              <Ionicons name="eye" size={24} style={{ color: "black" }} />
             ) : (
-              <Ionicons
-                name="eye-off"
-                size={24}
-                style={{ color: isDarkMode ? "white" : "black" }}
-              />
+              <Ionicons name="eye-off" size={24} style={{ color: "black" }} />
             )}
           </Pressable>
         )}
         {rightIcon && (
           <Pressable onPress={onRightPress}>
-            <Text
-              style={{ marginLeft: 8, color: isDarkMode ? "white" : "black" }}>
-              {rightIcon}
-            </Text>
+            <Text style={{ marginLeft: 8, color: "black" }}>{rightIcon}</Text>
           </Pressable>
         )}
       </View>

@@ -16,6 +16,15 @@ const Stories = () => {
       name: "Button",
       onPress: () => NavigationService.navigate("ButtonCollection"),
     },
+    {
+      name: "FormikTextInputField",
+      onPress: () =>
+        NavigationService.navigate("FormikTextInputFieldCollection"),
+    },
+    {
+      name: "TextInputField",
+      onPress: () => NavigationService.navigate("TextInputFieldCollection"),
+    },
   ];
 
   const renderItem = ({ item }: { item: ButtonItem }) => (
