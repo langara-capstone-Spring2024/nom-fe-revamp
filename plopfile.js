@@ -58,7 +58,7 @@ module.exports = (plop) => {
         path: "src/navigation/NavigationStack.tsx",
         pattern: "// PLOP_INJECT_COLLECTION_IMPORT",
         template:
-          "import {{pascalCase name}}Collection from 'src/collections/base/{{pascalCase name}}'",
+          "import {{pascalCase name}}Collection from '../collections/base/{{pascalCase name}}'",
       },
     ],
   });
@@ -97,32 +97,6 @@ module.exports = (plop) => {
         path: "src/collections/layout/{{pascalCase name}}.tsx",
         templateFile: "plop-templates/collection/layout.tsx.hbs",
       },
-      // {
-      //   type: "append",
-      //   path: "src/navigation/NavigationService.tsx",
-      //   pattern: "// PLOP_COMPONENT_TYPE",
-      //   template: " {{ pascalCase name }}Collection: undefined;",
-      // },
-      // {
-      //   type: "append",
-      //   path: "src/screens/Stories/index.tsx",
-      //   pattern: "/*_PLOP_INJECT_COMPONENT_SCREEN */",
-      //   template:
-      //     "{name: '{{pascalCase name}}', onPress: () => NavigationService.navigate('{{ pascalCase name }}Collection')},",
-      // },
-      // {
-      //   type: "append",
-      //   path: "src/navigation/NavigationStack.tsx",
-      //   pattern: "// PLOP_INJECT_NAVIGATOR_SCREEN",
-      //   template: "{func: {{ pascalCase name}}Collection, custom: false},",
-      // },
-      // {
-      //   type: "append",
-      //   path: "src/navigation/NavigationStack.tsx",
-      //   pattern: "// PLOP_INJECT_COLLECTION_IMPORT",
-      //   template:
-      //     "import {{pascalCase name}}Collection from 'src/collections/base/{{pascalCase name}}'",
-      // },
     ],
   });
   plop.setGenerator("base", {
@@ -184,7 +158,7 @@ module.exports = (plop) => {
         path: "src/navigation/NavigationStack.tsx",
         pattern: "// PLOP_INJECT_COLLECTION_IMPORT",
         template:
-          "import {{pascalCase name}}Collection from 'src/collections/base/{{pascalCase name}}'",
+          "import {{pascalCase name}}Collection from '../collections/base/{{pascalCase name}}'",
       },
     ],
   });
@@ -247,7 +221,7 @@ module.exports = (plop) => {
         path: "src/navigation/NavigationStack.tsx",
         pattern: "// PLOP_INJECT_COLLECTION_IMPORT",
         template:
-          "import {{pascalCase name}}Collection from 'src/collections/module/{{pascalCase name}}'",
+          "import {{pascalCase name}}Collection from '../collections/module/{{pascalCase name}}'",
       },
     ],
   });

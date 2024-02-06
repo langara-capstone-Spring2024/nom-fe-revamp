@@ -3,12 +3,16 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+ TestModuleCollection: undefined;
+ BaseCollection: undefined;
+ TestBaseCollection: undefined;
   ButtonCollection: undefined;
 };
 
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+ TestScreen: undefined;
   Stories: undefined;
   Login: undefined;
   SampleScreen: undefined;
