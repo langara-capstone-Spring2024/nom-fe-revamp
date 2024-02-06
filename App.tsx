@@ -3,11 +3,10 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, useMutation } from "@tanstack/react-query";
 import { RNQueryClient } from "./src/services/react-query/query-client";
 import { useStore } from "./src/store";
-
-// import { useLoginMutation } from "./src/services/react-query/queries/auth";
+import { apiClient } from "./src/services/client";
 
 export default function App() {
   const { setTokens, setIsLoggedIn } = useStore((state) => ({
