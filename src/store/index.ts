@@ -20,7 +20,7 @@ export const useStore = create<IStore>()(
       // for testing purposes, displaying the AsyncStorage Data
       displayAsyncStorageData: async () => {
         try {
-          const storedData = await AsyncStorage.getItem("app-storage");
+          const storedData = await AsyncStorage.getItem("storage");
           // console.log("AsyncStorage Data:", storedData);
         } catch (error) {
           console.error("Error:", error);
@@ -28,7 +28,7 @@ export const useStore = create<IStore>()(
       },
     }),
     {
-      name: "app-storage",
+      name: "storage",
       storage: createJSONStorage(() => AsyncStorage),
     }
   )
