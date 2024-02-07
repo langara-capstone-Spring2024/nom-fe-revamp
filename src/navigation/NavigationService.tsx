@@ -3,7 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- MultipleImagePickerCollection: undefined;
+  MultipleImagePickerCollection: undefined;
   SingleImagePickerCollection: undefined;
   StripeCollection: undefined;
   DateTimeSelectorCollection: undefined;
