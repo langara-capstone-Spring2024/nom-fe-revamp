@@ -9,6 +9,7 @@ import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import LoadingAnimationCollection from '../collections/base/LoadingAnimation'
 import DateTimeSelectorCollection from "../collections/base/DateTimeSelector";
 import CheckboxCollection from "../collections/base/Checkbox";
 
@@ -24,6 +25,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: LoadingAnimationCollection, custom: false},
     { func: DateTimeSelectorCollection, custom: false },
     { func: CheckboxCollection, custom: false },
     { func: SampleScreen, custom: false },
