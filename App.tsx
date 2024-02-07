@@ -21,7 +21,6 @@ const Entrypoint = () => {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
-
   return (
     <QueryClientProvider client={RNQueryClient}>
       <StripeProvider publishableKey={STRIPE_PB_KEY}>
