@@ -1,16 +1,33 @@
-import React, { useState } from "react";
-import { View, Text, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text } from "react-native";
 import { StripeProps } from "./Stripe.props";
 import styles from "./Stripe.style";
 import { CardField, useStripe } from "@stripe/stripe-react-native";
-//@ts-ignore
-import { STRIPE_PB_KEY } from "@env";
+import axios from "axios";
+import Button from "../../base/Button";
+import { apiClient } from "../../../services/client";
+import { useStore } from "../../../store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stripe = (props: StripeProps) => {
   const [cardDetails, setCardDetails] = useState<any>({});
-  const { createPaymentMethod, createToken } = useStripe();
+  const { createPaymentMethod } = useStripe();
   const [error, setError] = useState<string | null>(null);
+  const accessToken = useStore((state) => state.accessToken);
+  console.log("ACCESS TOKEN", accessToken);
 
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("accessToken");
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    console.log(getData());
+  }, []);
   const handleSubmit = async () => {
     try {
       const { paymentMethod, error } = await createPaymentMethod({
@@ -22,7 +39,12 @@ const Stripe = (props: StripeProps) => {
         setError(error.message);
       } else {
         console.log("Payment Method created:", paymentMethod);
-        // Proceed with further actions, such as sending the paymentMethod to your backend
+
+        await apiClient.post("api/stripe-card", {
+          paymentMethodId: paymentMethod.id,
+        });
+
+        console.log("Payment method sent to backend successfully");
       }
     } catch (error) {
       console.error("Error creating payment method:", error);
@@ -31,7 +53,7 @@ const Stripe = (props: StripeProps) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <CardField
         postalCodeEnabled={true}
         placeholders={{
@@ -53,7 +75,16 @@ const Stripe = (props: StripeProps) => {
           console.log("focusField", focusedField);
         }}
       />
-      <Button title="Submit" onPress={handleSubmit} />
+      <Text>Use 4242 4242 4242 4242 in Card Number</Text>
+      <Text>Use any future date in expiry</Text>
+      <Text>Use any three digit number in cvv</Text>
+      <Button
+        variant="primary"
+        buttonSize="sm"
+        text="Add Card"
+        takeFullWidth
+        onPress={handleSubmit}
+      />
     </View>
   );
 };
