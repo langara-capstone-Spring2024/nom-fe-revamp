@@ -14,6 +14,7 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  Scanner: undefined;
   TestScreen: undefined;
   Stories: undefined;
   Login: undefined;
