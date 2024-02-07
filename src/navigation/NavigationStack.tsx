@@ -9,11 +9,13 @@ import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import DropdownCollection from '../collections/base/Dropdown'
-
+import DateTimeSelectorCollection from "../collections/base/DateTimeSelector";
+import CheckboxCollection from "../collections/base/Checkbox";
+import DropdownCollection from "../collections/base/Dropdown";
 import ButtonCollection from "../collections/base/Button";
 import TextInputFieldCollection from "../collections/base/TextInputField";
 import FormikTextInputFieldCollection from "../collections/base/FormikTextInputField";
+import TypographyCollection from "../collections/base/Typography";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -22,11 +24,14 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: DropdownCollection, custom: false},
+    { func: DateTimeSelectorCollection, custom: false },
+    { func: CheckboxCollection, custom: false },
+    { func: DropdownCollection, custom: false },
     { func: SampleScreen, custom: false },
     { func: ButtonCollection, custom: false },
     { func: FormikTextInputFieldCollection, custom: false },
     { func: TextInputFieldCollection, custom: false },
+    { func: TypographyCollection, custom: false },
   ];
 
   return (
