@@ -15,7 +15,7 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
       <Button
         variant="primary"
         buttonSize="lg"
-        text="Back"
+        text="Login"
         onPress={() => setIsLoggedIn(false)}
       />
     </View>
