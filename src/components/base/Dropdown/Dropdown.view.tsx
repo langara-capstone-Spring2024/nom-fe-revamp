@@ -20,7 +20,7 @@ const Dropdown = (props: DropdownProps) => {
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       onChange={(item) => {
-        setValue(item.value);
+        setValue?.(item.value);
         setIsFocused(false);
       }}
     />
