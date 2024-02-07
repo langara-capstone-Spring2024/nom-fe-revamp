@@ -7,6 +7,7 @@ import Login from "../screens/Login";
 import { navigationRef } from "./NavigationService";
 import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
+import Scanner from "../screens/Scanner";
 
 // PLOP_INJECT_COLLECTION_IMPORT
 import StripeCollection from "../collections/module/Stripe";
@@ -29,6 +30,7 @@ const PrivateNavigator = () => {
     { func: DateTimeSelectorCollection, custom: false },
     { func: CheckboxCollection, custom: false },
     { func: SampleScreen, custom: false },
+    { func: Scanner, custom: false },
     { func: ButtonCollection, custom: false },
     { func: FormikTextInputFieldCollection, custom: false },
     { func: TextInputFieldCollection, custom: false },
