@@ -12,7 +12,10 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'SingleImagePicker', onPress: () => NavigationService.navigate('SingleImagePickerCollection')},
+    {
+      name: "SingleImagePicker",
+      onPress: () => NavigationService.navigate("SingleImagePickerCollection"),
+    },
     {
       name: "DateTimeSelector",
       onPress: () => NavigationService.navigate("DateTimeSelectorCollection"),
