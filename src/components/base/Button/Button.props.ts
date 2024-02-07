@@ -7,10 +7,10 @@ import {
 
 export interface ButtonProps {
   text: React.ReactNode;
-  variant: Variants;
+  variant?: Variants;
   iconPosition?: IconPosition;
   icon?: React.ReactNode;
-  buttonSize: ButtonSize;
+  buttonSize?: ButtonSize;
   takeFullWidth?: boolean;
   onPress?: (event?: GestureResponderEvent) => void;
   isDisabled?: boolean;

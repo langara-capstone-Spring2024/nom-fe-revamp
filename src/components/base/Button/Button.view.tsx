@@ -54,7 +54,11 @@ const Button = (props: ButtonProps) => {
           ...(isDisabled ? styles.disabledGhostButton : null),
         };
       default:
-        return null;
+        return {
+          ...styles.primaryButton,
+          ...(isPressed ? styles.pressedPrimaryButton : null),
+          ...(isDisabled ? styles.disabledPrimarySecondaryButton : null),
+        };
     }
   };
 
@@ -67,7 +71,7 @@ const Button = (props: ButtonProps) => {
       case "lg":
         return styles.lgButton;
       default:
-        return null;
+        return styles.smButton;
     }
   };
 
