@@ -12,6 +12,7 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
+{name: 'DateTimeSelector', onPress: () => NavigationService.navigate('DateTimeSelectorCollection')},
 {name: 'Checkbox', onPress: () => NavigationService.navigate('CheckboxCollection')},
     {
       name: "Button",
