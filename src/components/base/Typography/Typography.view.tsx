@@ -5,7 +5,6 @@ const Typography: React.FC<TypographyProps> = ({
   variant,
   alignment,
   weight,
-  color,
   children,
   otherStyle,
 }) => {
@@ -18,7 +17,6 @@ const Typography: React.FC<TypographyProps> = ({
         {
           textAlign: alignment,
           fontWeight: weight || "normal",
-          color,
         },
         otherStyle,
       ]}
