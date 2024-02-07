@@ -10,6 +10,8 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import Scanner from "../screens/Scanner";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import MultipleImagePickerCollection from '../collections/base/MultipleImagePicker'
+import SingleImagePickerCollection from '../collections/base/SingleImagePicker'
 import StripeCollection from "../collections/module/Stripe";
 import DateTimeSelectorCollection from "../collections/base/DateTimeSelector";
 import CheckboxCollection from "../collections/base/Checkbox";
@@ -26,6 +28,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: MultipleImagePickerCollection, custom: false},
+{func: SingleImagePickerCollection, custom: false},
     { func: StripeCollection, custom: false },
     { func: DateTimeSelectorCollection, custom: false },
     { func: CheckboxCollection, custom: false },
