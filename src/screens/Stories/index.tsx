@@ -12,6 +12,7 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
+{name: 'Checkbox', onPress: () => NavigationService.navigate('CheckboxCollection')},
     {
       name: "Button",
       onPress: () => NavigationService.navigate("ButtonCollection"),

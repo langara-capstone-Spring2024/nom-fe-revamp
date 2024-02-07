@@ -9,6 +9,7 @@ import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import CheckboxCollection from '../collections/base/Checkbox'
 
 import ButtonCollection from "../collections/base/Button";
 import TextInputFieldCollection from "../collections/base/TextInputField";
@@ -21,6 +22,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: CheckboxCollection, custom: false},
     { func: SampleScreen, custom: false },
     { func: ButtonCollection, custom: false },
     { func: FormikTextInputFieldCollection, custom: false },
