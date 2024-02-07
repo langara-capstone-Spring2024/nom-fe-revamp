@@ -14,6 +14,18 @@ const Stories = () => {
     /*_PLOP_INJECT_COMPONENT_SCREEN */
 {name: 'Stripe', onPress: () => NavigationService.navigate('StripeCollection')},
     {
+      name: "DateTimeSelector",
+      onPress: () => NavigationService.navigate("DateTimeSelectorCollection"),
+    },
+    {
+      name: "Checkbox",
+      onPress: () => NavigationService.navigate("CheckboxCollection"),
+    },
+    {
+      name: "Typography",
+      onPress: () => NavigationService.navigate("TypographyCollection"),
+    },
+    {
       name: "Button",
       onPress: () => NavigationService.navigate("ButtonCollection"),
     },
