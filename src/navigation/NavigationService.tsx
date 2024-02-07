@@ -3,12 +3,15 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  DateTimeSelectorCollection: undefined;
+  CheckboxCollection: undefined;
   TestModuleCollection: undefined;
   BaseCollection: undefined;
   TestBaseCollection: undefined;
   ButtonCollection: undefined;
   FormikTextInputFieldCollection: undefined;
   TextInputFieldCollection: undefined;
+  TypographyCollection: undefined;
 };
 
 // insert a value on the type to pass a param
