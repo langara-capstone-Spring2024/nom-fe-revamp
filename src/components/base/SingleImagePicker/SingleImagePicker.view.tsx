@@ -18,12 +18,7 @@ const SingleImagePicker = (props: SingleImagePickerProps) => {
       aspect: [1, 1],
     });
 
-    if (
-      !result.canceled &&
-      result.assets[0].uri &&
-      result.assets[0].fileName &&
-      result.assets[0].mimeType
-    ) {
+    if (!result.canceled) {
       setImage({
         uri: result.assets[0].uri,
         fileName: result.assets[0].fileName,

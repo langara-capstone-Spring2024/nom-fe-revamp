@@ -14,7 +14,12 @@ const SingleImagePickerCollection = () => {
   const [remoteImage, setRemoteImage] = useState<string | undefined>(undefined);
 
   const handleUpload = async () => {
-    if (localImage) {
+    if (
+      localImage &&
+      localImage.uri &&
+      localImage.fileName &&
+      localImage.type
+    ) {
       const formData = new FormData();
       formData.append("image", {
         uri: localImage.uri,
