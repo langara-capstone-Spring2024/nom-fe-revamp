@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  SingleImagePickerCollection: undefined;
   DateTimeSelectorCollection: undefined;
   CheckboxCollection: undefined;
   TestModuleCollection: undefined;
