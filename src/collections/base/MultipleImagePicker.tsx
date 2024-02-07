@@ -1,14 +1,16 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MultipleImagePicker from "../../components/base/MultipleImagePicker";
 import { Image as ImageType } from "../../types";
 import Button from "../../components/base/Button";
 import FormData from "form-data";
-import axios from "axios";
+import { AddImage } from "../../services/react-query/queries/user";
 
 const MultipleImagePickerCollection = () => {
   const [localImages, setLocalImages] = useState<ImageType[]>([]);
   const [remoteImages, setRemoteImages] = useState<string[]>([]);
+
+  const { mutate: addImageMutate, data: addImageData, isPending } = AddImage();
 
   const handleUpload = async () => {
     const formData = new FormData();
@@ -20,19 +22,15 @@ const MultipleImagePickerCollection = () => {
       });
     });
 
-    const response = await axios.post(
-      "http://localhost:8000/api/upload-multi",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    const data = response.data.results as { Key: string }[];
-    setRemoteImages(data.map((dataItem) => dataItem.Key));
+    addImageMutate(formData);
   };
+
+  useEffect(() => {
+    if (addImageData && addImageData.results) {
+      const data = addImageData.results as { Key: string }[];
+      setRemoteImages(data.map((dataItem) => dataItem.Key));
+    }
+  }, [addImageData]);
 
   return (
     <ScrollView
@@ -53,18 +51,22 @@ const MultipleImagePickerCollection = () => {
       </View>
       <View>
         <Text>Remote Images</Text>
-        <View style={styles.list}>
-          {remoteImages.map((remoteImage, itemIndex) => (
-            <View style={styles.item} key={itemIndex}>
-              <Image source={{ uri: remoteImage }} style={styles.image} />
+        {!isPending && (
+          <>
+            <View style={styles.list}>
+              {remoteImages.map((remoteImage, itemIndex) => (
+                <View style={styles.item} key={itemIndex}>
+                  <Image source={{ uri: remoteImage }} style={styles.image} />
+                </View>
+              ))}
             </View>
-          ))}
-        </View>
-        <View>
-          {remoteImages.map((remoteImage, itemIndex) => (
-            <Text key={itemIndex}>{remoteImage}</Text>
-          ))}
-        </View>
+            <View>
+              {remoteImages.map((remoteImage, itemIndex) => (
+                <Text key={itemIndex}>{remoteImage}</Text>
+              ))}
+            </View>
+          </>
+        )}
       </View>
     </ScrollView>
   );
