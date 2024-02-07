@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { RNQueryClient } from "./src/services/react-query/query-client";
 import Navigator from "./src/navigation";
 import { StripeProvider } from "@stripe/stripe-react-native";
+//@ts-ignore
 import { STRIPE_PB_KEY } from "@env";
 
 const Entrypoint = () => {
@@ -20,6 +21,9 @@ const Entrypoint = () => {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
+
+  console.log("PB_KEY: ", STRIPE_PB_KEY);
+
   return (
     <QueryClientProvider client={RNQueryClient}>
       <StripeProvider publishableKey={STRIPE_PB_KEY}>
