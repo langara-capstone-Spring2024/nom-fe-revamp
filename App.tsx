@@ -22,8 +22,6 @@ const Entrypoint = () => {
 
   if (!fontsLoaded) return null;
 
-  console.log("PB_KEY: ", STRIPE_PB_KEY);
-
   return (
     <QueryClientProvider client={RNQueryClient}>
       <StripeProvider publishableKey={STRIPE_PB_KEY}>
