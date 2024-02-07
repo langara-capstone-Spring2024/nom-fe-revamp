@@ -1,17 +1,20 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SingleImagePicker from "../../components/base/SingleImagePicker";
 import { Image as ImageType } from "../../types/Image";
 import Button from "../../components/base/Button";
 import FormData from "form-data";
 import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
+import { AddImage } from "../../services/react-query/queries/user";
 
 const SingleImagePickerCollection = () => {
   const [localImage, setLocalImage] = useState<ImageType | undefined>(
     undefined
   );
   const [remoteImage, setRemoteImage] = useState<string | undefined>(undefined);
+
+  const { mutate: addImageMutate, data: addImageData, isPending } = AddImage();
 
   const handleUpload = async () => {
     if (
@@ -27,22 +30,18 @@ const SingleImagePickerCollection = () => {
         type: localImage.type,
       });
 
-      const response = await axios.post(
-        "http://localhost:8000/api/upload-multi",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      addImageMutate(formData);
+    }
+  };
 
-      const data = response.data.results as { Key: string }[];
+  useEffect(() => {
+    if (addImageData && addImageData.results) {
+      const data = addImageData.results as { Key: string }[];
       if (0 < data.length) {
         setRemoteImage(data[0].Key);
       }
     }
-  };
+  }, [addImageData]);
 
   return (
     <ScrollView
@@ -65,14 +64,18 @@ const SingleImagePickerCollection = () => {
       </View>
       <View>
         <Text>Remote Image</Text>
-        <View style={styles.imageContainer}>
-          <View style={styles.item}>
-            <Image source={{ uri: remoteImage }} style={styles.image} />
-          </View>
-        </View>
-        <View>
-          <Text>{remoteImage}</Text>
-        </View>
+        {!isPending && (
+          <>
+            <View style={styles.imageContainer}>
+              <View style={styles.item}>
+                <Image source={{ uri: remoteImage }} style={styles.image} />
+              </View>
+            </View>
+            <View>
+              <Text>{remoteImage}</Text>
+            </View>
+          </>
+        )}
       </View>
     </ScrollView>
   );
