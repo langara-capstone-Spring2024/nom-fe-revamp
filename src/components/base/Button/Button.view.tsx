@@ -13,6 +13,7 @@ const Button = (props: ButtonProps) => {
     takeFullWidth,
     onPress,
     isDisabled,
+    style,
   } = props;
 
   const [isPressed, setIsPressed] = useState(false);
@@ -95,7 +96,7 @@ const Button = (props: ButtonProps) => {
           </>
         )}
 
-        {text && <Text style={textStyles}>{text}</Text>}
+        {text && <Text style={[textStyles, style]}>{text}</Text>}
 
         {iconPosition === "right" && (
           <>
