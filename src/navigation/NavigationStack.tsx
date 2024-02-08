@@ -10,6 +10,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import Scanner from "../screens/Scanner";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import UserAvatarCollection from '../collections/base/UserAvatar'
 import SingleImagePickerCollection from '../collections/base/SingleImagePicker'
 import MultipleImagePickerCollection from '../collections/base/MultipleImagePicker'
 import StripeCollection from "../collections/module/Stripe";
@@ -28,6 +29,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: UserAvatarCollection, custom: false},
 {func: SingleImagePickerCollection, custom: false},
 {func: MultipleImagePickerCollection, custom: false},
     { func: StripeCollection, custom: false },
