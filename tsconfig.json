@@ -1,10 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
   "baseUrl": "./",
-  "paths": {
-    "src/*": ["src/*"],
-    "*": ["types/*"]
-  },
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -19,6 +15,5 @@
     "types": ["react", "react-native", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-
   "exclude": ["node_modules"]
 }
