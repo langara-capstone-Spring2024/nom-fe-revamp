@@ -12,7 +12,14 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'Stripe', onPress: () => NavigationService.navigate('StripeCollection')},
+    {
+      name: "Stripe",
+      onPress: () => NavigationService.navigate("StripeCollection"),
+    },
+    {
+      name: "Dropdown",
+      onPress: () => NavigationService.navigate("DropdownCollection"),
+    },
     {
       name: "DateTimeSelector",
       onPress: () => NavigationService.navigate("DateTimeSelectorCollection"),

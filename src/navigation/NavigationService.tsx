@@ -6,6 +6,7 @@ type Collections = {
   StripeCollection: undefined;
   DateTimeSelectorCollection: undefined;
   CheckboxCollection: undefined;
+ DropdownCollection: undefined;
   TestModuleCollection: undefined;
   BaseCollection: undefined;
   TestBaseCollection: undefined;

@@ -13,7 +13,7 @@ import Scanner from "../screens/Scanner";
 import StripeCollection from "../collections/module/Stripe";
 import DateTimeSelectorCollection from "../collections/base/DateTimeSelector";
 import CheckboxCollection from "../collections/base/Checkbox";
-
+import DropdownCollection from "../collections/base/Dropdown";
 import ButtonCollection from "../collections/base/Button";
 import TextInputFieldCollection from "../collections/base/TextInputField";
 import FormikTextInputFieldCollection from "../collections/base/FormikTextInputField";
@@ -29,6 +29,7 @@ const PrivateNavigator = () => {
     { func: StripeCollection, custom: false },
     { func: DateTimeSelectorCollection, custom: false },
     { func: CheckboxCollection, custom: false },
+    { func: DropdownCollection, custom: false },
     { func: SampleScreen, custom: false },
     { func: Scanner, custom: false },
     { func: ButtonCollection, custom: false },
