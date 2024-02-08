@@ -3,13 +3,13 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- UserAvatarCollection: undefined;
- SingleImagePickerCollection: undefined;
- MultipleImagePickerCollection: undefined;
+  UserAvatarCollection: undefined;
+  SingleImagePickerCollection: undefined;
+  MultipleImagePickerCollection: undefined;
   StripeCollection: undefined;
   DateTimeSelectorCollection: undefined;
   CheckboxCollection: undefined;
- DropdownCollection: undefined;
+  DropdownCollection: undefined;
   TestModuleCollection: undefined;
   BaseCollection: undefined;
   TestBaseCollection: undefined;
@@ -23,6 +23,7 @@ type Collections = {
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
   Scanner: undefined;
+  ChangePassword: undefined;
   TestScreen: undefined;
   Stories: undefined;
   Login: undefined;

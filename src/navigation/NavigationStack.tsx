@@ -8,11 +8,12 @@ import { navigationRef } from "./NavigationService";
 import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 import Scanner from "../screens/Scanner";
+import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import UserAvatarCollection from '../collections/base/UserAvatar'
-import SingleImagePickerCollection from '../collections/base/SingleImagePicker'
-import MultipleImagePickerCollection from '../collections/base/MultipleImagePicker'
+import UserAvatarCollection from "../collections/base/UserAvatar";
+import SingleImagePickerCollection from "../collections/base/SingleImagePicker";
+import MultipleImagePickerCollection from "../collections/base/MultipleImagePicker";
 import StripeCollection from "../collections/module/Stripe";
 import DateTimeSelectorCollection from "../collections/base/DateTimeSelector";
 import CheckboxCollection from "../collections/base/Checkbox";
@@ -29,9 +30,9 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: UserAvatarCollection, custom: false},
-{func: SingleImagePickerCollection, custom: false},
-{func: MultipleImagePickerCollection, custom: false},
+    { func: UserAvatarCollection, custom: false },
+    { func: SingleImagePickerCollection, custom: false },
+    { func: MultipleImagePickerCollection, custom: false },
     { func: StripeCollection, custom: false },
     { func: DateTimeSelectorCollection, custom: false },
     { func: CheckboxCollection, custom: false },
@@ -42,6 +43,7 @@ const PrivateNavigator = () => {
     { func: FormikTextInputFieldCollection, custom: false },
     { func: TextInputFieldCollection, custom: false },
     { func: TypographyCollection, custom: false },
+    { func: ChangePassword, custom: false },
   ];
 
   return (
