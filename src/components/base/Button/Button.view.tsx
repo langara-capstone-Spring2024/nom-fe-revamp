@@ -13,6 +13,7 @@ const Button = (props: ButtonProps) => {
     takeFullWidth,
     onPress,
     isDisabled,
+    style,
   } = props;
 
   const [isPressed, setIsPressed] = useState(false);
@@ -53,7 +54,11 @@ const Button = (props: ButtonProps) => {
           ...(isDisabled ? styles.disabledGhostButton : null),
         };
       default:
-        return null;
+        return {
+          ...styles.primaryButton,
+          ...(isPressed ? styles.pressedPrimaryButton : null),
+          ...(isDisabled ? styles.disabledPrimarySecondaryButton : null),
+        };
     }
   };
 
@@ -66,7 +71,7 @@ const Button = (props: ButtonProps) => {
       case "lg":
         return styles.lgButton;
       default:
-        return null;
+        return styles.smButton;
     }
   };
 
@@ -95,7 +100,7 @@ const Button = (props: ButtonProps) => {
           </>
         )}
 
-        {text && <Text style={textStyles}>{text}</Text>}
+        {text && <Text style={[textStyles, style]}>{text}</Text>}
 
         {iconPosition === "right" && (
           <>

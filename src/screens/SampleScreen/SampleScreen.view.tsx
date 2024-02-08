@@ -3,6 +3,7 @@ import styles from "./SampleScreen.style";
 import { SampleScreenGeneratedProps } from "./SampleScreen.props";
 import Button from "../../components/base/Button";
 import { useStore } from "../../store";
+import NavigationService from "../../navigation/NavigationService";
 
 const SampleScreen = (props: SampleScreenGeneratedProps) => {
   const { setIsLoggedIn } = useStore((state) => ({
@@ -15,8 +16,14 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
       <Button
         variant="primary"
         buttonSize="lg"
-        text="Back"
+        text="Login"
         onPress={() => setIsLoggedIn(false)}
+      />
+      <Button
+        variant="primary"
+        buttonSize="lg"
+        text="Scan"
+        onPress={() => NavigationService.navigate("Scanner")}
       />
     </View>
   );

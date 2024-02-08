@@ -7,12 +7,20 @@ import Login from "../screens/Login";
 import { navigationRef } from "./NavigationService";
 import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
+import Scanner from "../screens/Scanner";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-
+import UserAvatarCollection from '../collections/base/UserAvatar'
+import SingleImagePickerCollection from '../collections/base/SingleImagePicker'
+import MultipleImagePickerCollection from '../collections/base/MultipleImagePicker'
+import StripeCollection from "../collections/module/Stripe";
+import DateTimeSelectorCollection from "../collections/base/DateTimeSelector";
+import CheckboxCollection from "../collections/base/Checkbox";
+import DropdownCollection from "../collections/base/Dropdown";
 import ButtonCollection from "../collections/base/Button";
 import TextInputFieldCollection from "../collections/base/TextInputField";
 import FormikTextInputFieldCollection from "../collections/base/FormikTextInputField";
+import TypographyCollection from "../collections/base/Typography";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -21,10 +29,19 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: UserAvatarCollection, custom: false},
+{func: SingleImagePickerCollection, custom: false},
+{func: MultipleImagePickerCollection, custom: false},
+    { func: StripeCollection, custom: false },
+    { func: DateTimeSelectorCollection, custom: false },
+    { func: CheckboxCollection, custom: false },
+    { func: DropdownCollection, custom: false },
     { func: SampleScreen, custom: false },
+    { func: Scanner, custom: false },
     { func: ButtonCollection, custom: false },
     { func: FormikTextInputFieldCollection, custom: false },
     { func: TextInputFieldCollection, custom: false },
+    { func: TypographyCollection, custom: false },
   ];
 
   return (
@@ -67,6 +84,10 @@ const App = () => {
     isLoggedIn: state.isLoggedIn,
     setIsLoggedIn: state.setIsLoggedIn,
   }));
+
+  React.useEffect(() => {
+    setIsLoggedIn(false);
+  }, []);
 
   return (
     <NavigationContainer ref={navigationRef}>

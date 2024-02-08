@@ -1,14 +1,20 @@
-import { GestureResponderEvent } from "react-native";
+import {
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  GestureResponderEvent,
+} from "react-native";
 
 export interface ButtonProps {
   text: React.ReactNode;
-  variant: Variants;
+  variant?: Variants;
   iconPosition?: IconPosition;
   icon?: React.ReactNode;
-  buttonSize: ButtonSize;
+  buttonSize?: ButtonSize;
   takeFullWidth?: boolean;
   onPress?: (event?: GestureResponderEvent) => void;
   isDisabled?: boolean;
+  style?: StyleProp<ViewStyle | TextStyle>;
 }
 
 export type Variants = "primary" | "secondary" | "tertiary" | "ghost";

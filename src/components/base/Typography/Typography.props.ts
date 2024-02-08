@@ -1,4 +1,4 @@
-import { tokens as themeTokens } from "app/utils/Themes";
+// import { tokens as themeTokens } from "app/utils/Themes";
 import { TextStyle, ViewStyle } from "react-native";
 import typographyStyles from "./Typography.style";
 
@@ -7,7 +7,7 @@ export interface TypographyProps {
   alignment?: TextAlign;
   weight?: Weight;
   otherStyle?: TextStyle & ViewStyle;
-  color?: ColorKeys;
+  // color?: ColorKeys;
   children: any;
 }
 
@@ -23,11 +23,11 @@ export type Variants =
 
 export type TextAlign = "left" | "right" | "center";
 
-export type ColorKeys =
-  | keyof (typeof themeTokens.Color)["Content"]
-  | keyof (typeof themeTokens.Color)["Shadow"]
-  | keyof (typeof themeTokens.Color)["Border"]
-  | keyof (typeof themeTokens.Color)["Surface"];
+// export type ColorKeys =
+//   | keyof (typeof themeTokens.Color)["Content"]
+//   | keyof (typeof themeTokens.Color)["Shadow"]
+//   | keyof (typeof themeTokens.Color)["Border"]
+//   | keyof (typeof themeTokens.Color)["Surface"];
 
 export type Weight = "normal" | "400" | "500" | "600" | "700";
 

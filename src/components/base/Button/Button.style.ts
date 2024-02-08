@@ -1,13 +1,17 @@
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 
+interface CustomStyle extends ViewStyle {
+  textStyle?: TextStyle;
+}
+
 export interface ButtonStyles {
-  primaryButton: ViewStyle & TextStyle;
-  secondaryButton: ViewStyle & TextStyle;
-  tertiaryButton: ViewStyle & TextStyle;
-  ghostButton: ViewStyle & TextStyle;
-  smButton: ViewStyle & TextStyle;
-  mdButton: ViewStyle & TextStyle;
-  lgButton: ViewStyle & TextStyle;
+  primaryButton: CustomStyle;
+  secondaryButton: CustomStyle;
+  tertiaryButton: CustomStyle;
+  ghostButton: CustomStyle;
+  smButton: CustomStyle;
+  mdButton: CustomStyle;
+  lgButton: CustomStyle;
   icon: ViewStyle;
   fullWidth: ViewStyle;
   iconTextGap: ViewStyle;
@@ -35,13 +39,14 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       color: "white",
     },
-  },
+  } as CustomStyle,
+
   secondaryButton: {
     backgroundColor: "#F583F0",
     textStyle: {
       color: "white",
     },
-  },
+  } as CustomStyle,
   tertiaryButton: {
     backgroundColor: "#F0F0F0",
     borderColor: "#D4D4D4",
@@ -49,7 +54,7 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       color: "#3C3C3C",
     },
-  },
+  } as CustomStyle,
   ghostButton: {
     backgroundColor: "transparent",
     borderBottomColor: "#3C3C3C",
@@ -57,7 +62,7 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       color: "#3C3C3C",
     },
-  },
+  } as CustomStyle,
   smButton: {
     height: 38,
     paddingLeft: 16,
@@ -65,7 +70,7 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       fontSize: 14,
     },
-  },
+  } as CustomStyle,
   mdButton: {
     height: 44,
     paddingLeft: 16,
@@ -73,7 +78,7 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       fontSize: 14,
     },
-  },
+  } as CustomStyle,
   lgButton: {
     height: 50,
     paddingLeft: 24,
@@ -81,7 +86,7 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       fontSize: 16,
     },
-  },
+  } as CustomStyle,
   icon: {
     display: "flex",
     flexDirection: "column",
@@ -112,21 +117,21 @@ const styles: ButtonStyles = StyleSheet.create({
     textStyle: {
       color: "#939393",
     },
-  },
+  } as CustomStyle,
   disabledTertiaryButton: {
     backgroundColor: "transparent",
     borderColor: "#D4D4D4",
     textStyle: {
       color: "#D4D4D4",
     },
-  },
+  } as CustomStyle,
   disabledGhostButton: {
     backgroundColor: "transparent",
     borderBottomColor: "#D4D4D4",
     textStyle: {
       color: "#D4D4D4",
     },
-  },
+  } as CustomStyle,
 });
 
 export { baseButton, styles as default };
