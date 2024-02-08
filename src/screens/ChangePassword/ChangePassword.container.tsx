@@ -10,7 +10,7 @@ const ChangePassword = () => {
 
   const changePasswordMethod = async () => {
     // check if new password equeals to confirom new password
-    if (newPassword == confirmNewPassword) {
+    if (newPassword === confirmNewPassword) {
       try {
         const response = await apiClient.put("auth/change-password", {
           email: email,
@@ -18,7 +18,6 @@ const ChangePassword = () => {
           currentPassword: currentPassword,
         });
         console.log("Password changed successfully");
-        console.log("Response:", response.data);
       } catch (error) {
         console.error("Error changing password:", error);
       }

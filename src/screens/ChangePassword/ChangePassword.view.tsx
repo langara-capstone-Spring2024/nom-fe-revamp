@@ -5,35 +5,48 @@ import TextInputField from "../../components/base/TextInputField";
 import Button from "../../components/base/Button";
 
 const ChangePassword = (props: ChangePasswordGeneratedProps) => {
+  const {
+    email,
+    setEmail,
+    currentPassword,
+    setCurrentPassword,
+    newPassword,
+    setNewPassword,
+    confirmNewPassword,
+    setConfirmNewPassword,
+    changePasswordMethod,
+  } = props;
+
   return (
     <View>
       <TextInputField
         label="Email"
         placeholder="Email"
-        value={props.email}
-        setValue={props.setEmail}
+        value={email}
+        setValue={setEmail}
       />
+
       <TextInputField
         label="Current Password"
         placeholder="Current Password"
-        value={props.currentPassword}
-        setValue={props.setCurrentPassword}
+        value={currentPassword}
+        setValue={setCurrentPassword}
         secured
       />
 
       <TextInputField
         label="New Password"
         placeholder="New Password"
-        value={props.newPassword}
-        setValue={props.setNewPassword}
+        value={newPassword}
+        setValue={setNewPassword}
         secured
       />
 
       <TextInputField
         label="Confirm New Password"
         placeholder="Confirm New Password"
-        value={props.confirmNewPassword}
-        setValue={props.setConfirmNewPassword}
+        value={confirmNewPassword}
+        setValue={setConfirmNewPassword}
         secured
       />
 
@@ -42,7 +55,7 @@ const ChangePassword = (props: ChangePasswordGeneratedProps) => {
         buttonSize="sm"
         text="Change Password"
         takeFullWidth
-        onPress={props.changePasswordMethod}
+        onPress={changePasswordMethod}
       />
     </View>
   );

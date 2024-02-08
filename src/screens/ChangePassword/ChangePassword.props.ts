@@ -7,5 +7,5 @@ export interface ChangePasswordGeneratedProps {
   setNewPassword: React.Dispatch<React.SetStateAction<string>>;
   confirmNewPassword: string;
   setConfirmNewPassword: React.Dispatch<React.SetStateAction<string>>;
-  changePasswordMethod: () => Promise<void>;
+  changePasswordMethod: () => void;
 }
