@@ -33,19 +33,19 @@ const Button = (props: ButtonProps) => {
         return {
           ...styles.primaryButton,
           ...(isPressed ? styles.pressedPrimaryButton : null),
-          ...(isDisabled ? styles.disabledPrimarySecondaryButton : null),
+          ...(isDisabled ? styles.disabledPrimaryButton : null),
         };
       case "secondary":
         return {
           ...styles.secondaryButton,
           ...(isPressed ? styles.pressedSecondaryButton : null),
-          ...(isDisabled ? styles.disabledPrimarySecondaryButton : null),
+          ...(isDisabled ? styles.disabledSecondaryButton : null),
         };
-      case "tertiary":
+      case "error":
         return {
-          ...styles.tertiaryButton,
-          ...(isPressed ? styles.pressedTertiaryButton : null),
-          ...(isDisabled ? styles.disabledTertiaryButton : null),
+          ...styles.errorButton,
+          ...(isPressed ? styles.pressedErrorButton : null),
+          ...(isDisabled ? styles.disabledErrorButton : null),
         };
       case "ghost":
         return {
@@ -57,7 +57,7 @@ const Button = (props: ButtonProps) => {
         return {
           ...styles.primaryButton,
           ...(isPressed ? styles.pressedPrimaryButton : null),
-          ...(isDisabled ? styles.disabledPrimarySecondaryButton : null),
+          ...(isDisabled ? styles.disabledPrimaryButton : null),
         };
     }
   };
@@ -65,13 +65,33 @@ const Button = (props: ButtonProps) => {
   const buttonSizeStyle = () => {
     switch (buttonSize) {
       case "sm":
-        return styles.smButton;
+        return {
+          ...styles.smButton,
+          ...(variant === "primary"
+            ? { borderRadius: 8 }
+            : { borderRadius: 19 }),
+        };
       case "md":
-        return styles.mdButton;
+        return {
+          ...styles.mdButton,
+          ...(variant === "primary"
+            ? { borderRadius: 12 }
+            : { borderRadius: 22 }),
+        };
       case "lg":
-        return styles.lgButton;
+        return {
+          ...styles.lgButton,
+          ...(variant === "primary"
+            ? { borderRadius: 16 }
+            : { borderRadius: 25 }),
+        };
       default:
-        return styles.smButton;
+        return {
+          ...styles.smButton,
+          ...(variant === "primary"
+            ? { borderRadius: 8 }
+            : { borderRadius: 19 }),
+        };
     }
   };
 
@@ -92,6 +112,7 @@ const Button = (props: ButtonProps) => {
         onPressIn={handleOnPress}
         onPressOut={handleOffPress}
         disabled={isDisabled}
+        activeOpacity={1}
       >
         {iconPosition === "left" && (
           <>

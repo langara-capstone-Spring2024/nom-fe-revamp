@@ -2,6 +2,7 @@ import { View, ScrollView } from "react-native";
 import React from "react";
 import Button from "../../components/base/Button";
 import { Ionicons } from "@expo/vector-icons";
+import { theme } from "../../utils/Theme";
 
 const ButtonCollection = () => {
   return (
@@ -19,7 +20,13 @@ const ButtonCollection = () => {
           buttonSize="md"
           text="Primary Medium With Icon"
           iconPosition="left"
-          icon={<Ionicons name="planet-outline" size={16} color="white" />}
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content["white-strong"]}
+            />
+          }
           onPress={() => console.log("Button pressed")}
         />
 
@@ -28,7 +35,13 @@ const ButtonCollection = () => {
           buttonSize="lg"
           text="Primary Large Disabled"
           iconPosition="right"
-          icon={<Ionicons name="planet-outline" size={16} color="#939393" />}
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content.inactive}
+            />
+          }
           isDisabled
         />
 
@@ -44,7 +57,13 @@ const ButtonCollection = () => {
           buttonSize="md"
           text="Secondary Medium With Icon"
           iconPosition="left"
-          icon={<Ionicons name="planet-outline" size={16} color="white" />}
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content.primary}
+            />
+          }
           onPress={() => console.log("Button pressed")}
         />
 
@@ -53,32 +72,13 @@ const ButtonCollection = () => {
           buttonSize="lg"
           text="Secondary Large Disabled"
           iconPosition="right"
-          icon={<Ionicons name="planet-outline" size={16} color="#939393" />}
-          isDisabled
-        />
-
-        <Button
-          variant="tertiary"
-          buttonSize="sm"
-          text="Tertiary Small Full Width"
-          takeFullWidth
-        />
-
-        <Button
-          variant="tertiary"
-          buttonSize="md"
-          text="Tertiary Medium With Icon"
-          iconPosition="left"
-          icon={<Ionicons name="planet-outline" size={16} color="black" />}
-          onPress={() => console.log("Button pressed")}
-        />
-
-        <Button
-          variant="tertiary"
-          buttonSize="lg"
-          text="Tertiary Large Disabled"
-          iconPosition="right"
-          icon={<Ionicons name="planet-outline" size={16} color="#D4D4D4" />}
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content.inactive}
+            />
+          }
           isDisabled
         />
 
@@ -94,7 +94,13 @@ const ButtonCollection = () => {
           buttonSize="md"
           text="Ghost Medium With Icon"
           iconPosition="left"
-          icon={<Ionicons name="planet-outline" size={16} color="black" />}
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content.primary}
+            />
+          }
           onPress={() => console.log("Button pressed")}
         />
 
@@ -103,7 +109,50 @@ const ButtonCollection = () => {
           buttonSize="lg"
           text="Ghost Large Disabled"
           iconPosition="right"
-          icon={<Ionicons name="planet-outline" size={16} color="#D4D4D4" />}
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content.inactive}
+            />
+          }
+          isDisabled
+        />
+
+        <Button
+          variant="error"
+          buttonSize="sm"
+          text="Error Small Full Width"
+          takeFullWidth
+        />
+
+        <Button
+          variant="error"
+          buttonSize="md"
+          text="Error Medium With Icon"
+          iconPosition="left"
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content["error-medium"]}
+            />
+          }
+          onPress={() => console.log("Button pressed")}
+        />
+
+        <Button
+          variant="error"
+          buttonSize="lg"
+          text="Error Large Disabled"
+          iconPosition="right"
+          icon={
+            <Ionicons
+              name="planet-outline"
+              size={16}
+              color={theme.Content.inactive}
+            />
+          }
           isDisabled
         />
       </View>

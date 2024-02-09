@@ -17,7 +17,7 @@ export interface ButtonProps {
   style?: StyleProp<ViewStyle | TextStyle>;
 }
 
-export type Variants = "primary" | "secondary" | "tertiary" | "ghost";
+export type Variants = "primary" | "secondary" | "error" | "ghost";
 
 export type IconPosition = "left" | "right" | null;
 

@@ -1,4 +1,5 @@
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+import { theme } from "../../../utils/Theme";
 
 interface CustomStyle extends ViewStyle {
   textStyle?: TextStyle;
@@ -7,8 +8,8 @@ interface CustomStyle extends ViewStyle {
 export interface ButtonStyles {
   primaryButton: CustomStyle;
   secondaryButton: CustomStyle;
-  tertiaryButton: CustomStyle;
   ghostButton: CustomStyle;
+  errorButton: CustomStyle;
   smButton: CustomStyle;
   mdButton: CustomStyle;
   lgButton: CustomStyle;
@@ -16,51 +17,53 @@ export interface ButtonStyles {
   fullWidth: ViewStyle;
   iconTextGap: ViewStyle;
   pressedPrimaryButton: ViewStyle;
-  pressedSecondaryButton: ViewStyle;
-  pressedTertiaryButton: ViewStyle;
+  pressedSecondaryButton: CustomStyle;
   pressedGhostButton: ViewStyle;
-  disabledPrimarySecondaryButton: ViewStyle;
-  disabledTertiaryButton: ViewStyle;
-  disabledGhostButton: ViewStyle;
+  pressedErrorButton: CustomStyle;
+  disabledPrimaryButton: CustomStyle;
+  disabledSecondaryButton: CustomStyle;
+  disabledErrorButton: CustomStyle;
+  disabledGhostButton: CustomStyle;
 }
 
-const baseButton: ViewStyle = {
-  borderRadius: 8,
+const baseButton: CustomStyle = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
   marginVertical: 8,
+  textStyle: {
+    fontFamily: "PublicSansItalic",
+  },
 };
 
 const styles: ButtonStyles = StyleSheet.create({
   primaryButton: {
-    backgroundColor: "#9563FF",
+    backgroundColor: theme.Surface["brand-medium"],
+    borderRadius: 8,
     textStyle: {
-      color: "white",
+      color: theme.Content["white-strong"],
+      fontFamily: "PublicSansRegular",
+      fontWeight: "500",
     },
   } as CustomStyle,
-
   secondaryButton: {
-    backgroundColor: "#F583F0",
+    backgroundColor: theme.Surface["neutral-medium"],
+    borderRadius: 19,
     textStyle: {
-      color: "white",
+      color: theme.Content["medium"],
     },
   } as CustomStyle,
-  tertiaryButton: {
-    backgroundColor: "#F0F0F0",
-    borderColor: "#D4D4D4",
-    borderWidth: 1,
+  errorButton: {
+    backgroundColor: "transparent",
     textStyle: {
-      color: "#3C3C3C",
+      color: theme.Content["error-medium"],
     },
   } as CustomStyle,
   ghostButton: {
     backgroundColor: "transparent",
-    borderBottomColor: "#3C3C3C",
-    borderBottomWidth: 2,
     textStyle: {
-      color: "#3C3C3C",
+      color: theme.Content["medium"],
     },
   } as CustomStyle,
   smButton: {
@@ -100,36 +103,44 @@ const styles: ButtonStyles = StyleSheet.create({
     width: 8,
   },
   pressedPrimaryButton: {
-    backgroundColor: "#8750FF",
+    backgroundColor: theme.Surface["brand-strong"],
   },
   pressedSecondaryButton: {
-    backgroundColor: "#F373EC",
-  },
-  pressedTertiaryButton: {
-    backgroundColor: "#E6E6E6",
-    borderColor: "#939393",
-  },
-  pressedGhostButton: {
-    borderBottomColor: "#222222",
-  },
-  disabledPrimarySecondaryButton: {
-    backgroundColor: "#D4D4D4",
+    backgroundColor: theme.Surface["neutral-strong"],
     textStyle: {
-      color: "#939393",
+      color: theme.Content.primary,
     },
   } as CustomStyle,
-  disabledTertiaryButton: {
-    backgroundColor: "transparent",
-    borderColor: "#D4D4D4",
+  pressedErrorButton: {
     textStyle: {
-      color: "#D4D4D4",
+      color: theme.Content["error-strong"],
+    },
+  } as CustomStyle,
+  pressedGhostButton: {
+    textStyle: {
+      color: theme.Content.primary,
+    },
+  } as CustomStyle,
+  disabledPrimaryButton: {
+    backgroundColor: theme.Surface["neutral-medium"],
+    textStyle: {
+      color: theme.Content.inactive,
+    },
+  } as CustomStyle,
+  disabledSecondaryButton: {
+    backgroundColor: theme.Surface.sunken,
+    textStyle: {
+      color: theme.Content.inactive,
+    },
+  } as CustomStyle,
+  disabledErrorButton: {
+    textStyle: {
+      color: theme.Content["inactive"],
     },
   } as CustomStyle,
   disabledGhostButton: {
-    backgroundColor: "transparent",
-    borderBottomColor: "#D4D4D4",
     textStyle: {
-      color: "#D4D4D4",
+      color: theme.Content["inactive"],
     },
   } as CustomStyle,
 });
