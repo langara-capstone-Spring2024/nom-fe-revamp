@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useStore } from "../store";
 import Login from "../screens/Login";
+import { AntDesign } from "@expo/vector-icons";
 
 import { navigationRef } from "./NavigationService";
 import SampleScreen from "../screens/SampleScreen";
@@ -11,7 +12,8 @@ import Scanner from "../screens/Scanner";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import AutoCompleteCollection from '../collections/base/AutoComplete'
+import StepperCollection from '../collections/base/Stepper'
+import AutoCompleteCollection from "../collections/base/AutoComplete";
 import UserAvatarCollection from "../collections/base/UserAvatar";
 import SingleImagePickerCollection from "../collections/base/SingleImagePicker";
 import MultipleImagePickerCollection from "../collections/base/MultipleImagePicker";
@@ -23,6 +25,7 @@ import ButtonCollection from "../collections/base/Button";
 import TextInputFieldCollection from "../collections/base/TextInputField";
 import FormikTextInputFieldCollection from "../collections/base/FormikTextInputField";
 import TypographyCollection from "../collections/base/Typography";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -31,7 +34,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: AutoCompleteCollection, custom: false},
+{func: StepperCollection, custom: false},
+    { func: AutoCompleteCollection, custom: false },
     { func: UserAvatarCollection, custom: false },
     { func: SingleImagePickerCollection, custom: false },
     { func: MultipleImagePickerCollection, custom: false },
@@ -63,6 +67,11 @@ const PrivateNavigator = () => {
             component={component.func}
             options={({ navigation }) => ({
               headerShown: true,
+              headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <AntDesign name="arrowleft" size={24} color="black" />
+                </TouchableOpacity>
+              ),
             })}
           />
         );

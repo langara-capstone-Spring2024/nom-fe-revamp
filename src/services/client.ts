@@ -28,8 +28,6 @@ apiClient.interceptors.request.use(
       const accessToken = parsedData?.state.accessToken;
 
       if (accessToken) {
-        console.log("🚀 ~ accessToken:", accessToken);
-
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
 

@@ -3,6 +3,7 @@
   "baseUrl": "./",
   "compilerOptions": {
     "allowJs": true,
+    "checkJs": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
