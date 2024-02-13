@@ -7,18 +7,15 @@ import NavigationService from "../../navigation/NavigationService";
 import React from "react";
 
 const SampleScreen = (props: SampleScreenGeneratedProps) => {
-  const { setIsLoggedIn } = useStore((state) => ({
-    setIsLoggedIn: state.setIsLoggedIn,
-  }));
-
+  const { onLogout } = props;
   return (
     <View style={styles.container}>
       <Text style={styles.text}>SampleScreen</Text>
       <Button
         variant="primary"
         buttonSize="lg"
-        text="Login"
-        onPress={() => setIsLoggedIn(false)}
+        text="Logout"
+        onPress={() => onLogout()}
       />
       <Button
         variant="primary"
