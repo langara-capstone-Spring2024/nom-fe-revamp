@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import LoginView from "./Login.view";
-import { apiClient } from "../../services/client";
 import { useStore } from "../../store";
-import axios from "axios";
+import { useLoginMutation } from "../../services/react-query/queries/auth";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
@@ -20,26 +19,29 @@ const Login = (): JSX.Element => {
     setPassword(text);
   };
 
+  const loginMutation = useLoginMutation();
+
   const onLogin = async () => {
     try {
       console.log(email, password);
-      const response = await apiClient.post("auth/login", {
-        email: email,
-        password: password,
+      const credentials = { email, password };
+
+      loginMutation.mutate(credentials, {
+        onSuccess: (result) => {
+          console.log(result);
+          const { accessToken, refreshToken } = result;
+          setTokens(accessToken, refreshToken);
+          setIsLoggedIn(true);
+
+          // for displaying what's saved on AsyncStorage
+          useStore.getState().displayAsyncStorageData();
+        },
+        onError: (error) => {
+          console.error("Login Error:", error);
+        },
       });
-
-      const { accessToken } = response.data;
-
-      // Set tokens in the store
-      setTokens(accessToken, "");
-
-      // Set isLoggedIn state to true
-      setIsLoggedIn(true);
-
-      // Navigate to the next screen or perform any other action
     } catch (error) {
-      console.error("Error logging in:", error);
-      // Handle login error
+      console.error("Unknown Error:", error);
     }
   };
 

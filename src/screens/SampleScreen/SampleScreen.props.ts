@@ -1,1 +1,3 @@
-export interface SampleScreenGeneratedProps {}
+export interface SampleScreenGeneratedProps {
+  onLogout: () => Promise<void>;
+}
