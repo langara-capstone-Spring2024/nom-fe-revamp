@@ -7,15 +7,19 @@ import Navigator from "./src/navigation";
 import { StripeProvider } from "@stripe/stripe-react-native";
 //@ts-ignore
 import { STRIPE_PB_KEY } from "@env";
+import { Text } from "react-native-elements";
 
 const Entrypoint = () => {
   const [fontsLoaded] = useFonts({
     bold: require("./assets/fonts/SF-Pro-Text-Bold.otf"),
     semiBold: require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
     regular: require("./assets/fonts/SF-Pro-Text-Regular.otf"),
-    PublicSansRegular: require("./assets/fonts/PublicSans-VariableFont_wght.ttf"),
-    PublicSansItalic: require("./assets/fonts/PublicSans-Italic-VariableFont_wght.ttf"),
+    PublicSansRegular: require("./assets/fonts/PublicSans-Regular.ttf"),
+    PublicSansMedium: require("./assets/fonts/PublicSans-Medium.ttf"),
+    PublicSansBold: require("./assets/fonts/PublicSans-Bold.ttf"),
+    PublicSansVariable: require("./assets/fonts/PublicSans-VariableFont_wght.ttf"),
   });
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) await SplashScreen.hideAsync();
   }, [fontsLoaded]);

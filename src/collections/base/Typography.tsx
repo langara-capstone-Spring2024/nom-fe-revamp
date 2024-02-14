@@ -8,38 +8,35 @@ const TypographyCollection = () => {
       <Typography
         variant="title1"
         alignment="center"
-        weight="700"
-        otherStyle={{
-          fontFamily: "PublicSansItalic",
-          color: "pink",
-        }}
+        color="brand-strong"
+        otherStyle={{ fontFamily: "PublicSansBold" }}
       >
         Hello World
       </Typography>
       <Typography
         variant="title2"
         alignment="center"
-        weight="700"
-        otherStyle={{ fontFamily: "PublicSansRegular" }}
+        color="success-strong"
+        otherStyle={{ fontFamily: "PublicSansMedium" }}
       >
         Hello World
       </Typography>
-      <Typography variant="title3" alignment="center" weight="700">
+      <Typography variant="title3" alignment="center">
         Hello World
       </Typography>
-      <Typography variant="title4" alignment="center" weight="700">
+      <Typography variant="title4" alignment="center">
         Hello World
       </Typography>
-      <Typography variant="title5" alignment="center" weight="700">
+      <Typography variant="title5" alignment="center">
         Hello World
       </Typography>
-      <Typography variant="body" alignment="center" weight="700">
+      <Typography variant="body" alignment="center">
         Hello World
       </Typography>
-      <Typography variant="bodySm" alignment="center" weight="700">
+      <Typography variant="bodySm" alignment="center">
         Hello World
       </Typography>
-      <Typography variant="bodyXs" alignment="center" weight="700">
+      <Typography variant="bodyXs" alignment="center">
         Hello World
       </Typography>
     </View>
