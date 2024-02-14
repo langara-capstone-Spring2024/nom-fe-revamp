@@ -5,7 +5,7 @@ import Button from "../../components/base/Button";
 import NavigationService from "../../navigation/NavigationService";
 import React from "react";
 import { FlatList } from "react-native-gesture-handler";
-
+import { useTheme } from "react-native-paper";
 const SampleScreen = (props: SampleScreenGeneratedProps) => {
   const {
     isVisible,
@@ -14,7 +14,7 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
     onLogout,
     handleToggleModal,
   } = props;
-
+  const theme = useTheme();
   return (
     <View style={styles.container}>
       <Text style={styles.text}>SampleScreen</Text>
@@ -59,7 +59,9 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
                 data={merchants}
                 renderItem={({ item, index }) => (
                   <View key={index}>
-                    <Text>{item.user.email}</Text>
+                    <Text style={{ color: theme.colors.primary }}>
+                      {item.user.email}
+                    </Text>
                     <Text>{item.name}</Text>
                     <Text>{item.description}</Text>
                     <Text>{item.address}</Text>
