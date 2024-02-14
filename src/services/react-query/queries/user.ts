@@ -4,15 +4,16 @@ import { UserService } from "../../UserService";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { RNQueryClient } from "../query-client";
 import FormData from "form-data";
+import { Merchant } from "../../../types";
 
-export const GetUsers = () => {
+export const GetMerchants = () => {
   const userService = new UserService();
   userService.cancelRequests();
 
-  return useQuery({
-    queryKey: [QUERY_KEYS.USER],
+  return useQuery<Merchant[]>({
+    queryKey: [QUERY_KEYS.MERCHANTS],
     queryFn: async () => {
-      const response: AxiosResponse = await userService.getUsers();
+      const response: AxiosResponse = await userService.getMerchants();
       return response.data;
     },
   });
@@ -29,7 +30,7 @@ export const AddImage = () => {
     },
     onSuccess: (data) => {
       RNQueryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.USER, "images"],
+        queryKey: [QUERY_KEYS.IMAGES],
         exact: true,
       });
     },
