@@ -1,11 +1,12 @@
 import { View, Text, Modal, SafeAreaView } from "react-native";
-import styles from "./SampleScreen.style";
+import createStyles from "./SampleScreen.style";
 import { SampleScreenGeneratedProps } from "./SampleScreen.props";
 import Button from "../../components/base/Button";
 import NavigationService from "../../navigation/NavigationService";
-import React from "react";
+import React, { useMemo } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { useTheme } from "react-native-paper";
+
 const SampleScreen = (props: SampleScreenGeneratedProps) => {
   const {
     isVisible,
@@ -15,6 +16,8 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
     handleToggleModal,
   } = props;
   const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>SampleScreen</Text>

@@ -8,3 +8,5 @@ export const theme = {
     secondary: "yellow",
   },
 };
+
+export type Theme = typeof theme;
