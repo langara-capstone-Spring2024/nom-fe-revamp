@@ -43,7 +43,7 @@ const styles: ButtonStyles = StyleSheet.create({
     borderRadius: 8,
     textStyle: {
       color: theme.Content["white-strong"],
-      fontFamily: "PublicSansRegular",
+      fontFamily: "PublicSansMedium",
       fontWeight: "500",
     },
   } as CustomStyle,
