@@ -1,7 +1,7 @@
 const QUERY_KEYS = {
-  USER: "UserDetails",
-  CHARACTER: "Character",
-  PRODUCT: "Product",
+  CONSUMERS: "Consumers",
+  MERCHANTS: "Merchants",
+  IMAGES: "Images",
   AUTH: "Auth",
   STRIPE_PAYMENT: "STRIPE_PAYMENT",
 };

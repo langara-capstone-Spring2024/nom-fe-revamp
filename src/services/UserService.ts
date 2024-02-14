@@ -4,8 +4,8 @@ import { apiClient } from "./client";
 import FormData from "form-data";
 
 export class UserService extends BaseService {
-  async getUsers() {
-    const response = await apiClient.get("api/users");
+  async getMerchants() {
+    const response = await apiClient.get("api/merchants");
 
     return response;
   }

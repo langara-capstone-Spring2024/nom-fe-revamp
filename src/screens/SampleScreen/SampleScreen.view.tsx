@@ -1,13 +1,20 @@
-import { View, Text } from "react-native";
+import { View, Text, Modal, SafeAreaView } from "react-native";
 import styles from "./SampleScreen.style";
 import { SampleScreenGeneratedProps } from "./SampleScreen.props";
 import Button from "../../components/base/Button";
-import { useStore } from "../../store";
 import NavigationService from "../../navigation/NavigationService";
 import React from "react";
+import { FlatList } from "react-native-gesture-handler";
 
 const SampleScreen = (props: SampleScreenGeneratedProps) => {
-  const { onLogout } = props;
+  const {
+    isVisible,
+    isErrorOnMerchants,
+    merchants,
+    onLogout,
+    handleToggleModal,
+  } = props;
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>SampleScreen</Text>
@@ -29,6 +36,45 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
         text="Change password"
         onPress={() => NavigationService.navigate("ChangePassword")}
       />
+      <Button
+        variant="primary"
+        buttonSize="lg"
+        text="Get Merchants"
+        onPress={handleToggleModal}
+      />
+      <Modal visible={isVisible}>
+        <SafeAreaView style={{ alignItems: "center" }}>
+          <View style={{ padding: 16 }}>
+            <Button
+              variant="primary"
+              buttonSize="lg"
+              text="Close"
+              onPress={handleToggleModal}
+              takeFullWidth
+            />
+            {isErrorOnMerchants ? (
+              <Text>Error!</Text>
+            ) : (
+              <FlatList
+                data={merchants}
+                renderItem={({ item, index }) => (
+                  <View key={index}>
+                    <Text>{item.user.email}</Text>
+                    <Text>{item.name}</Text>
+                    <Text>{item.description}</Text>
+                    <Text>{item.address}</Text>
+                    <Text>{item.opening}</Text>
+                    <Text>{item.closing}</Text>
+                  </View>
+                )}
+                ItemSeparatorComponent={() => (
+                  <View style={{ height: 1, backgroundColor: "gray" }}></View>
+                )}
+              />
+            )}
+          </View>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 };
