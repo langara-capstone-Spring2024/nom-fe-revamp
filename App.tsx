@@ -8,6 +8,7 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 //@ts-ignore
 import { STRIPE_PB_KEY } from "@env";
 import { Text } from "react-native-elements";
+import { PaperProvider } from "react-native-paper";
 
 const Entrypoint = () => {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,9 @@ const Entrypoint = () => {
   return (
     <QueryClientProvider client={RNQueryClient}>
       <StripeProvider publishableKey={STRIPE_PB_KEY}>
-        <Navigator />
+        <PaperProvider>
+          <Navigator />
+        </PaperProvider>
       </StripeProvider>
     </QueryClientProvider>
   );
