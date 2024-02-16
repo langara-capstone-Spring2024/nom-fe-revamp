@@ -3,8 +3,20 @@ import { AxiosResponse } from "axios";
 import { UserService } from "../../UserService";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { RNQueryClient } from "../query-client";
-import FormData from "form-data";
-import { Merchant } from "../../../types";
+import { User, Merchant } from "../../../types";
+
+export const GetUser = () => {
+  const userService = new UserService();
+  userService.cancelRequests();
+
+  return useQuery<User>({
+    queryKey: [QUERY_KEYS.USER],
+    queryFn: async () => {
+      const response: AxiosResponse = await userService.getUser();
+      return response.data;
+    },
+  });
+};
 
 export const GetMerchants = () => {
   const userService = new UserService();
@@ -19,23 +31,22 @@ export const GetMerchants = () => {
   });
 };
 
-export const AddImage = () => {
+export const ChangeImage = () => {
   const userService = new UserService();
   userService.cancelRequests();
 
-  return useMutation({
-    mutationFn: async (formData: FormData) => {
-      const response: AxiosResponse = await userService.addImage(formData);
-      return response.data;
+  return useMutation<any, Error, Partial<User>>({
+    mutationFn: async (partialUser) => {
+      const response: AxiosResponse = await userService.changeImage(
+        partialUser
+      );
+      return response?.data;
     },
     onSuccess: (data) => {
       RNQueryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.IMAGES],
         exact: true,
       });
-    },
-    onError: (error, variables, context) => {
-      console.log(error, variables, context);
     },
   });
 };

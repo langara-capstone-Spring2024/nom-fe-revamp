@@ -3,8 +3,9 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- StepperCollection: undefined;
- AutoCompleteCollection: undefined;
+  ChangeImageCollection: undefined;
+  StepperCollection: undefined;
+  AutoCompleteCollection: undefined;
   UserAvatarCollection: undefined;
   SingleImagePickerCollection: undefined;
   MultipleImagePickerCollection: undefined;

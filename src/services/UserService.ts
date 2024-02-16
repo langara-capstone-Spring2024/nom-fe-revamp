@@ -1,27 +1,23 @@
 import axios from "axios";
 import { BaseService } from "./BaseService";
 import { apiClient } from "./client";
-import FormData from "form-data";
+import { User } from "../types";
 
 export class UserService extends BaseService {
+  async getUser() {
+    const response = await apiClient.get("api/user");
+
+    return response;
+  }
+
   async getMerchants() {
     const response = await apiClient.get("api/merchants");
 
     return response;
   }
 
-  async addImage(formData: FormData) {
-    // const response = await apiClient.post("api/upload-multi", formData);
-
-    const response = await axios.post(
-      "http://localhost:8000/api/upload-multi",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+  async changeImage(partialUser: Partial<User>) {
+    const response = await apiClient.put("api/image", partialUser);
 
     return response;
   }

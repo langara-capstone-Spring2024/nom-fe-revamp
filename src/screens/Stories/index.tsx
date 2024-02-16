@@ -12,11 +12,31 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'Stepper', onPress: () => NavigationService.navigate('StepperCollection')},
-{name: 'AutoComplete', onPress: () => NavigationService.navigate('AutoCompleteCollection')},
-{name: 'UserAvatar', onPress: () => NavigationService.navigate('UserAvatarCollection')},
-{name: 'SingleImagePicker', onPress: () => NavigationService.navigate('SingleImagePickerCollection')},
-{name: 'MultipleImagePicker', onPress: () => NavigationService.navigate('MultipleImagePickerCollection')},
+    {
+      name: "ChangeImage",
+      onPress: () => NavigationService.navigate("ChangeImageCollection"),
+    },
+    {
+      name: "Stepper",
+      onPress: () => NavigationService.navigate("StepperCollection"),
+    },
+    {
+      name: "AutoComplete",
+      onPress: () => NavigationService.navigate("AutoCompleteCollection"),
+    },
+    {
+      name: "UserAvatar",
+      onPress: () => NavigationService.navigate("UserAvatarCollection"),
+    },
+    {
+      name: "SingleImagePicker",
+      onPress: () => NavigationService.navigate("SingleImagePickerCollection"),
+    },
+    {
+      name: "MultipleImagePicker",
+      onPress: () =>
+        NavigationService.navigate("MultipleImagePickerCollection"),
+    },
     {
       name: "Stripe",
       onPress: () => NavigationService.navigate("StripeCollection"),

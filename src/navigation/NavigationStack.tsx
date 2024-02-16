@@ -12,7 +12,8 @@ import Scanner from "../screens/Scanner";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import StepperCollection from '../collections/base/Stepper'
+import ChangeImageCollection from "../collections/base/ChangeImage";
+import StepperCollection from "../collections/base/Stepper";
 import AutoCompleteCollection from "../collections/base/AutoComplete";
 import UserAvatarCollection from "../collections/base/UserAvatar";
 import SingleImagePickerCollection from "../collections/base/SingleImagePicker";
@@ -34,7 +35,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: StepperCollection, custom: false},
+    { func: ChangeImageCollection, custom: false },
+    { func: StepperCollection, custom: false },
     { func: AutoCompleteCollection, custom: false },
     { func: UserAvatarCollection, custom: false },
     { func: SingleImagePickerCollection, custom: false },

@@ -1,4 +1,5 @@
 const QUERY_KEYS = {
+  USER: "User",
   CONSUMERS: "Consumers",
   MERCHANTS: "Merchants",
   IMAGES: "Images",

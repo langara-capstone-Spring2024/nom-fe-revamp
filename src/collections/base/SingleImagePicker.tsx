@@ -1,12 +1,18 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { S3 } from "aws-sdk";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import SingleImagePicker from "../../components/base/SingleImagePicker";
 import { Image as ImageType } from "../../types/Image";
 import Button from "../../components/base/Button";
-import FormData from "form-data";
-import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
-import { AddImage } from "../../services/react-query/queries/user";
+
+const s3 = new S3({
+  accessKeyId: process.env.EXPO_PUBLIC_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.EXPO_PUBLIC_AWS_SECRET_ACCESS_KEY,
+  region: process.env.EXPO_PUBLIC_AWS_REGION,
+});
 
 const SingleImagePickerCollection = () => {
   const [localImage, setLocalImage] = useState<ImageType | undefined>(
@@ -14,34 +20,33 @@ const SingleImagePickerCollection = () => {
   );
   const [remoteImage, setRemoteImage] = useState<string | undefined>(undefined);
 
-  const { mutate: addImageMutate, data: addImageData, isPending } = AddImage();
-
   const handleUpload = async () => {
     if (
+      process.env.EXPO_PUBLIC_AWS_BUCKET_NAME &&
       localImage &&
-      localImage.uri &&
-      localImage.fileName &&
-      localImage.type
+      localImage.uri
     ) {
-      const formData = new FormData();
-      formData.append("image", {
-        uri: localImage.uri,
-        name: localImage.fileName,
-        type: localImage.type,
-      });
+      const uuid = uuidv4();
+      const response = await fetch(localImage.uri);
+      const blob = await response.blob();
+      const contentType = response.headers.get("Content-Type");
 
-      addImageMutate(formData);
-    }
-  };
+      if (contentType) {
+        const params = {
+          Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME,
+          Key: `uploads/${uuid}-${localImage.fileName}`,
+          Body: blob,
+          ContentType: contentType,
+        };
 
-  useEffect(() => {
-    if (addImageData && addImageData.results) {
-      const data = addImageData.results as { Key: string }[];
-      if (0 < data.length) {
-        setRemoteImage(data[0].Key);
+        const result = await s3.upload(params).promise();
+
+        if (result.Location) {
+          setRemoteImage(result.Location);
+        }
       }
     }
-  }, [addImageData]);
+  };
 
   return (
     <ScrollView
@@ -54,7 +59,7 @@ const SingleImagePickerCollection = () => {
           <SingleImagePicker image={localImage} setImage={setLocalImage} />
         </View>
       </View>
-      <View style={{ marginBottom: 32 }}>
+      <View style={{ marginBottom: 32, alignItems: "center" }}>
         <Button
           text="Upload"
           variant="primary"
@@ -64,18 +69,14 @@ const SingleImagePickerCollection = () => {
       </View>
       <View>
         <Text>Remote Image</Text>
-        {!isPending && (
-          <>
-            <View style={styles.imageContainer}>
-              <View style={styles.item}>
-                <Image source={{ uri: remoteImage }} style={styles.image} />
-              </View>
-            </View>
-            <View>
-              <Text>{remoteImage}</Text>
-            </View>
-          </>
-        )}
+        <View style={styles.imageContainer}>
+          <View style={styles.item}>
+            <Image source={{ uri: remoteImage }} style={styles.image} />
+          </View>
+        </View>
+        <View>
+          <Text>{remoteImage}</Text>
+        </View>
       </View>
     </ScrollView>
   );

@@ -9,3 +9,7 @@ export interface LoginPayload {
   email: string;
   password: string;
 }
+
+export interface User {
+  image: string;
+}
