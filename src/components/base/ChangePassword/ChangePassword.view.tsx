@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
+import { ChangePasswordProps } from "./ChangePassword.props";
 import styles from "./ChangePassword.style";
-import { ChangePasswordGeneratedProps } from "./ChangePassword.props";
-import TextInputField from "../../components/base/TextInputField";
-import Button from "../../components/base/Button";
+import TextInputField from "./../../base/TextInputField";
+import Button from "./../../base/Button";
 
-const ChangePassword = (props: ChangePasswordGeneratedProps) => {
+const ChangePassword = (props: ChangePasswordProps) => {
   const {
     email,
     setEmail,
