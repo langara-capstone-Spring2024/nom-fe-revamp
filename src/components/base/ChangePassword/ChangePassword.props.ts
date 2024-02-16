@@ -1,4 +1,4 @@
-export interface ChangePasswordGeneratedProps {
+export interface ChangePasswordProps {
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   currentPassword: string;

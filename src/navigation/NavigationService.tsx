@@ -3,8 +3,9 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- StepperCollection: undefined;
- AutoCompleteCollection: undefined;
+ ChangePasswordCollection: undefined;
+  StepperCollection: undefined;
+  AutoCompleteCollection: undefined;
   UserAvatarCollection: undefined;
   SingleImagePickerCollection: undefined;
   MultipleImagePickerCollection: undefined;
@@ -25,7 +26,6 @@ type Collections = {
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
   Scanner: undefined;
-  ChangePassword: undefined;
   TestScreen: undefined;
   Stories: undefined;
   Login: undefined;

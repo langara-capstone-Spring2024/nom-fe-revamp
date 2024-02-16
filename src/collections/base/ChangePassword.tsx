@@ -1,8 +1,9 @@
-import ChangePasswordView from "./ChangePassword.view";
+import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
+import ChangePassword from "../../components/base/ChangePassword";
 import { apiClient } from "../../services/client";
 
-const ChangePassword = () => {
+const ChangePasswordCollection = () => {
   const [email, setEmail] = useState<string>("");
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
@@ -27,19 +28,30 @@ const ChangePassword = () => {
     }
   };
 
-  const generatedProps = {
-    email,
-    setEmail,
-    currentPassword,
-    setCurrentPassword,
-    newPassword,
-    setNewPassword,
-    confirmNewPassword,
-    setConfirmNewPassword,
-    changePasswordMethod,
-  };
-
-  return <ChangePasswordView {...generatedProps} />;
+  return (
+    <View style={styles.container}>
+      <ChangePassword
+        email={email}
+        setEmail={setEmail}
+        currentPassword={currentPassword}
+        setCurrentPassword={setCurrentPassword}
+        newPassword={newPassword}
+        setNewPassword={setNewPassword}
+        confirmNewPassword={confirmNewPassword}
+        setConfirmNewPassword={setConfirmNewPassword}
+        changePasswordMethod={changePasswordMethod}
+      />
+    </View>
+  );
 };
 
-export default ChangePassword;
+export default ChangePasswordCollection;
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+});

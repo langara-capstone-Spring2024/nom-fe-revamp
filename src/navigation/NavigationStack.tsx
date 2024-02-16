@@ -9,10 +9,10 @@ import { navigationRef } from "./NavigationService";
 import SampleScreen from "../screens/SampleScreen";
 import BottomNavigation from "../components/layout/BottomNavigation";
 import Scanner from "../screens/Scanner";
-import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import StepperCollection from '../collections/base/Stepper'
+import ChangePasswordCollection from "../collections/base/ChangePassword";
+import StepperCollection from "../collections/base/Stepper";
 import AutoCompleteCollection from "../collections/base/AutoComplete";
 import UserAvatarCollection from "../collections/base/UserAvatar";
 import SingleImagePickerCollection from "../collections/base/SingleImagePicker";
@@ -34,7 +34,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: StepperCollection, custom: false},
+    { func: ChangePasswordCollection, custom: false },
+    { func: StepperCollection, custom: false },
     { func: AutoCompleteCollection, custom: false },
     { func: UserAvatarCollection, custom: false },
     { func: SingleImagePickerCollection, custom: false },
@@ -49,7 +50,6 @@ const PrivateNavigator = () => {
     { func: FormikTextInputFieldCollection, custom: false },
     { func: TextInputFieldCollection, custom: false },
     { func: TypographyCollection, custom: false },
-    { func: ChangePassword, custom: false },
   ];
 
   return (
