@@ -12,6 +12,7 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
+{name: 'Scanner', onPress: () => NavigationService.navigate('ScannerCollection')},
 {name: 'Stepper', onPress: () => NavigationService.navigate('StepperCollection')},
 {name: 'AutoComplete', onPress: () => NavigationService.navigate('AutoCompleteCollection')},
 {name: 'UserAvatar', onPress: () => NavigationService.navigate('UserAvatarCollection')},
