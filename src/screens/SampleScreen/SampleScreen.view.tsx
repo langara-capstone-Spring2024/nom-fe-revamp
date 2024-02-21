@@ -30,12 +30,6 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
       <Button
         variant="primary"
         buttonSize="lg"
-        text="Scan"
-        onPress={() => NavigationService.navigate("Scanner")}
-      />
-      <Button
-        variant="primary"
-        buttonSize="lg"
         text="Change password"
         onPress={() => NavigationService.navigate("ChangePassword")}
       />
