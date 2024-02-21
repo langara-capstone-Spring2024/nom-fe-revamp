@@ -7,7 +7,8 @@ import Navigator from "./src/navigation";
 import { StripeProvider } from "@stripe/stripe-react-native";
 //@ts-ignore
 import { STRIPE_PB_KEY } from "@env";
-import { Text } from "react-native-elements";
+import { PaperProvider } from "react-native-paper";
+import { theme } from "./src/config/theme-config";
 
 const Entrypoint = () => {
   const [fontsLoaded] = useFonts({
@@ -25,10 +26,13 @@ const Entrypoint = () => {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
+
   return (
     <QueryClientProvider client={RNQueryClient}>
       <StripeProvider publishableKey={STRIPE_PB_KEY}>
-        <Navigator />
+        <PaperProvider theme={theme}>
+          <Navigator />
+        </PaperProvider>
       </StripeProvider>
     </QueryClientProvider>
   );
