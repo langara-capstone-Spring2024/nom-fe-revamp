@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+ MerchantRegistrationCollection: undefined;
   ScannerCollection: undefined;
   StepperCollection: undefined;
   AutoCompleteCollection: undefined;

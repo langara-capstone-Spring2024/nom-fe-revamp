@@ -9,6 +9,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
   },
+  label: {
+    marginBottom: 8,
+  },
+  error: {
+    marginTop: 8,
+    paddingHorizontal: 8,
+  },
 });
 
 export default styles;
