@@ -1,4 +1,4 @@
-import { View, Pressable, Image } from "react-native";
+import { View, Pressable, Image, Text } from "react-native";
 import { MultipleImagePickerProps } from "./MultipleImagePicker.props";
 import styles from "./MultipleImagePicker.style";
 import * as ImagePicker from "expo-image-picker";
@@ -27,29 +27,48 @@ const MultipleImagePicker = (props: MultipleImagePickerProps) => {
     }
   };
 
-  const handleRemoveImage = (index: number) => {
-    setImages((oldValues) =>
-      oldValues.filter((_, itemIndex) => itemIndex !== index)
-    );
-  };
-
   return (
-    <View style={styles.container}>
-      <Pressable onPress={handlePickImages} style={styles.item}>
-        <View style={styles.button}>
-          <Ionicons name="images" size={25} />
+    <>
+      <View>
+        {0 < images.length ? (
+          <Pressable onPress={handlePickImages}>
+            <View style={styles.button}>
+              <Image
+                source={{ uri: images[0].uri }}
+                style={[styles.image, { borderRadius: 16 }]}
+              />
+            </View>
+          </Pressable>
+        ) : (
+          <Pressable onPress={handlePickImages}>
+            <View style={styles.button}>
+              <Ionicons name="images" size={25} />
+            </View>
+          </Pressable>
+        )}
+      </View>
+      {1 < images.length && (
+        <View style={styles.list}>
+          {images.slice(1, 6).map((image, index) => (
+            <Pressable
+              onPress={handlePickImages}
+              style={styles.item}
+              key={index}
+            >
+              <Image
+                source={{ uri: image.uri }}
+                style={[styles.image, { borderRadius: 8 }]}
+              />
+              {6 < images.length && index === 4 && (
+                <View style={styles.background}>
+                  <Text style={styles.text}>+ {images.length - 6}</Text>
+                </View>
+              )}
+            </Pressable>
+          ))}
         </View>
-      </Pressable>
-      {images.map((image, index) => (
-        <Pressable
-          onPress={() => handleRemoveImage(index)}
-          style={styles.item}
-          key={index}
-        >
-          <Image source={{ uri: image.uri }} style={styles.image} />
-        </Pressable>
-      ))}
-    </View>
+      )}
+    </>
   );
 };
 
