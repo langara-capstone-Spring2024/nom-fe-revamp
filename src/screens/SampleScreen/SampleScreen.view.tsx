@@ -30,6 +30,12 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
       <Button
         variant="primary"
         buttonSize="lg"
+        text="Scan"
+        onPress={() => NavigationService.navigate("Scanner")}
+      />
+      <Button
+        variant="primary"
+        buttonSize="lg"
         text="Get Merchants"
         onPress={handleToggleModal}
       />
