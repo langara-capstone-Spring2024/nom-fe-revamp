@@ -39,6 +39,7 @@ const AutoComplete = (props: AutoCompleteProps) => {
             });
           }
         }}
+        disableScroll
         fetchDetails
         enablePoweredByContainer={false}
         suppressDefaultStyles
