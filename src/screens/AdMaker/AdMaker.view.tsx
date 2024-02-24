@@ -69,7 +69,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           text="Previous"
           takeFullWidth
           onPress={prev}
-          isDisabled={!localImage}
+          // isDisabled={!localImage}
         />
         <Button
           variant="primary"
@@ -77,7 +77,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           text="Next"
           takeFullWidth
           onPress={next}
-          isDisabled={!localImage}
+          // isDisabled={!localImage}
         />
       </View>
     </View>

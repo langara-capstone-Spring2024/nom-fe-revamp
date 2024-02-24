@@ -3,5 +3,5 @@ import { Dispatch, SetStateAction } from "react";
 
 export interface AdImagePickerProps {
   image?: Image;
-  setImage: Dispatch<SetStateAction<Image | undefined>>;
+  setImage: (image: Image | undefined) => void;
 }
