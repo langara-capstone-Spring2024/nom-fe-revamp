@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import AdImagePickerCollection from '../collections/base/AdImagePicker'
 import CircularNumberCollection from '../collections/base/CircularNumber'
 import ScannerCollection from "../collections/module/Scanner";
 import StepperCollection from "../collections/base/Stepper";
@@ -36,6 +37,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: AdImagePickerCollection, custom: false},
 {func: CircularNumberCollection, custom: false},
     { func: ScannerCollection, customName: "", custom: false },
     { func: StepperCollection, customName: "", custom: false },
