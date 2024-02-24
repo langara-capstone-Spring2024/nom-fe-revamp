@@ -37,7 +37,7 @@ const AdMaker = () => {
   const onColorSelect = (color: returnedResults) => {
     "worklet";
     selectedColor.value = color.hex;
-    console.log(color.hex);
+    console.log("This is the color", color.hex);
   };
 
   //end of page 2

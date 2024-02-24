@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "react-native-paper";
 import { theme as t } from "../../utils/Theme";
 import * as Progress from "react-native-progress";
@@ -19,15 +19,38 @@ import ColorPicker, {
   PreviewText,
 } from "reanimated-color-picker";
 
-import { useSharedValue } from "react-native-reanimated";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
-  const { localImage, handleImageChange, next, prev, page, selectedColor, customSwatches, onColorSelect } = props;
+  const {
+    localImage,
+    handleImageChange,
+    next,
+    prev,
+    page,
+    selectedColor,
+    customSwatches,
+    onColorSelect,
+  } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = useMemo(() => ["50%", "70%", "90%"], []);
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
 
+  const [idx, setIdx] = React.useState(0);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log("handleSheetChanges", index);
+    setIdx(index);
+  }, []);
 
+  console.log(idx);
   const content = () => {
     if (page === 1) {
       return (
@@ -46,35 +69,19 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <Typography variant="title5" alignment="left" color="primary">
             Select a Template
           </Typography>
-          <View style={styles.pickerContainer}>
-            <ColorPicker
-              value={selectedColor.value}
-              sliderThickness={25}
-              thumbSize={24}
-              thumbShape="circle"
-              onChange={onColorSelect}
-              boundedThumb>
-              <Panel1 style={styles.panelStyle} />
-              <HueSlider style={styles.sliderStyle} />
-              <OpacitySlider style={styles.sliderStyle} />
-              <Swatches
-                style={styles.swatchesContainer}
-                swatchStyle={styles.swatchStyle}
-                colors={customSwatches}
-              />
-              {/* <View style={style.previewTxtContainer}>
-                <PreviewText style={{ color: "#707070" }} />
-              </View> */}
-            </ColorPicker>
-          </View>
+          <Button
+            onPress={handlePresentModalPress}
+            text="Present Modal"
+            variant="secondary"
+          />
         </>
       );
     }
     // Add more conditions for other pages if needed
   };
-
+  const container = idx > 0 ? styles.openModalContainer : styles.container;
   return (
-    <View style={styles.container}>
+    <View style={container}>
       <Progress.Bar
         progress={page / 4}
         color={t.Border.contrast}
@@ -95,6 +102,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <AdImagePicker image={localImage} setImage={handleImageChange} />
         </View>
       )}
+
       <View style={styles.buttonContainer}>
         <Button
           variant="primary"
@@ -113,6 +121,45 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           // isDisabled={!localImage}
         />
       </View>
+      {page === 2 && (
+        <BottomSheetModalProvider>
+          <BottomSheetModal
+            ref={bottomSheetModalRef}
+            index={1}
+            snapPoints={snapPoints}
+            onChange={handleSheetChanges}>
+            <View style={styles.pickerHeader}>
+              <Button variant="error" buttonSize="md" text="Cancel" />
+              <Typography variant="body" weight="700">
+                Primary Color
+              </Typography>
+              <Button variant="error" buttonSize="md" text="Save" />
+            </View>
+
+            <View style={styles.pickerContainer}>
+              <ColorPicker
+                value={selectedColor.value}
+                sliderThickness={24}
+                thumbSize={24}
+                thumbShape="circle"
+                onChange={onColorSelect}
+                boundedThumb>
+                <Panel1 style={styles.panelStyle} />
+                <HueSlider style={styles.sliderStyle} />
+                <OpacitySlider style={styles.sliderStyle} />
+                <Swatches
+                  style={styles.swatchesContainer}
+                  swatchStyle={styles.swatchStyle}
+                  colors={customSwatches}
+                />
+                {/* <View style={style.previewTxtContainer}>
+                <PreviewText style={{ color: "#707070" }} />
+              </View> */}
+              </ColorPicker>
+            </View>
+          </BottomSheetModal>
+        </BottomSheetModalProvider>
+      )}
     </View>
   );
 };

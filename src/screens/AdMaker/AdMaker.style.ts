@@ -1,10 +1,16 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { Theme } from "../../config/theme-config";
 
+const { width } = Dimensions.get("window");
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       backgroundColor: "#fff",
+      flex: 2,
+      paddingTop: 16,
+    },
+    openModalContainer: {
+      backgroundColor: "#0000004D",
       flex: 2,
       paddingTop: 16,
     },
@@ -52,24 +58,22 @@ const createStyles = (theme: Theme) =>
       justifyContent: "center",
       alignContent: "center",
     },
+    pickerHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: 16,
+    },
     pickerContainer: {
       alignSelf: "center",
-      width: 300,
+      width,
       backgroundColor: "#fff",
-      padding: 20,
-      borderRadius: 20,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.34,
-      shadowRadius: 6.27,
-
-      elevation: 10,
+      paddingTop: 5,
+      paddingHorizontal: 36,
     },
     panelStyle: {
       borderRadius: 16,
+      height: 172,
 
       shadowColor: "#000",
       shadowOffset: {
