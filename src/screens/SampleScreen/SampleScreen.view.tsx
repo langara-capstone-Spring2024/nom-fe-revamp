@@ -39,6 +39,12 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
         text="Get Merchants"
         onPress={handleToggleModal}
       />
+      <Button
+        variant="primary"
+        buttonSize="lg"
+        text="Ad Maker"
+        onPress={() => NavigationService.navigate("AdMaker")}
+      />
       <Modal visible={isVisible}>
         <SafeAreaView style={{ alignItems: "center" }}>
           <View style={{ padding: 16 }}>

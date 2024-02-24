@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+ CircularNumberCollection: undefined;
   ScannerCollection: undefined;
   StepperCollection: undefined;
   AutoCompleteCollection: undefined;
@@ -25,6 +26,7 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  AdMaker: undefined;
   ChangePassword: undefined;
   TestScreen: undefined;
   Stories: undefined;
