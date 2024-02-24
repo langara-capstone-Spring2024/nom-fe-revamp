@@ -11,14 +11,15 @@ import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
-  const { localImage, handleImageChange } = props;
+  const { localImage, handleImageChange, next, prev, page } = props;
+
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
   return (
     <View style={styles.container}>
       <Progress.Bar
-        progress={0.25}
+        progress={page/4}
         color={t.Border.contrast}
         unfilledColor={"#D4D4D4"}
         borderWidth={0}
@@ -48,6 +49,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           buttonSize="lg"
           text="Next"
           takeFullWidth
+          onPress={next}
           isDisabled={!localImage}
         />
       </View>

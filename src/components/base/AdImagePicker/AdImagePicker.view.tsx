@@ -8,6 +8,7 @@ import Typography from "../Typography";
 
 const AdImagePicker = (props: AdImagePickerProps) => {
   const { image, setImage } = props;
+  const noBorderStyle = image && styles.noBorderContainer;
 
   const handlePickImage = async () => {
     await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -27,8 +28,9 @@ const AdImagePicker = (props: AdImagePickerProps) => {
       });
     }
   };
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, noBorderStyle]}>
       {image ? (
         <Pressable
           onPress={handlePickImage}

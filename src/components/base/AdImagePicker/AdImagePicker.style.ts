@@ -7,11 +7,14 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth - 32,
     aspectRatio: 16 / 9,
-    borderWidth: 2,
     borderColor: t.Border["brand-strong"],
     borderStyle: "dashed",
     borderRadius: 24,
-    marginHorizontal: 16
+    marginHorizontal: 16,
+    borderWidth: 2,
+  },
+  noBorderContainer: {
+    borderWidth: 0,
   },
   item: {
     width: "100%",
@@ -31,8 +34,8 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   spacer: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
 
 export default styles;

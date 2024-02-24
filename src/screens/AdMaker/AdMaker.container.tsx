@@ -1,5 +1,5 @@
 import AdMakerView from "./AdMaker.view";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Image } from "../../types";
 
 const AdMaker = () => {
@@ -11,10 +11,23 @@ const AdMaker = () => {
     // form.append('image', image);
   };
 
+  const [page, setPage] = useState(1);
+
+  const next = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const prev = () => {
+    setPage((prev) => prev - 1);
+  };
+
   const generatedProps = {
     // generated props here
     handleImageChange,
-    localImage
+    localImage,
+    next,
+    prev,
+    page
   };
   return <AdMakerView {...generatedProps} />;
 };
