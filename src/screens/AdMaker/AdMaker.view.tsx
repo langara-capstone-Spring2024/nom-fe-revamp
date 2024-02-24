@@ -39,8 +39,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ["50%", "70%", "90%"], []);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
+
+  const snapPoints = useMemo(() => ["65%"], []);
   const handlePresentModalPress = useCallback(() => {
+    setIsOpenModal(true);
     bottomSheetModalRef.current?.present();
   }, []);
 
@@ -50,7 +53,14 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     setIdx(index);
   }, []);
 
-  console.log(idx);
+  const handleClosePress = useCallback(() => {
+    setIsOpenModal(false);
+    bottomSheetModalRef.current?.close();
+  }, []);
+
+  const container =
+    idx === 0 && isOpenModal ? styles.openModalContainer : styles.container;
+
   const content = () => {
     if (page === 1) {
       return (
@@ -71,7 +81,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </Typography>
           <Button
             onPress={handlePresentModalPress}
-            text="Present Modal"
+            text="Primary Color"
             variant="secondary"
           />
         </>
@@ -79,7 +89,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     }
     // Add more conditions for other pages if needed
   };
-  const container = idx > 0 ? styles.openModalContainer : styles.container;
+
   return (
     <View style={container}>
       <Progress.Bar
@@ -125,11 +135,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
         <BottomSheetModalProvider>
           <BottomSheetModal
             ref={bottomSheetModalRef}
-            index={1}
+            index={0}
             snapPoints={snapPoints}
             onChange={handleSheetChanges}>
             <View style={styles.pickerHeader}>
-              <Button variant="error" buttonSize="md" text="Cancel" />
+              <Button variant="error" buttonSize="md" text="Cancel" onPress={handleClosePress} />
               <Typography variant="body" weight="700">
                 Primary Color
               </Typography>
@@ -152,9 +162,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   swatchStyle={styles.swatchStyle}
                   colors={customSwatches}
                 />
-                {/* <View style={style.previewTxtContainer}>
-                <PreviewText style={{ color: "#707070" }} />
-              </View> */}
+                {/* <View>
+                  <PreviewText style={{ color: "#707070" }} />
+                </View> */}
               </ColorPicker>
             </View>
           </BottomSheetModal>

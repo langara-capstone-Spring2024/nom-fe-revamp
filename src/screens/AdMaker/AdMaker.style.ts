@@ -62,7 +62,7 @@ const createStyles = (theme: Theme) =>
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      paddingHorizontal: 16,
+      paddingHorizontal: 18,
     },
     pickerContainer: {
       alignSelf: "center",
