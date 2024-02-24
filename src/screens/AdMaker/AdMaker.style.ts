@@ -28,7 +28,7 @@ const createStyles = (theme: Theme) =>
       color: "white",
     },
     wrapper: {
-      marginHorizontal: 16
+      marginHorizontal: 16,
     },
     contentContainer: {
       marginTop: 32,
@@ -36,6 +36,16 @@ const createStyles = (theme: Theme) =>
     },
     textContainer: {
       marginLeft: 12,
+    },
+    imagePicker: {
+      marginTop: 36,
+    },
+    buttonContainer: {
+      position: "absolute",
+      bottom: 16,
+      left: 0,
+      right: 0,
+      paddingHorizontal: 16,
     },
   });
 

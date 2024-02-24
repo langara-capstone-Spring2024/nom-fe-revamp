@@ -5,12 +5,13 @@ const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
-    width: windowWidth,
+    width: windowWidth - 32,
     aspectRatio: 16 / 9,
     borderWidth: 2,
     borderColor: t.Border["brand-strong"],
     borderStyle: "dashed",
     borderRadius: 24,
+    marginHorizontal: 16
   },
   item: {
     width: "100%",

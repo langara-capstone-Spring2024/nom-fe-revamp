@@ -7,10 +7,14 @@ import { theme as t } from "../../utils/Theme";
 import * as Progress from "react-native-progress";
 import CircularNumber from "../../components/base/CircularNumber";
 import Typography from "../../components/base/Typography";
+import AdImagePicker from "../../components/base/AdImagePicker";
+import Button from "../../components/base/Button";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
+  const { localImage, handleImageChange } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
+
   return (
     <View style={styles.container}>
       <Progress.Bar
@@ -34,6 +38,18 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             </Typography>
           </View>
         </View>
+      </View>
+      <View style={styles.imagePicker}>
+        <AdImagePicker image={localImage} setImage={handleImageChange} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          variant="primary"
+          buttonSize="lg"
+          text="Next"
+          takeFullWidth
+          isDisabled={!localImage}
+        />
       </View>
     </View>
   );
