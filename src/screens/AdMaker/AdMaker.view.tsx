@@ -79,11 +79,24 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <Typography variant="title5" alignment="left" color="primary">
             Select a Template
           </Typography>
-          <Button
-            onPress={handlePresentModalPress}
-            text="Primary Color"
-            variant="secondary"
-          />
+          <View style={styles.primaryAccentWrapper}>
+            <Button
+              onPress={handlePresentModalPress}
+              text="Primary Color"
+              variant="chip"
+              buttonSize="chipSize"
+              iconPosition="left"
+              icon={<View style={styles.primarySquare} />}
+            />
+            <Button
+              onPress={handlePresentModalPress}
+              text="Accent Color"
+              variant="chip"
+              buttonSize="chipSize"
+              iconPosition="left"
+              icon={<View style={styles.accentSquare} />}
+            />
+          </View>
         </>
       );
     }
@@ -139,7 +152,12 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             snapPoints={snapPoints}
             onChange={handleSheetChanges}>
             <View style={styles.pickerHeader}>
-              <Button variant="error" buttonSize="md" text="Cancel" onPress={handleClosePress} />
+              <Button
+                variant="error"
+                buttonSize="md"
+                text="Cancel"
+                onPress={handleClosePress}
+              />
               <Typography variant="body" weight="700">
                 Primary Color
               </Typography>

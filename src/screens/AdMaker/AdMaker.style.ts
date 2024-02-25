@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { Theme } from "../../config/theme-config";
-
+import { theme as t } from "../../utils/Theme";
 const { width } = Dimensions.get("window");
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -158,6 +158,24 @@ const createStyles = (theme: Theme) =>
       shadowRadius: 3.84,
 
       elevation: 5,
+    },
+    primaryAccentWrapper: {
+      flexDirection: "row",
+      gap: 8,
+      marginLeft: -36,
+      marginTop: 18
+    },
+    primarySquare: {
+      height: 24,
+      width: 24,
+      backgroundColor: t.Content["brand-medium"],
+      borderRadius: 8,
+    },
+    accentSquare: {
+      height: 24,
+      width: 24,
+      backgroundColor: t.Content["accent-medium"],
+      borderRadius: 8,
     },
   });
 

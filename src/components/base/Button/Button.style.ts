@@ -8,11 +8,13 @@ interface CustomStyle extends ViewStyle {
 export interface ButtonStyles {
   primaryButton: CustomStyle;
   secondaryButton: CustomStyle;
+  chipButton: CustomStyle;
   ghostButton: CustomStyle;
   errorButton: CustomStyle;
   smButton: CustomStyle;
   mdButton: CustomStyle;
   lgButton: CustomStyle;
+  chipButtonSize: CustomStyle;
   icon: ViewStyle;
   fullWidth: ViewStyle;
   iconTextGap: ViewStyle;
@@ -54,6 +56,13 @@ const styles: ButtonStyles = StyleSheet.create({
       color: theme.Content["medium"],
     },
   } as CustomStyle,
+  chipButton: {
+    backgroundColor: theme.Surface["neutral-medium"],
+    textStyle: {
+      color: theme.Content["medium"],
+      fontFamily: "PublicSansRegular",
+    },
+  } as CustomStyle,
   errorButton: {
     backgroundColor: "transparent",
     textStyle: {
@@ -64,6 +73,13 @@ const styles: ButtonStyles = StyleSheet.create({
     backgroundColor: "transparent",
     textStyle: {
       color: theme.Content["medium"],
+    },
+  } as CustomStyle,
+  chipButtonSize: {
+    padding: 8,
+    textStyle: {
+      fontSize: 16,
+      lineHeight: 21,
     },
   } as CustomStyle,
   smButton: {
