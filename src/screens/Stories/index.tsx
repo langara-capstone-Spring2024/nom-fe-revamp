@@ -12,13 +12,43 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'ChangePassword', onPress: () => NavigationService.navigate('ChangePasswordCollection')},
-{name: 'Scanner', onPress: () => NavigationService.navigate('ScannerCollection')},
-{name: 'Stepper', onPress: () => NavigationService.navigate('StepperCollection')},
-{name: 'AutoComplete', onPress: () => NavigationService.navigate('AutoCompleteCollection')},
-{name: 'UserAvatar', onPress: () => NavigationService.navigate('UserAvatarCollection')},
-{name: 'SingleImagePicker', onPress: () => NavigationService.navigate('SingleImagePickerCollection')},
-{name: 'MultipleImagePicker', onPress: () => NavigationService.navigate('MultipleImagePickerCollection')},
+    {
+      name: "AdImagePicker",
+      onPress: () => NavigationService.navigate("AdImagePickerCollection"),
+    },
+    {
+      name: "CircularNumber",
+      onPress: () => NavigationService.navigate("CircularNumberCollection"),
+    },
+    {
+      name: "ChangePassword",
+      onPress: () => NavigationService.navigate("ChangePasswordCollection"),
+    },
+    {
+      name: "Scanner",
+      onPress: () => NavigationService.navigate("ScannerCollection"),
+    },
+    {
+      name: "Stepper",
+      onPress: () => NavigationService.navigate("StepperCollection"),
+    },
+    {
+      name: "AutoComplete",
+      onPress: () => NavigationService.navigate("AutoCompleteCollection"),
+    },
+    {
+      name: "UserAvatar",
+      onPress: () => NavigationService.navigate("UserAvatarCollection"),
+    },
+    {
+      name: "SingleImagePicker",
+      onPress: () => NavigationService.navigate("SingleImagePickerCollection"),
+    },
+    {
+      name: "MultipleImagePicker",
+      onPress: () =>
+        NavigationService.navigate("MultipleImagePickerCollection"),
+    },
     {
       name: "Stripe",
       onPress: () => NavigationService.navigate("StripeCollection"),

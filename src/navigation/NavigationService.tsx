@@ -3,6 +3,8 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  AdImagePickerCollection: undefined;
+  CircularNumberCollection: undefined;
   ChangePasswordCollection: undefined;
   ScannerCollection: undefined;
   StepperCollection: undefined;
@@ -26,6 +28,8 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  AdMaker: undefined;
+  ChangePassword: undefined;
   TestScreen: undefined;
   Stories: undefined;
   Login: undefined;
@@ -39,6 +43,7 @@ function navigate(
   name: keyof RootStackParamList,
   params?: RootStackParamList[keyof RootStackParamList]
 ) {
+  //@ts-ignore
   navigationRef.current?.navigate(name, params as never);
 }
 

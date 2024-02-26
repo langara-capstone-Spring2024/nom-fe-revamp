@@ -2,6 +2,7 @@ import { Text } from "react-native";
 import { TypographyProps, getStyleForVariant } from "./Typography.props";
 import { theme } from "../../../utils/Theme";
 import { Theme } from "../../../types/Theme";
+import React from 'react'
 
 const Typography: React.FC<TypographyProps> = ({
   variant = "body",

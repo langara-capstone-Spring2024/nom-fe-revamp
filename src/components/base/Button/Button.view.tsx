@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, TextStyle } from "react-native";
 import { ButtonProps } from "./Button.props";
 import styles, { baseButton } from "./Button.style";
 import { useState } from "react";
+import Typography from "../Typography";
 
 const Button = (props: ButtonProps) => {
   const {
@@ -38,6 +39,12 @@ const Button = (props: ButtonProps) => {
       case "secondary":
         return {
           ...styles.secondaryButton,
+          ...(isPressed ? styles.pressedSecondaryButton : null),
+          ...(isDisabled ? styles.disabledSecondaryButton : null),
+        };
+      case "chip":
+        return {
+          ...styles.chipButton,
           ...(isPressed ? styles.pressedSecondaryButton : null),
           ...(isDisabled ? styles.disabledSecondaryButton : null),
         };
@@ -85,6 +92,13 @@ const Button = (props: ButtonProps) => {
             ? { borderRadius: 16 }
             : { borderRadius: 25 }),
         };
+      case "chipSize":
+        return {
+          ...styles.chipButtonSize,
+          ...(variant === "primary"
+            ? { borderRadius: 16 }
+            : { borderRadius: 8 }),
+        };
       default:
         return {
           ...styles.smButton,
@@ -112,8 +126,7 @@ const Button = (props: ButtonProps) => {
         onPressIn={handleOnPress}
         onPressOut={handleOffPress}
         disabled={isDisabled}
-        activeOpacity={1}
-      >
+        activeOpacity={1}>
         {iconPosition === "left" && (
           <>
             <View style={styles.icon}>{icon}</View>
