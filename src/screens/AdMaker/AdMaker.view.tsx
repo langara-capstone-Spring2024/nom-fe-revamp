@@ -34,32 +34,28 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     selectedColor,
     customSwatches,
     onColorSelect,
+    snapPoints,
+    idx,
+    setIdx,
+    openPrimaryModal,
+    setOpenPrimaryModal,
+    openAccentModal,
+    setOpenAccentModal,
+    handleSheetChanges,
+    handlePresentAccentPress,
+    handlePresentPrimaryPress,
+    handleClosePress,
+    primarySheetModalRef,
+    accentSheetModalRef,
+    handleSavePress
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const [isOpenModal, setIsOpenModal] = React.useState(false);
-
-  const snapPoints = useMemo(() => ["65%"], []);
-  const handlePresentModalPress = useCallback(() => {
-    setIsOpenModal(true);
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const [idx, setIdx] = React.useState(0);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-    setIdx(index);
-  }, []);
-
-  const handleClosePress = useCallback(() => {
-    setIsOpenModal(false);
-    bottomSheetModalRef.current?.close();
-  }, []);
-
   const container =
-    idx === 0 && isOpenModal ? styles.openModalContainer : styles.container;
+    idx === 0 && (openAccentModal || openPrimaryModal)
+      ? styles.openModalContainer
+      : styles.container;
 
   const content = () => {
     if (page === 1) {
@@ -81,7 +77,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </Typography>
           <View style={styles.primaryAccentWrapper}>
             <Button
-              onPress={handlePresentModalPress}
+              onPress={handlePresentPrimaryPress}
               text="Primary Color"
               variant="chip"
               buttonSize="chipSize"
@@ -89,7 +85,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               icon={<View style={styles.primarySquare} />}
             />
             <Button
-              onPress={handlePresentModalPress}
+              onPress={handlePresentAccentPress}
               text="Accent Color"
               variant="chip"
               buttonSize="chipSize"
@@ -147,7 +143,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
       {page === 2 && (
         <BottomSheetModalProvider>
           <BottomSheetModal
-            ref={bottomSheetModalRef}
+            ref={openPrimaryModal ? primarySheetModalRef : accentSheetModalRef}
             index={0}
             snapPoints={snapPoints}
             onChange={handleSheetChanges}>
@@ -159,9 +155,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 onPress={handleClosePress}
               />
               <Typography variant="body" weight="700">
-                Primary Color
+                {openPrimaryModal ? "Primary Color" : "Accent Color"}
               </Typography>
-              <Button variant="error" buttonSize="md" text="Save" />
+              <Button variant="error" buttonSize="md" text="Save" onPress={handleSavePress} />
             </View>
 
             <View style={styles.pickerContainer}>
