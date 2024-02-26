@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { Theme } from "../../config/theme-config";
 import { theme as t } from "../../utils/Theme";
 const { width } = Dimensions.get("window");
+
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
@@ -163,7 +164,7 @@ const createStyles = (theme: Theme) =>
       flexDirection: "row",
       gap: 8,
       marginLeft: -36,
-      marginTop: 18
+      marginTop: 18,
     },
     primarySquare: {
       height: 24,
@@ -176,6 +177,27 @@ const createStyles = (theme: Theme) =>
       width: 24,
       backgroundColor: t.Content["accent-medium"],
       borderRadius: 8,
+    },
+    editAdTextImageContainer: {
+      width: width - 36,
+      marginLeft: -36,
+      marginHorizontal: 47,
+      paddingVertical: 36,
+      paddingHorizontal: 47,
+      aspectRatio: 16 / 9,
+      borderRadius: 24,
+
+      shadowColor: 'rgba(0, 0, 0, 0.15)',
+      shadowOffset: { width: 16, height: 16 },
+      shadowOpacity: 1,
+      shadowRadius: 0,
+      elevation: 16,
+    },
+    editAdTextImage: {
+      borderRadius: 24,
+      resizeMode: "cover",
+      height: 134,
+      width: 267,
     },
   });
 

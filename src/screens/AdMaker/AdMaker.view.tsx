@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
@@ -47,7 +47,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     handleClosePress,
     primarySheetModalRef,
     accentSheetModalRef,
-    handleSavePress
+    handleSavePress,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -95,9 +95,26 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </View>
         </>
       );
+    } else if (page === 3) {
+      return (
+        <>
+          <Typography variant="title5" alignment="left" color="primary">
+            Edit Ad Text
+          </Typography>
+
+          <View style={styles.editAdTextImageContainer}>
+            <Image
+              source={{ uri: localImage?.uri }}
+              style={styles.editAdTextImage}
+            />
+          </View>
+        </>
+      );
     }
     // Add more conditions for other pages if needed
   };
+
+  console.log(localImage);
 
   return (
     <View style={container}>
@@ -157,7 +174,12 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               <Typography variant="body" weight="700">
                 {openPrimaryModal ? "Primary Color" : "Accent Color"}
               </Typography>
-              <Button variant="error" buttonSize="md" text="Save" onPress={handleSavePress} />
+              <Button
+                variant="error"
+                buttonSize="md"
+                text="Save"
+                onPress={handleSavePress}
+              />
             </View>
 
             <View style={styles.pickerContainer}>
