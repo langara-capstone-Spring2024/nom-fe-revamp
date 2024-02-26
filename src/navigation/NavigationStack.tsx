@@ -11,8 +11,9 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import AdImagePickerCollection from '../collections/base/AdImagePicker'
-import CircularNumberCollection from '../collections/base/CircularNumber'
+import AdImagePickerCollection from "../collections/base/AdImagePicker";
+import CircularNumberCollection from "../collections/base/CircularNumber";
+import ChangePasswordCollection from "../collections/base/ChangePassword";
 import ScannerCollection from "../collections/module/Scanner";
 import StepperCollection from "../collections/base/Stepper";
 import AutoCompleteCollection from "../collections/base/AutoComplete";
@@ -37,8 +38,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: AdImagePickerCollection, custom: false},
-{func: CircularNumberCollection, custom: false},
+    { func: AdImagePickerCollection, custom: false },
+    { func: CircularNumberCollection, custom: false },
     { func: ScannerCollection, customName: "", custom: false },
     { func: StepperCollection, customName: "", custom: false },
     { func: AutoCompleteCollection, customName: "", custom: false },
@@ -56,6 +57,23 @@ const PrivateNavigator = () => {
     { func: TypographyCollection, customName: "", custom: false },
     { func: ChangePassword, customName: "", custom: false },
     { func: AdMaker, customName: "Banner Ads", custom: false },
+    { func: ChangePasswordCollection, custom: false },
+    { func: ScannerCollection, custom: false },
+    { func: StepperCollection, custom: false },
+    { func: AutoCompleteCollection, custom: false },
+    { func: UserAvatarCollection, custom: false },
+    { func: SingleImagePickerCollection, custom: false },
+    { func: MultipleImagePickerCollection, custom: false },
+    { func: StripeCollection, custom: false },
+    { func: DateTimeSelectorCollection, custom: false },
+    { func: CheckboxCollection, custom: false },
+    { func: DropdownCollection, custom: false },
+    { func: SampleScreen, custom: false },
+    { func: ButtonCollection, custom: false },
+    { func: FormikTextInputFieldCollection, custom: false },
+    { func: TextInputFieldCollection, custom: false },
+    { func: TypographyCollection, custom: false },
+    { func: ChangePassword, custom: false },
   ];
 
   return (

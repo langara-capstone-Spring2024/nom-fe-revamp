@@ -3,8 +3,9 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- AdImagePickerCollection: undefined;
- CircularNumberCollection: undefined;
+  AdImagePickerCollection: undefined;
+  CircularNumberCollection: undefined;
+  ChangePasswordCollection: undefined;
   ScannerCollection: undefined;
   StepperCollection: undefined;
   AutoCompleteCollection: undefined;
@@ -42,6 +43,7 @@ function navigate(
   name: keyof RootStackParamList,
   params?: RootStackParamList[keyof RootStackParamList]
 ) {
+  //@ts-ignore
   navigationRef.current?.navigate(name, params as never);
 }
 
