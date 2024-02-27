@@ -1,12 +1,4 @@
 import React, { useState, Fragment, useCallback, useMemo, useRef } from "react";
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  TextStyle,
-} from "react-native";
 import { DatePickerProps } from "./DatePicker.props";
 import { createStyles, calendarTheme } from "./DatePicker.style";
 import { useTheme } from "react-native-paper";
@@ -91,25 +83,19 @@ const DatePicker = (props: DatePickerProps) => {
   );
 
   return (
-    <View>
-      <CalendarList
-        current={INITIAL_DATE}
-        minDate={INITIAL_DATE}
-        pastScrollRange={24}
-        futureScrollRange={24}
-        markedDates={markedDates}
-        onDayPress={handleDayPress}
-        theme={calendarTheme}
-        horizontal
-        pagingEnabled
-        staticHeader
-        customHeaderTitle={CustomHeaderTitle}
-      />
-      <View style={styles.selectedDates}>
-        <Text>Selected Start Date: {startDate}</Text>
-        <Text>Selected End Date: {endDate}</Text>
-      </View>
-    </View>
+    <CalendarList
+      current={INITIAL_DATE}
+      minDate={INITIAL_DATE}
+      pastScrollRange={24}
+      futureScrollRange={24}
+      markedDates={markedDates}
+      onDayPress={handleDayPress}
+      theme={calendarTheme}
+      horizontal
+      pagingEnabled
+      staticHeader
+      customHeaderTitle={CustomHeaderTitle}
+    />
   );
 };
 
