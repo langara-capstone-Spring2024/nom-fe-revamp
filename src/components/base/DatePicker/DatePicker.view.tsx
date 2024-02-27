@@ -6,6 +6,7 @@ import { useTheme } from "react-native-paper";
 
 import { CalendarList, DateData } from "react-native-calendars";
 import Typography from "../Typography";
+import { ScrollView } from "react-native-gesture-handler";
 
 const currentDate = new Date();
 const INITIAL_DATE = currentDate.toISOString().split("T")[0];
@@ -89,15 +90,15 @@ const DatePicker = (props: DatePickerProps) => {
     <CalendarList
       current={INITIAL_DATE}
       minDate={INITIAL_DATE}
-      pastScrollRange={24}
-      futureScrollRange={24}
+      pastScrollRange={1}
+      futureScrollRange={2}
       markedDates={markedDates}
       onDayPress={handleDayPress}
       theme={calendarTheme}
       horizontal
       pagingEnabled
       staticHeader
-      customHeaderTitle={CustomHeaderTitle}
+      // customHeaderTitle={CustomHeaderTitle}
     />
   );
 };

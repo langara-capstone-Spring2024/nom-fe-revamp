@@ -18,6 +18,11 @@ export const createStyles = (theme: Theme) =>
 
 export const calendarTheme = {
   selectedDayBackgroundColor: "#3C6DEB",
+  textDayFontFamily: "PublicSansRegular",
+  textMonthFontFamily: "PublicSansRegular",
+  textDayHeaderFontFamily: "PublicSansRegular",
+  textTodayFontFamily: "PublicSansRegular",
+  textMonthFontSize: 16,
   stylesheet: {
     calendar: {
       header: {
@@ -36,6 +41,22 @@ export const calendarTheme = {
     todayText: {
       color: "#5390D9",
       fontWeight: "800",
+      fontFamily: "PublicSansRegular",
+    },
+  },
+  "stylesheet.calendar.header": {
+    headerContainer: {
+      position: "absolute",
+      flexDirection: "row",
+      left: 0,
+      gap: 20,
+    },
+    header: {
+      fontFamily: "PublicSansRegular",
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      marginTop: 6,
+      alignItems: "center",
     },
   },
 };
