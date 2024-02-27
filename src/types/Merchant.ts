@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Merchant {
   _id: string;
   name: string;
@@ -6,7 +8,5 @@ export interface Merchant {
   opening: string;
   closing: string;
   isVerified: boolean;
-  user: {
-    email: string;
-  };
+  user: User;
 }

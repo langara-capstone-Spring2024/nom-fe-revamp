@@ -16,6 +16,7 @@ export const GetMerchants = () => {
       const response: AxiosResponse = await userService.getMerchants();
       return response.data;
     },
+    retryDelay: 60000,
   });
 };
 
