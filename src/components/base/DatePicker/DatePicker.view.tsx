@@ -94,6 +94,7 @@ const DatePicker = (props: DatePickerProps) => {
     <View>
       <CalendarList
         current={INITIAL_DATE}
+        minDate={INITIAL_DATE}
         pastScrollRange={24}
         futureScrollRange={24}
         markedDates={markedDates}
