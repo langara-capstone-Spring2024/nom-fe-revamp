@@ -1,4 +1,5 @@
 import React, { useState, Fragment, useCallback, useMemo, useRef } from "react";
+
 import { DatePickerProps } from "./DatePicker.props";
 import { createStyles, calendarTheme } from "./DatePicker.style";
 import { useTheme } from "react-native-paper";
@@ -15,6 +16,7 @@ const monthYearString = currentDate.toLocaleString("default", {
 const [month, year] = monthYearString.split(" ");
 
 const DatePicker = (props: DatePickerProps) => {
+  const { onSelectDates } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
@@ -30,6 +32,7 @@ const DatePicker = (props: DatePickerProps) => {
       setEndDate("");
     } else if (!endDate && day.dateString >= startDate) {
       setEndDate(day.dateString);
+      onSelectDates(startDate, day.dateString);
     } else if (endDate && day.dateString < startDate) {
       setStartDate(day.dateString);
       setEndDate("");
