@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import MenuCardCollection from "../collections/base/MenuCard";
 import DatePickerCollection from "../collections/base/DatePicker";
 import AdImagePickerCollection from "../collections/base/AdImagePicker";
 import CircularNumberCollection from "../collections/base/CircularNumber";
@@ -39,6 +40,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: MenuCardCollection, custom: false },
     { func: DatePickerCollection, custom: false },
     { func: AdImagePickerCollection, custom: false },
     { func: CircularNumberCollection, custom: false },
@@ -84,7 +86,8 @@ const PrivateNavigator = () => {
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
-                  style={{ paddingLeft: 16, margin: 8 }}>
+                  style={{ paddingLeft: 16, margin: 8 }}
+                >
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),

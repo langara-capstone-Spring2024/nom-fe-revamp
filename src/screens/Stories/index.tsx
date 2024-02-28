@@ -13,6 +13,10 @@ const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
     {
+      name: "MenuCard",
+      onPress: () => NavigationService.navigate("MenuCardCollection"),
+    },
+    {
       name: "DatePicker",
       onPress: () => NavigationService.navigate("DatePickerCollection"),
     },

@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  MenuCardCollection: undefined;
   DatePickerCollection: undefined;
   AdImagePickerCollection: undefined;
   CircularNumberCollection: undefined;
@@ -30,7 +31,6 @@ type Collections = {
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
   AdMaker: undefined;
-  ChangePassword: undefined;
   TestScreen: undefined;
   Stories: undefined;
   Login: undefined;
