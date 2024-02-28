@@ -3,8 +3,9 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- ListCollection: undefined;
- AccordionCollection: undefined;
+  ListCollection: undefined;
+  AccordionCollection: undefined;
+  DatePickerCollection: undefined;
   AdImagePickerCollection: undefined;
   CircularNumberCollection: undefined;
   ChangePasswordCollection: undefined;

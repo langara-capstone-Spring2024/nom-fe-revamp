@@ -11,8 +11,9 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import ListCollection from '../collections/base/List'
-import AccordionCollection from '../collections/base/Accordion'
+import ListCollection from "../collections/base/List";
+import AccordionCollection from "../collections/base/Accordion";
+import DatePickerCollection from "../collections/base/DatePicker";
 import AdImagePickerCollection from "../collections/base/AdImagePicker";
 import CircularNumberCollection from "../collections/base/CircularNumber";
 import ChangePasswordCollection from "../collections/base/ChangePassword";
@@ -40,8 +41,9 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: ListCollection, custom: false},
-{func: AccordionCollection, custom: false},
+    { func: ListCollection, custom: false },
+    { func: AccordionCollection, custom: false },
+    { func: DatePickerCollection, custom: false },
     { func: AdImagePickerCollection, custom: false },
     { func: CircularNumberCollection, custom: false },
     { func: ScannerCollection, customName: "", custom: false },
@@ -86,7 +88,8 @@ const PrivateNavigator = () => {
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
-                  style={{ paddingLeft: 16, margin: 8 }}>
+                  style={{ paddingLeft: 16, margin: 8 }}
+                >
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),

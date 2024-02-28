@@ -15,6 +15,10 @@ const Stories = () => {
 {name: 'List', onPress: () => NavigationService.navigate('ListCollection')},
 {name: 'Accordion', onPress: () => NavigationService.navigate('AccordionCollection')},
     {
+      name: "DatePicker",
+      onPress: () => NavigationService.navigate("DatePickerCollection"),
+    },
+    {
       name: "AdImagePicker",
       onPress: () => NavigationService.navigate("AdImagePickerCollection"),
     },
