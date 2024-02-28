@@ -3,6 +3,7 @@ import { TextInputFieldProps } from "./TextInputField.props";
 import styles from "./TextInputField.style";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
+import Typography from "../Typography";
 
 const TextInputField = (props: TextInputFieldProps) => {
   const {
@@ -17,6 +18,7 @@ const TextInputField = (props: TextInputFieldProps) => {
     error,
     isDarkMode,
     onRightPress,
+    noClear = false,
   } = props;
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -24,16 +26,15 @@ const TextInputField = (props: TextInputFieldProps) => {
   return (
     <View>
       {label && (
-        <Text style={[styles.label, { color: isDarkMode ? "white" : "black" }]}>
+        <Typography variant="label2" otherStyle={styles.label}>
           {label}
-        </Text>
+        </Typography>
       )}
       <View
         style={[
           styles.textInputFieldContainer,
           { borderRadius: rounded ? 24 : 8 },
-        ]}
-      >
+        ]}>
         {leftIcon && (
           <Text style={{ marginRight: 8, color: "black" }}>{leftIcon}</Text>
         )}
@@ -45,14 +46,20 @@ const TextInputField = (props: TextInputFieldProps) => {
           autoCapitalize="none"
           style={styles.textInputField}
         />
-        <Pressable onPress={() => setValue("")} style={{ marginLeft: 8 }}>
-          <Ionicons name="close-circle" size={18} style={{ color: "black" }} />
-        </Pressable>
+        {!noClear && (
+          <Pressable onPress={() => setValue("")} style={{ marginLeft: 8 }}>
+            <Ionicons
+              name="close-circle"
+              size={18}
+              style={{ color: "black" }}
+            />
+          </Pressable>
+        )}
+
         {secured && (
           <Pressable
             onPress={() => setIsVisible((oldValue) => !oldValue)}
-            style={{ marginLeft: 8 }}
-          >
+            style={{ marginLeft: 8 }}>
             {isVisible ? (
               <Ionicons name="eye" size={18} style={{ color: "black" }} />
             ) : (

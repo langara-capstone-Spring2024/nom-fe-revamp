@@ -23,6 +23,7 @@ import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
+import TextInputField from "../../components/base/TextInputField";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -48,6 +49,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     primarySheetModalRef,
     accentSheetModalRef,
     handleSavePress,
+    headline,
+    setHeadline
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -107,6 +110,16 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               source={{ uri: localImage?.uri }}
               style={styles.editAdTextImage}
             />
+          </View>
+          <View style={styles.edAdTextHeadlineWrapper}>
+            <TextInputField
+              label="Headline"
+              placeholder="e.g. Best Weekly Deals"
+              value={headline}
+              setValue={setHeadline}
+              noClear
+            />
+            <Typography variant="bodyXs" otherStyle={{color: '#686868', textAlign: 'right', marginTop: 4}}> 0/20</Typography>
           </View>
         </>
       );

@@ -101,6 +101,8 @@ const AdMaker = () => {
       accentSheetModalRef.current?.close();
     }
   }, [openAccentModal]);
+
+  const [headline, setHeadline] = useState("")
   //end of page 2
 
   const generatedProps = {
@@ -127,6 +129,8 @@ const AdMaker = () => {
     accentSheetModalRef,
     primarySheetModalRef,
     handleSavePress,
+    headline,
+    setHeadline
   };
   return <AdMakerView {...generatedProps} />;
 };

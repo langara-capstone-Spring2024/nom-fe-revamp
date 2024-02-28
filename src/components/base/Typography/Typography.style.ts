@@ -41,6 +41,10 @@ const typographyStyles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0,
   },
+  label2: {
+    fontSize: 14,
+    lineHeight: 16,
+  },
 });
 
 export default typographyStyles;

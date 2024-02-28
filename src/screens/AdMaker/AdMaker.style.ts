@@ -187,7 +187,7 @@ const createStyles = (theme: Theme) =>
       aspectRatio: 16 / 9,
       borderRadius: 24,
 
-      shadowColor: 'rgba(0, 0, 0, 0.15)',
+      shadowColor: "rgba(0, 0, 0, 0.15)",
       shadowOffset: { width: 16, height: 16 },
       shadowOpacity: 1,
       shadowRadius: 0,
@@ -198,6 +198,14 @@ const createStyles = (theme: Theme) =>
       resizeMode: "cover",
       height: 134,
       width: 267,
+    },
+    edAdTextHeadlineWrapper: {
+      width: width - 16,
+      marginLeft: -36,
+      paddingRight: 16,
+      // marginHorizontal: 47,
+      // paddingVertical: 36,
+      // paddingHorizontal: 47,
     },
   });
 

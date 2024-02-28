@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {},
   label: {
     marginBottom: 8,
+    color: "#3c3c3c",
   },
   textInputFieldContainer: {
     backgroundColor: "white",

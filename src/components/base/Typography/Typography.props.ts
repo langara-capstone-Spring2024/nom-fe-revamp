@@ -20,7 +20,8 @@ export type Variants =
   | "title5"
   | "body"
   | "bodySm"
-  | "bodyXs";
+  | "bodyXs"
+  | "label2";
 
 export type TextAlign = "left" | "right" | "center";
 

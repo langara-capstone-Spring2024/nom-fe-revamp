@@ -29,8 +29,13 @@ export interface AdMakerGeneratedProps {
   setOpenAccentModal: (v: boolean) => void;
   handleSheetChanges: (v: number) => void;
 
-  handlePresentPrimaryPress: (event?: GestureResponderEvent | undefined) => void;
+  handlePresentPrimaryPress: (
+    event?: GestureResponderEvent | undefined
+  ) => void;
   handlePresentAccentPress: (event?: GestureResponderEvent | undefined) => void;
   handleClosePress: (event?: GestureResponderEvent | undefined) => void;
   handleSavePress: (event?: GestureResponderEvent | undefined) => void;
+
+  headline: string;
+  setHeadline: (v: string) => void;
 }
