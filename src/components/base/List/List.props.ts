@@ -7,4 +7,5 @@ export interface ListProps {
   rightComponent?: ReactNode;
   hasRightIcon?: boolean;
   rightIcon?: ReactNode;
+  isLast?: boolean;
 }

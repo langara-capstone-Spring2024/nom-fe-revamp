@@ -13,7 +13,7 @@ const Accordion = (props: AccordionProps) => {
   const { title, children, hasLeftItem, leftItem, hasRightItem, rightItem } =
     props;
 
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
   const handlePress = () => setExpanded(!expanded);
 
   return (

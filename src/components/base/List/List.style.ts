@@ -8,13 +8,24 @@ const createStyles = (theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      gap: 16,
+      backgroundColor: "white",
+      height: 53,
+      gap: 20,
     },
-    content: {
+    contentWrapper: {
+      flex: 1,
+      height: 53,
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      borderBottomColor: t.Border.default,
+    },
+    contentRight: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
     },
   });
 

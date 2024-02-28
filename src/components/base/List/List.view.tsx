@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { ListProps } from "./List.props";
 import createStyles from "./List.style";
 import React, { useMemo } from "react";
@@ -13,16 +13,23 @@ const List = (props: ListProps) => {
     rightComponent,
     hasRightIcon,
     rightIcon,
+    isLast,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
     <View style={styles.listWrapper}>
-      {hasLeftIcon && leftIcon}
-      <View style={styles.content}>
+      <View>{hasLeftIcon && leftIcon}</View>
+
+      <View
+        style={[
+          styles.contentWrapper,
+          isLast ? null : { borderBottomWidth: 1 },
+        ]}
+      >
         <Typography>{title}</Typography>
-        <View>
+        <View style={styles.contentRight}>
           {rightComponent}
           {hasRightIcon && rightIcon}
         </View>
