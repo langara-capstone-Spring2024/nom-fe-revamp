@@ -12,6 +12,8 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
+{name: 'List', onPress: () => NavigationService.navigate('ListCollection')},
+{name: 'Accordion', onPress: () => NavigationService.navigate('AccordionCollection')},
     {
       name: "MenuCard",
       onPress: () => NavigationService.navigate("MenuCardCollection"),
