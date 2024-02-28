@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, LayoutAnimation } from "react-native";
 import { AccordionProps } from "./Accordion.props";
 import createStyles from "./Accordion.style";
 import React, { useMemo } from "react";
@@ -14,12 +14,19 @@ const Accordion = (props: AccordionProps) => {
     props;
 
   const [expanded, setExpanded] = React.useState(false);
-  const handlePress = () => setExpanded(!expanded);
+  const handlePress = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setExpanded(!expanded);
+  };
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={handlePress} style={styles.headerContent}>
+        <TouchableOpacity
+          onPress={handlePress}
+          style={styles.headerContent}
+          activeOpacity={1}
+        >
           <View style={styles.leftComponent}>
             {hasLeftItem && leftItem}
             <Typography>{title}</Typography>
