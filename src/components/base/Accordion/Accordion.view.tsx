@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, LayoutAnimation } from "react-native";
 import { AccordionProps } from "./Accordion.props";
 import createStyles from "./Accordion.style";
-import React, { useMemo } from "react";
+import React, { useMemo, useLayoutEffect } from "react";
 import { useTheme, List } from "react-native-paper";
 import Typography from "../Typography";
 import { Entypo } from "@expo/vector-icons";
@@ -14,9 +14,12 @@ const Accordion = (props: AccordionProps) => {
     props;
 
   const [expanded, setExpanded] = React.useState(false);
+  const [visibleChildren, setVisibleChildren] = React.useState(false);
+
   const handlePress = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setVisibleChildren(!visibleChildren);
     setExpanded(!expanded);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   };
 
   return (
@@ -55,7 +58,7 @@ const Accordion = (props: AccordionProps) => {
           expanded ? { borderTopWidth: 0.5 } : null,
         ]}
       >
-        {expanded && children}
+        {visibleChildren && children}
       </View>
     </View>
   );

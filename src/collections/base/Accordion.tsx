@@ -74,15 +74,23 @@ const AccordionCollection = () => {
 
       <View style={{ padding: 20 }}>
         <Accordion
-          title="Details"
-          hasLeftItem={true}
-          leftItem={<LeftItemComponent />}
+          title="Items"
+          // hasLeftItem={true}
+          // leftItem={<LeftItemComponent />}
           hasRightItem={true}
           rightItem={<RightItemComponent />}
         >
-          {data.map((item, index) => (
-            <List key={index} {...item} />
-          ))}
+          <List
+            title="Add Item"
+            hasRightIcon={true}
+            rightIcon={
+              <Entypo name="chevron-small-right" size={24} color="black" />
+            }
+            isLast={true}
+            hasBottomDescription={true}
+            bottomDescription="Add or edit items"
+            style={{ paddingVertical: 40 }}
+          />
         </Accordion>
       </View>
     </>

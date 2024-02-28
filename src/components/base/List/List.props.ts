@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { ViewStyle } from "react-native";
 
 export interface ListProps {
   hasLeftIcon?: boolean;
@@ -8,4 +9,7 @@ export interface ListProps {
   hasRightIcon?: boolean;
   rightIcon?: ReactNode;
   isLast?: boolean;
+  hasBottomDescription?: boolean;
+  bottomDescription?: string;
+  style?: ViewStyle;
 }

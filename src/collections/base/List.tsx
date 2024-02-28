@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import List from "../../components/base/List";
 import DateImage from "../../../assets/Date.png";
 import DateTimeSelector from "../../components/base/DateTimeSelector";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Entypo } from "@expo/vector-icons";
 import { theme as t } from "../../utils/Theme";
 
 const ListCollection = () => {
@@ -33,6 +33,17 @@ const ListCollection = () => {
           <Ionicons name="chevron-expand-outline" size={24} color="black" />
         }
         isLast={true}
+      />
+
+      <List
+        title="Add Item"
+        hasRightIcon={true}
+        rightIcon={
+          <Entypo name="chevron-small-right" size={24} color="black" />
+        }
+        isLast={true}
+        hasBottomDescription={true}
+        bottomDescription="Add or edit items"
       />
     </View>
   );

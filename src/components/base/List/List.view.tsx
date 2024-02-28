@@ -14,12 +14,15 @@ const List = (props: ListProps) => {
     hasRightIcon,
     rightIcon,
     isLast,
+    hasBottomDescription,
+    bottomDescription,
+    style,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
-    <View style={styles.listWrapper}>
+    <View style={[styles.listWrapper, !hasLeftIcon && { gap: 0 }, style]}>
       <View>{hasLeftIcon && leftIcon}</View>
 
       <View
@@ -28,7 +31,13 @@ const List = (props: ListProps) => {
           isLast ? null : { borderBottomWidth: 1 },
         ]}
       >
-        <Typography>{title}</Typography>
+        <View>
+          <Typography>{title}</Typography>
+          {hasBottomDescription && (
+            <Typography variant="bodyXs">{bottomDescription}</Typography>
+          )}
+        </View>
+
         <View style={styles.contentRight}>
           {rightComponent}
           {hasRightIcon && rightIcon}

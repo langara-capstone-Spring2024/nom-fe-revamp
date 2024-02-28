@@ -8,7 +8,6 @@ const createStyles = (theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: "white",
       height: 53,
       gap: 20,
     },
