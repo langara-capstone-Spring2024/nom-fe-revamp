@@ -1,1 +1,3 @@
-export interface RatingBarsProps {}
+export interface RatingBarsProps {
+  ratingNumbers: number[];
+}
