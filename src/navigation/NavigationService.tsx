@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  MapCollection: undefined;
   ListCollection: undefined;
   AccordionCollection: undefined;
   MenuCardCollection: undefined;
