@@ -18,7 +18,7 @@ const createStyles = (theme: Theme) =>
     },
 
     leftComponent: {
-      flex: 7,
+      flex: 7.5,
       marginRight: 5,
     },
 
@@ -27,20 +27,20 @@ const createStyles = (theme: Theme) =>
     },
 
     rightComponent: {
-      flex: 3,
+      flex: 2.5,
       marginLeft: 5,
       alignItems: "flex-end",
     },
 
     imageContainer: {
-      width: 100,
-      height: 100,
+      width: "100%",
+      aspectRatio: 1,
       borderRadius: 8,
     },
 
     noImageContainer: {
-      width: 100,
-      height: 100,
+      width: "100%",
+      aspectRatio: 1,
       borderRadius: 8,
       borderWidth: 1,
       borderColor: t.Border["default"],

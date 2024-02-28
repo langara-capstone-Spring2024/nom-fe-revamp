@@ -6,7 +6,7 @@ const MenuCardCollection = () => {
   return (
     <View>
       <MenuCard
-        itemName="Sandwishes"
+        itemName="SandwishesSandwishesSandwishes"
         originalPrice="17.99"
         itemImage="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcRkzwW5Ron058pqrtPbrrKkBl1AxHvUREdnpzaP1z_Ite7aZKry4Fkwjfb0CtaSMr7jFq4HNfzvajsL6lL18rU"
         itemDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elitdsasdsa adipiscing"

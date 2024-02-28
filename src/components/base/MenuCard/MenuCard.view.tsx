@@ -22,14 +22,14 @@ const MenuCard = (props: MenuCardProps) => {
       <View style={styles.leftComponent}>
         <View style={styles.namePrice}>
           <Typography variant="body" alignment="left" color="primary">
-            {itemName}
+          {truncateDescription(itemName, 25)}
           </Typography>
           <Typography variant="bodySm" alignment="left" color="medium">
             {originalPrice}
           </Typography>
         </View>
         <Typography variant="bodySm" alignment="left" color="medium">
-          {truncateDescription(itemDescription, 60)}
+          {truncateDescription(itemDescription, 64)}
         </Typography>
       </View>
 
