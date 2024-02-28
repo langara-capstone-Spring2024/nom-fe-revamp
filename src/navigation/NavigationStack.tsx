@@ -11,7 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import MapCollection from '../collections/base/Map'
+import MapCollection from "../collections/base/Map";
 import MenuCardCollection from "../collections/base/MenuCard";
 import DatePickerCollection from "../collections/base/DatePicker";
 import AdImagePickerCollection from "../collections/base/AdImagePicker";
@@ -41,7 +41,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: MapCollection, custom: false},
+    { func: MapCollection, custom: false },
     { func: MenuCardCollection, custom: false },
     { func: DatePickerCollection, custom: false },
     { func: AdImagePickerCollection, custom: false },
