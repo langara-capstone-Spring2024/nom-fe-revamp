@@ -4,6 +4,7 @@ import List from "../../components/base/List";
 import DateImage from "../../../assets/Date.png";
 import DateTimeSelector from "../../components/base/DateTimeSelector";
 import { Ionicons } from "@expo/vector-icons";
+import { theme as t } from "../../utils/Theme";
 
 const ListCollection = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -15,7 +16,13 @@ const ListCollection = () => {
   );
 
   return (
-    <View>
+    <View
+      style={{
+        paddingLeft: 20,
+        paddingRight: 20,
+        backgroundColor: t.Content["invert-strong"],
+      }}
+    >
       <List
         hasLeftIcon={true}
         leftIcon={<Image source={DateImage} />}

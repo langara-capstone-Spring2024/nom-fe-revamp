@@ -63,19 +63,29 @@ const data = [
 
 const AccordionCollection = () => {
   return (
-    <View>
-      <Accordion
-        title="Details"
-        hasLeftItem={true}
-        leftItem={<LeftItemComponent />}
-        hasRightItem={true}
-        rightItem={<RightItemComponent />}
-      >
-        {data.map((item, index) => (
-          <List key={index} {...item} />
-        ))}
-      </Accordion>
-    </View>
+    <>
+      <View style={{ padding: 20 }}>
+        <Accordion title="Details">
+          {data.map((item, index) => (
+            <List key={index} {...item} />
+          ))}
+        </Accordion>
+      </View>
+
+      <View style={{ padding: 20 }}>
+        <Accordion
+          title="Details"
+          hasLeftItem={true}
+          leftItem={<LeftItemComponent />}
+          hasRightItem={true}
+          rightItem={<RightItemComponent />}
+        >
+          {data.map((item, index) => (
+            <List key={index} {...item} />
+          ))}
+        </Accordion>
+      </View>
+    </>
   );
 };
 
