@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import RatingBarsCollection from "../collections/base/RatingBars";
 import MapCollection from "../collections/base/Map";
 import ListCollection from "../collections/base/List";
 import AccordionCollection from "../collections/base/Accordion";
@@ -43,6 +44,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: RatingBarsCollection, custom: false },
     { func: MapCollection, custom: false },
     { func: ListCollection, custom: false },
     { func: AccordionCollection, custom: false },
