@@ -3,7 +3,7 @@ import { View } from "react-native";
 import Dropdown from "../../components/base/Dropdown";
 import { Option } from "./../../types";
 
-const DropdownCollection: React.FC = () => {
+const DropdownCollection = () => {
   const [value, setValue] = useState<string>("");
 
   const options: Option[] = [

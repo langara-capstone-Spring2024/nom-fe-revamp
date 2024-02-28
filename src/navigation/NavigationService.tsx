@@ -5,6 +5,7 @@ type Collections = {
   // PLOP_COMPONENT_TYPE
   ListCollection: undefined;
   AccordionCollection: undefined;
+  MenuCardCollection: undefined;
   DatePickerCollection: undefined;
   AdImagePickerCollection: undefined;
   CircularNumberCollection: undefined;
@@ -31,8 +32,11 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  Scanner: undefined;
+  Activity: undefined;
+  Account: undefined;
+  Home: undefined;
   AdMaker: undefined;
-  ChangePassword: undefined;
   TestScreen: undefined;
   Stories: undefined;
   Login: undefined;

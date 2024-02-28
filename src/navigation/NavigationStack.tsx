@@ -13,6 +13,7 @@ import ChangePassword from "../screens/ChangePassword";
 // PLOP_INJECT_COLLECTION_IMPORT
 import ListCollection from "../collections/base/List";
 import AccordionCollection from "../collections/base/Accordion";
+import MenuCardCollection from "../collections/base/MenuCard";
 import DatePickerCollection from "../collections/base/DatePicker";
 import AdImagePickerCollection from "../collections/base/AdImagePicker";
 import CircularNumberCollection from "../collections/base/CircularNumber";
@@ -43,6 +44,7 @@ const PrivateNavigator = () => {
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: ListCollection, custom: false },
     { func: AccordionCollection, custom: false },
+    { func: MenuCardCollection, custom: false },
     { func: DatePickerCollection, custom: false },
     { func: AdImagePickerCollection, custom: false },
     { func: CircularNumberCollection, custom: false },
@@ -88,8 +90,7 @@ const PrivateNavigator = () => {
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
-                  style={{ paddingLeft: 16, margin: 8 }}
-                >
+                  style={{ paddingLeft: 16, margin: 8 }}>
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),
@@ -126,14 +127,7 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name="PrivateStack"
-          component={PrivateNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"
             component={PrivateNavigator}
@@ -141,8 +135,7 @@ const App = () => {
               headerShown: false,
             }}
           />
-        ) 
-        : (
+        ) : (
           <Stack.Screen
             name="PublicStack"
             component={PublicNavigator}
@@ -150,7 +143,7 @@ const App = () => {
               headerShown: false,
             }}
           />
-        )} */}
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
