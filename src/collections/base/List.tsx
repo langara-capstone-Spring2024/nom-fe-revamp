@@ -25,6 +25,7 @@ const ListCollection = () => {
         rightIcon={
           <Ionicons name="chevron-expand-outline" size={24} color="black" />
         }
+        isLast={true}
       />
     </View>
   );
