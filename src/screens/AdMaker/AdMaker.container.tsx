@@ -5,9 +5,10 @@ import { colorKit } from "reanimated-color-picker";
 import { useSharedValue } from "react-native-reanimated";
 import type { returnedResults } from "reanimated-color-picker";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { LayoutAnimation } from "react-native";
 
 const AdMaker = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(4);
 
   const next = () => {
     setPage((prev) => prev + 1);
@@ -102,9 +103,39 @@ const AdMaker = () => {
     }
   }, [openAccentModal]);
 
+  //end of page 2
+
+  //start of page 3
+
   const [headline, setHeadline] = useState("");
   const [tagline, setTagline] = useState("");
-  //end of page 2
+
+  //end of page 3
+
+  //start of page 4
+  const [showDate, setShowDate] = useState(false);
+
+  const [selectedStartDate, setSelectedStartDate] = useState("");
+  console.log(
+    "🚀 ~ DatePickerCollection ~ selectedStartDate:",
+    selectedStartDate
+  );
+  const [selectedEndDate, setSelectedEndDate] = useState("");
+  console.log("🚀 ~ DatePickerCollection ~ selectedEndDate:", selectedEndDate);
+
+  const handleSelectDates = (startDate: string, endDate: string) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
+
+  const dateSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const toggleDateDisplay = useCallback(() => {
+    dateSheetModalRef.current?.present();
+    setShowDate(!showDate);
+  }, [showDate]);
+
+  //end of page 4
 
   const generatedProps = {
     // generated props here
@@ -134,6 +165,13 @@ const AdMaker = () => {
     setHeadline,
     tagline,
     setTagline,
+    showDate,
+    setShowDate,
+    toggleDateDisplay,
+    selectedEndDate,
+    selectedStartDate,
+    handleSelectDates,
+    dateSheetModalRef,
   };
   return <AdMakerView {...generatedProps} />;
 };

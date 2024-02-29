@@ -40,4 +40,13 @@ export interface AdMakerGeneratedProps {
   setHeadline: (v: string) => void;
   tagline: string;
   setTagline: (v: string) => void;
+
+  showDate: boolean;
+  setShowDate: (v: boolean) => void;
+  toggleDateDisplay: () => void;
+  selectedStartDate: string;
+  selectedEndDate: string;
+  handleSelectDates: (start: string, end: string) => void;
+  dateSheetModalRef: RefObject<BottomSheetModal>;
+
 }

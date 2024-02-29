@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput } from "react-native";
+import { View, Text, Image } from "react-native";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
@@ -25,6 +25,8 @@ import {
 } from "@gorhom/bottom-sheet";
 import TextInputField from "../../components/base/TextInputField";
 import TextArea from "../../components/base/TextArea";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import DatePicker from "../../components/base/DatePicker";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -54,6 +56,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     setHeadline,
     tagline,
     setTagline,
+    showDate,
+    setShowDate,
+    toggleDateDisplay,
+    handleSelectDates,
+    dateSheetModalRef
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -163,12 +170,34 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <Typography variant="title5" alignment="left" color="primary">
             Confirm & Pay
           </Typography>
-          <View style={styles.editAdTextImageContainer}>
-            <Image
-              source={{ uri: localImage?.uri }}
-              style={styles.editAdTextImage}
-            />
-          </View>
+          <ScrollView style={styles.scrollViewContent}>
+            <View style={styles.editAdTextImageContainer}>
+              <Image
+                source={{ uri: localImage?.uri }}
+                style={styles.editAdTextImage}
+              />
+            </View>
+            <View style={styles.campaignDetailsWrapper}>
+              <Typography variant="body" weight="600">
+                Ad Campaign Details
+              </Typography>
+              <View style={styles.hr} />
+              <View style={styles.dateWrapper}>
+                <Typography variant="body">Date</Typography>
+                <TouchableOpacity onPress={toggleDateDisplay}>
+                  <Typography variant="body">April 1 - April, 2024</Typography>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.hr} />
+              <View style={styles.priceWrapper}>
+                <Typography variant="body">Price</Typography>
+                <Typography variant="body" color="brand-medium">
+                  150CA$
+                </Typography>
+              </View>
+            </View>
+          </ScrollView>
         </>
       );
     }
@@ -199,7 +228,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <AdImagePicker image={localImage} setImage={handleImageChange} />
         </View>
       )}
-
+      {/* <View>
+        <DatePicker onSelectDates={handleSelectDates} />
+      </View> */}
       <View style={styles.buttonContainer}>
         <Button
           variant="primary"
@@ -264,6 +295,19 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   <PreviewText style={{ color: "#707070" }} />
                 </View> */}
               </ColorPicker>
+            </View>
+          </BottomSheetModal>
+        </BottomSheetModalProvider>
+      )}
+      {page === 4 && (
+        <BottomSheetModalProvider>
+          <BottomSheetModal
+            ref={dateSheetModalRef}
+            index={0}
+            snapPoints={snapPoints}
+            onChange={handleSheetChanges}>
+            <View>
+              <DatePicker onSelectDates={handleSelectDates} />
             </View>
           </BottomSheetModal>
         </BottomSheetModalProvider>

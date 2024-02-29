@@ -205,6 +205,38 @@ const createStyles = (theme: Theme) =>
       paddingRight: 22,
       marginTop: 36,
     },
+    campaignDetailsWrapper: {
+      borderWidth: 1,
+      borderColor: t.Border.default,
+      width: width - 36,
+      padding: 16,
+      borderRadius: 16,
+    },
+    hr: {
+      height: 1,
+      borderWidth: 0.5,
+      borderColor: t.Border.default,
+      marginTop: 16
+    },
+    priceWrapper: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 16
+    },
+    dateWrapper: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 16
+    },
+    scrollViewContent: {
+      // flexGrow: 1,
+      marginLeft: -36,
+      borderWidth: 1,
+      borderColor: 'hotpink'
+      // justifyContent: 'space-between',
+    },
   });
 
 export default createStyles;
