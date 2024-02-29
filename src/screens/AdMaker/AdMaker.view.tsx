@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TextInput } from "react-native";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
@@ -24,6 +24,7 @@ import {
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
 import TextInputField from "../../components/base/TextInputField";
+import TextArea from "../../components/base/TextArea";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -50,7 +51,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     accentSheetModalRef,
     handleSavePress,
     headline,
-    setHeadline
+    setHeadline,
+    tagline,
+    setTagline,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -112,14 +115,45 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             />
           </View>
           <View style={styles.edAdTextHeadlineWrapper}>
-            <TextInputField
-              label="Headline"
-              placeholder="e.g. Best Weekly Deals"
-              value={headline}
-              setValue={setHeadline}
-              noClear
-            />
-            <Typography variant="bodyXs" otherStyle={{color: '#686868', textAlign: 'right', marginTop: 4}}> 0/20</Typography>
+            <View>
+              <TextInputField
+                label="Headline"
+                placeholder="e.g. Best Weekly Deals"
+                value={headline}
+                setValue={setHeadline}
+                noClear
+                maxLength={20}
+              />
+              <Typography
+                variant="bodyXs"
+                otherStyle={{
+                  color: "#686868",
+                  textAlign: "right",
+                  marginTop: 4,
+                }}>
+                {headline.length}/20 characters
+              </Typography>
+            </View>
+            <View style={{ height: 10 }} />
+            <View>
+              <TextArea
+                value={tagline}
+                setValue={setTagline}
+                placeholder="e.g. Enjoy up to 50% off!"
+                label="Tagline"
+                maxLength={40}
+                numberOfLines={2}
+              />
+              <Typography
+                variant="bodyXs"
+                otherStyle={{
+                  color: "#686868",
+                  textAlign: "right",
+                  marginTop: 4,
+                }}>
+                {tagline.length}/40 characters
+              </Typography>
+            </View>
           </View>
         </>
       );

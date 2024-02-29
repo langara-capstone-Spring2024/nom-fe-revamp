@@ -202,10 +202,8 @@ const createStyles = (theme: Theme) =>
     edAdTextHeadlineWrapper: {
       width: width - 16,
       marginLeft: -36,
-      paddingRight: 16,
-      // marginHorizontal: 47,
-      // paddingVertical: 36,
-      // paddingHorizontal: 47,
+      paddingRight: 22,
+      marginTop: 36,
     },
   });
 

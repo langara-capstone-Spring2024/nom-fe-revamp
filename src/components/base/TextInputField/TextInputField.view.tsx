@@ -19,6 +19,7 @@ const TextInputField = (props: TextInputFieldProps) => {
     isDarkMode,
     onRightPress,
     noClear = false,
+    ...rest
   } = props;
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -45,6 +46,7 @@ const TextInputField = (props: TextInputFieldProps) => {
           secureTextEntry={secured && !isVisible}
           autoCapitalize="none"
           style={styles.textInputField}
+          {...rest}
         />
         {!noClear && (
           <Pressable onPress={() => setValue("")} style={{ marginLeft: 8 }}>

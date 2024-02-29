@@ -38,4 +38,6 @@ export interface AdMakerGeneratedProps {
 
   headline: string;
   setHeadline: (v: string) => void;
+  tagline: string;
+  setTagline: (v: string) => void;
 }

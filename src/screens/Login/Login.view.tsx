@@ -8,13 +8,13 @@ const LoginView = (props: LoginGeneratedProps) => {
   const { email, password, onEmailChange, onPasswordChange, onLogin } = props;
   return (
     <View style={styles.container}>
-      <View style={styles.container}>
-        <TextInputField
-          label="Email"
-          placeholder="email"
-          value={email}
-          setValue={onEmailChange}
-        />
+      <View style={[styles.container, { paddingHorizontal: 8 }]}>
+          <TextInputField
+            label="Email"
+            placeholder="email"
+            value={email}
+            setValue={onEmailChange}
+          />
         <TextInputField
           label="Password"
           placeholder="password"
