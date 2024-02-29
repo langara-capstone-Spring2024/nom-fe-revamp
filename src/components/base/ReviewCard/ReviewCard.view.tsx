@@ -7,8 +7,6 @@ import UserAvatar from "../UserAvatar";
 import Typography from "../Typography";
 import { Rating } from "react-native-ratings";
 
-const URL = require("../../../../assets/Time.png");
-
 const ReviewCard = (props: ReviewCardProps) => {
   const { avatarImageUrl, userName, postedDate, rating, content } = props;
 
