@@ -157,20 +157,34 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </View>
         </>
       );
+    } else if (page === 4) {
+      return (
+        <>
+          <Typography variant="title5" alignment="left" color="primary">
+            Confirm & Pay
+          </Typography>
+          <View style={styles.editAdTextImageContainer}>
+            <Image
+              source={{ uri: localImage?.uri }}
+              style={styles.editAdTextImage}
+            />
+          </View>
+        </>
+      );
     }
-    // Add more conditions for other pages if needed
   };
 
   console.log(localImage);
+  console.log(page);
 
   return (
     <View style={container}>
       <Progress.Bar
         progress={page / 4}
-        color={t.Border.contrast}
-        unfilledColor={"#D4D4D4"}
+        color={t.Surface["brand-medium"]}
+        unfilledColor={t.Surface["brand-light"]}
         borderWidth={0}
-        height={2}
+        height={4}
         width={null}
         style={styles.progressBar}
       />
@@ -190,19 +204,20 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
         <Button
           variant="primary"
           buttonSize="lg"
-          text="Previous"
-          takeFullWidth
-          onPress={prev}
-          // isDisabled={!localImage}
-        />
-        <Button
-          variant="primary"
-          buttonSize="lg"
           text="Next"
           takeFullWidth
           onPress={next}
-          // isDisabled={!localImage}
+          isDisabled={!localImage && page === 1}
         />
+        {page !== 1 && (
+          <Button
+            variant="secondary"
+            buttonSize="lg"
+            text="Previous"
+            takeFullWidth
+            onPress={prev}
+          />
+        )}
       </View>
       {page === 2 && (
         <BottomSheetModalProvider>

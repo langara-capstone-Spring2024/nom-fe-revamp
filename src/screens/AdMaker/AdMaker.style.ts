@@ -187,11 +187,11 @@ const createStyles = (theme: Theme) =>
       aspectRatio: 16 / 9,
       borderRadius: 24,
 
-      shadowColor: "rgba(0, 0, 0, 0.15)",
-      shadowOffset: { width: 16, height: 16 },
-      shadowOpacity: 1,
-      shadowRadius: 0,
-      elevation: 16,
+      // shadowColor: "rgba(0, 0, 0, 0.15)",
+      // shadowOffset: { width: 16, height: 16 },
+      // shadowOpacity: 1,
+      // shadowRadius: 0,
+      // elevation: 16,
     },
     editAdTextImage: {
       borderRadius: 24,
