@@ -6,6 +6,7 @@ import { useSharedValue } from "react-native-reanimated";
 import type { returnedResults } from "reanimated-color-picker";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { LayoutAnimation } from "react-native";
+import { getDates } from "../../utils/transformDate";
 
 const AdMaker = () => {
   const [page, setPage] = useState(4);
@@ -113,14 +114,18 @@ const AdMaker = () => {
   //end of page 3
 
   //start of page 4
+
+  // Test the function
+  const [today, fiveDaysLater] = getDates();
+
   const [showDate, setShowDate] = useState(false);
 
-  const [selectedStartDate, setSelectedStartDate] = useState("");
+  const [selectedStartDate, setSelectedStartDate] = useState(today);
   console.log(
     "🚀 ~ DatePickerCollection ~ selectedStartDate:",
     selectedStartDate
   );
-  const [selectedEndDate, setSelectedEndDate] = useState("");
+  const [selectedEndDate, setSelectedEndDate] = useState(fiveDaysLater);
   console.log("🚀 ~ DatePickerCollection ~ selectedEndDate:", selectedEndDate);
 
   const handleSelectDates = (startDate: string, endDate: string) => {
@@ -132,7 +137,19 @@ const AdMaker = () => {
 
   const toggleDateDisplay = useCallback(() => {
     dateSheetModalRef.current?.present();
-    setShowDate(!showDate);
+    setShowDate(true);
+  }, [showDate]);
+
+  const handleCloseDatePress = useCallback(() => {
+    setShowDate(false);
+    setSelectedEndDate("");
+    setSelectedStartDate("");
+    dateSheetModalRef.current?.close();
+  }, []);
+
+  const handleSaveDatePress = useCallback(() => {
+    setShowDate(false);
+    dateSheetModalRef.current?.close();
   }, [showDate]);
 
   //end of page 4
@@ -172,6 +189,8 @@ const AdMaker = () => {
     selectedStartDate,
     handleSelectDates,
     dateSheetModalRef,
+    handleCloseDatePress,
+    handleSaveDatePress,
   };
   return <AdMakerView {...generatedProps} />;
 };

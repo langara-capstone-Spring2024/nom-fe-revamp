@@ -9,6 +9,7 @@ import CircularNumber from "../../components/base/CircularNumber";
 import Typography from "../../components/base/Typography";
 import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
+import { convertDate } from "../../utils/transformDate";
 
 import ColorPicker, {
   Panel1,
@@ -60,16 +61,21 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     setShowDate,
     toggleDateDisplay,
     handleSelectDates,
-    dateSheetModalRef
+    dateSheetModalRef,
+    handleCloseDatePress,
+    handleSaveDatePress,
+    selectedStartDate,
+    selectedEndDate,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
   const container =
-    idx === 0 && (openAccentModal || openPrimaryModal)
+    idx === 0 && (openAccentModal || openPrimaryModal || showDate)
       ? styles.openModalContainer
       : styles.container;
 
+  console.log(idx, showDate, "<---- THis is idx and showDate");
   const content = () => {
     if (page === 1) {
       return (
@@ -185,7 +191,21 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               <View style={styles.dateWrapper}>
                 <Typography variant="body">Date</Typography>
                 <TouchableOpacity onPress={toggleDateDisplay}>
-                  <Typography variant="body">April 1 - April, 2024</Typography>
+                  <View
+                    style={{
+                      borderRadius: 8,
+                      backgroundColor: "#f4f4f5",
+                    }}>
+                    <Typography
+                      variant="body"
+                      otherStyle={{
+                        padding: 8,
+                      }}>
+                      {selectedEndDate &&
+                        selectedStartDate &&
+                        convertDate(selectedStartDate, selectedEndDate)}
+                    </Typography>
+                  </View>
                 </TouchableOpacity>
               </View>
 
@@ -228,9 +248,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <AdImagePicker image={localImage} setImage={handleImageChange} />
         </View>
       )}
-      {/* <View>
-        <DatePicker onSelectDates={handleSelectDates} />
-      </View> */}
       <View style={styles.buttonContainer}>
         <Button
           variant="primary"
@@ -306,6 +323,25 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             index={0}
             snapPoints={snapPoints}
             onChange={handleSheetChanges}>
+            {/* <View style={styles.pickerHeader}>
+              <Button
+                variant="error"
+                buttonSize="md"
+                text="Cancel"
+                onPress={handleCloseDatePress}
+              />
+              <Typography variant="body" weight="700">
+                {selectedEndDate &&
+                  selectedStartDate &&
+                  convertDate(selectedStartDate, selectedEndDate)}
+              </Typography>
+              <Button
+                variant="error"
+                buttonSize="md"
+                text="Save"
+                onPress={handleSaveDatePress}
+              />
+            </View> */}
             <View>
               <DatePicker onSelectDates={handleSelectDates} />
             </View>

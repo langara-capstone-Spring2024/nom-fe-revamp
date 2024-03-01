@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { Theme } from "../../config/theme-config";
 import { theme as t } from "../../utils/Theme";
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -216,26 +216,27 @@ const createStyles = (theme: Theme) =>
       height: 1,
       borderWidth: 0.5,
       borderColor: t.Border.default,
-      marginTop: 16
+      marginTop: 16,
     },
     priceWrapper: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      marginTop: 16
+      marginTop: 16,
     },
     dateWrapper: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      marginTop: 16
+      marginTop: 16,
     },
     scrollViewContent: {
       // flexGrow: 1,
       marginLeft: -36,
-      borderWidth: 1,
-      borderColor: 'hotpink'
+      // borderWidth: 1,
+      // borderColor: 'hotpink'
       // justifyContent: 'space-between',
+      height,
     },
   });
 

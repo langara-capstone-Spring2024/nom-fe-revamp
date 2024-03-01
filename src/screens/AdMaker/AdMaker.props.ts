@@ -49,4 +49,7 @@ export interface AdMakerGeneratedProps {
   handleSelectDates: (start: string, end: string) => void;
   dateSheetModalRef: RefObject<BottomSheetModal>;
 
+  handleCloseDatePress: (event?: GestureResponderEvent | undefined) => void;
+  handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
+
 }
