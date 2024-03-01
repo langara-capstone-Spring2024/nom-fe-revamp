@@ -13,6 +13,15 @@ const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
     {
+      name: "AgendaItem",
+      onPress: () => NavigationService.navigate("AgendaItemCollection"),
+    },
+    {
+      name: "ExpandableCalendarComponent",
+      onPress: () =>
+        NavigationService.navigate("ExpandableCalendarComponentCollection"),
+    },
+    {
       name: "TextArea",
       onPress: () => NavigationService.navigate("TextAreaCollection"),
     },

@@ -23,6 +23,7 @@ export interface Theme {
     "success-medium": string;
     "info-strong": string;
     "info-medium": string;
+    "info-dark": string;
   };
   Surface: {
     sunken: string;
