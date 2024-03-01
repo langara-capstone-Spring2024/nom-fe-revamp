@@ -12,7 +12,18 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'TextArea', onPress: () => NavigationService.navigate('TextAreaCollection')},
+    {
+      name: "TextArea",
+      onPress: () => NavigationService.navigate("TextAreaCollection"),
+    },
+    {
+      name: "ReviewCard",
+      onPress: () => NavigationService.navigate("ReviewCardCollection"),
+    },
+    {
+      name: "RatingBars",
+      onPress: () => NavigationService.navigate("RatingBarsCollection"),
+    },
     { name: "Map", onPress: () => NavigationService.navigate("MapCollection") },
     {
       name: "List",
