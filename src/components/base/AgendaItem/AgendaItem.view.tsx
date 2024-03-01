@@ -6,6 +6,7 @@ import { useTheme } from "react-native-paper";
 import Typography from "../Typography";
 import MenuIcon from "../../../../assets/menu.png";
 import CouponIcon from "../../../../assets/red_coupon.png";
+import { theme as t } from "../../../utils/Theme";
 
 const AgendaItem = (props: AgendaItemProps) => {
   const { item } = props;
@@ -13,43 +14,42 @@ const AgendaItem = (props: AgendaItemProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   const itemPressed = useCallback(() => {
+    // will redirect this later on to promo details page
     Alert.alert(item.title);
   }, []);
 
-  const buttonPressed = useCallback(() => {
-    Alert.alert("Show me more");
-  }, []);
-
   return (
-    <TouchableOpacity
-      onPress={itemPressed}
-      style={[styles.item, styles.wrapper]}
-    >
-      <View>
-        <Typography otherStyle={styles.itemHourText}>{item.hour}</Typography>
-        <Typography>{item.endTime}</Typography>
+    <TouchableOpacity onPress={itemPressed} style={styles.wrapper}>
+      <View style={styles.date}>
+        <Typography otherStyle={styles.itemHourText}>
+          {item.startTime}
+        </Typography>
+        <Typography variant="bodySm" color="subtle">
+          {item.endTime}
+        </Typography>
       </View>
-      <View>
+      <View style={styles.bar}>
         <View></View>
       </View>
-      <View>
+      <View style={styles.rightContent}>
         <Typography>{item.discount}% Off</Typography>
-        <View>
+        <View style={[styles.flex, styles.subtext]}>
           {item.menuCount && (
-            <View>
+            <View style={[styles.flex, styles.menu]}>
               <Image source={MenuIcon} />
-              <Typography>{item.menuCount}</Typography>
+              <Typography variant="bodySm" color="subtle">
+                {item.menuCount} Items
+              </Typography>
             </View>
           )}
           {item.discountCount && (
-            <View>
+            <View style={[styles.flex, styles.discount]}>
               <Image source={CouponIcon} />
-              <Typography>{item.discountCount}</Typography>
+              <Typography variant="bodySm" color="subtle">
+                {item.discountCount} Total
+              </Typography>
             </View>
           )}
-        </View>
-        <View style={styles.itemButtonContainer}>
-          <Button title={"Info"} onPress={buttonPressed} />
         </View>
       </View>
     </TouchableOpacity>
