@@ -178,7 +178,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             Confirm & Pay
           </Typography>
           <ScrollView style={styles.scrollViewContent}>
-            <View style={styles.editAdTextImageContainer}>
+            <View style={[styles.editAdTextImageContainer, { marginLeft: 0 }]}>
               <Image
                 source={{ uri: localImage?.uri }}
                 style={styles.editAdTextImage}
