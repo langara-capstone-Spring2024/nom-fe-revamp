@@ -4,4 +4,6 @@ export interface ExpandableCalendarComponentProps {
   weekView?: boolean;
   markedDates?: MarkedDates;
   allowShadow?: boolean;
+  pastScrollRange?: number;
+  futureScrollRange?: number;
 }
