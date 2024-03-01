@@ -107,7 +107,6 @@ const PrivateNavigator = () => {
                   onPress={() => {
                     if (isAdScreen && page !== 1) {
                       prev();
-                      console.log("test");
                     } else {
                       setAdScreen(false);
                       navigation.goBack();
