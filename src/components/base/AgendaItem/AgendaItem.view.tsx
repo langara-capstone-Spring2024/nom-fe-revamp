@@ -13,13 +13,8 @@ const AgendaItem = (props: AgendaItemProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const itemPressed = useCallback(() => {
-    // will redirect this later on to promo details page
-    Alert.alert(item.title);
-  }, []);
-
   return (
-    <TouchableOpacity onPress={itemPressed} style={styles.wrapper}>
+    <TouchableOpacity style={styles.wrapper}>
       <View style={styles.date}>
         <Typography otherStyle={styles.itemHourText}>
           {item.startTime}
