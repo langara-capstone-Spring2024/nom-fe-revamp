@@ -9,17 +9,19 @@ import { LayoutAnimation } from "react-native";
 import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
 import { GetPrices } from "../../services/react-query/queries/ad";
 import { calculateTotalAdPrice } from "../../utils/getTotalAdPrice";
+import { useStore } from "../../store";
 
 const AdMaker = () => {
-  const [page, setPage] = useState(1);
+  const { prev, next, page, setAdScreen } = useStore((state) => ({
+    setAdScreen: state.setAdScreen,
+    prev: state.previous,
+    next: state.next,
+    page: state.page,
+  }));
 
-  const next = () => {
-    setPage((prev) => prev + 1);
-  };
-
-  const prev = () => {
-    setPage((prev) => prev - 1);
-  };
+  useEffect(() => {
+    setAdScreen(true);
+  }, []);
 
   //start of page 1
   const [localImage, setLocalImage] = useState<Image | undefined>(undefined);

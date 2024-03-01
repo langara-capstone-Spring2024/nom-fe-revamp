@@ -67,7 +67,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     selectedStartDate,
     selectedEndDate,
     totalAdPrice,
-    confirm
+    confirm,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -178,7 +178,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             Confirm & Pay
           </Typography>
           <ScrollView style={styles.scrollViewContent}>
-            <View style={styles.editAdTextImageContainer}>
+            <View style={[styles.editAdTextImageContainer, { marginLeft: 0 }]}>
               <Image
                 source={{ uri: localImage?.uri }}
                 style={styles.editAdTextImage}
@@ -258,15 +258,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           onPress={page == 4 ? confirm : next}
           isDisabled={!localImage && page === 1}
         />
-        {page !== 1 && (
-          <Button
-            variant="secondary"
-            buttonSize="lg"
-            text="Previous"
-            takeFullWidth
-            onPress={prev}
-          />
-        )}
       </View>
       {page === 2 && (
         <BottomSheetModalProvider>
