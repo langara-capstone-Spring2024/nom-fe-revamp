@@ -81,6 +81,13 @@ const PrivateNavigator = () => {
     { func: Promo, customName: "Promo", custom: false },
     { func: ChangePasswordCollection, custom: false },
   ];
+  const { isAdScreen, prev, page, setAdScreen } = useStore((state) => ({
+    isAdScreen: state.isAdScreen,
+    setAdScreen: state.setAdScreen,
+    prev: state.previous,
+    next: state.next,
+    page: state.page,
+  }));
 
   return (
     <PrivateStack.Navigator>
@@ -103,7 +110,14 @@ const PrivateNavigator = () => {
               headerShown: true,
               headerLeft: () => (
                 <TouchableOpacity
-                  onPress={() => navigation.goBack()}
+                  onPress={() => {
+                    if (isAdScreen && page !== 1) {
+                      prev();
+                    } else {
+                      setAdScreen(false);
+                      navigation.goBack();
+                    }
+                  }}
                   style={{ paddingLeft: 16, margin: 8 }}
                 >
                   <AntDesign name="arrowleft" size={24} color="black" />
