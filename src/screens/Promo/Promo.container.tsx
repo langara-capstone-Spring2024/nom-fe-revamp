@@ -1,15 +1,28 @@
 import { MarkedDates } from "react-native-calendars/src/types";
 import PromoView from "./Promo.view";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 const Promo = () => {
+  const currentDate = new Date();
+  const INITIAL_DATE = currentDate.toISOString().split("T")[0];
+
   const onDateChanged = useCallback((date: any, updateSource: any) => {
     console.log("DateChanged: ", date, updateSource);
   }, []);
 
-  const onMonthChanged = useCallback((dateString: any) => {
-    console.log("DateChanged: ", dateString);
-  }, []);
+  const onMonthChanged = useCallback(
+    (dateString: any, newVisibleMonths: string[]) => {
+      console.log("DateChanged: ", dateString);
+      const currentMonth = currentDate.getMonth() + 1;
+      const minMonth = currentMonth - 2;
+      const maxMonth = currentMonth + 2;
+
+      if (dateString.month > maxMonth || dateString.month < minMonth) {
+        alert("You cannot view other months");
+      }
+    },
+    []
+  );
 
   const getFutureDates = (numberOfDays: number) => {
     const array: string[] = [];
@@ -154,6 +167,7 @@ const Promo = () => {
     onDateChanged,
     onMonthChanged,
     getMarkedDates,
+    INITIAL_DATE,
   };
   return <PromoView {...generatedProps} />;
 };

@@ -5,4 +5,5 @@ export interface PromoGeneratedProps {
   onDateChanged: (date: any, updateSource: any) => void;
   onMonthChanged: (date: any, updateSource: any) => void;
   getMarkedDates: () => MarkedDates;
+  INITIAL_DATE: string;
 }
