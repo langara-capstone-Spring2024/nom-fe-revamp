@@ -26,6 +26,7 @@ const lightColor: Theme = {
     "success-medium": "#06884C",
     "info-strong": "#0F3866",
     "info-medium": "#3C6DEB",
+    "info-dark": "#000000",
   },
   Surface: {
     sunken: "#E5E5E5",
