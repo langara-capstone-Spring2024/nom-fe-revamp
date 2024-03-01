@@ -64,7 +64,7 @@ const lightColor: Theme = {
     "success-medium": "#06884C",
     "success-strong": "#037A43",
     "info-subtle": "#EAF4FF",
-    "info-light": "#D5E9FF",
+    "info-light": "#D6E9FF",
     "info-medium": "#3C6DEB",
     "info-strong": "#3264E7",
   },
