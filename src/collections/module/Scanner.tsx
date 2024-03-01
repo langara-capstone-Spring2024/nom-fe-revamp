@@ -1,7 +1,6 @@
-import { StyleSheet, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import Scanner from "../../components/module/Scanner";
-import { useNavigation } from "@react-navigation/native";
 import Button from "../../components/base/Button";
 
 const ScannerCollection = () => {
@@ -10,8 +9,12 @@ const ScannerCollection = () => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleResult = (result: string) => {
-    console.log(result);
-    // setIsError(true);
+    if (result === "success") {
+      setIsVisible(false);
+      setResult(result);
+    } else {
+      setIsError(true);
+    }
   };
 
   const handleOpen = () => {
@@ -34,6 +37,7 @@ const ScannerCollection = () => {
       ) : (
         <Button text="Open" onPress={handleOpen} />
       )}
+      <Text>{result}</Text>
     </View>
   );
 };

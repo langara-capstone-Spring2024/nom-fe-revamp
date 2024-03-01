@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   lense: {
     flex: 1,
     aspectRatio: 1,
+    zIndex: 1000,
   },
   frame: {
     position: "absolute",
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
   rightTopCorner: { position: "absolute", top: 0, right: 0 },
   rightBottomCorner: { position: "absolute", bottom: 0, right: 0 },
   leftBottomCorner: { position: "absolute", bottom: 0, left: 0 },
-  errorContainer: {
+  modalContainer: {
     marginTop: "50%",
     width: "80%",
     backgroundColor: "white",
@@ -74,17 +75,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 16,
   },
-  // buttonContainer: {
-  //   flex: 1,
-  //   flexDirection: "row",
-  //   backgroundColor: "transparent",
-  //   margin: 64,
-  // },
-  // buttonCamera: {
-  //   flex: 1,
-  //   alignSelf: "flex-end",
-  //   alignItems: "center",
-  // },
 });
 
 export default styles;
