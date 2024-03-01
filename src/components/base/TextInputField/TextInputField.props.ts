@@ -12,4 +12,5 @@ export interface TextInputFieldProps extends TextInputProps {
   error?: string;
   isDarkMode?: boolean;
   onRightPress?: () => void;
+  noClear?: boolean;
 }

@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import TextAreaCollection from "../collections/base/TextArea";
 import ReviewCardCollection from "../collections/base/ReviewCard";
 import RatingBarsCollection from "../collections/base/RatingBars";
 import MapCollection from "../collections/base/Map";
@@ -45,6 +46,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: TextAreaCollection, custom: false },
     { func: ReviewCardCollection, custom: false },
     { func: RatingBarsCollection, custom: false },
     { func: MapCollection, custom: false },
@@ -96,8 +98,7 @@ const PrivateNavigator = () => {
               headerLeft: () => (
                 <TouchableOpacity
                   onPress={() => navigation.goBack()}
-                  style={{ paddingLeft: 16, margin: 8 }}
-                >
+                  style={{ paddingLeft: 16, margin: 8 }}>
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),

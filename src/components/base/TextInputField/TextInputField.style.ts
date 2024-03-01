@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {},
   label: {
-    marginBottom: 8,
+    marginBottom: 6.5,
+    color: "#3c3c3c",
   },
   textInputFieldContainer: {
     backgroundColor: "white",
@@ -12,12 +13,14 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderColor: "lightgray",
+    borderColor: "#939393",
     borderWidth: 1,
   },
   textInputField: {
     flex: 1,
     flexGrow: 1,
+    fontSize: 16,
+    lineHeight: 21
   },
   error: {
     marginTop: 8,
