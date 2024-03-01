@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { Theme } from "../../config/theme-config";
 import { theme as t } from "../../utils/Theme";
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -187,17 +187,56 @@ const createStyles = (theme: Theme) =>
       aspectRatio: 16 / 9,
       borderRadius: 24,
 
-      shadowColor: 'rgba(0, 0, 0, 0.15)',
-      shadowOffset: { width: 16, height: 16 },
-      shadowOpacity: 1,
-      shadowRadius: 0,
-      elevation: 16,
+      // shadowColor: "rgba(0, 0, 0, 0.15)",
+      // shadowOffset: { width: 16, height: 16 },
+      // shadowOpacity: 1,
+      // shadowRadius: 0,
+      // elevation: 16,
     },
     editAdTextImage: {
       borderRadius: 24,
       resizeMode: "cover",
       height: 134,
       width: 267,
+    },
+    edAdTextHeadlineWrapper: {
+      width: width - 16,
+      marginLeft: -36,
+      paddingRight: 22,
+      marginTop: 36,
+    },
+    campaignDetailsWrapper: {
+      borderWidth: 1,
+      borderColor: t.Border.default,
+      width: width - 36,
+      padding: 16,
+      borderRadius: 16,
+    },
+    hr: {
+      height: 1,
+      borderWidth: 0.5,
+      borderColor: t.Border.default,
+      marginTop: 16,
+    },
+    priceWrapper: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 16,
+    },
+    dateWrapper: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 16,
+    },
+    scrollViewContent: {
+      // flexGrow: 1,
+      marginLeft: -36,
+      // borderWidth: 1,
+      // borderColor: 'hotpink'
+      // justifyContent: 'space-between',
+      height,
     },
   });
 

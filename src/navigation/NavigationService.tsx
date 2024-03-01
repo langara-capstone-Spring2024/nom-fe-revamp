@@ -3,8 +3,10 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- AgendaItemCollection: undefined;
+  AgendaItemCollection: undefined;
   ExpandableCalendarComponentCollection: undefined;
+  TextAreaCollection: undefined;
+  ReviewCardCollection: undefined;
   RatingBarsCollection: undefined;
   MapCollection: undefined;
   ListCollection: undefined;

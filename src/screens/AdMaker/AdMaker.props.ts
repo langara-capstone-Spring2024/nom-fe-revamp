@@ -29,8 +29,28 @@ export interface AdMakerGeneratedProps {
   setOpenAccentModal: (v: boolean) => void;
   handleSheetChanges: (v: number) => void;
 
-  handlePresentPrimaryPress: (event?: GestureResponderEvent | undefined) => void;
+  handlePresentPrimaryPress: (
+    event?: GestureResponderEvent | undefined
+  ) => void;
   handlePresentAccentPress: (event?: GestureResponderEvent | undefined) => void;
   handleClosePress: (event?: GestureResponderEvent | undefined) => void;
   handleSavePress: (event?: GestureResponderEvent | undefined) => void;
+
+  headline: string;
+  setHeadline: (v: string) => void;
+  tagline: string;
+  setTagline: (v: string) => void;
+
+  showDate: boolean;
+  setShowDate: (v: boolean) => void;
+  toggleDateDisplay: () => void;
+  selectedStartDate: string;
+  selectedEndDate: string;
+  handleSelectDates: (start: string, end: string) => void;
+  dateSheetModalRef: RefObject<BottomSheetModal>;
+
+  handleCloseDatePress: (event?: GestureResponderEvent | undefined) => void;
+  handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
+  totalAdPrice: number;
+  confirm: () => void;
 }

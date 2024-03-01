@@ -9,6 +9,7 @@ import CircularNumber from "../../components/base/CircularNumber";
 import Typography from "../../components/base/Typography";
 import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
+import { convertDate } from "../../utils/transformDate";
 
 import ColorPicker, {
   Panel1,
@@ -23,6 +24,10 @@ import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
+import TextInputField from "../../components/base/TextInputField";
+import TextArea from "../../components/base/TextArea";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import DatePicker from "../../components/base/DatePicker";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -48,12 +53,27 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     primarySheetModalRef,
     accentSheetModalRef,
     handleSavePress,
+    headline,
+    setHeadline,
+    tagline,
+    setTagline,
+    showDate,
+    setShowDate,
+    toggleDateDisplay,
+    handleSelectDates,
+    dateSheetModalRef,
+    handleCloseDatePress,
+    handleSaveDatePress,
+    selectedStartDate,
+    selectedEndDate,
+    totalAdPrice,
+    confirm
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
   const container =
-    idx === 0 && (openAccentModal || openPrimaryModal)
+    idx === 0 && (openAccentModal || openPrimaryModal || showDate)
       ? styles.openModalContainer
       : styles.container;
 
@@ -108,22 +128,113 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               style={styles.editAdTextImage}
             />
           </View>
+          <View style={styles.edAdTextHeadlineWrapper}>
+            <View>
+              <TextInputField
+                label="Headline"
+                placeholder="e.g. Best Weekly Deals"
+                value={headline}
+                setValue={setHeadline}
+                noClear
+                maxLength={20}
+              />
+              <Typography
+                variant="bodyXs"
+                otherStyle={{
+                  color: "#686868",
+                  textAlign: "right",
+                  marginTop: 4,
+                }}>
+                {headline.length}/20 characters
+              </Typography>
+            </View>
+            <View style={{ height: 10 }} />
+            <View>
+              <TextArea
+                value={tagline}
+                setValue={setTagline}
+                placeholder="e.g. Enjoy up to 50% off!"
+                label="Tagline"
+                maxLength={40}
+                numberOfLines={2}
+              />
+              <Typography
+                variant="bodyXs"
+                otherStyle={{
+                  color: "#686868",
+                  textAlign: "right",
+                  marginTop: 4,
+                }}>
+                {tagline.length}/40 characters
+              </Typography>
+            </View>
+          </View>
+        </>
+      );
+    } else if (page === 4) {
+      return (
+        <>
+          <Typography variant="title5" alignment="left" color="primary">
+            Confirm & Pay
+          </Typography>
+          <ScrollView style={styles.scrollViewContent}>
+            <View style={styles.editAdTextImageContainer}>
+              <Image
+                source={{ uri: localImage?.uri }}
+                style={styles.editAdTextImage}
+              />
+            </View>
+            <View style={styles.campaignDetailsWrapper}>
+              <Typography variant="body" weight="600">
+                Ad Campaign Details
+              </Typography>
+              <View style={styles.hr} />
+              <View style={styles.dateWrapper}>
+                <Typography variant="body">Date</Typography>
+                <TouchableOpacity onPress={toggleDateDisplay}>
+                  <View
+                    style={{
+                      borderRadius: 8,
+                      backgroundColor: "#f4f4f5",
+                    }}>
+                    <Typography
+                      variant="body"
+                      otherStyle={{
+                        padding: 8,
+                      }}>
+                      {selectedEndDate &&
+                        selectedStartDate &&
+                        convertDate(selectedStartDate, selectedEndDate)}
+                    </Typography>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.hr} />
+              <View style={styles.priceWrapper}>
+                <Typography variant="body">Price</Typography>
+                <Typography variant="body" color="brand-medium">
+                  {totalAdPrice}CA$
+                </Typography>
+              </View>
+            </View>
+          </ScrollView>
         </>
       );
     }
-    // Add more conditions for other pages if needed
   };
 
-  console.log(localImage);
+  // console.log(localImage);
+  // console.log(page);
 
   return (
     <View style={container}>
       <Progress.Bar
         progress={page / 4}
-        color={t.Border.contrast}
-        unfilledColor={"#D4D4D4"}
+        color={t.Surface["brand-medium"]}
+        unfilledColor={t.Surface["brand-light"]}
         borderWidth={0}
-        height={2}
+        height={4}
         width={null}
         style={styles.progressBar}
       />
@@ -138,24 +249,24 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <AdImagePicker image={localImage} setImage={handleImageChange} />
         </View>
       )}
-
       <View style={styles.buttonContainer}>
         <Button
           variant="primary"
           buttonSize="lg"
-          text="Previous"
+          text={page == 4 ? "Confirm" : "Next"}
           takeFullWidth
-          onPress={prev}
-          // isDisabled={!localImage}
+          onPress={page == 4 ? confirm : next}
+          isDisabled={!localImage && page === 1}
         />
-        <Button
-          variant="primary"
-          buttonSize="lg"
-          text="Next"
-          takeFullWidth
-          onPress={next}
-          // isDisabled={!localImage}
-        />
+        {page !== 1 && (
+          <Button
+            variant="secondary"
+            buttonSize="lg"
+            text="Previous"
+            takeFullWidth
+            onPress={prev}
+          />
+        )}
       </View>
       {page === 2 && (
         <BottomSheetModalProvider>
@@ -202,6 +313,38 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   <PreviewText style={{ color: "#707070" }} />
                 </View> */}
               </ColorPicker>
+            </View>
+          </BottomSheetModal>
+        </BottomSheetModalProvider>
+      )}
+      {page === 4 && (
+        <BottomSheetModalProvider>
+          <BottomSheetModal
+            ref={dateSheetModalRef}
+            index={0}
+            snapPoints={snapPoints}
+            onChange={handleSheetChanges}>
+            {/* <View style={styles.pickerHeader}>
+              <Button
+                variant="error"
+                buttonSize="md"
+                text="Cancel"
+                onPress={handleCloseDatePress}
+              />
+              <Typography variant="body" weight="700">
+                {selectedEndDate &&
+                  selectedStartDate &&
+                  convertDate(selectedStartDate, selectedEndDate)}
+              </Typography>
+              <Button
+                variant="error"
+                buttonSize="md"
+                text="Save"
+                onPress={handleSaveDatePress}
+              />
+            </View> */}
+            <View>
+              <DatePicker onSelectDates={handleSelectDates} />
             </View>
           </BottomSheetModal>
         </BottomSheetModalProvider>

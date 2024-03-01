@@ -13,6 +13,8 @@ import ChangePassword from "../screens/ChangePassword";
 // PLOP_INJECT_COLLECTION_IMPORT
 import AgendaItemCollection from "../collections/base/AgendaItem";
 import ExpandableCalendarComponentCollection from "../collections/base/ExpandableCalendarComponent";
+import TextAreaCollection from "../collections/base/TextArea";
+import ReviewCardCollection from "../collections/base/ReviewCard";
 import RatingBarsCollection from "../collections/base/RatingBars";
 import MapCollection from "../collections/base/Map";
 import ListCollection from "../collections/base/List";
@@ -49,6 +51,8 @@ const PrivateNavigator = () => {
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: AgendaItemCollection, custom: false },
     { func: ExpandableCalendarComponentCollection, custom: false },
+    { func: TextAreaCollection, custom: false },
+    { func: ReviewCardCollection, custom: false },
     { func: RatingBarsCollection, custom: false },
     { func: MapCollection, custom: false },
     { func: ListCollection, custom: false },

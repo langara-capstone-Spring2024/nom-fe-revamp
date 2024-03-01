@@ -5,6 +5,10 @@ import { colorKit } from "reanimated-color-picker";
 import { useSharedValue } from "react-native-reanimated";
 import type { returnedResults } from "reanimated-color-picker";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { LayoutAnimation } from "react-native";
+import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
+import { GetPrices } from "../../services/react-query/queries/ad";
+import { calculateTotalAdPrice } from "../../utils/getTotalAdPrice";
 
 const AdMaker = () => {
   const [page, setPage] = useState(1);
@@ -52,7 +56,7 @@ const AdMaker = () => {
   const accentSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
+    // console.log("handleSheetChanges", index);
     setIdx(index);
   }, []);
 
@@ -101,7 +105,65 @@ const AdMaker = () => {
       accentSheetModalRef.current?.close();
     }
   }, [openAccentModal]);
+
   //end of page 2
+
+  //start of page 3
+
+  const [headline, setHeadline] = useState("");
+  const [tagline, setTagline] = useState("");
+
+  //end of page 3
+
+  //start of page 4
+
+  const [today, fiveDaysLater] = getDates();
+  const [showDate, setShowDate] = useState(false);
+  const [selectedStartDate, setSelectedStartDate] = useState(today);
+  const [selectedEndDate, setSelectedEndDate] = useState(fiveDaysLater);
+
+  const handleSelectDates = (startDate: string, endDate: string) => {
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  };
+
+  const dateSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const toggleDateDisplay = useCallback(() => {
+    dateSheetModalRef.current?.present();
+    setShowDate(true);
+  }, [showDate]);
+
+  const handleCloseDatePress = useCallback(() => {
+    setShowDate(false);
+    setSelectedEndDate("");
+    setSelectedStartDate("");
+    dateSheetModalRef.current?.close();
+  }, []);
+
+  const handleSaveDatePress = useCallback(() => {
+    setShowDate(false);
+    dateSheetModalRef.current?.close();
+  }, [showDate]);
+
+  const { data: adPrices, isError } = GetPrices();
+
+  const daysList = getDaysOfWeekInRange(selectedStartDate, selectedEndDate);
+
+  const totalAdPrice = calculateTotalAdPrice(adPrices, daysList);
+
+  const confirm = () => {
+    console.log("Confirm!");
+    console.log("🚀 ~ AdMaker ~ totalPrice:", totalAdPrice);
+    console.log("🚀 ~ AdMaker ~ selectedEndDate:", selectedEndDate);
+    console.log("🚀 ~ AdMaker ~ selectedStartDate:", selectedStartDate);
+    console.log("🚀 ~ AdMaker ~ selectedAccentColor:", selectedAccentColor);
+    console.log("🚀 ~ AdMaker ~ selectedPrimaryColor:", selectedPrimaryColor);
+    console.log("🚀 ~ AdMaker ~ localImage:", localImage);
+    console.log("🚀 ~ AdMaker ~ headline:", headline);
+    console.log("🚀 ~ AdMaker ~ tagline:", tagline);
+  };
+  //end of page 4
 
   const generatedProps = {
     // generated props here
@@ -127,7 +189,23 @@ const AdMaker = () => {
     accentSheetModalRef,
     primarySheetModalRef,
     handleSavePress,
+    headline,
+    setHeadline,
+    tagline,
+    setTagline,
+    showDate,
+    setShowDate,
+    toggleDateDisplay,
+    selectedEndDate,
+    selectedStartDate,
+    handleSelectDates,
+    dateSheetModalRef,
+    handleCloseDatePress,
+    handleSaveDatePress,
+    totalAdPrice,
+    confirm,
   };
+
   return <AdMakerView {...generatedProps} />;
 };
 

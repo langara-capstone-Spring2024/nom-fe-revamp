@@ -22,6 +22,14 @@ const Stories = () => {
         NavigationService.navigate("ExpandableCalendarComponentCollection"),
     },
     {
+      name: "TextArea",
+      onPress: () => NavigationService.navigate("TextAreaCollection"),
+    },
+    {
+      name: "ReviewCard",
+      onPress: () => NavigationService.navigate("ReviewCardCollection"),
+    },
+    {
       name: "RatingBars",
       onPress: () => NavigationService.navigate("RatingBarsCollection"),
     },

@@ -22,7 +22,7 @@ export const calendarTheme = {
   textMonthFontFamily: "PublicSansRegular",
   textDayHeaderFontFamily: "PublicSansRegular",
   textTodayFontFamily: "PublicSansRegular",
-  textMonthFontSize: 16,
+  // textMonthFontSize: 16,
   stylesheet: {
     calendar: {
       header: {
@@ -44,19 +44,21 @@ export const calendarTheme = {
       fontFamily: "PublicSansRegular",
     },
   },
-  "stylesheet.calendar.header": {
-    headerContainer: {
-      position: "absolute",
-      flexDirection: "row",
-      left: 0,
-      gap: 20,
-    },
-    header: {
-      fontFamily: "PublicSansRegular",
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      marginTop: 6,
-      alignItems: "center",
-    },
-  },
+  // "stylesheet.calendar.header": {
+  //   headerContainer: {
+  //     flexDirection: "row",
+  //     justifyContent: "space-between",
+  //     // position: "absolute",
+  //     // flexDirection: "row",
+  //     // left: 0,
+  //     // gap: 20,
+  //   },
+  //   header: {
+  //     fontFamily: "PublicSansRegular",
+  //     // flexDirection: "row",
+  //     // justifyContent: "flex-end",
+  //     // marginTop: 6,
+  //     // alignItems: "center",
+  //   },
+  // },
 };
