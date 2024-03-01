@@ -51,5 +51,6 @@ export interface AdMakerGeneratedProps {
 
   handleCloseDatePress: (event?: GestureResponderEvent | undefined) => void;
   handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
-
+  totalAdPrice: number;
+  confirm: () => void;
 }

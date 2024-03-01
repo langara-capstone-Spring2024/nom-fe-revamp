@@ -66,6 +66,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     handleSaveDatePress,
     selectedStartDate,
     selectedEndDate,
+    totalAdPrice,
+    confirm
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -75,7 +77,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
       ? styles.openModalContainer
       : styles.container;
 
-  console.log(idx, showDate, "<---- THis is idx and showDate");
   const content = () => {
     if (page === 1) {
       return (
@@ -213,7 +214,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               <View style={styles.priceWrapper}>
                 <Typography variant="body">Price</Typography>
                 <Typography variant="body" color="brand-medium">
-                  150CA$
+                  {totalAdPrice}CA$
                 </Typography>
               </View>
             </View>
@@ -223,8 +224,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     }
   };
 
-  console.log(localImage);
-  console.log(page);
+  // console.log(localImage);
+  // console.log(page);
 
   return (
     <View style={container}>
@@ -252,9 +253,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
         <Button
           variant="primary"
           buttonSize="lg"
-          text="Next"
+          text={page == 4 ? "Confirm" : "Next"}
           takeFullWidth
-          onPress={next}
+          onPress={page == 4 ? confirm : next}
           isDisabled={!localImage && page === 1}
         />
         {page !== 1 && (

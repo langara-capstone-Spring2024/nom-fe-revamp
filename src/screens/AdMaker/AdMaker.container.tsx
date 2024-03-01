@@ -6,10 +6,12 @@ import { useSharedValue } from "react-native-reanimated";
 import type { returnedResults } from "reanimated-color-picker";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { LayoutAnimation } from "react-native";
-import { getDates } from "../../utils/transformDate";
+import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
+import { GetPrices } from "../../services/react-query/queries/ad";
+import { calculateTotalAdPrice } from "../../utils/getTotalAdPrice";
 
 const AdMaker = () => {
-  const [page, setPage] = useState(4);
+  const [page, setPage] = useState(1);
 
   const next = () => {
     setPage((prev) => prev + 1);
@@ -115,18 +117,10 @@ const AdMaker = () => {
 
   //start of page 4
 
-  // Test the function
   const [today, fiveDaysLater] = getDates();
-
   const [showDate, setShowDate] = useState(false);
-
   const [selectedStartDate, setSelectedStartDate] = useState(today);
-  console.log(
-    "🚀 ~ DatePickerCollection ~ selectedStartDate:",
-    selectedStartDate
-  );
   const [selectedEndDate, setSelectedEndDate] = useState(fiveDaysLater);
-  console.log("🚀 ~ DatePickerCollection ~ selectedEndDate:", selectedEndDate);
 
   const handleSelectDates = (startDate: string, endDate: string) => {
     setSelectedStartDate(startDate);
@@ -152,6 +146,24 @@ const AdMaker = () => {
     dateSheetModalRef.current?.close();
   }, [showDate]);
 
+  const { data: adPrices, isError } = GetPrices();
+
+  const daysList = getDaysOfWeekInRange(selectedStartDate, selectedEndDate);
+
+  const totalAdPrice = calculateTotalAdPrice(adPrices, daysList);
+  console.log("🚀 ~ AdMaker ~ totalPrice:", totalAdPrice);
+
+  const confirm = () => {
+    console.log("Confirm!");
+    console.log("🚀 ~ AdMaker ~ totalPrice:", totalAdPrice);
+    console.log("🚀 ~ AdMaker ~ selectedEndDate:", selectedEndDate);
+    console.log("🚀 ~ AdMaker ~ selectedStartDate:", selectedStartDate);
+    console.log("🚀 ~ AdMaker ~ selectedAccentColor:", selectedAccentColor);
+    console.log("🚀 ~ AdMaker ~ selectedPrimaryColor:", selectedPrimaryColor);
+    console.log("🚀 ~ AdMaker ~ localImage:", localImage);
+    console.log("🚀 ~ AdMaker ~ headline:", headline);
+    console.log("🚀 ~ AdMaker ~ tagline:", tagline);
+  };
   //end of page 4
 
   const generatedProps = {
@@ -191,7 +203,11 @@ const AdMaker = () => {
     dateSheetModalRef,
     handleCloseDatePress,
     handleSaveDatePress,
+    totalAdPrice,
+    confirm,
   };
+  console.log("🚀 ~ AdMaker ~ localImage:", localImage);
+  console.log("🚀 ~ AdMaker ~ localImage:", localImage);
   return <AdMakerView {...generatedProps} />;
 };
 
