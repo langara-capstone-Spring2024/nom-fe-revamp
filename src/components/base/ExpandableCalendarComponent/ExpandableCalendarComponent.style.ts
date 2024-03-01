@@ -19,21 +19,21 @@ export const createStyles = (theme: Theme) =>
   });
 
 export const calendarTheme = {
-  // arrows
-  arrowColor: "black",
-  // knob
+  // for arrows
+  arrowColor: t.Content["info-dark"],
+  // for knob
   //expandableKnobColor: themeColor,
-  // month
-  monthTextColor: "black",
+  // for month
+  monthTextColor: t.Content["info-dark"],
   textMonthFontSize: 16,
   textMonthFontFamily: "PublicSansRegular",
-  // day names
-  textSectionTitleColor: "black",
+  // for day names
+  textSectionTitleColor: t.Content["info-dark"],
   textDayHeaderFontSize: 12,
   textDayHeaderColor: t.Content.inactive,
   textDayHeaderTextTransform: "uppercase",
   textDayHeaderFontFamily: "PublicSansRegular",
-  // dates
+  // for dates
   // dayTextColor: themeColor,
   todayTextColor: t.Content["info-medium"],
   textDayFontSize: 18,
@@ -44,7 +44,7 @@ export const calendarTheme = {
   // disabled date
   // textDisabledColor: disabledColor,
   // dot (marked date)
-  // dotColor: themeColor,
+  dotColor: t.Surface["brand-medium"],
   selectedDotColor: "white",
   // disabledDotColor: disabledColor,
   dotStyle: { marginTop: -2 },
