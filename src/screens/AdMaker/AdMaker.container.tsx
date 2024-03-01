@@ -56,7 +56,7 @@ const AdMaker = () => {
   const accentSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
+    // console.log("handleSheetChanges", index);
     setIdx(index);
   }, []);
 
@@ -151,7 +151,6 @@ const AdMaker = () => {
   const daysList = getDaysOfWeekInRange(selectedStartDate, selectedEndDate);
 
   const totalAdPrice = calculateTotalAdPrice(adPrices, daysList);
-  console.log("🚀 ~ AdMaker ~ totalPrice:", totalAdPrice);
 
   const confirm = () => {
     console.log("Confirm!");
@@ -206,8 +205,7 @@ const AdMaker = () => {
     totalAdPrice,
     confirm,
   };
-  console.log("🚀 ~ AdMaker ~ localImage:", localImage);
-  console.log("🚀 ~ AdMaker ~ localImage:", localImage);
+
   return <AdMakerView {...generatedProps} />;
 };
 
