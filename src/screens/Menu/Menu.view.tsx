@@ -1,10 +1,12 @@
 import React, { useMemo, useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, FlatList } from "react-native";
 import { useTheme } from "react-native-paper";
 import createStyles from "./Menu.style";
 import MenuCard from "../../components/base/MenuCard";
-import { MenuItem } from "./../../types/MenuItem";
+import { MenuItem } from "../../types/Menu";
 import { apiClient } from "../../services/client";
+import ItemList from "../../components/base/ItemList";
+import axios from "axios";
 
 const Menu = () => {
   const theme = useTheme();
@@ -31,15 +33,18 @@ const Menu = () => {
 
   return (
     <View style={styles.container}>
-      {menuItems.map((item) => (
-        <MenuCard
-          key={item._id}
-          itemName={item.name}
-          originalPrice={item.originalPrice}
-          itemImage={item.imageUrl}
-          itemDescription={item.description}
-        />
-      ))}
+      <ItemList title="Add Items" subtitle="Add or edit items" />
+      <View style={styles.menuCardContainer}>
+        {menuItems.map((item) => (
+          <MenuCard
+            key={item._id}
+            itemName={item.name}
+            originalPrice={item.originalPrice}
+            itemImage={item.imageUrl}
+            itemDescription={item.description}
+          />
+        ))}
+      </View>
     </View>
   );
 };
