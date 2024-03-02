@@ -1,1 +1,3 @@
-export interface MenuGeneratedProps {}
+export interface MenuGeneratedProps {
+  }
+  

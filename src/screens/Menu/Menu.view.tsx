@@ -5,8 +5,10 @@ import MenuCard from "../../components/base/MenuCard";
 import ItemList from "../../components/base/ItemList";
 import { Menus } from "../../types/Menus";
 import { useTheme } from "react-native-paper";
+import { MenuGeneratedProps } from "./Menu.props";
 
-const MenuView = ({ menuItems }) => {
+const MenuView = (props: MenuGeneratedProps) => {
+  const { menuItems } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
