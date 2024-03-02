@@ -41,6 +41,7 @@ import TypographyCollection from "../collections/base/Typography";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
+import Menu from "../screens/Menu/Menu.view";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -79,6 +80,7 @@ const PrivateNavigator = () => {
     { func: ChangePassword, customName: "", custom: false },
     { func: AdMaker, customName: "Banner Ads", custom: false },
     { func: Promo, customName: "Promo", custom: false },
+    { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
   ];
   const { isAdScreen, prev, page, setAdScreen } = useStore((state) => ({
