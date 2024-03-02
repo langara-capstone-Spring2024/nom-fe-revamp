@@ -12,7 +12,7 @@ export const GetMenu = () => {
         const response = await menuService.getMenu(); 
         return response.data;
       } catch (error) {
-        return { error: error.message }; 
+        return { error }; 
       }
     },
   });
