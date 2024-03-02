@@ -1,21 +1,14 @@
 import React, { useMemo } from "react";
 import { View } from "react-native";
-import { useTheme } from "react-native-paper";
 import createStyles from "./Menu.style";
 import MenuCard from "../../components/base/MenuCard";
 import ItemList from "../../components/base/ItemList";
-import { GetMenu } from "./../../services/react-query/queries/menu";
 import { Menus } from "../../types/Menus";
+import { useTheme } from "react-native-paper";
 
-const Menu = () => {
+const MenuView = ({ menuItems }) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-
-  const { data: menuItems, error } = GetMenu();
-
-  if (error) {
-    console.error("Error fetching menu items:", error);
-  }
 
   return (
     <View style={styles.container}>
@@ -36,4 +29,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default MenuView;

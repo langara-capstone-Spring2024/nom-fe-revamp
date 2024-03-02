@@ -44,7 +44,7 @@ import TypographyCollection from "../collections/base/Typography";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
-import Menu from "../screens/Menu/Menu.view";
+import Menu from "./../screens/Menu"
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
