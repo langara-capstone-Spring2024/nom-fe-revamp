@@ -1,9 +1,9 @@
-import React, { useMemo, useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
-import createStyles from './Menu.style';
-import MenuCard from '../../components/base/MenuCard';
-import { MenuItem } from './../../types/MenuItem';
+import React, { useMemo, useEffect, useState } from "react";
+import { View } from "react-native";
+import { useTheme } from "react-native-paper";
+import createStyles from "./Menu.style";
+import MenuCard from "../../components/base/MenuCard";
+import { MenuItem } from "./../../types/MenuItem";
 import { apiClient } from "../../services/client";
 
 const Menu = () => {
@@ -16,14 +16,13 @@ const Menu = () => {
       try {
         const response = await apiClient.get("api/menu");
         const responseData = response.data;
-        if (responseData && Array.isArray(responseData.data)) { // Check if responseData.data is an array
+        if (responseData && Array.isArray(responseData.data)) {
           setMenuItems(responseData.data);
-          console.log(responseData.data.originalPrice)
         } else {
-          console.error('Invalid menu items data:', responseData);
+          console.error("Invalid menu items data:", responseData);
         }
       } catch (error) {
-        console.error('Error fetching menu items:', error);
+        console.error("Error fetching menu items:", error);
       }
     };
 
@@ -36,8 +35,8 @@ const Menu = () => {
         <MenuCard
           key={item._id}
           itemName={item.name}
-          originalPrice={item.originalPrice} 
-          itemImage={item.imageUrl} 
+          originalPrice={item.originalPrice}
+          itemImage={item.imageUrl}
           itemDescription={item.description}
         />
       ))}
