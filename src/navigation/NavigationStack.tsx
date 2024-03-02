@@ -11,6 +11,8 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import ChipsCollection from "../collections/base/Chips";
+import WheelPickerCollection from "../collections/base/WheelPicker";
 import AgendaItemCollection from "../collections/base/AgendaItem";
 import ExpandableCalendarComponentCollection from "../collections/base/ExpandableCalendarComponent";
 import TextAreaCollection from "../collections/base/TextArea";
@@ -50,6 +52,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: ChipsCollection, custom: false },
+    { func: WheelPickerCollection, custom: false },
     { func: AgendaItemCollection, custom: false },
     { func: ExpandableCalendarComponentCollection, custom: false },
     { func: TextAreaCollection, custom: false },
