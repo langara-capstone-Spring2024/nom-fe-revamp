@@ -3,8 +3,10 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
- ChipsCollection: undefined;
- WheelPickerCollection: undefined;
+  ChipsCollection: undefined;
+  WheelPickerCollection: undefined;
+  AgendaItemCollection: undefined;
+  ExpandableCalendarComponentCollection: undefined;
   TextAreaCollection: undefined;
   ReviewCardCollection: undefined;
   RatingBarsCollection: undefined;
@@ -38,6 +40,7 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  Promo: undefined;
   Scanner: undefined;
   Activity: undefined;
   Account: undefined;

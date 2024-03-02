@@ -13,6 +13,8 @@ import ChangePassword from "../screens/ChangePassword";
 // PLOP_INJECT_COLLECTION_IMPORT
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
+import AgendaItemCollection from "../collections/base/AgendaItem";
+import ExpandableCalendarComponentCollection from "../collections/base/ExpandableCalendarComponent";
 import TextAreaCollection from "../collections/base/TextArea";
 import ReviewCardCollection from "../collections/base/ReviewCard";
 import RatingBarsCollection from "../collections/base/RatingBars";
@@ -40,6 +42,7 @@ import FormikTextInputFieldCollection from "../collections/base/FormikTextInputF
 import TypographyCollection from "../collections/base/Typography";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
+import Promo from "../screens/Promo";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -50,6 +53,8 @@ const PrivateNavigator = () => {
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
+    { func: AgendaItemCollection, custom: false },
+    { func: ExpandableCalendarComponentCollection, custom: false },
     { func: TextAreaCollection, custom: false },
     { func: ReviewCardCollection, custom: false },
     { func: RatingBarsCollection, custom: false },
@@ -77,6 +82,7 @@ const PrivateNavigator = () => {
     { func: TypographyCollection, customName: "", custom: false },
     { func: ChangePassword, customName: "", custom: false },
     { func: AdMaker, customName: "Banner Ads", custom: false },
+    { func: Promo, customName: "Promo", custom: false },
     { func: ChangePasswordCollection, custom: false },
   ];
   const { isAdScreen, prev, page, setAdScreen } = useStore((state) => ({

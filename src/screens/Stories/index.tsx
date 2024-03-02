@@ -15,6 +15,15 @@ const Stories = () => {
 {name: 'Chips', onPress: () => NavigationService.navigate('ChipsCollection')},
 {name: 'WheelPicker', onPress: () => NavigationService.navigate('WheelPickerCollection')},
     {
+      name: "AgendaItem",
+      onPress: () => NavigationService.navigate("AgendaItemCollection"),
+    },
+    {
+      name: "ExpandableCalendarComponent",
+      onPress: () =>
+        NavigationService.navigate("ExpandableCalendarComponentCollection"),
+    },
+    {
       name: "TextArea",
       onPress: () => NavigationService.navigate("TextAreaCollection"),
     },
