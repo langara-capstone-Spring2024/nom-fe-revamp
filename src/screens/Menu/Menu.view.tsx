@@ -11,7 +11,6 @@ const Menu = () => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  // Use the GetMenu hook to fetch menu items
   const { data: menuItems, error } = GetMenu();
 
   if (error) {
@@ -22,7 +21,6 @@ const Menu = () => {
     <View style={styles.container}>
       <ItemList title="Add Items" subtitle="Add or edit items" />
       <View style={styles.menuCardContainer}>
-        {/* Check if menuItems is not undefined before mapping */}
         {menuItems &&
           menuItems.map((item: Menus) => (
             <MenuCard
