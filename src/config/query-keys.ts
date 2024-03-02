@@ -5,6 +5,7 @@ const QUERY_KEYS = {
   AUTH: "Auth",
   STRIPE_PAYMENT: "STRIPE_PAYMENT",
   AD: "AD",
+  MENUS: "MENUS"
 };
 
 export { QUERY_KEYS };

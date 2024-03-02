@@ -4,8 +4,8 @@ import { useStore } from "../../store";
 import { useLoginMutation } from "../../services/react-query/queries/auth";
 
 const Login = (): JSX.Element => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("merchant@merchant.com");
+  const [password, setPassword] = useState("merchant1");
   const { setIsLoggedIn, setTokens } = useStore((state) => ({
     setIsLoggedIn: state.setIsLoggedIn,
     setTokens: state.setTokens,
