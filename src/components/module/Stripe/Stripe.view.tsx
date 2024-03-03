@@ -3,31 +3,16 @@ import { View, Text } from "react-native";
 import { StripeProps } from "./Stripe.props";
 import styles from "./Stripe.style";
 import { CardField, useStripe } from "@stripe/stripe-react-native";
-import axios from "axios";
 import Button from "../../base/Button";
-import { apiClient } from "../../../services/client";
-import { useStore } from "../../../store";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AddPaymentMethod } from "../../../services/react-query/queries/stripe";
 
 const Stripe = (props: StripeProps) => {
   const [cardDetails, setCardDetails] = useState<any>({});
   const { createPaymentMethod } = useStripe();
   const [error, setError] = useState<string | null>(null);
-  const accessToken = useStore((state) => state.accessToken);
-  console.log("ACCESS TOKEN", accessToken);
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("accessToken");
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-      // error reading value
-    }
-  };
+  const { mutate, data, isSuccess, isError } = AddPaymentMethod();
 
-  useEffect(() => {
-    console.log(getData());
-  }, []);
   const handleSubmit = async () => {
     try {
       const { paymentMethod, error } = await createPaymentMethod({
@@ -38,13 +23,9 @@ const Stripe = (props: StripeProps) => {
         console.error("Error creating payment method:", error.message);
         setError(error.message);
       } else {
-        console.log("Payment Method created:", paymentMethod);
+        // console.log("Payment Method created:", paymentMethod);
 
-        await apiClient.post("api/stripe-card", {
-          paymentMethodId: paymentMethod.id,
-        });
-
-        console.log("Payment method sent to backend successfully");
+        mutate(paymentMethod.id);
       }
     } catch (error) {
       console.error("Error creating payment method:", error);

@@ -218,6 +218,15 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 </Typography>
               </View>
             </View>
+            
+            <View style={{height: 32}} />
+            <View style={styles.campaignDetailsWrapper}>
+              <Typography variant="body" weight="600">
+                Payment Method
+              </Typography>
+              <View style={styles.hr} />
+
+            </View>
           </ScrollView>
         </>
       );

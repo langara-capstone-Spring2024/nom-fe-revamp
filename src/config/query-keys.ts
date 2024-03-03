@@ -4,6 +4,7 @@ const QUERY_KEYS = {
   IMAGES: "Images",
   AUTH: "Auth",
   STRIPE_PAYMENT: "STRIPE_PAYMENT",
+  STRIPE_CARDS: "STRIPE_CARDS",
   AD: "AD",
 };
 
