@@ -86,12 +86,16 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
   ];
-  const { isAdScreen, prev, page, setAdScreen } = useStore((state) => ({
+  const { isAdScreen, prev, page, setAdScreen, isMenuScreen, setMenuScreen, isAddingMenuItem, setIsAddingMenuItem } = useStore((state) => ({
     isAdScreen: state.isAdScreen,
     setAdScreen: state.setAdScreen,
     prev: state.previous,
     next: state.next,
     page: state.page,
+    isMenuScreen: state.isMenuScreen,
+    setMenuScreen: state.setMenuScreen,
+    isAddingMenuItem: state.isAddingMenuItem,
+    setIsAddingMenuItem: state.setIsAddingMenuItem
   }));
 
   return (
@@ -118,8 +122,11 @@ const PrivateNavigator = () => {
                   onPress={() => {
                     if (isAdScreen && page !== 1) {
                       prev();
+                    } else if(isMenuScreen && isAddingMenuItem) {
+                      setIsAddingMenuItem(false);
                     } else {
                       setAdScreen(false);
+                      setMenuScreen(false);
                       navigation.goBack();
                     }
                   }}

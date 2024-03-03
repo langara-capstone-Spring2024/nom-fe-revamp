@@ -7,12 +7,12 @@ import Typography from "../Typography";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const ItemList = (props: ItemListProps) => {
-  const { title, subtitle } = props;
+  const { title, subtitle, onPress } = props;
 
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Typography variant="body" alignment="left" color="info-medium">
