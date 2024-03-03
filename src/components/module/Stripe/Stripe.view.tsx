@@ -3,13 +3,23 @@ import { View, Text } from "react-native";
 import { StripeProps } from "./Stripe.props";
 import styles from "./Stripe.style";
 import { CardField, useStripe } from "@stripe/stripe-react-native";
+import axios from "axios";
 import Button from "../../base/Button";
-import { AddPaymentMethod } from "../../../services/react-query/queries/stripe";
+import { apiClient } from "../../../services/client";
+import { useStore } from "../../../store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  AddPaymentMethod,
+  GetAllSavedCards,
+} from "../../../services/react-query/queries/stripe";
 
 const Stripe = (props: StripeProps) => {
   const [cardDetails, setCardDetails] = useState<any>({});
   const { createPaymentMethod } = useStripe();
   const [error, setError] = useState<string | null>(null);
+
+  const { data: savedCards } = GetAllSavedCards();
+  console.log("🚀 ~ Stripe ~ savedCards:", savedCards);
 
   const { mutate, data, isSuccess, isError } = AddPaymentMethod();
 

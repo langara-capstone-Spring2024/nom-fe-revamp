@@ -10,6 +10,7 @@ import Typography from "../../components/base/Typography";
 import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
 import { convertDate } from "../../utils/transformDate";
+import { RadioButton } from "react-native-paper";
 
 import ColorPicker, {
   Panel1,
@@ -34,18 +35,14 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     localImage,
     handleImageChange,
     next,
-    prev,
     page,
     selectedColor,
     customSwatches,
     onColorSelect,
     snapPoints,
     idx,
-    setIdx,
     openPrimaryModal,
-    setOpenPrimaryModal,
     openAccentModal,
-    setOpenAccentModal,
     handleSheetChanges,
     handlePresentAccentPress,
     handlePresentPrimaryPress,
@@ -58,19 +55,20 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     tagline,
     setTagline,
     showDate,
-    setShowDate,
     toggleDateDisplay,
     handleSelectDates,
     dateSheetModalRef,
-    handleCloseDatePress,
-    handleSaveDatePress,
     selectedStartDate,
     selectedEndDate,
     totalAdPrice,
     confirm,
+    savedCards,
+    handleSelectedPmChange,
+    selectedPaymentMethodId,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
+  const [value, setValue] = React.useState("");
 
   const container =
     idx === 0 && (openAccentModal || openPrimaryModal || showDate)
@@ -218,15 +216,71 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 </Typography>
               </View>
             </View>
-            
-            <View style={{height: 32}} />
+
+            <View style={{ height: 32 }} />
             <View style={styles.campaignDetailsWrapper}>
               <Typography variant="body" weight="600">
                 Payment Method
               </Typography>
               <View style={styles.hr} />
+              {/* {savedCards && savedCards.map((card, idx) => (
+                <RadioButton
+                  key={idx}
+                  value={card.cards.paymentMethodId}
+                />
+              ))} */}
 
+              <RadioButton.Group
+                onValueChange={handleSelectedPmChange}
+                value={selectedPaymentMethodId}>
+                {savedCards &&
+                  savedCards.map((card) => {
+                    let cardIcon;
+                    if (card.brand === "mastercard") {
+                      cardIcon = (
+                        <Image
+                          source={require(`../../../assets/mastercard.png`)}
+                        />
+                      );
+                    } else {
+                      cardIcon = (
+                        <Image source={require(`../../../assets/visa.png`)} />
+                      );
+                    }
+                    return (
+                      <View
+                        key={card.paymentMethodId}
+                        style={styles.radioContainer}>
+                        <View style={styles.radioLabel}>
+                          {cardIcon}
+                          <Typography variant="body" color="medium">
+                            **** {card.last4}
+                          </Typography>
+                        </View>
+                        <RadioButton.Android
+                          value={card.paymentMethodId}
+                          color="#3C6DEB"
+                        />
+                      </View>
+                    );
+                  })}
+              </RadioButton.Group>
+              <RadioButton.Group
+                onValueChange={(value) => setValue(value)}
+                value={value}>
+                <View style={styles.radioContainer}>
+                  <View style={styles.radioLabel}>
+                    <Image source={require("../../../assets/mastercard.png")} />
+                    <Typography variant="body" color="medium">
+                      **** 4835
+                    </Typography>
+                  </View>
+                  <RadioButton.Android value="first" color="#3C6DEB" />
+                </View>
+                {/* <RadioButton.Android value="second" color="#3C6DEB" /> */}
+              </RadioButton.Group>
             </View>
+            <View />
           </ScrollView>
         </>
       );

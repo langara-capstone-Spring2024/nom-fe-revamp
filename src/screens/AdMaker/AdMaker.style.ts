@@ -231,12 +231,19 @@ const createStyles = (theme: Theme) =>
       marginTop: 16,
     },
     scrollViewContent: {
-      // flexGrow: 1,
       marginLeft: -36,
-      // borderWidth: 1,
-      // borderColor: 'hotpink'
-      // justifyContent: 'space-between',
       height,
+    },
+    radioContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    radioLabel: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 8,
     },
   });
 

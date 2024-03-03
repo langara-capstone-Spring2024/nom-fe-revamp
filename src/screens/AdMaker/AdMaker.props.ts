@@ -53,4 +53,18 @@ export interface AdMakerGeneratedProps {
   handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
   totalAdPrice: number;
   confirm: () => void;
+  checked: string;
+  setChecked: (v: string) => void;
+  savedCards: Card[];
+  selectedPaymentMethodId: string;
+  setSelectedPaymentMethodId: (v: string) => void;
+  handleSelectedPmChange: (v: string) => void;
+}
+
+interface Card {
+  brand: string;
+  expMonth: string;
+  expYear: string;
+  last4: string;
+  paymentMethodId: string;
 }

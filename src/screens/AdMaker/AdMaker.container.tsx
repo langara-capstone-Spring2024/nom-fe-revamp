@@ -10,6 +10,7 @@ import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
 import { GetPrices } from "../../services/react-query/queries/ad";
 import { calculateTotalAdPrice } from "../../utils/getTotalAdPrice";
 import { useStore } from "../../store";
+import { GetAllSavedCards } from "../../services/react-query/queries/stripe";
 
 const AdMaker = () => {
   const { prev, next, page, setAdScreen } = useStore((state) => ({
@@ -154,6 +155,14 @@ const AdMaker = () => {
 
   const totalAdPrice = calculateTotalAdPrice(adPrices, daysList);
 
+  const [checked, setChecked] = useState("mastercard");
+
+  const { data: savedCards } = GetAllSavedCards();
+  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState("");
+
+  const handleSelectedPmChange = (value: string) => {
+    setSelectedPaymentMethodId(value);
+  };
   const confirm = () => {
     console.log("Confirm!");
     console.log("🚀 ~ AdMaker ~ totalPrice:", totalAdPrice);
@@ -206,6 +215,12 @@ const AdMaker = () => {
     handleSaveDatePress,
     totalAdPrice,
     confirm,
+    checked,
+    setChecked,
+    savedCards,
+    selectedPaymentMethodId,
+    setSelectedPaymentMethodId,
+    handleSelectedPmChange,
   };
 
   return <AdMakerView {...generatedProps} />;
