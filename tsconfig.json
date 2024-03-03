@@ -15,6 +15,6 @@
     "target": "es2017",
     "types": ["react", "react-native", "node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "types/**/*.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "types/**/*.d.ts", "src/components/base/Button/Button.test.js"],
   "exclude": ["node_modules"]
 }
