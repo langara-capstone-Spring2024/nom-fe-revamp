@@ -6,15 +6,19 @@ import Button from "../../components/base/Button";
 const ScannerCollection = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [result, setResult] = useState<string>("");
-  const [isError, setIsError] = useState<boolean>(false);
 
-  const handleResult = (result: string) => {
+  const handleChange = (result: string) => {
     if (result === "success") {
-      setIsVisible(false);
       setResult(result);
+
+      return true;
     } else {
-      setIsError(true);
+      return false;
     }
+  };
+
+  const handleSuccess = () => {
+    setIsVisible(false);
   };
 
   const handleOpen = () => {
@@ -29,10 +33,9 @@ const ScannerCollection = () => {
     <View style={styles.container}>
       {isVisible ? (
         <Scanner
-          setResult={handleResult}
-          isError={isError}
-          setIsError={setIsError}
+          onChange={handleChange}
           onClose={handleClose}
+          onSuccess={handleSuccess}
         />
       ) : (
         <Button text="Open" onPress={handleOpen} />

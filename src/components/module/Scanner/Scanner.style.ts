@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import { Theme } from "../../../config/theme-config";
+import { theme as t } from "../../../utils/Theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +33,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 0.5,
     backgroundColor: "rgba(0, 0, 0, 0.75)",
+    padding: 32,
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   rightOverlay: {
     height: "100%",
@@ -61,6 +66,7 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 48,
     borderWidth: 3,
+    borderColor: t.Border.white,
   },
   leftTopCorner: { position: "absolute", top: 0, left: 0 },
   rightTopCorner: { position: "absolute", top: 0, right: 0 },
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     marginTop: "50%",
     width: "80%",
-    backgroundColor: "white",
+    backgroundColor: t.Content["white-strong"],
     padding: 16,
     borderRadius: 16,
     alignItems: "center",
