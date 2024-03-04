@@ -1,33 +1,48 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
+  list: {
+    marginTop: 8,
     width: "100%",
     flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "flex-start",
-    margin: -4,
-  },
-  item: {
-    width: "25%",
-    height: "100%",
-    borderRadius: 8,
-    aspectRatio: 1,
-    padding: 4,
+    gap: 8,
+    flex: 5,
   },
   button: {
     width: "100%",
-    height: "100%",
-    borderRadius: 8,
+    aspectRatio: 1.8,
+    borderRadius: 16,
     backgroundColor: "gray",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  item: {
+    flex: 1,
+    maxWidth: "20%",
+    borderRadius: 8,
+    aspectRatio: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
     width: "100%",
     height: "100%",
-    borderRadius: 8,
     objectFit: "cover",
+  },
+  background: {
+    position: "absolute",
+    borderRadius: 8,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(1, 1, 1, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: "white",
+    fontSize: 18,
   },
 });
 
