@@ -16,7 +16,6 @@ const createStyles = (theme: Theme) =>
     imagePicker: {
       marginTop: 36,
       marginBottom: 32,
-      // width: windowWidth - 50,
     },
 
     inputContainer: {
@@ -39,11 +38,15 @@ const createStyles = (theme: Theme) =>
     },
 
     priceCurrency: {
-      justifyContent: "center",
-      marginTop: 23,
+      marginTop: 20,
       marginLeft: 10,
       flex: 1,
-      
+    },
+
+    errorPriceCurrency: {
+      marginTop: 5,
+      marginLeft: 10,
+      flex: 1,
     },
 
     buttonContainer: {

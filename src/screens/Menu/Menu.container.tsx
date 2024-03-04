@@ -30,6 +30,8 @@ const Menu = () => {
   const [name, onNameChange] = useState<string>("");
   const [price, onPriceChange] = useState<string>("");
   const [description, onDescriptionChange] = useState<string>("");
+  const [nameError, setNameError] = useState<string>("");
+  const [priceError, setPriceError] = useState<string>("");
 
   useEffect(() => {
     setMenuScreen(true);
@@ -41,6 +43,7 @@ const Menu = () => {
   if (error) {
     console.error("Error fetching menu items:", error);
   }
+  
 
   const onPressAddItem = async () => {
     if (localImage) {
@@ -81,6 +84,10 @@ const Menu = () => {
     setIsAddingMenuItem: setIsAddingMenuItem,
     onPressAddItem: onPressAddItem,
     menuItems: menuItems,
+    nameError: nameError,
+    setNameError: setNameError,
+    priceError: priceError,
+    setPriceError: setPriceError,
   };
 
   return <MenuView {...generatedProps} />;

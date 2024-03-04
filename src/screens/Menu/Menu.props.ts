@@ -17,4 +17,8 @@ export interface MenuGeneratedProps {
     | ((event?: GestureResponderEvent | undefined) => void)
     | undefined;
   menuItems: Menus[];
+  nameError: string;
+  setNameError: (text: string) => void;
+  priceError: string;
+  setPriceError: (text: string ) => void;
 }

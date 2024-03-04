@@ -75,7 +75,7 @@ const TextInputField = (props: TextInputFieldProps) => {
           </Pressable>
         )}
       </View>
-      {error && <Text style={[styles.error, { color: "red" }]}>{error}</Text>}
+      {error && <Typography variant="bodyXs" color="error-medium">{error}</Typography>}
     </View>
   );
 };
