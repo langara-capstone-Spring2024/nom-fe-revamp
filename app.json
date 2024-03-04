@@ -15,9 +15,9 @@
       ]
     ],
     "splash": {
-      "image": "./assets/pikachu.jpg",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/nom-logo-white.png",
+      "backgroundColor": "#E51E35",
+      "resizeMode": "contain"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
