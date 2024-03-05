@@ -8,9 +8,9 @@ import { v4 as uuidv4 } from "uuid";
 import { S3Params } from "../../types/S3Params";
 import { S3 } from "aws-sdk";
 import "react-native-get-random-values";
+import { MenuService } from "../../services/MenuService";
 
 const Menu = () => {
-
   const { setMenuScreen, isAddingMenuItem, setIsAddingMenuItem } = useStore(
     (state) => ({
       setMenuScreen: state.setMenuScreen,
@@ -28,6 +28,7 @@ const Menu = () => {
   const [description, onDescriptionChange] = useState<string>("");
   const [nameError, setNameError] = useState<string>("");
   const [priceError, setPriceError] = useState<string>("");
+  const [updatedMenu, setUpdatedMenu] = useState<any[]>([]);
 
   useEffect(() => {
     setMenuScreen(true);
@@ -66,27 +67,49 @@ const Menu = () => {
     region: process.env.EXPO_PUBLIC_AWS_REGION,
   });
 
+  const menuService = new MenuService();
+
   const onPressAddItem = async () => {
-    if (localImage) {
-      const uuid = uuidv4();
-      const response = await fetch(localImage.uri || "");
-      const blob = await response.blob();
-      const contentType = response.headers.get("Content-Type");
+    try {
+      if (localImage) {
+        const uuid = uuidv4();
+        const response = await fetch(localImage.uri || "");
+        const blob = await response.blob();
+        const contentType = response.headers.get("Content-Type");
 
-      if (!contentType) return;
-      const params: S3Params = {
-        Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME || "",
-        Key: `uploads/${uuid}`,
-        Body: blob,
-        ContentType: contentType,
-      };
+        if (!contentType) return;
 
-      const result = await s3.upload(params).promise();
-      console.log(result.Location)
-      // add to mongodb
+        const params: S3Params = {
+          Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME || "",
+          Key: `uploads/${uuid}`,
+          Body: blob,
+          ContentType: contentType,
+        };
+
+        // Upload the image to S3
+        const result = await s3.upload(params).promise();
+        console.log(result.Location);
+
+        // Add menu item to MongoDB
+        const menuItemData = {
+          imageUrl: result.Location,
+          name: name,
+          originalPrice: price,
+          description: description,
+        };
+
+        await menuService.addMenuItem(
+          menuItemData.imageUrl,
+          menuItemData.name,
+          menuItemData.originalPrice,
+          menuItemData.description
+        );
+        
+      }
+    } catch (error) {
+      console.error("Error adding menu item:", error);
     }
   };
-
 
   const generatedProps = {
     localImage: localImage,

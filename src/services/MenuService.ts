@@ -11,4 +11,24 @@ export class MenuService extends BaseService {
       throw error;
     }
   }
+
+  async addMenuItem(
+    imageUrl: String,
+    name: String,
+    originalPrice: String,
+    description: String
+  ) {
+    try {
+      const response = await apiClient.post("api/menu", {
+        imageUrl: imageUrl,
+        name: name,
+        originalPrice: originalPrice,
+        description: description,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error adding menu item:", error);
+      throw error;
+    }
+  }
 }

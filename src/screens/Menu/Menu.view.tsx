@@ -11,6 +11,7 @@ import AdImagePicker from "../../components/base/AdImagePicker";
 import TextArea from "../../components/base/TextArea";
 import Typography from "../../components/base/Typography";
 import Button from "../../components/base/Button";
+import MenuImagePicker from "../../components/base/MenuImagePicker";
 
 const MenuView = (props: MenuGeneratedProps) => {
   const {
@@ -39,7 +40,7 @@ const MenuView = (props: MenuGeneratedProps) => {
   return isAddingMenuItem ? (
     <View style={styles.container}>
       <View style={styles.imagePicker}>
-        <AdImagePicker image={localImage} setImage={handleImageChange} />
+        <MenuImagePicker image={localImage} setImage={handleImageChange} />
       </View>
 
       <View style={styles.inputContainer}>
