@@ -5,11 +5,14 @@ import { createLoginSlice, ILoginSlice } from "./createLoginSlice";
 import { createCounterSlice, ICounterSlice } from "./createCounterSlice";
 import { IAdSlice, createAdSlice } from "./createAdSlice";
 import { IDateSlice, createDateSlice } from "./createDateSlice";
-
-interface IStore extends ILoginSlice, ICounterSlice, IAdSlice, IDateSlice {
 import { IMenuSlice, createMenuSlice } from "./createMenuSlice";
 
-interface IStore extends ILoginSlice, ICounterSlice, IAdSlice, IMenuSlice {
+interface IStore
+  extends ILoginSlice,
+    ICounterSlice,
+    IAdSlice,
+    IMenuSlice,
+    IDateSlice {
   displayAsyncStorageData(): unknown;
 }
 
