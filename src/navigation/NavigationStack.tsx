@@ -13,6 +13,7 @@ import ChangePassword from "../screens/ChangePassword";
 // PLOP_INJECT_COLLECTION_IMPORT
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
+import ItemListCollection from "../collections/base/ItemList";
 import AgendaItemCollection from "../collections/base/AgendaItem";
 import ExpandableCalendarComponentCollection from "../collections/base/ExpandableCalendarComponent";
 import TextAreaCollection from "../collections/base/TextArea";
@@ -43,7 +44,7 @@ import TypographyCollection from "../collections/base/Typography";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
-import Menu from "../screens/Menu/Menu.view";
+import Menu from "./../screens/Menu";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -54,6 +55,7 @@ const PrivateNavigator = () => {
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
+    { func: ItemListCollection, custom: false },
     { func: AgendaItemCollection, custom: false },
     { func: ExpandableCalendarComponentCollection, custom: false },
     { func: TextAreaCollection, custom: false },
@@ -87,12 +89,25 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
   ];
-  const { isAdScreen, prev, page, setAdScreen } = useStore((state) => ({
+  const {
+    isAdScreen,
+    prev,
+    page,
+    setAdScreen,
+    isMenuScreen,
+    setMenuScreen,
+    isAddingMenuItem,
+    setIsAddingMenuItem,
+  } = useStore((state) => ({
     isAdScreen: state.isAdScreen,
     setAdScreen: state.setAdScreen,
     prev: state.previous,
     next: state.next,
     page: state.page,
+    isMenuScreen: state.isMenuScreen,
+    setMenuScreen: state.setMenuScreen,
+    isAddingMenuItem: state.isAddingMenuItem,
+    setIsAddingMenuItem: state.setIsAddingMenuItem,
   }));
 
   return (
@@ -119,8 +134,11 @@ const PrivateNavigator = () => {
                   onPress={() => {
                     if (isAdScreen && page !== 1) {
                       prev();
+                    } else if (isMenuScreen && isAddingMenuItem) {
+                      setIsAddingMenuItem(false);
                     } else {
                       setAdScreen(false);
+                      setMenuScreen(false);
                       navigation.goBack();
                     }
                   }}
