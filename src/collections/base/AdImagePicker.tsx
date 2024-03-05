@@ -7,22 +7,21 @@ import Typography from "../../components/base/Typography";
 import { v4 as uuidv4 } from "uuid";
 import { Image as ImageType } from "../../types/Image";
 import { S3Params } from "../../types/S3Params";
-import {UploadImage} from "../../services/react-query/queries/s3"
+import { S3 } from "aws-sdk";
 
 const AdImagePickerCollection = () => {
-  const [localImages, setLocalImages] = useState<ImageType>();
-  const [remoteImages, setRemoteImages] = useState<string>();
+  const [localImage, setLocalImage] = useState<ImageType>();
+  const [remoteImage, setRemoteImage] = useState<string>();
 
-  
-  const {
-    mutate: uploadImageMutate,
-    data: uploadImageData,
-    isPending,
-  } = UploadImage();
+  const s3 = new S3({
+    accessKeyId: process.env.EXPO_PUBLIC_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.EXPO_PUBLIC_AWS_SECRET_ACCESS_KEY,
+    region: process.env.EXPO_PUBLIC_AWS_REGION,
+  });
 
   const handleImageChange = async (image: Image | undefined) => {
     if (!image || !image.uri) return;
-    setLocalImages(image);
+    setLocalImage(image);
 
     try {
       const uuid = uuidv4();
@@ -38,24 +37,21 @@ const AdImagePickerCollection = () => {
         Body: blob,
         ContentType: contentType,
       };
-      uploadImageMutate(params)
+      const result = await s3.upload(params).promise();
+      if (result.Location) {
+        setRemoteImage(result.Location);
+        console.log(result.Location);
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
     }
   };
 
-  useEffect(() => {
-    if (uploadImageData) {
-      setRemoteImages(uploadImageData);
-      console.log(uploadImageData);
-    }
-  }, [uploadImageData]);
-
   return (
     <ScrollView>
       <View>
         <View>
-          <AdImagePicker image={localImages} setImage={handleImageChange} />
+          <AdImagePicker image={localImage} setImage={handleImageChange} />
         </View>
       </View>
     </ScrollView>

@@ -18,6 +18,8 @@ const MenuView = (props: MenuGeneratedProps) => {
     handleImageChange,
     isAddingMenuItem,
     setIsAddingMenuItem,
+    handlePriceChange,
+    handleNameChange,
     name,
     onNameChange,
     price,
@@ -33,26 +35,6 @@ const MenuView = (props: MenuGeneratedProps) => {
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-
-  const handleNameChange = (text: string) => {
-    if (!text.trim()) {
-      setNameError("Please input the item name");
-    } else {
-      setNameError("");
-    }
-    onNameChange(text);
-  };
-
-  const handlePriceChange = (text: string) => {
-    if (!text.trim()) {
-      setPriceError("Please indicate the price");
-    } else if (!/^\d+(\.\d{1,3})?$/.test(text)) {
-      setPriceError("Invalid price format");
-    } else {
-      setPriceError("");
-    }
-    onPriceChange(text);
-  };
 
   return isAddingMenuItem ? (
     <View style={styles.container}>

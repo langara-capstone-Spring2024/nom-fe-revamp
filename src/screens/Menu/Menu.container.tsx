@@ -4,16 +4,12 @@ import { GetMenu } from "./../../services/react-query/queries/menu";
 import { useStore } from "../../store";
 import { useEffect, useState } from "react";
 import { Image } from "../../types";
-import { UploadImage } from "../../services/react-query/queries/s3";
 import { v4 as uuidv4 } from "uuid";
 import { S3Params } from "../../types/S3Params";
+import { S3 } from "aws-sdk";
+import "react-native-get-random-values";
 
 const Menu = () => {
-  const {
-    mutate: uploadImageMutate,
-    data: uploadImageData,
-    isPending,
-  } = UploadImage();
 
   const { setMenuScreen, isAddingMenuItem, setIsAddingMenuItem } = useStore(
     (state) => ({
@@ -43,7 +39,32 @@ const Menu = () => {
   if (error) {
     console.error("Error fetching menu items:", error);
   }
-  
+
+  const handleNameChange = (text: string) => {
+    if (!text.trim()) {
+      setNameError("Please input the item name");
+    } else {
+      setNameError("");
+    }
+    onNameChange(text);
+  };
+
+  const handlePriceChange = (text: string) => {
+    if (!text.trim()) {
+      setPriceError("Please indicate the price");
+    } else if (!/^\d+(\.\d{1,3})?$/.test(text)) {
+      setPriceError("Invalid price format");
+    } else {
+      setPriceError("");
+    }
+    onPriceChange(text);
+  };
+
+  const s3 = new S3({
+    accessKeyId: process.env.EXPO_PUBLIC_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.EXPO_PUBLIC_AWS_SECRET_ACCESS_KEY,
+    region: process.env.EXPO_PUBLIC_AWS_REGION,
+  });
 
   const onPressAddItem = async () => {
     if (localImage) {
@@ -59,17 +80,13 @@ const Menu = () => {
         Body: blob,
         ContentType: contentType,
       };
-      uploadImageMutate(params);
+
+      const result = await s3.upload(params).promise();
+      console.log(result.Location)
+      // add to mongodb
     }
   };
 
-  useEffect(() => {
-    if (uploadImageData) {
-      console.log(uploadImageData);
-
-      // add to mongodb
-    }
-  }, [uploadImageData]);
 
   const generatedProps = {
     localImage: localImage,
@@ -88,6 +105,8 @@ const Menu = () => {
     setNameError: setNameError,
     priceError: priceError,
     setPriceError: setPriceError,
+    handleNameChange: handleNameChange,
+    handlePriceChange: handlePriceChange,
   };
 
   return <MenuView {...generatedProps} />;
