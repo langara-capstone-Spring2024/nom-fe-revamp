@@ -8,6 +8,7 @@ type Collections = {
   CouponCarouselCollection: undefined;
   CouponCollection: undefined;
   RestaurantDescriptionCollection: undefined;
+  MenuImagePickerCollection: undefined;
   ChipsCollection: undefined;
   WheelPickerCollection: undefined;
   ItemListCollection: undefined;
