@@ -7,6 +7,7 @@ import { useTheme } from "react-native-paper";
 import { CalendarList, DateData } from "react-native-calendars";
 import Typography from "../Typography";
 import { ScrollView } from "react-native-gesture-handler";
+import { useStore } from "../../../store";
 
 const currentDate = new Date();
 const INITIAL_DATE = currentDate.toISOString().split("T")[0];
@@ -17,15 +18,20 @@ const monthYearString = currentDate.toLocaleString("default", {
 const [month, year] = monthYearString.split(" ");
 
 const DatePicker = (props: DatePickerProps) => {
-  const { onSelectDates } = props;
+  const { onSelectDates, singleDate } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
+  const { dateValue, setDateValue } = useStore();
 
   const handleDayPress = (day: DateData) => {
-    if (startDate && endDate) {
+    if (startDate && singleDate) {
+      setStartDate(day.dateString);
+      setEndDate(day.dateString);
+      setDateValue(day.dateString);
+    } else if (startDate && endDate) {
       setStartDate(day.dateString);
       setEndDate("");
     } else if (!startDate) {
