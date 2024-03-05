@@ -6,6 +6,8 @@ const QUERY_KEYS = {
   STRIPE_PAYMENT: "STRIPE_PAYMENT",
   STRIPE_CARDS: "STRIPE_CARDS",
   AD: "AD",
+  MENUS: "MENUS",
+  S3: "S3"
 };
 
 export { QUERY_KEYS };

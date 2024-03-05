@@ -4,8 +4,9 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { createLoginSlice, ILoginSlice } from "./createLoginSlice";
 import { createCounterSlice, ICounterSlice } from "./createCounterSlice";
 import { IAdSlice, createAdSlice } from "./createAdSlice";
+import { IMenuSlice, createMenuSlice } from "./createMenuSlice";
 
-interface IStore extends ILoginSlice, ICounterSlice, IAdSlice {
+interface IStore extends ILoginSlice, ICounterSlice, IAdSlice, IMenuSlice {
   displayAsyncStorageData(): unknown;
 }
 
@@ -19,6 +20,7 @@ export const useStore = create<IStore>()(
       ...createCounterSlice(set, get, api),
       ...createLoginSlice(set, get, api),
       ...createAdSlice(set, get, api),
+      ...createMenuSlice(set, get, api),
       // for testing purposes, displaying the AsyncStorage Data
       displayAsyncStorageData: async () => {
         try {
