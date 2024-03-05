@@ -47,7 +47,7 @@ const MenuImagePicker = (props: MenuImagePickerProps) => {
             onPress={handlePickImage}
             style={[styles.item, styles.button]}
           >
-            <Entypo name="image-inverted" size={24} color="inactive" />
+            <Entypo name="image-inverted" size={24} color="#939393" />
           </Pressable>
         )}
       </View>
