@@ -1,4 +1,5 @@
 export interface WheelPickerProps {
   pickerData: string[];
-  updateLabel?: (value: string) => void;
+  selectedValue?: string;
+  onValueChange?: (any: any) => void;
 }
