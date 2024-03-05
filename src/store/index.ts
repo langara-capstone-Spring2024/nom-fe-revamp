@@ -7,6 +7,9 @@ import { IAdSlice, createAdSlice } from "./createAdSlice";
 import { IDateSlice, createDateSlice } from "./createDateSlice";
 
 interface IStore extends ILoginSlice, ICounterSlice, IAdSlice, IDateSlice {
+import { IMenuSlice, createMenuSlice } from "./createMenuSlice";
+
+interface IStore extends ILoginSlice, ICounterSlice, IAdSlice, IMenuSlice {
   displayAsyncStorageData(): unknown;
 }
 
@@ -21,6 +24,7 @@ export const useStore = create<IStore>()(
       ...createLoginSlice(set, get, api),
       ...createAdSlice(set, get, api),
       ...createDateSlice(set, get, api),
+      ...createMenuSlice(set, get, api),
       // for testing purposes, displaying the AsyncStorage Data
       displayAsyncStorageData: async () => {
         try {
