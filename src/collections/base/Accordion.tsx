@@ -73,7 +73,24 @@ const AccordionCollection = () => {
 
   useEffect(() => {
     console.log("Current dateValue:", dateValue);
+    const initialTime = new Date(dateValue);
+    initialTime.setHours(12, 0, 0, 0);
+
+    handleSyncDateTime(dateValue);
   }, [dateValue]);
+
+  const handleSyncDateTime = (dateValue: string) => {
+    const initialTime = new Date(dateValue);
+    initialTime.setHours(
+      currentDateTime.getHours(),
+      currentDateTime.getMinutes(),
+      0,
+      0
+    );
+
+    setSelectedStartDateTime(initialTime);
+    setSelectedEndDateTime(initialTime);
+  };
 
   const handleSelectDates = (startDate: string, endDate: string) => {
     setSelectedStartDate(startDate);
@@ -81,7 +98,6 @@ const AccordionCollection = () => {
   };
 
   const DateRightComponent = () => <Chips label={formatDate(dateValue)} />;
-
   /*========= for Time List =========*/
   const handleHideShowTime = (timeType: "start" | "end" | null) => {
     setTimeIsVisible((prevVisibility) =>
@@ -89,13 +105,13 @@ const AccordionCollection = () => {
     );
   };
 
-  const startFormattedTime = selectedStartDateTime.toLocaleString("en-US", {
+  const startFormattedTime = selectedStartDateTime.toLocaleTimeString("en-US", {
     timeZone: "America/Los_Angeles",
     hour: "numeric",
     minute: "numeric",
   });
 
-  const endFormattedTime = selectedEndDateTime.toLocaleString("en-US", {
+  const endFormattedTime = selectedEndDateTime.toLocaleTimeString("en-US", {
     timeZone: "America/Los_Angeles",
     hour: "numeric",
     minute: "numeric",
@@ -115,7 +131,7 @@ const AccordionCollection = () => {
       setTimeIsVisible(null);
     }
   };
-  console.log("startTime: ", startFormattedTime);
+  console.log("startTime: ", selectedStartDateTime);
 
   const handleEndTimeChange = (
     _event: DateTimePickerEvent,
@@ -131,7 +147,7 @@ const AccordionCollection = () => {
       setTimeIsVisible(null);
     }
   };
-  console.log("endTime: ", endFormattedTime);
+  console.log("endTime: ", selectedEndDateTime);
 
   const StartTimeRightComponent = () => <Chips label={startFormattedTime} />;
   const EndTimeRightComponent = () => <Chips label={endFormattedTime} />;
