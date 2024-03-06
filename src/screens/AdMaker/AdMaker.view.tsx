@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Touchable } from "react-native";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
@@ -11,6 +11,7 @@ import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
 import { convertDate } from "../../utils/transformDate";
 import { RadioButton } from "react-native-paper";
+import { AntDesign } from "@expo/vector-icons";
 
 import ColorPicker, {
   Panel1,
@@ -29,6 +30,8 @@ import TextInputField from "../../components/base/TextInputField";
 import TextArea from "../../components/base/TextArea";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import DatePicker from "../../components/base/DatePicker";
+import ButtonCollection from "../../collections/base/Button";
+import { CardField } from "@stripe/stripe-react-native";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -65,13 +68,17 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     savedCards,
     handleSelectedPmChange,
     selectedPaymentMethodId,
+    cardSheetModalRef,
+    toggleCardDisplay,
+    showStripe,
+    handleAddNewCard
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
   const [value, setValue] = React.useState("");
 
   const container =
-    idx === 0 && (openAccentModal || openPrimaryModal || showDate)
+    idx === 0 && (openAccentModal || openPrimaryModal || showDate || showStripe)
       ? styles.openModalContainer
       : styles.container;
 
@@ -175,7 +182,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <Typography variant="title5" alignment="left" color="primary">
             Confirm & Pay
           </Typography>
-          <ScrollView style={styles.scrollViewContent}>
+          <ScrollView
+            style={styles.scrollViewContent}
+            contentContainerStyle={{
+              paddingBottom: 280,
+            }}>
             <View style={[styles.editAdTextImageContainer, { marginLeft: 0 }]}>
               <Image
                 source={{ uri: localImage?.uri }}
@@ -183,7 +194,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               />
             </View>
             <View style={styles.campaignDetailsWrapper}>
-              <Typography variant="body" weight="600">
+              <Typography
+                variant="body"
+                weight="600"
+                otherStyle={{ fontFamily: "PublicSansMedium" }}>
                 Ad Campaign Details
               </Typography>
               <View style={styles.hr} />
@@ -208,7 +222,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 </TouchableOpacity>
               </View>
 
-              <View style={styles.hr} />
+              <View style={styles.hrInside} />
               <View style={styles.priceWrapper}>
                 <Typography variant="body">Price</Typography>
                 <Typography variant="body" color="brand-medium">
@@ -219,7 +233,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
 
             <View style={{ height: 32 }} />
             <View style={styles.campaignDetailsWrapper}>
-              <Typography variant="body" weight="600">
+              <Typography
+                variant="body"
+                weight="600"
+                otherStyle={{ fontFamily: "PublicSansMedium" }}>
                 Payment Method
               </Typography>
               <View style={styles.hr} />
@@ -248,38 +265,36 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                       );
                     }
                     return (
-                      <View
-                        key={card.paymentMethodId}
-                        style={styles.radioContainer}>
-                        <View style={styles.radioLabel}>
-                          {cardIcon}
-                          <Typography variant="body" color="medium">
-                            **** {card.last4}
-                          </Typography>
+                      <View key={card.paymentMethodId}>
+                        <View
+                          style={[
+                            styles.radioContainer,
+                            { marginTop: 16, marginBottom: -5 },
+                          ]}>
+                          <View style={styles.radioLabel}>
+                            {cardIcon}
+                            <Typography variant="body" color="medium">
+                              **** {card.last4}
+                            </Typography>
+                          </View>
+                          <RadioButton.Android
+                            value={card.paymentMethodId}
+                            color="#3C6DEB"
+                          />
                         </View>
-                        <RadioButton.Android
-                          value={card.paymentMethodId}
-                          color="#3C6DEB"
-                        />
+                        <View style={styles.hrInside} />
                       </View>
                     );
                   })}
               </RadioButton.Group>
-              <RadioButton.Group
-                onValueChange={(value) => setValue(value)}
-                value={value}>
-                <View style={styles.radioContainer}>
-                  <View style={styles.radioLabel}>
-                    <Image source={require("../../../assets/mastercard.png")} />
-                    <Typography variant="body" color="medium">
-                      **** 4835
-                    </Typography>
-                  </View>
-                  <RadioButton.Android value="first" color="#3C6DEB" />
-                </View>
-                {/* <RadioButton.Android value="second" color="#3C6DEB" /> */}
-              </RadioButton.Group>
+              <TouchableOpacity
+                style={styles.addNewCard}
+                onPress={toggleCardDisplay}>
+                <AntDesign name="plus" size={16} color="black" />
+                <Typography variant="body"> Add New Card</Typography>
+              </TouchableOpacity>
             </View>
+
             <View />
           </ScrollView>
         </>
@@ -378,27 +393,45 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             index={0}
             snapPoints={snapPoints}
             onChange={handleSheetChanges}>
-            {/* <View style={styles.pickerHeader}>
-              <Button
-                variant="error"
-                buttonSize="md"
-                text="Cancel"
-                onPress={handleCloseDatePress}
-              />
-              <Typography variant="body" weight="700">
-                {selectedEndDate &&
-                  selectedStartDate &&
-                  convertDate(selectedStartDate, selectedEndDate)}
-              </Typography>
-              <Button
-                variant="error"
-                buttonSize="md"
-                text="Save"
-                onPress={handleSaveDatePress}
-              />
-            </View> */}
             <View>
               <DatePicker onSelectDates={handleSelectDates} />
+            </View>
+          </BottomSheetModal>
+          <BottomSheetModal
+            ref={cardSheetModalRef}
+            index={0}
+            snapPoints={["40%"]}
+            onChange={handleSheetChanges}>
+            <View style={styles.newCardContainer}>
+              <Typography
+                variant="body"
+                alignment="center"
+                otherStyle={{ marginTop: 16, fontFamily: "PublicSansMedium" }}>
+                Add New Card
+              </Typography>
+              <View>
+                <Typography variant="label2" otherStyle={{ marginBottom: 6 }}>
+                  Enter Card Details
+                </Typography>
+                <CardField
+                  placeholders={{
+                    number: "4242 4242 4242 4242",
+                  }}
+                  cardStyle={{
+                    backgroundColor: "#FFFFFF",
+                    textColor: "#000000",
+                  }}
+                  style={styles.cardField}
+                />
+              </View>
+
+              <Button
+                variant="primary"
+                buttonSize="lg"
+                text="Confirm"
+                takeFullWidth
+                onPress={handleAddNewCard}
+              />
             </View>
           </BottomSheetModal>
         </BottomSheetModalProvider>

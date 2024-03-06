@@ -34,5 +34,6 @@ export const GetAllSavedCards = () => {
       const response: AxiosResponse = await stripeService.getAllSavedCards();
       return response.data;
     },
+  
   });
 };

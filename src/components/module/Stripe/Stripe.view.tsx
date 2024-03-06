@@ -46,7 +46,7 @@ const Stripe = (props: StripeProps) => {
   return (
     <View style={styles.container}>
       <CardField
-        postalCodeEnabled={true}
+        // postalCodeEnabled={true}
         placeholders={{
           number: "4242 4242 4242 4242",
         }}

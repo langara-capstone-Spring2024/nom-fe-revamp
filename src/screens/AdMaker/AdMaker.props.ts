@@ -48,6 +48,8 @@ export interface AdMakerGeneratedProps {
   selectedEndDate: string;
   handleSelectDates: (start: string, end: string) => void;
   dateSheetModalRef: RefObject<BottomSheetModal>;
+  cardSheetModalRef: RefObject<BottomSheetModal>;
+  toggleCardDisplay: () => void;
 
   handleCloseDatePress: (event?: GestureResponderEvent | undefined) => void;
   handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
@@ -59,6 +61,11 @@ export interface AdMakerGeneratedProps {
   selectedPaymentMethodId: string;
   setSelectedPaymentMethodId: (v: string) => void;
   handleSelectedPmChange: (v: string) => void;
+
+  showStripe: boolean;
+  setShowStripe: (v: boolean) => void;
+
+  handleAddNewCard: () => void;
 }
 
 interface Card {
