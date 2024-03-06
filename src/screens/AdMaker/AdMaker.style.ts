@@ -179,11 +179,13 @@ const createStyles = (theme: Theme) =>
       borderRadius: 8,
     },
     editAdTextImageContainer: {
-      width: width - 36,
-      marginLeft: -36,
-      marginHorizontal: 47,
-      paddingVertical: 36,
-      paddingHorizontal: 47,
+      // width: width - 36,
+      // marginLeft: -36,
+      // marginHorizontal: 47,
+      paddingTop: 36,
+      // paddingHorizontal: 47,
+      flexDirection: "row",
+      justifyContent: "center",
       aspectRatio: 16 / 9,
       borderRadius: 24,
 
@@ -200,9 +202,7 @@ const createStyles = (theme: Theme) =>
       width: 267,
     },
     edAdTextHeadlineWrapper: {
-      width: width - 16,
-      marginLeft: -36,
-      paddingRight: 22,
+      width: width - 40,
       marginTop: 36,
     },
     campaignDetailsWrapper: {
@@ -274,16 +274,16 @@ const createStyles = (theme: Theme) =>
     },
     generateAdTextContainer: {
       flexDirection: "row",
-      alignItems: "center",
+      alignSelf: "flex-end",
       gap: 8,
       backgroundColor: t.Surface["neutral-medium"],
-      paddingHorizontal: 16,
-      paddingVertical: 11,
+      padding: 16,
       borderRadius: 19,
-      width: 170,
-      marginLeft: 150,
     },
     generateAdTextBtn: {},
+    keyboard: {
+      marginLeft: -36,
+    },
   });
 
 export default createStyles;
