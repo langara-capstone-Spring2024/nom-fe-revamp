@@ -1,3 +1,4 @@
+export * from "./CouponBody";
 export * from "./ScannerError";
 export * from "./ScannerLeftBottom";
 export * from "./ScannerLeftTop";
