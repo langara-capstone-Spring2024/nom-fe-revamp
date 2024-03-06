@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import RestaurantDescriptionCollection from "../collections/base/RestaurantDescription";
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
 import ItemListCollection from "../collections/base/ItemList";
@@ -53,6 +54,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: RestaurantDescriptionCollection, custom: false },
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
     { func: ItemListCollection, custom: false },
