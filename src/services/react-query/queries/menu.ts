@@ -27,19 +27,14 @@ export const addMenuItem = () => {
   menuService.cancelRequests();
 
   return useMutation({
-    mutationFn: async (formData) => { 
-      const {
-        imageUrl,
-        name,
-        originalPrice,
-        description,
-      } = formData; 
-      
+    mutationFn: async (formData) => {
+      const { imageUrl, name, originalPrice, description } = formData;
+
       const response = await menuService.addMenuItem(
         imageUrl,
         name,
         originalPrice,
-        description,
+        description
       );
 
       return response.data;
@@ -55,4 +50,3 @@ export const addMenuItem = () => {
     },
   });
 };
-

@@ -67,7 +67,7 @@ const MenuImagePicker = (props: MenuImagePickerProps) => {
         ) : (
           <>
             <Typography variant="body" color="info-medium">
-              Change your photo
+              Upload your photo
             </Typography>
             <Typography variant="bodyXs" color="medium">
               This is optional but
