@@ -18,6 +18,7 @@ export interface AdMakerGeneratedProps {
   onColorSelect: (color: returnedResults) => void;
 
   snapPoints: string[];
+  otherSnapPoints: string[];
   primarySheetModalRef: RefObject<BottomSheetModal>;
   accentSheetModalRef: RefObject<BottomSheetModal>;
 
@@ -49,7 +50,10 @@ export interface AdMakerGeneratedProps {
   handleSelectDates: (start: string, end: string) => void;
   dateSheetModalRef: RefObject<BottomSheetModal>;
   cardSheetModalRef: RefObject<BottomSheetModal>;
+  promptSheetModalRef: RefObject<BottomSheetModal>;
+
   toggleCardDisplay: () => void;
+  togglePromptDisplay: () => void;
 
   handleCloseDatePress: (event?: GestureResponderEvent | undefined) => void;
   handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
@@ -66,6 +70,12 @@ export interface AdMakerGeneratedProps {
   setShowStripe: (v: boolean) => void;
 
   handleAddNewCard: () => void;
+
+  showPrompt: boolean;
+  setShowPrompt: (v: boolean) => void;
+
+  description: string;
+  setDescription: (v: string) => void;
 }
 
 interface Card {

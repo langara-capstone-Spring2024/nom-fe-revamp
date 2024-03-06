@@ -57,8 +57,8 @@ const AdMaker = () => {
     selectedColor.value = color.hex;
   };
 
-  const snapPoints = useMemo(() => ["65%"], []);
-
+  const snapPoints = useMemo(() => ["90%"], []);
+  const otherSnapPoints = useMemo(() => ["70%"], [])
   const primarySheetModalRef = useRef<BottomSheetModal>(null);
   const accentSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -119,6 +119,14 @@ const AdMaker = () => {
 
   const [headline, setHeadline] = useState("");
   const [tagline, setTagline] = useState("");
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [description, setDescription] = useState("");
+
+  const promptSheetModalRef = useRef<BottomSheetModal>(null);
+  const togglePromptDisplay = useCallback(() => {
+    promptSheetModalRef.current?.present();
+    setShowPrompt(true);
+  }, [showPrompt]);
 
   //end of page 3
 
@@ -264,6 +272,13 @@ const AdMaker = () => {
     cardSheetModalRef,
     toggleCardDisplay,
     handleAddNewCard,
+    promptSheetModalRef,
+    togglePromptDisplay,
+    showPrompt,
+    setShowPrompt,
+    description,
+    setDescription,
+    otherSnapPoints
   };
 
   return <AdMakerView {...generatedProps} />;
