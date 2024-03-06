@@ -3,7 +3,7 @@ import MenuView from "./Menu.view";
 import { GetMenu } from "./../../services/react-query/queries/menu";
 import { useStore } from "../../store";
 import { useEffect, useState } from "react";
-import { Image } from "../../types";
+import { Image, Menus } from "../../types";
 import { v4 as uuidv4 } from "uuid";
 import { S3Params } from "../../types/S3Params";
 import { S3 } from "aws-sdk";
@@ -28,7 +28,7 @@ const Menu = () => {
   const [description, onDescriptionChange] = useState<string>("");
   const [nameError, setNameError] = useState<string>("");
   const [priceError, setPriceError] = useState<string>("");
-  const [updatedMenu, setUpdatedMenu] = useState<any[]>([]);
+  const [updatedMenu, setUpdatedMenu] = useState<Menus[]>([]);
 
   useEffect(() => {
     setMenuScreen(true);
@@ -36,6 +36,8 @@ const Menu = () => {
 
   useState();
   const { data: menuItems, error } = GetMenu();
+  // const prevMenuItems = menuItems;
+  // console.log(prevMenuItems);
 
   if (error) {
     console.error("Error fetching menu items:", error);
@@ -105,6 +107,12 @@ const Menu = () => {
           menuItemData.description
         );
         
+        onNameChange("");
+        onPriceChange("");
+        onDescriptionChange("");
+        setLocalImage(undefined);
+        setIsAddingMenuItem(false);
+        GetMenu();
       }
     } catch (error) {
       console.error("Error adding menu item:", error);
