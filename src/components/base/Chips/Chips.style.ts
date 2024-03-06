@@ -7,8 +7,8 @@ const createStyles = (theme: Theme) =>
     container: {
       backgroundColor: t.Surface.raised,
       borderRadius: 8,
-      paddingLeft: 15,
-      paddingRight: 15,
+      paddingLeft: 10,
+      paddingRight: 10,
       paddingTop: 10,
       paddingBottom: 10,
     },

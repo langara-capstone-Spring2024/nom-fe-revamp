@@ -8,28 +8,24 @@ import Chips from "../Chips";
 
 const List = (props: ListProps) => {
   const {
+    title,
     hasLeftIcon,
     leftIcon,
-    title,
-    hasRightComponent,
-    rightComponent,
     hasRightIcon,
     rightIcon,
+    hasRightComponent,
+    rightComponent,
+    handleRightComponentClick,
     isLast,
     hasBottomDescription,
     bottomDescription,
-    style,
     hiddenComponent,
+    hiddenComponentIsVisible,
+    style,
   } = props;
+
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const [isVisible, setIsVisible] = useState(false);
-  const [label, setLabel] = useState("+");
-  //const [formattedValue, setFormattedValue] = useState("+");
-
-  const rightComponentClick = () => {
-    setIsVisible(!isVisible);
-  };
 
   return (
     <>
@@ -51,8 +47,10 @@ const List = (props: ListProps) => {
 
           <View style={styles.contentRight}>
             {hasRightComponent && (
-              <TouchableOpacity onPress={rightComponentClick}>
-                <Chips label={label} />
+              <TouchableOpacity onPress={handleRightComponentClick}>
+                {typeof rightComponent === "function"
+                  ? rightComponent()
+                  : rightComponent}
               </TouchableOpacity>
             )}
 
@@ -60,13 +58,7 @@ const List = (props: ListProps) => {
           </View>
         </View>
       </View>
-      <View>
-        {isVisible &&
-          React.cloneElement(hiddenComponent as React.ReactElement, {
-            updateLabel: setLabel,
-            //updateFormattedValue: setFormattedValue,
-          })}
-      </View>
+      <View>{hiddenComponentIsVisible && hiddenComponent}</View>
     </>
   );
 };

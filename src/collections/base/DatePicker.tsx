@@ -17,7 +17,7 @@ const DatePickerCollection = () => {
   };
   return (
     <View>
-      <DatePicker onSelectDates={handleSelectDates} />
+      <DatePicker onSelectDates={handleSelectDates} singleDate />
     </View>
   );
 };

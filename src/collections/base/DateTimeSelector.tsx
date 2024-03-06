@@ -26,7 +26,7 @@ const DateTimeSelectorCollection = () => {
         <View style={[styles.container, { marginLeft: 10 }]}>
           <Button
             text={formattedTime}
-            variant="tertiary"
+            variant="primary"
             buttonSize="sm"
             onPress={() => setShowPicker(!showPicker)}
           />
