@@ -11,7 +11,11 @@ export class StripeService extends BaseService {
       paymentMethodId,
     });
 
-    console.log("PAYMENT METHOD ", paymentMethodId);
+    return response;
+  }
+
+  async getAllSavedCards() {
+    const response = await apiClient.get("api/stripe-saved-cards");
     return response;
   }
 }

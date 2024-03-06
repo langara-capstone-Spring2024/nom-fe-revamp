@@ -10,6 +10,11 @@ import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
 import { GetPrices } from "../../services/react-query/queries/ad";
 import { calculateTotalAdPrice } from "../../utils/getTotalAdPrice";
 import { useStore } from "../../store";
+import {
+  AddPaymentMethod,
+  GetAllSavedCards,
+} from "../../services/react-query/queries/stripe";
+import { createPaymentMethod } from "@stripe/stripe-react-native";
 
 const AdMaker = () => {
   const { prev, next, page, setAdScreen } = useStore((state) => ({
@@ -124,6 +129,8 @@ const AdMaker = () => {
   const [selectedStartDate, setSelectedStartDate] = useState(today);
   const [selectedEndDate, setSelectedEndDate] = useState(fiveDaysLater);
 
+  const [showStripe, setShowStripe] = useState(false);
+
   const handleSelectDates = (startDate: string, endDate: string) => {
     setSelectedStartDate(startDate);
     setSelectedEndDate(endDate);
@@ -148,11 +155,51 @@ const AdMaker = () => {
     dateSheetModalRef.current?.close();
   }, [showDate]);
 
+  const cardSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const toggleCardDisplay = useCallback(() => {
+    cardSheetModalRef.current?.present();
+    setShowStripe(true);
+  }, [showStripe]);
+
+  const handleCloseCardPress = useCallback(() => {
+    setShowStripe(false);
+    cardSheetModalRef.current?.close();
+  }, []);
+
   const { data: adPrices, isError } = GetPrices();
 
   const daysList = getDaysOfWeekInRange(selectedStartDate, selectedEndDate);
 
   const totalAdPrice = calculateTotalAdPrice(adPrices, daysList);
+
+  const [checked, setChecked] = useState("mastercard");
+
+  const { mutate, isSuccess } = AddPaymentMethod();
+
+  const handleAddNewCard = async () => {
+    try {
+      const { paymentMethod, error } = await createPaymentMethod({
+        paymentMethodType: "Card",
+      });
+
+      if (error) {
+        console.error("Error creating payment method:", error.message);
+      } else {
+        mutate(paymentMethod.id);
+      }
+      handleCloseCardPress();
+    } catch (error) {
+      console.error("Error creating payment method:", error);
+    }
+  };
+
+  const { data: savedCards } = GetAllSavedCards();
+  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState("");
+
+  const handleSelectedPmChange = (value: string) => {
+    setSelectedPaymentMethodId(value);
+  };
 
   const confirm = () => {
     console.log("Confirm!");
@@ -206,6 +253,17 @@ const AdMaker = () => {
     handleSaveDatePress,
     totalAdPrice,
     confirm,
+    checked,
+    setChecked,
+    savedCards,
+    selectedPaymentMethodId,
+    setSelectedPaymentMethodId,
+    handleSelectedPmChange,
+    showStripe,
+    setShowStripe,
+    cardSheetModalRef,
+    toggleCardDisplay,
+    handleAddNewCard,
   };
 
   return <AdMakerView {...generatedProps} />;

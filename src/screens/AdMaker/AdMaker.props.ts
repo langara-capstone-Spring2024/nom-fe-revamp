@@ -48,9 +48,30 @@ export interface AdMakerGeneratedProps {
   selectedEndDate: string;
   handleSelectDates: (start: string, end: string) => void;
   dateSheetModalRef: RefObject<BottomSheetModal>;
+  cardSheetModalRef: RefObject<BottomSheetModal>;
+  toggleCardDisplay: () => void;
 
   handleCloseDatePress: (event?: GestureResponderEvent | undefined) => void;
   handleSaveDatePress: (event?: GestureResponderEvent | undefined) => void;
   totalAdPrice: number;
   confirm: () => void;
+  checked: string;
+  setChecked: (v: string) => void;
+  savedCards: Card[];
+  selectedPaymentMethodId: string;
+  setSelectedPaymentMethodId: (v: string) => void;
+  handleSelectedPmChange: (v: string) => void;
+
+  showStripe: boolean;
+  setShowStripe: (v: boolean) => void;
+
+  handleAddNewCard: () => void;
+}
+
+interface Card {
+  brand: string;
+  expMonth: string;
+  expYear: string;
+  last4: string;
+  paymentMethodId: string;
 }

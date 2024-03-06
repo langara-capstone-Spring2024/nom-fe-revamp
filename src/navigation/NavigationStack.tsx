@@ -142,8 +142,7 @@ const PrivateNavigator = () => {
                       navigation.goBack();
                     }
                   }}
-                  style={{ paddingLeft: 16, margin: 8 }}
-                >
+                  style={{ paddingLeft: 16, margin: 8 }}>
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),
@@ -180,6 +179,13 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {/* <Stack.Screen
+          name="PrivateStack"
+          component={PrivateNavigator}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
         {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"

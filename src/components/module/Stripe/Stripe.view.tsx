@@ -8,26 +8,21 @@ import Button from "../../base/Button";
 import { apiClient } from "../../../services/client";
 import { useStore } from "../../../store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  AddPaymentMethod,
+  GetAllSavedCards,
+} from "../../../services/react-query/queries/stripe";
 
 const Stripe = (props: StripeProps) => {
   const [cardDetails, setCardDetails] = useState<any>({});
   const { createPaymentMethod } = useStripe();
   const [error, setError] = useState<string | null>(null);
-  const accessToken = useStore((state) => state.accessToken);
-  console.log("ACCESS TOKEN", accessToken);
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("accessToken");
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-      // error reading value
-    }
-  };
+  const { data: savedCards } = GetAllSavedCards();
+  console.log("🚀 ~ Stripe ~ savedCards:", savedCards);
 
-  useEffect(() => {
-    console.log(getData());
-  }, []);
+  const { mutate, data, isSuccess, isError } = AddPaymentMethod();
+
   const handleSubmit = async () => {
     try {
       const { paymentMethod, error } = await createPaymentMethod({
@@ -38,13 +33,9 @@ const Stripe = (props: StripeProps) => {
         console.error("Error creating payment method:", error.message);
         setError(error.message);
       } else {
-        console.log("Payment Method created:", paymentMethod);
+        // console.log("Payment Method created:", paymentMethod);
 
-        await apiClient.post("api/stripe-card", {
-          paymentMethodId: paymentMethod.id,
-        });
-
-        console.log("Payment method sent to backend successfully");
+        mutate(paymentMethod.id);
       }
     } catch (error) {
       console.error("Error creating payment method:", error);
@@ -55,7 +46,7 @@ const Stripe = (props: StripeProps) => {
   return (
     <View style={styles.container}>
       <CardField
-        postalCodeEnabled={true}
+        // postalCodeEnabled={true}
         placeholders={{
           number: "4242 4242 4242 4242",
         }}

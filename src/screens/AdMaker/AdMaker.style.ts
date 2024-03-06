@@ -213,7 +213,15 @@ const createStyles = (theme: Theme) =>
       borderRadius: 16,
     },
     hr: {
-      height: 1,
+      // height: 1,
+      borderWidth: 0.5,
+      borderColor: t.Border.default,
+      marginTop: 16,
+      marginRight: -16,
+      marginLeft: -16,
+    },
+    hrInside: {
+      // height: 1,
       borderWidth: 0.5,
       borderColor: t.Border.default,
       marginTop: 16,
@@ -231,12 +239,38 @@ const createStyles = (theme: Theme) =>
       marginTop: 16,
     },
     scrollViewContent: {
-      // flexGrow: 1,
       marginLeft: -36,
-      // borderWidth: 1,
-      // borderColor: 'hotpink'
-      // justifyContent: 'space-between',
       height,
+    },
+    radioContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginTop: 10,
+    },
+    radioLabel: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 8,
+    },
+    addNewCard: {
+      flexDirection: "row",
+      gap: 8,
+      marginTop: 16,
+      alignItems: "center",
+      marginLeft: 8,
+    },
+    newCardContainer: {
+      width: width - 32,
+      marginLeft: 16,
+      gap: 30,
+    },
+    cardField: {
+      height: 50,
+      borderWidth: 1,
+      borderColor: "#939393",
+      borderRadius: 8,
     },
   });
 
