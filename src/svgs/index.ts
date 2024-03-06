@@ -1,3 +1,6 @@
+export * from "./RestaurantDescriptionCoupon";
+export * from "./RestaurantDescriptionCutlery";
+export * from "./RestaurantDescriptionLocation";
 export * from "./ScannerError";
 export * from "./ScannerLeftBottom";
 export * from "./ScannerLeftTop";
