@@ -272,6 +272,18 @@ const createStyles = (theme: Theme) =>
       borderColor: "#939393",
       borderRadius: 8,
     },
+    generateAdTextContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+      backgroundColor: t.Surface["neutral-medium"],
+      paddingHorizontal: 16,
+      paddingVertical: 11,
+      borderRadius: 19,
+      width: 170,
+      marginLeft: 150,
+    },
+    generateAdTextBtn: {},
   });
 
 export default createStyles;

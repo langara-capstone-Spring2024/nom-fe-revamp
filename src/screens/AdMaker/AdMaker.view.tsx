@@ -11,7 +11,7 @@ import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
 import { convertDate } from "../../utils/transformDate";
 import { RadioButton } from "react-native-paper";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
 import ColorPicker, {
   Panel1,
@@ -71,7 +71,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     cardSheetModalRef,
     toggleCardDisplay,
     showStripe,
-    handleAddNewCard
+    handleAddNewCard,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -133,6 +133,17 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               style={styles.editAdTextImage}
             />
           </View>
+          <TouchableOpacity
+            style={styles.generateAdTextContainer}
+            onPress={() => console.log("test")}>
+            <FontAwesome name="pencil-square-o" size={16} color="black" />
+            <Typography
+              variant="label2"
+              color="medium"
+              otherStyle={styles.generateAdTextBtn}>
+              Generate Ad Text
+            </Typography>
+          </TouchableOpacity>
           <View style={styles.edAdTextHeadlineWrapper}>
             <View>
               <TextInputField
