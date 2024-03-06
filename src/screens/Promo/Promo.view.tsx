@@ -8,12 +8,12 @@ import ExpandableCalendarComponent from "../../components/base/ExpandableCalenda
 import AgendaItem from "../../components/base/AgendaItem";
 
 const Promo = (props: PromoGeneratedProps) => {
-  const { items, onDateChanged, onMonthChanged, getMarkedDates, INITIAL_DATE } =
+  const { items, onDateChanged, onMonthChanged, INITIAL_DATE, getMarkedDates } =
     props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   const marked = useRef(getMarkedDates());
-
+  console.log(marked);
   const renderItem = useCallback(({ item }: any) => {
     return <AgendaItem item={item} />;
   }, []);
@@ -28,11 +28,13 @@ const Promo = (props: PromoGeneratedProps) => {
         todayBottomMargin={16}
       >
         <ExpandableCalendarComponent markedDates={marked.current} />
-        <AgendaList
-          sections={items}
-          renderItem={renderItem}
-          sectionStyle={styles.section}
-        />
+        {items && (
+          <AgendaList
+            sections={items}
+            renderItem={renderItem}
+            sectionStyle={styles.section}
+          />
+        )}
       </CalendarProvider>
     </View>
   );

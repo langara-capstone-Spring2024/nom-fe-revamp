@@ -1,6 +1,10 @@
 import { MarkedDates } from "react-native-calendars/src/types";
 import PromoView from "./Promo.view";
 import { useCallback, useState } from "react";
+import { GetAllActiveDiscount } from "../../services/react-query/queries/discount";
+import { useQuery } from "@tanstack/react-query";
+import { Discounts } from "../../types/Discounts";
+import { Text } from "react-native-elements";
 
 const Promo = () => {
   const currentDate = new Date();
@@ -46,17 +50,28 @@ const Promo = () => {
       .split("T")[0];
   };
 
+  const { data: items, error, status } = GetAllActiveDiscount();
+  if (status === "pending") {
+    return <Text>Loading...</Text>;
+  }
+  if (error) {
+    console.error("Error fetching menu items:", error);
+  }
+  console.log(items);
+
   const getMarkedDates = () => {
     const marked: MarkedDates = {};
-
-    items.forEach((item) => {
-      // NOTE: only mark dates with data
-      if (item.data && item.data.length > 0) {
-        marked[item.title] = { marked: true };
-      } else {
-        marked[item.title] = { disabled: true };
-      }
-    });
+    if (items) {
+      items.forEach((item: any) => {
+        // NOTE: only mark dates with data
+        console.log("item: ", item);
+        if (item.data && item.data.length > 0) {
+          marked[item.title] = { marked: true };
+        } else {
+          marked[item.title] = { disabled: true };
+        }
+      });
+    }
     return marked;
   };
 
@@ -66,100 +81,100 @@ const Promo = () => {
   const dates = [fastDate, today].concat(futureDates);
 
   // when we do the fetch of data on backend the object should be pushed to array ion this structure
-  const items = [
-    {
-      title: "2024-02-26",
-      data: [
-        {
-          title: "4:00 pm Happy Hour",
-          startTime: "4:00 PM",
-          endTime: "6:00 PM",
-          discount: 30,
-          menuCount: 5,
-          discountCount: 15,
-        },
-        {
-          title: "4:00 pm Happy Hour",
-          startTime: "4:00 PM",
-          endTime: "6:00 PM",
-          discount: 30,
-          menuCount: 5,
-          discountCount: 15,
-        },
-      ],
-    },
-    {
-      title: "2024-02-27",
-      data: [
-        {
-          title: "4:00 pm Happy Hour",
-          startTime: "4:00 PM",
-          endTime: "6:00 PM",
-          discount: 30,
-          menuCount: 5,
-          discountCount: 15,
-        },
-      ],
-    },
-    {
-      title: "2024-03-01",
-      data: [
-        {
-          title: "3:30 pm Happy Hour",
-          startTime: "3:30 PM",
-          endTime: "6:30 PM",
-          discount: 25,
-          menuCount: 5,
-          discountCount: 10,
-        },
-        {
-          title: "3:30 pm Happy Hour",
-          startTime: "3:30 PM",
-          endTime: "6:30 PM",
-          discount: 25,
-          menuCount: 5,
-          discountCount: 10,
-        },
-        {
-          title: "3:30 pm Happy Hour",
-          startTime: "3:30 PM",
-          endTime: "6:30 PM",
-          discount: 25,
-          menuCount: 5,
-          discountCount: 10,
-        },
-      ],
-    },
-    {
-      title: "2024-03-02",
-      data: [
-        {
-          title: "7:30 am Happy Hour",
-          startTime: "7:30 AM",
-          endTime: "9:00 AM",
-          discount: 15,
-          menuCount: 8,
-          discountCount: 20,
-        },
-        {
-          title: "7:30 am Happy Hour",
-          startTime: "7:30 AM",
-          endTime: "9:00 AM",
-          discount: 15,
-          menuCount: 8,
-          discountCount: 20,
-        },
-        {
-          title: "7:30 am Happy Hour",
-          startTime: "7:30 AM",
-          endTime: "9:00 AM",
-          discount: 15,
-          menuCount: 8,
-          discountCount: 20,
-        },
-      ],
-    },
-  ];
+  // const items = [
+  //   {
+  //     title: "2024-02-26",
+  //     data: [
+  //       {
+  //         title: "4:00 pm Happy Hour",
+  //         startTime: "4:00 PM",
+  //         endTime: "6:00 PM",
+  //         discount: 30,
+  //         menuCount: 5,
+  //         discountCount: 15,
+  //       },
+  //       {
+  //         title: "4:00 pm Happy Hour",
+  //         startTime: "4:00 PM",
+  //         endTime: "6:00 PM",
+  //         discount: 30,
+  //         menuCount: 5,
+  //         discountCount: 15,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "2024-02-27",
+  //     data: [
+  //       {
+  //         title: "4:00 pm Happy Hour",
+  //         startTime: "4:00 PM",
+  //         endTime: "6:00 PM",
+  //         discount: 30,
+  //         menuCount: 5,
+  //         discountCount: 15,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "2024-03-01",
+  //     data: [
+  //       {
+  //         title: "3:30 pm Happy Hour",
+  //         startTime: "3:30 PM",
+  //         endTime: "6:30 PM",
+  //         discount: 25,
+  //         menuCount: 5,
+  //         discountCount: 10,
+  //       },
+  //       {
+  //         title: "3:30 pm Happy Hour",
+  //         startTime: "3:30 PM",
+  //         endTime: "6:30 PM",
+  //         discount: 25,
+  //         menuCount: 5,
+  //         discountCount: 10,
+  //       },
+  //       {
+  //         title: "3:30 pm Happy Hour",
+  //         startTime: "3:30 PM",
+  //         endTime: "6:30 PM",
+  //         discount: 25,
+  //         menuCount: 5,
+  //         discountCount: 10,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     title: "2024-03-02",
+  //     data: [
+  //       {
+  //         title: "7:30 am Happy Hour",
+  //         startTime: "7:30 AM",
+  //         endTime: "9:00 AM",
+  //         discount: 15,
+  //         menuCount: 8,
+  //         discountCount: 20,
+  //       },
+  //       {
+  //         title: "7:30 am Happy Hour",
+  //         startTime: "7:30 AM",
+  //         endTime: "9:00 AM",
+  //         discount: 15,
+  //         menuCount: 8,
+  //         discountCount: 20,
+  //       },
+  //       {
+  //         title: "7:30 am Happy Hour",
+  //         startTime: "7:30 AM",
+  //         endTime: "9:00 AM",
+  //         discount: 15,
+  //         menuCount: 8,
+  //         discountCount: 20,
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const generatedProps = {
     // generated props here
