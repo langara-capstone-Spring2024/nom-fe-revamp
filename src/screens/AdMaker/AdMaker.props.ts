@@ -76,6 +76,7 @@ export interface AdMakerGeneratedProps {
 
   description: string;
   setDescription: (v: string) => void;
+  handleGenerateAiText: () => void;
 }
 
 interface Card {

@@ -1,9 +1,16 @@
-import { View, Text, Image, Touchable, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Touchable,
+  Keyboard,
+  TextInput,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import { useTheme } from "react-native-paper";
+import { useTheme, Modal, Portal } from "react-native-paper";
 import { theme as t } from "../../utils/Theme";
 import * as Progress from "react-native-progress";
 import CircularNumber from "../../components/base/CircularNumber";
@@ -14,6 +21,7 @@ import { convertDate } from "../../utils/transformDate";
 import { RadioButton } from "react-native-paper";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { Platform } from "react-native";
+
 import ColorPicker, {
   Panel1,
   Swatches,
@@ -80,12 +88,13 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     description,
     setDescription,
     otherSnapPoints,
+    setShowPrompt,
+    handleGenerateAiText,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
 
   const isKeyboardOpen = useKeyboard();
-
   const container =
     idx === 0 &&
     (openAccentModal ||
@@ -412,7 +421,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </BottomSheetModal>
         </BottomSheetModalProvider>
       )}
-
       {page === 3 && (
         <BottomSheetModalProvider>
           <BottomSheetModal
@@ -432,11 +440,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               </Typography>
               <View style={{ marginHorizontal: 16, marginTop: 27, gap: 30 }}>
                 <TextArea
-                  value={description}
+                  defaultValue={description}
                   setValue={setDescription}
                   placeholder="e.g. Create a 20% discount for all japanese cuisines."
                   label="Describe your ad campaign"
-                  maxLength={40}
+                  maxLength={100}
                   numberOfLines={2}
                 />
                 <Button
@@ -444,7 +452,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   buttonSize="lg"
                   text="Generate Ad Text"
                   takeFullWidth
-                  onPress={() => console.log("first")}
+                  onPress={handleGenerateAiText}
                   iconPosition="left"
                   icon={
                     <FontAwesome
@@ -459,6 +467,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </BottomSheetModal>
         </BottomSheetModalProvider>
       )}
+
       {page === 4 && (
         <BottomSheetModalProvider>
           <BottomSheetModal
