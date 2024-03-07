@@ -6,7 +6,7 @@ import { Discounts } from "../types/Discounts";
 export class DiscountService extends BaseService {
   async getAllActiveDiscount() {
     try {
-      const res = await apiClient.get("api/activeDiscount");
+      const res = await apiClient.get("api/active-discount");
       return res.data;
     } catch (error) {
       console.log("Error: ", error);
