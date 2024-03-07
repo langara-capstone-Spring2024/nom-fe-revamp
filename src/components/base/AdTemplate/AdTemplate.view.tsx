@@ -4,7 +4,7 @@ import createStyles from "./AdTemplate.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
 import Typography from "../Typography";
-import { TempTwo } from "../SVG";
+
 
 const AdTemplate = (props: AdTemplateProps) => {
   const { uri, headline, tagline, variant } = props;

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { TempTwo } from "../../components/base/SVG";
+import { TempTwoAccent, TempTwoPrimary } from "../../components/base/SVG";
 
 const SVGCollection = () => {
+  const [fill, setFill] = useState("pink");
   return (
     <ScrollView>
-      <TempTwo width={216} height={200} fill="pink" />
+      <TempTwoPrimary width={216} height={200} fill={fill} />
+      <TempTwoAccent width={216} height={200} fill={fill} />
     </ScrollView>
   );
 };

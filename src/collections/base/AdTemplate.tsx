@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import AdTemplate from "../../components/base/AdTemplate";
-import { TempTwo } from "../../components/base/SVG";
+import { TempTwoPrimary } from "../../components/base/SVG";
 import { ScrollView } from "react-native-gesture-handler";
 
 const AdTemplateCollection = () => {
@@ -19,7 +19,7 @@ const AdTemplateCollection = () => {
         tagline="Lorem ipsum dolor sit amet est officiis."
         variant={1}
       />
-      <TempTwo width={216} height={200} fill="pink" />
+      <TempTwoPrimary width={216} height={200} fill="pink" />
     </ScrollView>
   );
 };
