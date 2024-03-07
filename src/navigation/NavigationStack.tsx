@@ -207,19 +207,12 @@ const App = () => {
           />
         ) : (
           <Stack.Screen
-            name="PrivateStack"
-            component={PrivateNavigator}
+            name="PublicStack"
+            component={PublicNavigator}
             options={{
               headerShown: false,
             }}
           />
-          // <Stack.Screen
-          //   name="PublicStack"
-          //   component={PublicNavigator}
-          //   options={{
-          //     headerShown: false,
-          //   }}
-          // />
         )}
       </Stack.Navigator>
     </NavigationContainer>
