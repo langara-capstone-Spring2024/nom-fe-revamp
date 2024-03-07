@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import NewsCardCollection from "../collections/base/NewsCard";
 import RestaurantDescriptionCollection from "../collections/base/RestaurantDescription";
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
@@ -54,6 +55,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: NewsCardCollection, custom: false },
     { func: RestaurantDescriptionCollection, custom: false },
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
@@ -144,7 +146,8 @@ const PrivateNavigator = () => {
                       navigation.goBack();
                     }
                   }}
-                  style={{ paddingLeft: 16, margin: 8 }}>
+                  style={{ paddingLeft: 16, margin: 8 }}
+                >
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),
