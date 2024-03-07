@@ -50,6 +50,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
+import SVGCollection from "../collections/base/SVG";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -58,6 +59,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: SVGCollection, customName: "", custom: false },
     { func: AdTemplateCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },

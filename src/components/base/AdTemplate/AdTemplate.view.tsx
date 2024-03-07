@@ -27,7 +27,6 @@ const AdTemplate = (props: AdTemplateProps) => {
         </>
       )}
       <Image source={{ uri }} style={styles.image} />
-      <TempTwo />
     </View>
   );
 };

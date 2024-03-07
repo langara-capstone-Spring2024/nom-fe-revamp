@@ -10,3 +10,4 @@ export { default as ScannerPermission } from "./ScannerPermission";
 export { default as ScannerRightBottom } from "./ScannerRightBottom";
 export { default as ScannerRightTop } from "./ScannerRightTop";
 export { default as ScannerSuccess } from "./ScannerSuccess";
+export { default as TempTwo } from "./TempTwo";
