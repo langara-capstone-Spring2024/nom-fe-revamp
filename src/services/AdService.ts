@@ -1,10 +1,16 @@
-import axios from "axios";
 import { BaseService } from "./BaseService";
 import { apiClient } from "./client";
 
 export class AdService extends BaseService {
   async getPrices() {
     const response = await apiClient.get("api/ad/price");
+    return response;
+  }
+
+  async generateAiText(description: string) {
+    const response = await apiClient.post("/api/ad/generate-ad", {
+      description,
+    });
     return response;
   }
 }
