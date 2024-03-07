@@ -8,8 +8,7 @@ import {
   RestaurantDescriptionCoupon,
   RestaurantDescriptionCutlery,
   RestaurantDescriptionLocation,
-} from "../../../svgs";
-import { SvgXml } from "react-native-svg";
+} from "../SVG";
 
 const RestaurantDescription = (props: RestaurantDescriptionProps) => {
   const {
@@ -31,18 +30,18 @@ const RestaurantDescription = (props: RestaurantDescriptionProps) => {
           <Typography variant="title3">{name}</Typography>
         </View>
         <View style={styles.addressContainer}>
-          <SvgXml xml={RestaurantDescriptionLocation} />
+          <RestaurantDescriptionLocation />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {address}
           </Typography>
         </View>
         <View style={styles.cuisineTypereservationNumberContainer}>
-          <SvgXml xml={RestaurantDescriptionCutlery} />
+          <RestaurantDescriptionCutlery />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {cuisineType}
           </Typography>
           <Typography variant="bodySm">・</Typography>
-          <SvgXml xml={RestaurantDescriptionCoupon} />
+          <RestaurantDescriptionCoupon />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {reservationNumber} reservations
           </Typography>

@@ -4,8 +4,7 @@ import createStyles from "./Coupon.style";
 import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import { useTheme } from "react-native-paper";
 import Typography from "../Typography";
-import { SvgXml } from "react-native-svg";
-import { CouponBody } from "../../../svgs";
+import { CouponSelected, CouponUnselected } from "../SVG";
 
 const Coupon = (props: CouponProps) => {
   const { time, amount, isSelected } = props;
@@ -25,9 +24,9 @@ const Coupon = (props: CouponProps) => {
   useEffect(() => {
     if (width && height) {
       if (isSelected) {
-        setBody(<SvgXml xml={CouponBody(width, height, isSelected)} />);
+        setBody(<CouponSelected width={width} height={height} />);
       } else {
-        setBody(<SvgXml xml={CouponBody(width, height, isSelected)} />);
+        setBody(<CouponUnselected width={width} height={height} />);
       }
     }
   }, [width, height, isSelected]);
