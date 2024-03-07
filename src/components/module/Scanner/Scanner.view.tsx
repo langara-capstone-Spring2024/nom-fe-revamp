@@ -17,7 +17,7 @@ import {
   ScannerRightBottom,
   ScannerRightTop,
   ScannerSuccess,
-} from "../../../svgs";
+} from "../../base/SVG";
 
 const Scanner = (props: ScannerProps) => {
   const {
@@ -171,26 +171,10 @@ const Scanner = (props: ScannerProps) => {
                   >
                     <View style={styles.leftOverlay}></View>
                     <View style={styles.lense}>
-                      <SvgXml
-                        xml={ScannerLeftTop}
-                        opacity={0.75}
-                        style={styles.leftTopCorner}
-                      />
-                      <SvgXml
-                        xml={ScannerRightTop}
-                        opacity={0.75}
-                        style={styles.rightTopCorner}
-                      />
-                      <SvgXml
-                        xml={ScannerRightBottom}
-                        opacity={0.75}
-                        style={styles.rightBottomCorner}
-                      />
-                      <SvgXml
-                        xml={ScannerLeftBottom}
-                        opacity={0.75}
-                        style={styles.leftBottomCorner}
-                      />
+                      <ScannerLeftTop style={styles.leftTopCorner} />
+                      <ScannerRightTop style={styles.rightTopCorner} />
+                      <ScannerRightBottom style={styles.rightBottomCorner} />
+                      <ScannerLeftBottom style={styles.leftBottomCorner} />
                       <View style={[styles.frame]}></View>
                     </View>
                     <View style={styles.rightOverlay}></View>
@@ -214,7 +198,7 @@ const Scanner = (props: ScannerProps) => {
                 ]}
               >
                 <View style={styles.modalContainer}>
-                  <SvgXml xml={ScannerError} />
+                  <ScannerError />
                   <Typography variant="title5" alignment="center">
                     Invalid QR Code
                   </Typography>
@@ -239,7 +223,7 @@ const Scanner = (props: ScannerProps) => {
                 ]}
               >
                 <View style={styles.modalContainer}>
-                  <SvgXml xml={ScannerSuccess} />
+                  <ScannerSuccess />
                   <Typography variant="title5" alignment="center">
                     Success!
                   </Typography>
@@ -264,7 +248,7 @@ const Scanner = (props: ScannerProps) => {
             ]}
           >
             <View style={styles.modalContainer}>
-              <SvgXml xml={ScannerPermission} />
+              <ScannerPermission />
               <Typography variant="title5" alignment="center">
                 nom! would like to access the camera
               </Typography>

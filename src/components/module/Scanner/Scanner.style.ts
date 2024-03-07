@@ -70,7 +70,11 @@ const styles = StyleSheet.create({
   },
   leftTopCorner: { position: "absolute", top: 0, left: 0 },
   rightTopCorner: { position: "absolute", top: 0, right: 0 },
-  rightBottomCorner: { position: "absolute", bottom: 0, right: 0 },
+  rightBottomCorner: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+  },
   leftBottomCorner: { position: "absolute", bottom: 0, left: 0 },
   modalContainer: {
     marginTop: "50%",
