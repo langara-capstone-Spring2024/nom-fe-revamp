@@ -24,9 +24,9 @@ const Menu = () => {
     setLocalImage(image);
   };
 
-  const [name, onNameChange] = useState<string>("");
-  const [price, onPriceChange] = useState<string>("");
-  const [description, onDescriptionChange] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const [nameError, setNameError] = useState<string>("");
   const [priceError, setPriceError] = useState<string>("");
   const [updatedMenu, setUpdatedMenu] = useState<Menus[]>([]);
@@ -36,8 +36,7 @@ const Menu = () => {
   }, []);
 
   const { data: menuItems, error } = GetMenu();
-  // const prevMenuItems = menuItems;
-  // console.log(prevMenuItems);
+
 
   if (error) {
     console.error("Error fetching menu items:", error);
@@ -49,7 +48,7 @@ const Menu = () => {
     } else {
       setNameError("");
     }
-    onNameChange(text);
+    setName(text);
   };
 
   const handlePriceChange = (text: string) => {
@@ -60,7 +59,7 @@ const Menu = () => {
     } else {
       setPriceError("");
     }
-    onPriceChange(text);
+    setPrice(text);
   };
 
   const s3 = new S3({
@@ -102,9 +101,9 @@ const Menu = () => {
 
         addMenu({ formData: menuItemData });
 
-        onNameChange("");
-        onPriceChange("");
-        onDescriptionChange("");
+        setName("");
+        setPrice("");
+        setDescription("");
         setLocalImage(undefined);
         setIsAddingMenuItem(false);
       }
@@ -117,11 +116,11 @@ const Menu = () => {
     localImage: localImage,
     handleImageChange: handleImageChange,
     name: name,
-    onNameChange: onNameChange,
+    onNameChange: setName,
     price: price,
-    onPriceChange: onPriceChange,
+    onPriceChange: setPrice,
     description: description,
-    onDescriptionChange: onDescriptionChange,
+    onDescriptionChange: setDescription,
     isAddingMenuItem: isAddingMenuItem,
     setIsAddingMenuItem: setIsAddingMenuItem,
     onPressAddItem: onPressAddItem,
