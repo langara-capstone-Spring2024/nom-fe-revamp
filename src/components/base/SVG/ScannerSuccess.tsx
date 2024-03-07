@@ -1,4 +1,10 @@
-export const ScannerSuccess = `
+import { SvgXml } from "react-native-svg";
+import { SVGProps } from "./SVG.props";
+
+const ScannerSuccess = (props: SVGProps) => {
+  const { fill, width, height, stroke, style } = props;
+
+  const xml = `
 <svg width="98" height="98" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_3307_12011)">
 <path d="M42.3919 67.8765C41.3644 67.8765 40.3416 67.4853 39.5592 66.7029L24.0098 51.1535C22.445 49.5887 22.445 47.0529 24.0098 45.4881C25.5746 43.9232 28.1104 43.9232 29.6753 45.4881L45.2246 61.0374C46.7894 62.6023 46.7894 65.138 45.2246 66.7029C44.4422 67.4853 43.4194 67.8765 42.3919 67.8765Z" fill="url(#paint0_radial_3307_12011)"/>
@@ -24,3 +30,8 @@ export const ScannerSuccess = `
 </defs>
 </svg>
 `;
+
+  return <SvgXml xml={xml} style={style} />;
+};
+
+export default ScannerSuccess;

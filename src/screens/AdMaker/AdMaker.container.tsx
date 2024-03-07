@@ -7,7 +7,10 @@ import type { returnedResults } from "reanimated-color-picker";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { LayoutAnimation } from "react-native";
 import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
-import { GetPrices } from "../../services/react-query/queries/ad";
+import {
+  GeneratetAiText,
+  GetPrices,
+} from "../../services/react-query/queries/ad";
 import { calculateTotalAdPrice } from "../../utils/getTotalAdPrice";
 import { useStore } from "../../store";
 import {
@@ -57,8 +60,8 @@ const AdMaker = () => {
     selectedColor.value = color.hex;
   };
 
-  const snapPoints = useMemo(() => ["65%"], []);
-
+  const snapPoints = useMemo(() => ["90%"], []);
+  const otherSnapPoints = useMemo(() => ["70%"], []);
   const primarySheetModalRef = useRef<BottomSheetModal>(null);
   const accentSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -119,6 +122,42 @@ const AdMaker = () => {
 
   const [headline, setHeadline] = useState("");
   const [tagline, setTagline] = useState("");
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [description, setDescription] = useState("");
+
+  const promptSheetModalRef = useRef<BottomSheetModal>(null);
+  const togglePromptDisplay = useCallback(() => {
+    promptSheetModalRef.current?.present();
+    setShowPrompt(true);
+  }, [showPrompt]);
+
+  const {
+    mutate: generateAiText,
+    data,
+    isSuccess: isSuccessAi,
+  } = GeneratetAiText();
+
+  const handleGenerateAiText = async () => {
+    try {
+      if (description) {
+        generateAiText(description);
+      }
+
+      if (isSuccessAi) {
+        console.log(data);
+        setTagline(data.t);
+        setHeadline(data.h);
+        promptSheetModalRef.current?.close();
+        setShowPrompt(false);
+        setDescription("");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setDescription("");
+      promptSheetModalRef.current?.close();
+      setShowPrompt(false);
+    }
+  };
 
   //end of page 3
 
@@ -264,6 +303,14 @@ const AdMaker = () => {
     cardSheetModalRef,
     toggleCardDisplay,
     handleAddNewCard,
+    promptSheetModalRef,
+    togglePromptDisplay,
+    showPrompt,
+    setShowPrompt,
+    description,
+    setDescription,
+    otherSnapPoints,
+    handleGenerateAiText,
   };
 
   return <AdMakerView {...generatedProps} />;

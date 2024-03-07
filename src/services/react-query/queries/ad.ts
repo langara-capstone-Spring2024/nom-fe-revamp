@@ -17,3 +17,21 @@ export const GetPrices = () => {
     },
   });
 };
+
+export const GeneratetAiText = () => {
+  const adService = new AdService();
+  adService.cancelRequests();
+
+  return useMutation({
+    mutationFn: async (payload: string) => {
+      const response: AxiosResponse = await adService.generateAiText(payload);
+      return response.data;
+    },
+    onSuccess: () => {
+      RNQueryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.AD],
+        exact: true,
+      });
+    },
+  });
+};

@@ -14,6 +14,18 @@ const Stories = () => {
     /*_PLOP_INJECT_COMPONENT_SCREEN */
 {name: 'AdTemplate', onPress: () => NavigationService.navigate('AdTemplateCollection')},
     {
+      name: "RestaurantCard",
+      onPress: () => NavigationService.navigate("RestaurantCardCollection"),
+    },
+    {
+      name: "CouponCarousel",
+      onPress: () => NavigationService.navigate("CouponCarouselCollection"),
+    },
+    {
+      name: "Coupon",
+      onPress: () => NavigationService.navigate("CouponCollection"),
+    },
+    {
       name: "RestaurantDescription",
       onPress: () =>
         NavigationService.navigate("RestaurantDescriptionCollection"),

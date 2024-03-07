@@ -1,8 +1,16 @@
-import { View, Text, Image, Touchable } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Touchable,
+  Keyboard,
+  TextInput,
+} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import createStyles from "./AdMaker.style";
 import { AdMakerGeneratedProps } from "./AdMaker.props";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import { useTheme } from "react-native-paper";
+import { useTheme, Modal, Portal } from "react-native-paper";
 import { theme as t } from "../../utils/Theme";
 import * as Progress from "react-native-progress";
 import CircularNumber from "../../components/base/CircularNumber";
@@ -11,7 +19,8 @@ import AdImagePicker from "../../components/base/AdImagePicker";
 import Button from "../../components/base/Button";
 import { convertDate } from "../../utils/transformDate";
 import { RadioButton } from "react-native-paper";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { Platform } from "react-native";
 
 import ColorPicker, {
   Panel1,
@@ -32,6 +41,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import DatePicker from "../../components/base/DatePicker";
 import ButtonCollection from "../../collections/base/Button";
 import { CardField } from "@stripe/stripe-react-native";
+import useKeyboard from "../../utils/hooks/useKeyboard";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -71,14 +81,27 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     cardSheetModalRef,
     toggleCardDisplay,
     showStripe,
-    handleAddNewCard
+    handleAddNewCard,
+    promptSheetModalRef,
+    togglePromptDisplay,
+    showPrompt,
+    description,
+    setDescription,
+    otherSnapPoints,
+    setShowPrompt,
+    handleGenerateAiText,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
-  const [value, setValue] = React.useState("");
 
+  const isKeyboardOpen = useKeyboard();
   const container =
-    idx === 0 && (openAccentModal || openPrimaryModal || showDate || showStripe)
+    idx === 0 &&
+    (openAccentModal ||
+      openPrimaryModal ||
+      showDate ||
+      showStripe ||
+      showPrompt)
       ? styles.openModalContainer
       : styles.container;
 
@@ -126,54 +149,66 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <Typography variant="title5" alignment="left" color="primary">
             Edit Ad Text
           </Typography>
-
-          <View style={styles.editAdTextImageContainer}>
-            <Image
-              source={{ uri: localImage?.uri }}
-              style={styles.editAdTextImage}
-            />
-          </View>
-          <View style={styles.edAdTextHeadlineWrapper}>
-            <View>
-              <TextInputField
-                label="Headline"
-                placeholder="e.g. Best Weekly Deals"
-                value={headline}
-                setValue={setHeadline}
-                noClear
-                maxLength={20}
+          <KeyboardAwareScrollView style={styles.keyboard}>
+            <View style={styles.editAdTextImageContainer}>
+              <Image
+                source={{ uri: localImage?.uri }}
+                style={styles.editAdTextImage}
               />
-              <Typography
-                variant="bodyXs"
-                otherStyle={{
-                  color: "#686868",
-                  textAlign: "right",
-                  marginTop: 4,
-                }}>
-                {headline.length}/20 characters
-              </Typography>
             </View>
-            <View style={{ height: 10 }} />
-            <View>
-              <TextArea
-                value={tagline}
-                setValue={setTagline}
-                placeholder="e.g. Enjoy up to 50% off!"
-                label="Tagline"
-                maxLength={40}
-                numberOfLines={2}
-              />
+            <TouchableOpacity
+              style={styles.generateAdTextContainer}
+              onPress={togglePromptDisplay}>
+              <FontAwesome name="pencil-square-o" size={16} color="black" />
               <Typography
-                variant="bodyXs"
-                otherStyle={{
-                  color: "#686868",
-                  textAlign: "right",
-                  marginTop: 4,
-                }}>
-                {tagline.length}/40 characters
+                variant="label2"
+                color="medium"
+                otherStyle={styles.generateAdTextBtn}>
+                Generate Ad Text
               </Typography>
+            </TouchableOpacity>
+            <View style={styles.edAdTextHeadlineWrapper}>
+              <View>
+                <TextInputField
+                  label="Headline"
+                  placeholder="e.g. Best Weekly Deals"
+                  value={headline}
+                  setValue={setHeadline}
+                  noClear
+                  maxLength={20}
+                />
+                <Typography
+                  variant="bodyXs"
+                  otherStyle={{
+                    color: "#686868",
+                    textAlign: "right",
+                    marginTop: 4,
+                  }}>
+                  {headline.length}/20 characters
+                </Typography>
+              </View>
+              <View style={{ height: 10 }} />
+              <View>
+                <TextArea
+                  value={tagline}
+                  setValue={setTagline}
+                  placeholder="e.g. Enjoy up to 50% off!"
+                  label="Tagline"
+                  maxLength={40}
+                  numberOfLines={2}
+                />
+                <Typography
+                  variant="bodyXs"
+                  otherStyle={{
+                    color: "#686868",
+                    textAlign: "right",
+                    marginTop: 4,
+                  }}>
+                  {tagline.length}/40 characters
+                </Typography>
+              </View>
             </View>
-          </View>
+          </KeyboardAwareScrollView>
         </>
       );
     } else if (page === 4) {
@@ -386,12 +421,59 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </BottomSheetModal>
         </BottomSheetModalProvider>
       )}
+      {page === 3 && (
+        <BottomSheetModalProvider>
+          <BottomSheetModal
+            ref={promptSheetModalRef}
+            index={0}
+            snapPoints={isKeyboardOpen ? ["85%"] : ["50%"]}
+            onChange={handleSheetChanges}>
+            <View>
+              <Typography
+                variant="body"
+                alignment="center"
+                otherStyle={{
+                  marginTop: 16,
+                  fontFamily: "PublicSansMedium",
+                }}>
+                Write your Prompt
+              </Typography>
+              <View style={{ marginHorizontal: 16, marginTop: 27, gap: 30 }}>
+                <TextArea
+                  defaultValue={description}
+                  setValue={setDescription}
+                  placeholder="e.g. Create a 20% discount for all japanese cuisines."
+                  label="Describe your ad campaign"
+                  maxLength={100}
+                  numberOfLines={2}
+                />
+                <Button
+                  variant="primary"
+                  buttonSize="lg"
+                  text="Generate Ad Text"
+                  takeFullWidth
+                  onPress={handleGenerateAiText}
+                  iconPosition="left"
+                  icon={
+                    <FontAwesome
+                      name="pencil-square-o"
+                      size={20}
+                      color="white"
+                    />
+                  }
+                />
+              </View>
+            </View>
+          </BottomSheetModal>
+        </BottomSheetModalProvider>
+      )}
+
       {page === 4 && (
         <BottomSheetModalProvider>
           <BottomSheetModal
             ref={dateSheetModalRef}
             index={0}
-            snapPoints={snapPoints}
+            snapPoints={["60%"]}
             onChange={handleSheetChanges}>
             <View>
               <DatePicker onSelectDates={handleSelectDates} />
@@ -400,13 +482,16 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           <BottomSheetModal
             ref={cardSheetModalRef}
             index={0}
-            snapPoints={["40%"]}
+            snapPoints={isKeyboardOpen ? ["80%"] : ["40%"]}
             onChange={handleSheetChanges}>
             <View style={styles.newCardContainer}>
               <Typography
                 variant="body"
                 alignment="center"
-                otherStyle={{ marginTop: 16, fontFamily: "PublicSansMedium" }}>
+                otherStyle={{
+                  marginTop: 16,
+                  fontFamily: "PublicSansMedium",
+                }}>
                 Add New Card
               </Typography>
               <View>

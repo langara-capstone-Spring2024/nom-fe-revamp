@@ -7,7 +7,7 @@ const ChipsCollection = () => {
     <View
       style={{ backgroundColor: "white", paddingVertical: 20, height: "100%" }}
     >
-      <Chips label="April 23, 2024" style={{ width: 50 }} />
+      <Chips label="April 23, 2024" style={{ width: 50 }}/>
     </View>
   );
 };
