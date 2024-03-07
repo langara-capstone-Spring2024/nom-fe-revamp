@@ -1,7 +1,7 @@
 import { MarkedDates } from "react-native-calendars/src/types";
 import { Discounts, FormattedDiscount } from "../../types/Discounts";
 export interface PromoGeneratedProps {
-  items?: FormattedDiscount[];
+  activeDiscounts?: FormattedDiscount[];
   onDateChanged: (date: any, updateSource: any) => void;
   onMonthChanged: (date: any, updateSource: any) => void;
   getMarkedDates: () => MarkedDates;
@@ -9,4 +9,5 @@ export interface PromoGeneratedProps {
   formattedDate: string;
   handleAgendaPress: () => void;
   handleButtonPress: () => void;
+  handleAddDiscount: () => void;
 }

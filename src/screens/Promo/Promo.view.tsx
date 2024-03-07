@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import createStyles from "./Promo.style";
 import { PromoGeneratedProps } from "./Promo.props";
 import React, { useMemo, useCallback, useRef } from "react";
@@ -7,11 +7,11 @@ import { AgendaList, CalendarProvider } from "react-native-calendars";
 import ExpandableCalendarComponent from "../../components/base/ExpandableCalendarComponent";
 import AgendaItem from "../../components/base/AgendaItem";
 import Typography from "../../components/base/Typography";
-import Chips from "../../components/base/Chips";
+import { AntDesign } from "@expo/vector-icons";
 
 const Promo = (props: PromoGeneratedProps) => {
   const {
-    items,
+    activeDiscounts,
     onDateChanged,
     onMonthChanged,
     INITIAL_DATE,
@@ -19,6 +19,7 @@ const Promo = (props: PromoGeneratedProps) => {
     formattedDate,
     handleAgendaPress,
     handleButtonPress,
+    handleAddDiscount,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -44,9 +45,9 @@ const Promo = (props: PromoGeneratedProps) => {
         todayBottomMargin={16}
       >
         <ExpandableCalendarComponent markedDates={marked.current} />
-        {items ? (
+        {activeDiscounts ? (
           <AgendaList
-            sections={items}
+            sections={activeDiscounts}
             renderItem={renderItem}
             sectionStyle={styles.section}
           />
@@ -71,6 +72,14 @@ const Promo = (props: PromoGeneratedProps) => {
           </View>
         )}
       </CalendarProvider>
+      <View style={styles.addButtonContainer}>
+        <TouchableOpacity
+          onPress={handleAddDiscount}
+          style={styles.fixedAddButton}
+        >
+          <AntDesign name="plus" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
