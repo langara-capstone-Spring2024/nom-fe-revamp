@@ -14,6 +14,7 @@ import ChangePassword from "../screens/ChangePassword";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
 import CouponCollection from "../collections/base/Coupon";
+import SegmentedButtonCollection from "../collections/base/SegmentedButton";
 import RestaurantDescriptionCollection from "../collections/base/RestaurantDescription";
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
@@ -60,6 +61,7 @@ const PrivateNavigator = () => {
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
     { func: CouponCollection, custom: false },
+    { func: SegmentedButtonCollection, custom: false },
     { func: RestaurantDescriptionCollection, custom: false },
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
