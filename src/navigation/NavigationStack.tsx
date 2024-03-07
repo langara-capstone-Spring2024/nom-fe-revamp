@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import DishCardCollection from "../collections/base/DishCard";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
 import CouponCollection from "../collections/base/Coupon";
@@ -57,6 +58,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: DishCardCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
     { func: CouponCollection, custom: false },
@@ -205,12 +207,19 @@ const App = () => {
           />
         ) : (
           <Stack.Screen
-            name="PublicStack"
-            component={PublicNavigator}
+            name="PrivateStack"
+            component={PrivateNavigator}
             options={{
               headerShown: false,
             }}
           />
+          // <Stack.Screen
+          //   name="PublicStack"
+          //   component={PublicNavigator}
+          //   options={{
+          //     headerShown: false,
+          //   }}
+          // />
         )}
       </Stack.Navigator>
     </NavigationContainer>
