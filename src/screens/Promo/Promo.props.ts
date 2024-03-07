@@ -6,4 +6,7 @@ export interface PromoGeneratedProps {
   onMonthChanged: (date: any, updateSource: any) => void;
   getMarkedDates: () => MarkedDates;
   INITIAL_DATE: string;
+  formattedDate: string;
+  handleAgendaPress: () => void;
+  handleButtonPress: () => void;
 }

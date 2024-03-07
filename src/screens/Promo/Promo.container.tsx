@@ -4,11 +4,24 @@ import { useCallback, useState } from "react";
 import { GetAllActiveDiscount } from "../../services/react-query/queries/discount";
 import { useQuery } from "@tanstack/react-query";
 import { Discounts } from "../../types/Discounts";
-import { Text } from "react-native-elements";
+import { Text, Alert } from "react-native";
 
 const Promo = () => {
   const currentDate = new Date();
   const INITIAL_DATE = currentDate.toISOString().split("T")[0];
+  const formattedDate = currentDate.toLocaleString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+
+  const handleAgendaPress = useCallback(() => {
+    Alert.alert("test");
+  }, []);
+
+  const handleButtonPress = useCallback(() => {
+    Alert.alert("Show me more");
+  }, []);
 
   const onDateChanged = useCallback((date: any, updateSource: any) => {
     console.log("DateChanged: ", date, updateSource);
@@ -183,6 +196,9 @@ const Promo = () => {
     onMonthChanged,
     getMarkedDates,
     INITIAL_DATE,
+    formattedDate,
+    handleAgendaPress,
+    handleButtonPress,
   };
   return <PromoView {...generatedProps} />;
 };
