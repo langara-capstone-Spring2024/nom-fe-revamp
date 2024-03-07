@@ -1,3 +1,4 @@
+export * from "./CouponBody";
 export * from "./RestaurantDescriptionCoupon";
 export * from "./RestaurantDescriptionCutlery";
 export * from "./RestaurantDescriptionLocation";

@@ -13,6 +13,14 @@ const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
     {
+      name: "CouponCarousel",
+      onPress: () => NavigationService.navigate("CouponCarouselCollection"),
+    },
+    {
+      name: "Coupon",
+      onPress: () => NavigationService.navigate("CouponCollection"),
+    },
+    {
       name: "RestaurantDescription",
       onPress: () =>
         NavigationService.navigate("RestaurantDescriptionCollection"),
