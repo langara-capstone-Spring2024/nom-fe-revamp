@@ -16,7 +16,7 @@ const Home = (props: HomeGeneratedProps) => {
         role === "consumer" ? (
           <Text>Consumer's Home</Text>
         ) : role === "merchant" ? (
-          <Text>Merchant's Home</Text>
+          <Text style={{backgroundColor: 'red', height: 100}}>Merchant's Home</Text>
         ) : (
           <Text>Who are you?</Text>
         )

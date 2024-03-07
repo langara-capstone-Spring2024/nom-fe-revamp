@@ -52,6 +52,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
         name="Home"
         component={Home}
         options={{
+          headerShown: false,
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
