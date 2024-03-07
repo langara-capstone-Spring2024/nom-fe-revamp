@@ -9,6 +9,7 @@ import { S3Params } from "../../types/S3Params";
 import { S3 } from "aws-sdk";
 import "react-native-get-random-values";
 import { MenuService } from "../../services/MenuService";
+import { addMenuItem } from "./../../services/react-query/queries/menu";
 
 const Menu = () => {
   const { setMenuScreen, isAddingMenuItem, setIsAddingMenuItem } = useStore(
@@ -34,7 +35,6 @@ const Menu = () => {
     setMenuScreen(true);
   }, []);
 
-  useState();
   const { data: menuItems, error } = GetMenu();
   // const prevMenuItems = menuItems;
   // console.log(prevMenuItems);
@@ -69,7 +69,7 @@ const Menu = () => {
     region: process.env.EXPO_PUBLIC_AWS_REGION,
   });
 
-  const menuService = new MenuService();
+  const { mutate: addMenu, data, isPending } = addMenuItem();
 
   const onPressAddItem = async () => {
     try {
@@ -100,19 +100,13 @@ const Menu = () => {
           description: description,
         };
 
-        await menuService.addMenuItem(
-          menuItemData.imageUrl,
-          menuItemData.name,
-          menuItemData.originalPrice,
-          menuItemData.description
-        );
-        
+        addMenu({ formData: menuItemData });
+
         onNameChange("");
         onPriceChange("");
         onDescriptionChange("");
         setLocalImage(undefined);
         setIsAddingMenuItem(false);
-        GetMenu();
       }
     } catch (error) {
       console.error("Error adding menu item:", error);

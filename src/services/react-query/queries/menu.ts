@@ -8,6 +8,7 @@ import { Menus } from "../../../types";
 
 export const GetMenu = () => {
   const menuService = new MenuService();
+  menuService.cancelRequests();
 
   return useQuery({
     queryKey: [QUERY_KEYS.MENUS],
@@ -27,7 +28,16 @@ export const addMenuItem = () => {
   menuService.cancelRequests();
 
   return useMutation({
-    mutationFn: async (formData) => {
+    mutationFn: async ({
+      formData,
+    }: {
+      formData: {
+        imageUrl: String;
+        name: String;
+        originalPrice: String;
+        description: String;
+      };
+    }) => {
       const { imageUrl, name, originalPrice, description } = formData;
 
       const response = await menuService.addMenuItem(
