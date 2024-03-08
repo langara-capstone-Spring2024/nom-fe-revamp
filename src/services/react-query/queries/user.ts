@@ -14,7 +14,10 @@ export const GetMerchants = () => {
     queryKey: [QUERY_KEYS.MERCHANTS],
     queryFn: async () => {
       const response: AxiosResponse = await userService.getMerchants();
-      return response.data;
+
+      if (response.status === 200) {
+        return response.data;
+      }
     },
   });
 };

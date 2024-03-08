@@ -47,12 +47,14 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  MerchantAccount: undefined;
+  ConsumerAccount: undefined;
+  MerchantHome: undefined;
+  Orders: undefined;
+  ConsumerHome: undefined;
   Menu: undefined;
   Promo: undefined;
   Scanner: undefined;
-  Activity: undefined;
-  Account: undefined;
-  Home: undefined;
   AdMaker: undefined;
   TestScreen: undefined;
   Stories: undefined;

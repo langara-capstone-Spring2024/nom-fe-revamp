@@ -1,8 +1,23 @@
-import ScannerView from './Scanner.view';
+import NavigationService from "../../navigation/NavigationService";
+import ScannerView from "./Scanner.view";
 
 const Scanner = () => {
+  const handleChange = (result: string) => {
+    return true;
+  };
+
+  const handleClose = () => {
+    NavigationService.navigate("MerchantHome");
+  };
+
+  const handleSuccess = () => {
+    NavigationService.navigate("MerchantHome");
+  };
+
   const generatedProps = {
-    // generated props here
+    handleChange,
+    handleClose,
+    handleSuccess,
   };
   return <ScannerView {...generatedProps} />;
 };

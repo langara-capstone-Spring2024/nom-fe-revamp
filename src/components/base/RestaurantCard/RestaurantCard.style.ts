@@ -6,6 +6,9 @@ const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       gap: 8,
+      borderRadius: 24,
+      backgroundColor: t.Surface.default,
+      paddingVertical: 16,
     },
     image: {
       borderRadius: 16,

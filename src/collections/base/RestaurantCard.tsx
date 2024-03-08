@@ -16,7 +16,7 @@ const RestaurantCardCollection = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ paddingVertical: 16, gap: 32 }}
+      contentContainerStyle={{ padding: 16, gap: 32 }}
     >
       <RestaurantCard
         imageUrl="https://picsum.photos/360?random=1"
@@ -28,7 +28,6 @@ const RestaurantCardCollection = () => {
         cityName="Vancouver"
         coupons={coupons}
       />
-      <View style={{ height: 1, backgroundColor: "#D4D4D4" }}></View>
       <RestaurantCard
         imageUrl="https://picsum.photos/360?random=2"
         restaurantName="Coffee Bear"
@@ -39,7 +38,6 @@ const RestaurantCardCollection = () => {
         cityName="Vancouver"
         coupons={coupons}
       />
-      <View style={{ height: 1, backgroundColor: "#D4D4D4" }}></View>
       <RestaurantCard
         imageUrl="https://picsum.photos/360?random=3"
         restaurantName="Sushi Palace"

@@ -74,8 +74,6 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
                     <Text>{item.name}</Text>
                     <Text>{item.description}</Text>
                     <Text>{item.address}</Text>
-                    <Text>{item.opening}</Text>
-                    <Text>{item.closing}</Text>
                   </View>
                 )}
                 ItemSeparatorComponent={() => (
