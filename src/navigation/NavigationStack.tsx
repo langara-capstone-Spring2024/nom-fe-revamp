@@ -190,13 +190,6 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen
-          name="PrivateStack"
-          component={PrivateNavigator}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"

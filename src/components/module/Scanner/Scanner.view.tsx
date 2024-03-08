@@ -6,7 +6,6 @@ import { ScannerProps } from "./Scanner.props";
 import { BarCodeScanningResult, Camera, FlashMode } from "expo-camera";
 import { ActivityIndicator } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { SvgXml } from "react-native-svg";
 import Typography from "../../base/Typography";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {
@@ -74,6 +73,8 @@ const Scanner = (props: ScannerProps) => {
   };
 
   const handleSuccess = () => {
+    setStatus("idle");
+    setResult("");
     onSuccess();
   };
 
