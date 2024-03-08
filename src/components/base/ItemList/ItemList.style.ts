@@ -11,7 +11,7 @@ const createStyles = (theme: Theme) =>
       alignItems: "center",
       padding: 16,
       height: 84,
-      borderBottomWidth: 1,
+      borderTopWidth: 1,
       borderColor: t.Border["default"],
       paddingLeft: 16,
       paddingRight: 16,

@@ -39,7 +39,7 @@ const MenuView = (props: MenuGeneratedProps) => {
   const isDisabled = !name || !price;
 
   return isAddingMenuItem ? (
-    <View style={styles.container}>
+    <View style={styles.addItemContainer}>
       <View style={styles.imagePicker}>
         <MenuImagePicker image={localImage} setImage={handleImageChange} />
       </View>
@@ -101,7 +101,7 @@ const MenuView = (props: MenuGeneratedProps) => {
       />
       <ScrollView>
         <View style={styles.menuCardContainer}>
-          {menuItems.length > 0 &&
+          {menuItems && menuItems.length > 0 &&  
             menuItems.map((item: Menus) => (
               <MenuCard
                 key={item._id}
