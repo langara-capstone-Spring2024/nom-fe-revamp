@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NavigationContainerRef } from "@react-navigation/native";
+import { config } from "process";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
@@ -47,6 +48,9 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  RestaurantProfile: {
+    merchantId: string;
+  };
   MerchantAccount: undefined;
   ConsumerAccount: undefined;
   MerchantHome: undefined;

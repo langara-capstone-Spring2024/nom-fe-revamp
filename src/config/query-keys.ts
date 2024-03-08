@@ -1,6 +1,7 @@
 const QUERY_KEYS = {
   CONSUMERS: "Consumers",
   MERCHANTS: "Merchants",
+  MERCHANT: "Merchant",
   IMAGES: "Images",
   AUTH: "Auth",
   STRIPE_PAYMENT: "STRIPE_PAYMENT",
