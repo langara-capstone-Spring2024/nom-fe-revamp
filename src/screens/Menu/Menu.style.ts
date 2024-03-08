@@ -5,12 +5,17 @@ const windowWidth = Dimensions.get("window").width;
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
+      // backgroundColor: "#fff",
+      flex: 2,
+    },
+
+    addItemContainer: {
       backgroundColor: "#fff",
       flex: 2,
     },
 
     menuCardContainer: {
-      padding: 16,
+      // padding: 16,
     },
 
     imagePicker: {

@@ -9,7 +9,7 @@ const createStyles = (theme: Theme) =>
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      paddingTop: 16,
+      padding: 16,
       height: 84,
       borderTopWidth: 1,
       borderColor: t.Border["default"],
