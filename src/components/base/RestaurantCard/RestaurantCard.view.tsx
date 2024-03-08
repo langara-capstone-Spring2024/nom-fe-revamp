@@ -1,7 +1,7 @@
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 import { RestaurantCardProps } from "./RestaurantCard.props";
 import createStyles from "./RestaurantCard.style";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Card, useTheme } from "react-native-paper";
 import CouponCarousel from "../CouponCarousel";
 import Typography from "../Typography";
@@ -21,12 +21,6 @@ const RestaurantCard = (props: RestaurantCardProps) => {
 
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-
-  const [index, setIndex] = useState<number>(0);
-
-  const handleSelect = (index: number) => {
-    setIndex(index);
-  };
 
   return (
     <Card contentStyle={styles.container}>
@@ -81,11 +75,7 @@ const RestaurantCard = (props: RestaurantCardProps) => {
         </View>
       </View>
       {coupons && coupons.length !== 0 && (
-        <CouponCarousel
-          coupons={coupons}
-          index={index}
-          onSelect={handleSelect}
-        />
+        <CouponCarousel coupons={coupons} onSelect={() => null} />
       )}
     </Card>
   );
