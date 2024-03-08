@@ -101,7 +101,7 @@ const MenuView = (props: MenuGeneratedProps) => {
       />
       <ScrollView>
         <View style={styles.menuCardContainer}>
-          {menuItems &&
+          {menuItems.length > 0 &&
             menuItems.map((item: Menus) => (
               <MenuCard
                 key={item._id}

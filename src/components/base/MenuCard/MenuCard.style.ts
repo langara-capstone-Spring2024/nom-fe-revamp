@@ -12,7 +12,7 @@ const createStyles = (theme: Theme) =>
       // paddingHorizontal: 20,
       paddingVertical: 10,
       backgroundColor: "#fff",
-      borderTopWidth: 1,
+      borderBottomWidth: 1,
       borderColor: t.Border["default"],
     },
 
