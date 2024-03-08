@@ -73,7 +73,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                         }
                       }
                     >
-                      <HomeFilledTab fill={focused ? "#E51E35" : "black"} />
+                      <HomeFilledTab fill={focused ? "#E51E35" : "#939393"} />
                     </View>
                   ),
                 }}
@@ -94,7 +94,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                         }
                       }
                     >
-                      <OrdersTab fill={focused ? "#E51E35" : "black"} />
+                      <OrdersTab fill={focused ? "#E51E35" : "#939393"} />
                     </View>
                   ),
                 }}
@@ -115,7 +115,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                         }
                       }
                     >
-                      <AccountTab fill={focused ? "#E51E35" : "black"} />
+                      <AccountTab fill={focused ? "#E51E35" : "#939393"} />
                     </View>
                   ),
                 }}
