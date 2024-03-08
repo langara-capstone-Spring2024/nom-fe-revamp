@@ -13,12 +13,8 @@ export const GetMenu = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.MENUS],
     queryFn: async () => {
-      try {
-        const response = await menuService.getMenu();
-        return response.data;
-      } catch (error) {
-        return { error };
-      }
+      const response = await menuService.getMenu();
+      return response.data;
     },
   });
 };

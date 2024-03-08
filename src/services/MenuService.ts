@@ -3,13 +3,8 @@ import { apiClient } from "./client";
 
 export class MenuService extends BaseService {
   async getMenu() {
-    try {
-      const response = await apiClient.get("api/menu");
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching menu:", error);
-      throw error;
-    }
+    const response = await apiClient.get("api/menu");
+    return response.data;
   }
 
   async addMenuItem(
@@ -18,17 +13,12 @@ export class MenuService extends BaseService {
     originalPrice: String,
     description: String
   ) {
-    try {
-      const response = await apiClient.post("api/menu", {
-        imageUrl: imageUrl,
-        name: name,
-        originalPrice: originalPrice,
-        description: description,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error adding menu item:", error);
-      throw error;
-    }
+    const response = await apiClient.post("api/menu", {
+      imageUrl: imageUrl,
+      name: name,
+      originalPrice: originalPrice,
+      description: description,
+    });
+    return response.data;
   }
 }
