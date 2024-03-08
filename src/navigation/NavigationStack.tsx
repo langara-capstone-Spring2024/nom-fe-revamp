@@ -50,6 +50,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
+import Order from "../screens/Order";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -98,6 +99,7 @@ const PrivateNavigator = () => {
     { func: Promo, customName: "Promo", custom: false },
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
+    { func: Order, customName: "Order", custom: false },
   ];
   const {
     isAdScreen,
