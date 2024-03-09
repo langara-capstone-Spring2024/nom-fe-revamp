@@ -4,6 +4,7 @@ import { QUERY_KEYS } from "../../../config/query-keys";
 import { AxiosResponse } from "axios";
 import { Discounts, FormattedDiscount } from "../../../types/Discounts";
 import { RNQueryClient } from "../query-client";
+import NavigationService from "../../../navigation/NavigationService";
 
 export const GetAllActiveDiscount = () => {
   const discountService = new DiscountService();
@@ -16,33 +17,70 @@ export const GetAllActiveDiscount = () => {
         const response: AxiosResponse =
           await discountService.getAllActiveDiscount();
 
-        const formattedDiscount: FormattedDiscount[] = response.data.map(
-          (item: Discounts) => {
-            const discount =
-              parseFloat(item.percentDiscount.$numberDecimal) * 10;
+        const formattedDiscount: FormattedDiscount[] = response.data.reduce(
+          (acc: any, item: Discounts) => {
+            const discount = item.percentDiscount * 100;
+            const validFromDate = new Date(item.validFromDate)
+              .toISOString()
+              .split("T")[0];
 
-            return {
-              title: new Date(item.validFromDate),
-              data: [
-                {
-                  title: item.label || "",
-                  startTime: new Date(item.validFromTime).toLocaleTimeString(
-                    [],
-                    { hour: "2-digit", minute: "2-digit" }
-                  ),
-                  endTime: new Date(item.validToTime).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  }),
-                  discount: discount,
-                  menuCount: 5,
-                },
-              ],
-            };
-          }
+            //check validFromDate in accumulator
+            const existingDate = acc.find(
+              (group: any) => group.title === validFromDate
+            );
+
+            if (existingDate) {
+              //add new discount to existing date
+              existingDate.data.push({
+                title: item.label || "",
+                startTime: new Date(item.validFromTime).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }),
+                endTime: new Date(item.validToTime).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }),
+                discount: discount,
+                menuCount: 5,
+              });
+            } else {
+              //if new date title, add a new group for new date
+              acc.push({
+                title: validFromDate,
+                data: [
+                  {
+                    title: item.label || "",
+                    startTime: new Date(item.validFromTime).toLocaleTimeString(
+                      [],
+                      { hour: "2-digit", minute: "2-digit" }
+                    ),
+                    endTime: new Date(item.validToTime).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }),
+                    discount: discount,
+                    menuCount: 5,
+                  },
+                ],
+              });
+            }
+            return acc;
+          },
+          []
         );
 
-        return formattedDiscount;
+        //sort the formattedDiscount based on title date
+        const sortedFormattedDiscount = formattedDiscount
+          .slice()
+          .sort((a, b) => {
+            const dateA: Date = new Date(a.title);
+            const dateB: Date = new Date(b.title);
+
+            return dateA.getTime() - dateB.getTime();
+          });
+
+        return sortedFormattedDiscount;
       } catch (error) {
         console.error("Error fetching discounts:", error);
         throw error;
@@ -63,7 +101,7 @@ export const GetDiscount = (discountId: string) => {
           discountId
         );
         const item: Discounts = response.data;
-        const discount = parseFloat(item.percentDiscount.$numberDecimal) * 10;
+        const discount = item.percentDiscount * 100;
         const formattedDiscount: FormattedDiscount = {
           title: new Date(item.validFromDate),
           data: [
@@ -108,6 +146,7 @@ export const AddDiscount = () => {
         queryKey: [QUERY_KEYS.DISCOUNT],
         exact: true,
       });
+      NavigationService.navigate("Promo");
     },
     onError: (error, variables, context) => {
       console.log(error, variables, context);
