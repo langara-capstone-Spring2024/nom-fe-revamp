@@ -2,7 +2,11 @@ import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
 import { DiscountService } from "../../DiscountService";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { AxiosResponse } from "axios";
-import { Discounts, FormattedDiscount } from "../../../types/Discounts";
+import {
+  Discount,
+  Discounts,
+  FormattedDiscount,
+} from "../../../types/Discounts";
 import { RNQueryClient } from "../query-client";
 import { Merchant } from "../../../types";
 
@@ -52,19 +56,14 @@ export const GetAllActiveDiscount = () => {
   });
 };
 
-export const GetActiveDiscounts = (merchants: Merchant[]) => {
+export const GetActiveDiscountsByMerchants = (merchants: Merchant[]) => {
   const discountService = new DiscountService();
   discountService.cancelRequests();
 
   return useQueries<
     any,
     {
-      data: {
-        _id: string;
-        percentDiscount: number;
-        validFromTime: string;
-        validToTime: string;
-      }[];
+      data: Discount[];
       isSuccess: boolean;
       isError: boolean;
     }[]
@@ -74,7 +73,7 @@ export const GetActiveDiscounts = (merchants: Merchant[]) => {
       queryFn: async () => {
         try {
           const response: AxiosResponse =
-            await discountService.getActiveDiscounts(merchant._id);
+            await discountService.getActiveDiscountsByMerchant(merchant._id);
 
           return response.data;
         } catch (error) {

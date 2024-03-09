@@ -22,7 +22,6 @@ const createStyles = (theme: Theme) =>
       flex: 7,
       gap: 4,
       justifyContent: "center",
-      borderBottomWidth: 1,
       borderBottomColor: t.Border.default,
     },
     amountContainer: {

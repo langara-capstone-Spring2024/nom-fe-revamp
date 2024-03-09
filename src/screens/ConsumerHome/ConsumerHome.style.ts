@@ -10,7 +10,12 @@ const createStyles = (theme: Theme) =>
     serchContainer: {
       paddingHorizontal: 16,
     },
-    merchantsContainer: {
+    titleContainer: {
+      paddingHorizontal: 16,
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    listContainer: {
       paddingHorizontal: 16,
       gap: 16,
     },

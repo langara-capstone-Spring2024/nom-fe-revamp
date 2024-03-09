@@ -4,25 +4,27 @@ import { QUERY_KEYS } from "../../../config/query-keys";
 import { Merchant } from "../../../types";
 import { RatingService } from "../../RatingService";
 import { Rating } from "../../../types/Rating";
+import { MenuDiscountService } from "../../MenuDiscountService";
+import { MenuDiscount } from "../../../types/MenuDiscount";
 
-export const GetRatingsByMerchants = (merchants: Merchant[]) => {
-  const ratingService = new RatingService();
-  ratingService.cancelRequests();
+export const GetMenuDiscountsByMerchants = (merchants: Merchant[]) => {
+  const menuDiscountService = new MenuDiscountService();
+  menuDiscountService.cancelRequests();
 
   return useQueries<
     any,
     {
-      data: Rating[];
+      data: MenuDiscount[];
       isSuccess: boolean;
       isError: boolean;
     }[]
   >({
     queries: merchants.map((merchant) => ({
-      queryKey: [QUERY_KEYS.RATINGS, merchant._id],
+      queryKey: [QUERY_KEYS.MENU_DISCOUNTS, merchant._id],
       queryFn: async () => {
         try {
           const response: AxiosResponse =
-            await ratingService.getRatingsMerchant(merchant._id);
+            await menuDiscountService.getMenuDiscountsMerchant(merchant._id);
 
           return response.data;
         } catch (error) {
