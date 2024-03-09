@@ -1,5 +1,9 @@
+export { default as AccountTab } from "./AccountTab";
 export { default as CouponSelected } from "./CouponSelected";
 export { default as CouponUnselected } from "./CouponUnselected";
+export { default as HomeFilledTab } from "./HomeFilledTab";
+export { default as HomeOutlinedTab } from "./HomeOutlinedTab";
+export { default as OrdersTab } from "./OrdersTab";
 export { default as RestaurantDescriptionCoupon } from "./RestaurantDescriptionCoupon";
 export { default as RestaurantDescriptionCutlery } from "./RestaurantDescriptionCutlery";
 export { default as RestaurantDescriptionLocation } from "./RestaurantDescriptionLocation";
@@ -10,3 +14,4 @@ export { default as ScannerPermission } from "./ScannerPermission";
 export { default as ScannerRightBottom } from "./ScannerRightBottom";
 export { default as ScannerRightTop } from "./ScannerRightTop";
 export { default as ScannerSuccess } from "./ScannerSuccess";
+export { default as ScannerTab } from "./ScannerTab";

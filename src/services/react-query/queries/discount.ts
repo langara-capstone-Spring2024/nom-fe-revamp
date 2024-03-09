@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
 import { DiscountService } from "../../DiscountService";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { AxiosResponse } from "axios";
 import { Discounts, FormattedDiscount } from "../../../types/Discounts";
 import { RNQueryClient } from "../query-client";
 import NavigationService from "../../../navigation/NavigationService";
+import { Merchant } from "../../../types";
 
 export const GetAllActiveDiscount = () => {
   const discountService = new DiscountService();
@@ -86,6 +87,39 @@ export const GetAllActiveDiscount = () => {
         throw error;
       }
     },
+  });
+};
+
+export const GetActiveDiscounts = (merchants: Merchant[]) => {
+  const discountService = new DiscountService();
+  discountService.cancelRequests();
+
+  return useQueries<
+    any,
+    {
+      data: {
+        _id: string;
+        percentDiscount: number;
+        validFromTime: string;
+        validToTime: string;
+      }[];
+      isSuccess: boolean;
+      isError: boolean;
+    }[]
+  >({
+    queries: merchants.map((merchant) => ({
+      queryKey: [QUERY_KEYS.DISCOUNTS, merchant._id],
+      queryFn: async () => {
+        try {
+          const response: AxiosResponse =
+            await discountService.getActiveDiscounts(merchant._id);
+
+          return response.data;
+        } catch (error) {
+          return [];
+        }
+      },
+    })),
   });
 };
 

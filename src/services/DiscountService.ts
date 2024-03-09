@@ -15,6 +15,16 @@ export class DiscountService extends BaseService {
     }
   }
 
+  async getActiveDiscounts(merchantId: string) {
+    const response = await apiClient.get("api/active-discounts", {
+      params: {
+        merchantId: merchantId,
+      },
+    });
+
+    return response;
+  }
+
   async getDiscount(discountId: string) {
     try {
       const res = await apiClient.get(`api/discount/${discountId}`);

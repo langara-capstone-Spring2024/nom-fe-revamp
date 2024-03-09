@@ -16,6 +16,7 @@ import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
 import CouponCollection from "../collections/base/Coupon";
 import RestaurantDescriptionCollection from "../collections/base/RestaurantDescription";
+import MenuImagePickerCollection from "../collections/base/MenuImagePicker";
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
 import ItemListCollection from "../collections/base/ItemList";
@@ -64,6 +65,7 @@ const PrivateNavigator = () => {
     { func: CouponCarouselCollection, custom: false },
     { func: CouponCollection, custom: false },
     { func: RestaurantDescriptionCollection, custom: false },
+    { func: MenuImagePickerCollection, custom: false },
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
     { func: ItemListCollection, custom: false },
@@ -192,13 +194,6 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen
-          name="PrivateStack"
-          component={PrivateNavigator}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"

@@ -21,7 +21,7 @@ const CouponCarouselCollection = () => {
 
   return (
     <View style={styles.container}>
-      <CouponCarousel coupons={coupons} index={index} onSelect={handleSelect} />
+      <CouponCarousel coupons={coupons} onSelect={handleSelect} />
       <Text>
         Time : {coupons[index].time}, Amount : {coupons[index].amount}
       </Text>

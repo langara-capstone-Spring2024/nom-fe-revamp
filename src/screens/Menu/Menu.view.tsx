@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import createStyles from "./Menu.style";
 import MenuCard from "../../components/base/MenuCard";
 import ItemList from "../../components/base/ItemList";
@@ -11,6 +11,7 @@ import AdImagePicker from "../../components/base/AdImagePicker";
 import TextArea from "../../components/base/TextArea";
 import Typography from "../../components/base/Typography";
 import Button from "../../components/base/Button";
+import MenuImagePicker from "../../components/base/MenuImagePicker";
 
 const MenuView = (props: MenuGeneratedProps) => {
   const {
@@ -35,11 +36,12 @@ const MenuView = (props: MenuGeneratedProps) => {
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const isDisabled = !name || !price;
 
   return isAddingMenuItem ? (
-    <View style={styles.container}>
+    <View style={styles.addItemContainer}>
       <View style={styles.imagePicker}>
-        <AdImagePicker image={localImage} setImage={handleImageChange} />
+        <MenuImagePicker image={localImage} setImage={handleImageChange} />
       </View>
 
       <View style={styles.inputContainer}>
@@ -62,7 +64,9 @@ const MenuView = (props: MenuGeneratedProps) => {
             />
           </View>
           <View
-            style={priceError ? styles.errorPriceCurrency : styles.priceCurrency}
+            style={
+              priceError ? styles.errorPriceCurrency : styles.priceCurrency
+            }
           >
             <Typography variant="body" color="primary">
               CA$
@@ -84,6 +88,7 @@ const MenuView = (props: MenuGeneratedProps) => {
           text="Add Item"
           takeFullWidth
           onPress={onPressAddItem}
+          isDisabled={isDisabled}
         />
       </View>
     </View>
@@ -94,18 +99,20 @@ const MenuView = (props: MenuGeneratedProps) => {
         subtitle="Add or edit items"
         onPress={() => setIsAddingMenuItem(true)}
       />
-      <View style={styles.menuCardContainer}>
-        {menuItems &&
-          menuItems.map((item: Menus) => (
-            <MenuCard
-              key={item._id}
-              itemName={item.name}
-              originalPrice={item.originalPrice}
-              itemImage={item.imageUrl}
-              itemDescription={item.description}
-            />
-          ))}
-      </View>
+      <ScrollView>
+        <View style={styles.menuCardContainer}>
+          {menuItems && menuItems.length > 0 &&  
+            menuItems.map((item: Menus) => (
+              <MenuCard
+                key={item._id}
+                itemName={item.name}
+                originalPrice={item.originalPrice}
+                itemImage={item.imageUrl}
+                itemDescription={item.description}
+              />
+            ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
