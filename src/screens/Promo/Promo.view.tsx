@@ -25,10 +25,11 @@ const Promo = (props: PromoGeneratedProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const marked = useRef(getMarkedDates());
   console.log(marked);
-  const renderItem = useCallback(({ item }: any) => {
+  const renderItem = useCallback(({ item, section }: any) => {
     return (
       <AgendaItem
         item={item}
+        title={section.title}
         handlePress={handleAgendaPress}
         handleButtonPress={handleButtonPress}
       />

@@ -1,8 +1,7 @@
 export interface Discounts {
-  _id: string;
   label?: string;
   description?: string;
-  percentDiscount: { $numberDecimal: string };
+  percentDiscount: number;
   imageUrl?: string;
   validFromTime: string;
   validToTime: string;

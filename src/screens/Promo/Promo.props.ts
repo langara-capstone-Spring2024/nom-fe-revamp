@@ -7,7 +7,7 @@ export interface PromoGeneratedProps {
   getMarkedDates: () => MarkedDates;
   INITIAL_DATE: string;
   formattedDate: string;
-  handleAgendaPress: () => void;
+  handleAgendaPress: (item: any) => void;
   handleButtonPress: () => void;
   handleAddDiscount: () => void;
 }
