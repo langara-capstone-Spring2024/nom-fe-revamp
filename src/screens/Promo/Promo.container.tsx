@@ -3,19 +3,28 @@ import PromoView from "./Promo.view";
 import { useCallback, useState } from "react";
 import { GetAllActiveDiscount } from "../../services/react-query/queries/discount";
 import { Text, Alert } from "react-native";
+import NavigationService from "../../navigation/NavigationService";
+import { useStore } from "../../store";
 
 const Promo = () => {
   const currentDate = new Date();
   const INITIAL_DATE = currentDate.toISOString().split("T")[0];
+  const { dateValue, setDateValue } = useStore();
   const formattedDate = currentDate.toLocaleString("en-US", {
     weekday: "long",
     month: "long",
     day: "numeric",
   });
 
-  const handleAgendaPress = useCallback(() => {
-    Alert.alert("test");
-  }, []);
+  const handleAgendaPress = useCallback(
+    ({ item, title }: { item: any; title: string }) => {
+      const combinedData = { item, title };
+      useStore.setState({ selectedItem: combinedData });
+      useStore.setState({ accordionExpanded: true });
+      NavigationService.navigate("PromoDetails");
+    },
+    []
+  );
 
   const handleButtonPress = useCallback(() => {
     Alert.alert("Show me more");
@@ -72,14 +81,12 @@ const Promo = () => {
   if (activeDiscountsError) {
     console.error("Error fetching discounts:", activeDiscountsError);
   }
-  console.log(activeDiscounts);
 
   const getMarkedDates = () => {
     const marked: MarkedDates = {};
     if (activeDiscounts) {
       activeDiscounts.forEach((item: any) => {
         // NOTE: only mark dates with data
-        console.log("item: ", item);
         if (item.data && item.data.length > 0) {
           marked[item.title] = { marked: true };
         } else {
@@ -96,7 +103,10 @@ const Promo = () => {
   const dates = [fastDate, today].concat(futureDates);
 
   const handleAddDiscount = () => {
-    console.log("pressed");
+    useStore.setState({ selectedItem: null });
+    setDateValue(INITIAL_DATE);
+    NavigationService.navigate("PromoDetails");
+    console.log("INITIAL_DATE: ", INITIAL_DATE);
   };
 
   const generatedProps = {
