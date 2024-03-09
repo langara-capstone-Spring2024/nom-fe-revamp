@@ -7,6 +7,9 @@ export interface TextInputFieldProps extends TextInputProps {
   setValue: (text: string) => void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  sizing?: "sm" | "md" | "lg";
+  bgColor?: string;
+  noborder?: boolean;
   rounded?: boolean;
   secured?: boolean;
   error?: string;

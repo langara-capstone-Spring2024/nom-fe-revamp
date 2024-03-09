@@ -75,7 +75,7 @@ const RestaurantCard = (props: RestaurantCardProps) => {
         </View>
       </View>
       {coupons && coupons.length !== 0 && (
-        <CouponCarousel coupons={coupons} onSelect={() => null} />
+        <CouponCarousel coupons={coupons} onSelect={() => null} unselectable />
       )}
     </Card>
   );

@@ -8,7 +8,9 @@ const createStyles = (theme: Theme) =>
       backgroundColor: t.Surface.default,
     },
     serchContainer: {
+      paddingVertical: 16,
       paddingHorizontal: 16,
+      backgroundColor: t.Surface.default,
     },
     titleContainer: {
       paddingHorizontal: 16,

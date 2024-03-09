@@ -7,7 +7,7 @@ import Coupon from "../Coupon/Coupon.view";
 import { Pressable } from "react-native";
 
 const CouponCarousel = (props: CouponCarouselProps) => {
-  const { coupons, onSelect } = props;
+  const { coupons, onSelect, unselectable } = props;
 
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -30,7 +30,7 @@ const CouponCarousel = (props: CouponCarouselProps) => {
           <Coupon
             time={coupon.time}
             amount={coupon.amount}
-            isSelected={itemIndex === index ? true : false}
+            isSelected={!unselectable && itemIndex === index ? true : false}
           />
         </Pressable>
       ))}
