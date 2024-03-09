@@ -1,6 +1,7 @@
 export interface AgendaItemProps {
   item: ItemType;
-  handlePress?: () => void;
+  title: Date;
+  handlePress?: (item: any) => void;
   handleButtonPress: () => void;
 }
 

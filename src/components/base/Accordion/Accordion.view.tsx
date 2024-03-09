@@ -10,11 +10,20 @@ import { theme as t } from "./../../../utils/Theme";
 const Accordion = (props: AccordionProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const { title, children, hasLeftItem, leftItem, hasRightItem, rightItem } =
-    props;
+  const {
+    title,
+    children,
+    hasLeftItem,
+    leftItem,
+    hasRightItem,
+    rightItem,
+    expanded: initialState,
+  } = props;
 
-  const [expanded, setExpanded] = React.useState(false);
-  const [visibleChildren, setVisibleChildren] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(initialState || false);
+  const [visibleChildren, setVisibleChildren] = React.useState(
+    expanded || false
+  );
 
   const handlePress = () => {
     setVisibleChildren(!visibleChildren);
@@ -38,13 +47,13 @@ const Accordion = (props: AccordionProps) => {
             {hasRightItem && rightItem}
             {expanded ? (
               <Entypo
-                name="chevron-small-down"
+                name="chevron-small-up"
                 size={24}
                 color={t.Content.inactive}
               />
             ) : (
               <Entypo
-                name="chevron-small-up"
+                name="chevron-small-down"
                 size={24}
                 color={t.Content.inactive}
               />
