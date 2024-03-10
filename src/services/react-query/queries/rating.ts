@@ -39,7 +39,7 @@ export const GetRatingsByMerchant = (merchantId: string) => {
   ratingService.cancelRequests();
 
   return useQuery<Rating[]>({
-    queryKey: [QUERY_KEYS.MENUS],
+    queryKey: [QUERY_KEYS.RATINGS, merchantId],
     queryFn: async () => {
       try {
         const response = await ratingService.getRatings(merchantId);

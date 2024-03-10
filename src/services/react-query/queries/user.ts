@@ -27,7 +27,7 @@ export const GetMerchant = (merchantId: string) => {
   userService.cancelRequests();
 
   return useQuery<Merchant>({
-    queryKey: [QUERY_KEYS.MERCHANT],
+    queryKey: [QUERY_KEYS.MERCHANT, merchantId],
     enabled: merchantId !== undefined,
     queryFn: async () => {
       try {
