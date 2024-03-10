@@ -11,9 +11,10 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import AdTemplateThreeCollection from '../collections/base/AdTemplateThree'
-import AdTemplateOneCollection from '../collections/base/AdTemplateOne'
+import AdTemplateThreeCollection from "../collections/base/AdTemplateThree";
+import AdTemplateOneCollection from "../collections/base/AdTemplateOne";
 import AdTemplateTwoCollection from "../collections/base/AdTemplateTwo";
+import MenuListCollection from "../collections/base/MenuList";
 import DishCardCollection from "../collections/base/DishCard";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
@@ -64,10 +65,11 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: AdTemplateThreeCollection, custom: false},
-{func: AdTemplateOneCollection, custom: false},
+    { func: AdTemplateThreeCollection, custom: false },
+    { func: AdTemplateOneCollection, custom: false },
     { func: SVGCollection, customName: "", custom: false },
     { func: AdTemplateTwoCollection, custom: false },
+    { func: MenuListCollection, custom: false },
     { func: DishCardCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
@@ -201,14 +203,7 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name="PrivateStack"
-          component={PrivateNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"
             component={PrivateNavigator}
@@ -224,7 +219,7 @@ const App = () => {
               headerShown: false,
             }}
           />
-        )} */}
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

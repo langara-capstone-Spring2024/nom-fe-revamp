@@ -12,7 +12,10 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'AdTemplateThree', onPress: () => NavigationService.navigate('AdTemplateThreeCollection')},
+    {
+      name: "AdTemplateThree",
+      onPress: () => NavigationService.navigate("AdTemplateThreeCollection"),
+    },
     {
       name: "AdTemplateOne",
       onPress: () => NavigationService.navigate("AdTemplateOneCollection"),
@@ -24,6 +27,10 @@ const Stories = () => {
     {
       name: "AdTemplateTwo",
       onPress: () => NavigationService.navigate("AdTemplateTwoCollection"),
+    },
+    {
+      name: "MenuList",
+      onPress: () => NavigationService.navigate("MenuListCollection"),
     },
     {
       name: "MenuImagePicker",
