@@ -22,6 +22,27 @@ export const GetMerchants = () => {
   });
 };
 
+export const GetMerchant = (merchantId: string) => {
+  const userService = new UserService();
+  userService.cancelRequests();
+
+  return useQuery<Merchant>({
+    queryKey: [QUERY_KEYS.MERCHANT],
+    enabled: merchantId !== undefined,
+    queryFn: async () => {
+      try {
+        const response: AxiosResponse = await userService.getMerchant(
+          merchantId
+        );
+
+        return response.data;
+      } catch (error) {
+        return null;
+      }
+    },
+  });
+};
+
 export const AddImage = () => {
   const userService = new UserService();
   userService.cancelRequests();

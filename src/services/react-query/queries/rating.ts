@@ -1,4 +1,4 @@
-import { useQueries } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { Merchant } from "../../../types";
@@ -31,5 +31,22 @@ export const GetRatings = (merchants: Merchant[]) => {
         }
       },
     })),
+  });
+};
+
+export const GetRatingsByMerchant = (merchantId: string) => {
+  const ratingService = new RatingService();
+  ratingService.cancelRequests();
+
+  return useQuery<Rating[]>({
+    queryKey: [QUERY_KEYS.MENUS],
+    queryFn: async () => {
+      try {
+        const response = await ratingService.getRatings(merchantId);
+        return response.data;
+      } catch (error) {
+        return null;
+      }
+    },
   });
 };

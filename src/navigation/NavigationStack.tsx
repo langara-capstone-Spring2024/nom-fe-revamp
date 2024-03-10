@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import RestaurantDetailCollection from "../collections/base/RestaurantDetail";
 import DishCardCollection from "../collections/base/DishCard";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
@@ -52,6 +53,7 @@ import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
 import PromoDetails from "../screens/PromoDetails";
+import RestaurantProfile from "../screens/RestaurantProfile";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -60,6 +62,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: RestaurantDetailCollection, custom: false },
     { func: DishCardCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
@@ -102,6 +105,7 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
+    { func: RestaurantProfile, customName: "RestaurantProfile", custom: false },
   ];
   const {
     isAdScreen,

@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Merchant {
   _id: string;
   name: string;
@@ -18,7 +20,5 @@ export interface Merchant {
   openings: Date[];
   closings: Date[];
   isVerified: boolean;
-  user: {
-    email: string;
-  };
+  user: User;
 }
