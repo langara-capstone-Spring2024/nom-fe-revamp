@@ -113,7 +113,7 @@ export const GetActiveDiscountsByMerchants = (merchants: Merchant[]) => {
           const response: AxiosResponse =
             await discountService.getActiveDiscountsByMerchant(merchant._id);
 
-          return response.data.data;
+          return response.data;
         } catch (error) {
           return [];
         }
