@@ -6,8 +6,8 @@ const createStyles = (theme: Theme) =>
   StyleSheet.create({
     map: {
       width: "100%",
-      borderRadius: 16,
-      aspectRatio: 1.5,
+      height: "100%",
+      borderRadius: 24,
     },
     home: {
       position: "absolute",
