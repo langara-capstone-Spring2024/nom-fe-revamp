@@ -11,7 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import AdTemplateCollection from "../collections/base/AdTemplate";
+import AdTemplateTwoCollection from "../collections/base/AdTemplateTwo";
 import DishCardCollection from "../collections/base/DishCard";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
@@ -63,7 +63,7 @@ const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: SVGCollection, customName: "", custom: false },
-    { func: AdTemplateCollection, custom: false },
+    { func: AdTemplateTwoCollection, custom: false },
     { func: DishCardCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
@@ -197,7 +197,14 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {isLoggedIn ? (
+        <Stack.Screen
+          name="PrivateStack"
+          component={PrivateNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"
             component={PrivateNavigator}
@@ -213,7 +220,7 @@ const App = () => {
               headerShown: false,
             }}
           />
-        )}
+        )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

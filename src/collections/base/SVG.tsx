@@ -6,13 +6,18 @@ import {
   TempThreePrimary,
   TempThreeAccent,
 } from "../../components/base/SVG";
+import { View, useWindowDimensions } from "react-native";
 
 const SVGCollection = () => {
   const [fill, setFill] = useState("#FFBF41");
   return (
     <ScrollView>
-      <TempTwoPrimary width={216} height={200} fill={fill} />
-      <TempTwoAccent width={380} height={184} fill={fill} />
+      <View style={{ width: 108, height: 100 }}>
+        <TempTwoPrimary fill={fill} />
+      </View>
+      <View style={{width: 360, height: 164}}>
+        <TempTwoAccent  fill={fill} />
+      </View>
       <TempThreePrimary width={400} height={200} fill={fill} />
       <TempThreeAccent width={400} height={200} fill={fill} />
     </ScrollView>

@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import AdTemplate from "../../components/base/AdTemplate";
+import AdTemplateTwo from "../../components/base/AdTemplateTwo";
 import { TempTwoPrimary } from "../../components/base/SVG";
 import { ScrollView } from "react-native-gesture-handler";
 
-const AdTemplateCollection = () => {
+const AdTemplateTwoCollection = () => {
   const aspectRatio = 16 / 9;
 
   const imageUrl = `https://picsum.photos/${Math.round(
@@ -14,7 +14,8 @@ const AdTemplateCollection = () => {
   return (
     <ScrollView>
       <View>
-        <AdTemplate
+        <AdTemplateTwo
+        //@ts-ignore
           uri={imageUrl}
           headline="Up to 50% off!"
           tagline="Lorem ipsum dolor sit amet est officiis."
@@ -27,6 +28,6 @@ const AdTemplateCollection = () => {
   );
 };
 
-export default AdTemplateCollection;
+export default AdTemplateTwoCollection;
 
 const styles = StyleSheet.create({});

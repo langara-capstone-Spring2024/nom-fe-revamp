@@ -1,6 +1,6 @@
 import { Image } from "../../../types";
 
-export interface AdTemplateProps {
+export interface AdTemplateTwoProps {
   image?: Image;
   headline: string;
   tagline: string;

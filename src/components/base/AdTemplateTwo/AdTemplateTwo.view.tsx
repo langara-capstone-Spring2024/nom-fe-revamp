@@ -1,13 +1,14 @@
 import { View, Text, Image } from "react-native";
-import { AdTemplateProps } from "./AdTemplate.props";
-import createStyles from "./AdTemplate.style";
+import { AdTemplateTwoProps } from "./AdTemplateTwo.props";
+import createStyles from "./AdTemplateTwo.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
 import Typography from "../Typography";
 import { TempTwoAccent, TempTwoPrimary } from "../SVG";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useWindowDimensions } from "react-native";
 
-const AdTemplate = (props: AdTemplateProps) => {
+const AdTemplate = (props: AdTemplateTwoProps) => {
   const {
     image,
     headline,
@@ -20,6 +21,7 @@ const AdTemplate = (props: AdTemplateProps) => {
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const windowWidth = useWindowDimensions().width;
 
   return (
     <>
@@ -38,40 +40,42 @@ const AdTemplate = (props: AdTemplateProps) => {
         </>
       )}
       <Image source={{ uri }} style={styles.image} /> */}
-        <TouchableOpacity onPress={() => console.log('pressed')}>
+        <TouchableOpacity
+          onPress={() => console.log("pressed")}
+          style={{ position: "relative" }}>
           {image && (
             <Image
               source={{ uri: image.uri }}
               style={[
                 styles.image,
-                { height: 200, width: 350, marginLeft: -40 },
+                { height: 180, width: 350, marginLeft: -40 },
               ]}
             />
           )}
-        </TouchableOpacity>
-        <View
-          style={[styles.overlay, { position: "absolute", top: 0, right: 0 }]}>
-          <TempTwoPrimary width={216} height={200} fill={primary} />
-          <Typography variant="title4" otherStyle={styles.tempTwoHeadline}>
-            {headline}
-          </Typography>
-          <Typography variant="bodyXs" otherStyle={styles.tempTwoTagline}>
-            {tagline}
-          </Typography>
-        </View>
-        <View
-          style={[
-            styles.overlay,
-            {
+          <View
+            style={{
+              width: 196,
+              height: 180,
               position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: [{ translateX: -190 }, { translateY: -92 }],
+              right: 0,
+              zIndex: 1,
+            }}>
+            <TempTwoPrimary fill={primary} />
+          </View>
+          <View
+            style={{
+              width: 340,
+              height: 164,
+              position: "absolute",
+              top:8,
+              marginLeft: -36,
               zIndex: 2,
-            },
-          ]}>
-          <TempTwoAccent width={310} height={184} fill={secondary} />
-        </View>
+            }}>
+            <TempTwoAccent fill={secondary} />
+          </View>
+          <Typography variant="title4" otherStyle={styles.tempTwoHeadline}>{headline}</Typography>
+          <Typography variant="bodyXs" otherStyle={styles.tempTwoTagline}>{tagline}</Typography>
+        </TouchableOpacity>
       </View>
     </>
   );

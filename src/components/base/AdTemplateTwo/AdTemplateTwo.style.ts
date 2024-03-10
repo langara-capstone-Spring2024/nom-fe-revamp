@@ -18,9 +18,9 @@ const createStyles = (theme: Theme) =>
       // borderColor: t.Surface["brand-medium"],
     },
     overlay: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
+      // flex: 1,
+      // justifyContent: "center",
+      // alignItems: "center",
       zIndex: 1, // Adjust the zIndex as needed
     },
     tempOnePrimary: {
@@ -70,8 +70,8 @@ const createStyles = (theme: Theme) =>
     },
     tempTwoHeadline: {
       position: "absolute",
-      top: "25%",
-      right: "13%",
+      top: "21%",
+      right: "8%",
       zIndex: 3,
       width: 130,
       height: 48,
@@ -82,7 +82,7 @@ const createStyles = (theme: Theme) =>
     tempTwoTagline: {
       position: "absolute",
       top: "50%",
-      right: "13%",
+      right: "8%",
       zIndex: 3,
       width: 130,
       color: "#3C3C3C",

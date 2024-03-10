@@ -17,8 +17,8 @@ const Stories = () => {
       onPress: () => NavigationService.navigate("SVGCollection"),
     },
     {
-      name: "AdTemplate",
-      onPress: () => NavigationService.navigate("AdTemplateCollection"),
+      name: "AdTemplateTwoCollection",
+      onPress: () => NavigationService.navigate("AdTemplateTwoCollection"),
     },
     {
       name: "MenuImagePicker",
