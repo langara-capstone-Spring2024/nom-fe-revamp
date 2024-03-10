@@ -10,9 +10,10 @@ const createStyles = (theme: Theme) =>
       justifyContent: "space-between",
       alignItems: "center",
       // paddingHorizontal: 20,
-      paddingVertical: 10,
+      // paddingVertical: 10,
       backgroundColor: "#fff",
       borderTopWidth: 1,
+      padding: 16,
       borderColor: t.Border["default"],
     },
 

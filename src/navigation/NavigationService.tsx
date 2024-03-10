@@ -5,10 +5,12 @@ type Collections = {
   // PLOP_COMPONENT_TYPE
   SVGCollection: undefined;
   AdTemplateCollection: undefined;
+  DishCardCollection: undefined;
   RestaurantCardCollection: undefined;
   CouponCarouselCollection: undefined;
   CouponCollection: undefined;
   RestaurantDescriptionCollection: undefined;
+  MenuImagePickerCollection: undefined;
   ChipsCollection: undefined;
   WheelPickerCollection: undefined;
   ItemListCollection: undefined;
@@ -47,12 +49,15 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
+  PromoDetails: undefined;
+  MerchantAccount: undefined;
+  ConsumerAccount: undefined;
+  MerchantHome: undefined;
+  Orders: undefined;
+  ConsumerHome: undefined;
   Menu: undefined;
   Promo: undefined;
   Scanner: undefined;
-  Activity: undefined;
-  Account: undefined;
-  Home: undefined;
   AdMaker: undefined;
   TestScreen: undefined;
   Stories: undefined;

@@ -9,12 +9,15 @@ import CouponIcon from "../../../../assets/red_coupon.png";
 import { theme as t } from "../../../utils/Theme";
 
 const AgendaItem = (props: AgendaItemProps) => {
-  const { item } = props;
+  const { item, title, handlePress, handleButtonPress } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
-    <TouchableOpacity style={styles.wrapper}>
+    <TouchableOpacity
+      style={styles.wrapper}
+      onPress={() => handlePress && handlePress({ item, title: title })}
+    >
       <View style={styles.date}>
         <Typography otherStyle={styles.itemHourText}>
           {item.startTime}
@@ -38,12 +41,15 @@ const AgendaItem = (props: AgendaItemProps) => {
             </View>
           )}
           {item.discountCount && (
-            <View style={[styles.flex, styles.discount]}>
-              <Image source={CouponIcon} />
-              <Typography variant="bodySm" color="subtle">
-                {item.discountCount} Total
-              </Typography>
-            </View>
+            <>
+              <View style={[styles.flex, styles.discount]}>
+                <Image source={CouponIcon} />
+                <Typography variant="bodySm" color="subtle">
+                  {item.discountCount} Total
+                </Typography>
+              </View>
+              <Button title={"Info"} onPress={handleButtonPress} />
+            </>
           )}
         </View>
       </View>

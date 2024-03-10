@@ -21,6 +21,14 @@ const Stories = () => {
       onPress: () => NavigationService.navigate("AdTemplateCollection"),
     },
     {
+      name: "MenuImagePicker",
+      onPress: () => NavigationService.navigate("MenuImagePickerCollection"),
+    },
+    {
+      name: "DishCard",
+      onPress: () => NavigationService.navigate("DishCardCollection"),
+    },
+    {
       name: "RestaurantCard",
       onPress: () => NavigationService.navigate("RestaurantCardCollection"),
     },

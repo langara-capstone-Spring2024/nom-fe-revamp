@@ -12,10 +12,12 @@ import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
 import AdTemplateCollection from "../collections/base/AdTemplate";
+import DishCardCollection from "../collections/base/DishCard";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
 import CouponCollection from "../collections/base/Coupon";
 import RestaurantDescriptionCollection from "../collections/base/RestaurantDescription";
+import MenuImagePickerCollection from "../collections/base/MenuImagePicker";
 import ChipsCollection from "../collections/base/Chips";
 import WheelPickerCollection from "../collections/base/WheelPicker";
 import ItemListCollection from "../collections/base/ItemList";
@@ -51,6 +53,7 @@ import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
+import PromoDetails from "../screens/PromoDetails";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -61,10 +64,12 @@ const PrivateNavigator = () => {
     // PLOP_INJECT_NAVIGATOR_SCREEN
     { func: SVGCollection, customName: "", custom: false },
     { func: AdTemplateCollection, custom: false },
+    { func: DishCardCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
     { func: CouponCollection, custom: false },
     { func: RestaurantDescriptionCollection, custom: false },
+    { func: MenuImagePickerCollection, custom: false },
     { func: ChipsCollection, custom: false },
     { func: WheelPickerCollection, custom: false },
     { func: ItemListCollection, custom: false },
@@ -100,6 +105,7 @@ const PrivateNavigator = () => {
     { func: Promo, customName: "Promo", custom: false },
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
+    { func: PromoDetails, customName: "Promo Details", custom: false },
   ];
   const {
     isAdScreen,
@@ -191,14 +197,7 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name="PrivateStack"
-          component={PrivateNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"
             component={PrivateNavigator}
@@ -214,7 +213,7 @@ const App = () => {
               headerShown: false,
             }}
           />
-        )} */}
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

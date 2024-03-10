@@ -24,6 +24,7 @@ export interface Theme {
     "info-strong": string;
     "info-medium": string;
     "info-dark": string;
+    "elevation-raised": string;
   };
   Surface: {
     sunken: string;

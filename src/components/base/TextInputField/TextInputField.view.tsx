@@ -13,6 +13,9 @@ const TextInputField = (props: TextInputFieldProps) => {
     setValue,
     leftIcon,
     rightIcon,
+    sizing = "md",
+    bgColor = "white",
+    noborder,
     rounded,
     secured,
     error,
@@ -34,8 +37,18 @@ const TextInputField = (props: TextInputFieldProps) => {
       <View
         style={[
           styles.textInputFieldContainer,
-          { borderRadius: rounded ? 24 : 8 },
-        ]}>
+          {
+            backgroundColor: bgColor,
+            borderRadius: rounded ? 32 : 8,
+          },
+          noborder && { borderWidth: undefined, borderColor: undefined },
+          sizing === "sm"
+            ? { paddingVertical: 4, paddingHorizontal: 16 }
+            : sizing === "lg"
+            ? { paddingVertical: 16, paddingHorizontal: 16 }
+            : { paddingVertical: 8, paddingHorizontal: 16 },
+        ]}
+      >
         {leftIcon && (
           <Text style={{ marginRight: 8, color: "black" }}>{leftIcon}</Text>
         )}
@@ -61,7 +74,8 @@ const TextInputField = (props: TextInputFieldProps) => {
         {secured && (
           <Pressable
             onPress={() => setIsVisible((oldValue) => !oldValue)}
-            style={{ marginLeft: 8 }}>
+            style={{ marginLeft: 8 }}
+          >
             {isVisible ? (
               <Ionicons name="eye" size={18} style={{ color: "black" }} />
             ) : (
@@ -75,7 +89,11 @@ const TextInputField = (props: TextInputFieldProps) => {
           </Pressable>
         )}
       </View>
-      {error && <Typography variant="bodyXs" color="error-medium">{error}</Typography>}
+      {error && (
+        <Typography variant="bodyXs" color="error-medium">
+          {error}
+        </Typography>
+      )}
     </View>
   );
 };

@@ -7,4 +7,5 @@ export interface AccordionProps {
   leftItem?: ReactNode;
   hasRightItem?: boolean;
   rightItem?: ReactNode;
+  expanded?: boolean;
 }
