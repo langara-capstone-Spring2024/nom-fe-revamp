@@ -27,11 +27,16 @@ const DishCard = (props: DishCardProps) => {
       <View style={styles.imageContainer}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
       </View>
-      <View style={styles.contentContainer}>
+      <View
+        style={[
+          styles.contentContainer,
+          { borderBottomWidth: bordered ? 1 : undefined },
+        ]}
+      >
         <Typography>{dishName}</Typography>
         <View style={{ flexDirection: "row", gap: 4 }}>
           <Typography variant="bodySm" color="subtle">
-            {rating}
+            {rating.toFixed(1)}
           </Typography>
           <Rating
             type="custom"
@@ -51,12 +56,16 @@ const DishCard = (props: DishCardProps) => {
           </Typography>
         </View>
         <View style={{ flexDirection: "row", gap: 4 }}>
-          <Typography variant="bodySm" color="subtle">
-            {distance}
-          </Typography>
-          <Typography variant="bodySm" color="subtle">
-            ・
-          </Typography>
+          {distance && (
+            <>
+              <Typography variant="bodySm" color="subtle">
+                {distance}
+              </Typography>
+              <Typography variant="bodySm" color="subtle">
+                ・
+              </Typography>
+            </>
+          )}
           <Typography variant="bodySm" color="subtle">
             {cityName}
           </Typography>

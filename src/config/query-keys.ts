@@ -3,6 +3,7 @@ const QUERY_KEYS = {
   MERCHANTS: "Merchants",
   RATINGS: "Ratings",
   DISCOUNTS: "Discounts",
+  MENU_DISCOUNTS: "MenuDiscounts",
   IMAGES: "Images",
   AUTH: "Auth",
   STRIPE_PAYMENT: "STRIPE_PAYMENT",

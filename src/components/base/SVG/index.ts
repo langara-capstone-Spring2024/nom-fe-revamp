@@ -1,4 +1,5 @@
 export { default as AccountTab } from "./AccountTab";
+export { default as ArrowRight } from "./ArrowRight";
 export { default as CouponSelected } from "./CouponSelected";
 export { default as CouponUnselected } from "./CouponUnselected";
 export { default as HomeFilledTab } from "./HomeFilledTab";
