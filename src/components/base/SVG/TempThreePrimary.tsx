@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Svg, Rect, Path, Defs, Mask } from "react-native-svg";
 import { SVGProps } from "./SVG.props";
 
-const TempThreePrimary = ({ width, height, fill, ...rest }: SVGProps): JSX.Element => {
+const TempThreePrimary = ({ fill }: SVGProps): JSX.Element => {
   return (
-    <Svg width={width} height={height}>
+    <Svg viewBox="0 0 400 200" fill="none">
       <Path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M400 0H0V200H400V0ZM294.851 178C338.503 178 369.964 170.756 369.964 127.235C369.964 124.808 369.973 122.324 369.982 119.798C370.131 77.0229 370.324 22 329.107 22C285.455 22 206 48.3171 206 91.8374C206 135.358 251.199 178 294.851 178Z"
         fill={fill}
-        fillRule="evenodd"
-        d="M400 0H0v200h400V0ZM294.851 178c43.652 0 75.113-7.244 75.113-50.765 0-2.427.009-4.911.018-7.437.149-42.775.342-97.798-40.875-97.798C285.455 22 206 48.317 206 91.837 206 135.358 251.199 178 294.851 178Z"
-        clipRule="evenodd"
       />
     </Svg>
   );

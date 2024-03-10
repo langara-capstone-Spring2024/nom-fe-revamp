@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import AdTemplateThreeCollection from '../collections/base/AdTemplateThree'
 import AdTemplateOneCollection from '../collections/base/AdTemplateOne'
 import AdTemplateTwoCollection from "../collections/base/AdTemplateTwo";
 import DishCardCollection from "../collections/base/DishCard";
@@ -63,6 +64,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+{func: AdTemplateThreeCollection, custom: false},
 {func: AdTemplateOneCollection, custom: false},
     { func: SVGCollection, customName: "", custom: false },
     { func: AdTemplateTwoCollection, custom: false },
