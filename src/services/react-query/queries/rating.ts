@@ -24,7 +24,7 @@ export const GetRatingsByMerchants = (merchants: Merchant[]) => {
           const response: AxiosResponse =
             await ratingService.getRatingsMerchant(merchant._id);
 
-          return response.data;
+          return response.data.data;
         } catch (error) {
           return [];
         }

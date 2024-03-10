@@ -15,7 +15,7 @@ export const GetMerchants = (keyword: string) => {
     queryFn: async () => {
       try {
         const response: AxiosResponse = await userService.getMerchants(keyword);
-        return response.data;
+        return response.data.data;
       } catch (error) {
         return [];
       }

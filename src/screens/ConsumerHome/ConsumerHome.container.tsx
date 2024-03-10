@@ -4,8 +4,11 @@ import ConsumerHomeView from "./ConsumerHome.view";
 import { GetRatingsByMerchants } from "../../services/react-query/queries/rating";
 import { GetActiveDiscountsByMerchants } from "../../services/react-query/queries/discount";
 import { GetMenuDiscountsByMerchants } from "../../services/react-query/queries/menuDiscount";
+import { useNavigation } from "@react-navigation/native";
 
 const ConsumerHome = () => {
+  const navigation = useNavigation();
+
   const [isRatingsReady, setIsRatingsReady] = useState<boolean>(false);
   const [isDiscountsReady, setIsDiscountsReady] = useState<boolean>(false);
   const [isMenuDiscountsReady, setIsMenuDiscountsReady] =
@@ -30,6 +33,16 @@ const ConsumerHome = () => {
       setIsRefrshing(false);
     }, 1000);
   };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+
+    return () => {
+      navigation.setOptions({ headerShown: undefined });
+    };
+  }, []);
 
   useEffect(() => {
     setIsRatingsReady(false);

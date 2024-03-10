@@ -26,7 +26,7 @@ export const GetMenuDiscountsByMerchants = (merchants: Merchant[]) => {
           const response: AxiosResponse =
             await menuDiscountService.getMenuDiscountsMerchant(merchant._id);
 
-          return response.data;
+          return response.data.data;
         } catch (error) {
           return [];
         }
