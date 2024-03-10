@@ -4,6 +4,7 @@ import createStyles from "./AdTemplateOne.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
 import { TempOnePrimary, TempOneAccent } from "../SVG";
+import Typography from "../Typography";
 
 const AdTemplateOne = (props: AdTemplateOneProps) => {
   const {
@@ -52,6 +53,12 @@ const AdTemplateOne = (props: AdTemplateOneProps) => {
           }}>
           <TempOneAccent fill={secondary} />
         </View>
+        <Typography variant="title4" otherStyle={styles.headline}>
+            {headline}
+          </Typography>
+          <Typography variant="bodyXs" otherStyle={styles.tagline}>
+            {tagline}
+          </Typography>
       </TouchableOpacity>
     </View>
   );

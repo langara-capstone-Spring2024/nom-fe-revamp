@@ -151,7 +151,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               tagline="Lorem ipsum dolor sit amet est officiis."
               variant={2}
               primary="#FFBF41"
-              secondary={""}
+              secondary="#3C3C3C"
             />
             <AdTemplateTwo
               image={localImage}

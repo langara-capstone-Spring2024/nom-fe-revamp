@@ -76,8 +76,8 @@ const createStyles = (theme: Theme) =>
       width: 130,
       height: 48,
       fontFamily: "PublicSansBold",
-      textAlign: "right",
       color: "#3C3C3C",
+      textAlign: "right",
     },
     tempTwoTagline: {
       position: "absolute",
