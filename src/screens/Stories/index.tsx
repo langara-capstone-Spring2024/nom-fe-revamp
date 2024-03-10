@@ -12,7 +12,26 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
-{name: 'MenuList', onPress: () => NavigationService.navigate('MenuListCollection')},
+    {
+      name: "AdTemplateThree",
+      onPress: () => NavigationService.navigate("AdTemplateThreeCollection"),
+    },
+    {
+      name: "AdTemplateOne",
+      onPress: () => NavigationService.navigate("AdTemplateOneCollection"),
+    },
+    {
+      name: "SVG",
+      onPress: () => NavigationService.navigate("SVGCollection"),
+    },
+    {
+      name: "AdTemplateTwo",
+      onPress: () => NavigationService.navigate("AdTemplateTwoCollection"),
+    },
+    {
+      name: "MenuList",
+      onPress: () => NavigationService.navigate("MenuListCollection"),
+    },
     {
       name: "MenuImagePicker",
       onPress: () => NavigationService.navigate("MenuImagePickerCollection"),

@@ -11,7 +11,10 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import MenuListCollection from '../collections/base/MenuList'
+import AdTemplateThreeCollection from "../collections/base/AdTemplateThree";
+import AdTemplateOneCollection from "../collections/base/AdTemplateOne";
+import AdTemplateTwoCollection from "../collections/base/AdTemplateTwo";
+import MenuListCollection from "../collections/base/MenuList";
 import DishCardCollection from "../collections/base/DishCard";
 import RestaurantCardCollection from "../collections/base/RestaurantCard";
 import CouponCarouselCollection from "../collections/base/CouponCarousel";
@@ -52,6 +55,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMaker from "../screens/AdMaker";
 import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
+import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
 
 const Stack = createStackNavigator();
@@ -61,7 +65,11 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: MenuListCollection, custom: false},
+    { func: AdTemplateThreeCollection, custom: false },
+    { func: AdTemplateOneCollection, custom: false },
+    { func: SVGCollection, customName: "", custom: false },
+    { func: AdTemplateTwoCollection, custom: false },
+    { func: MenuListCollection, custom: false },
     { func: DishCardCollection, custom: false },
     { func: RestaurantCardCollection, custom: false },
     { func: CouponCarouselCollection, custom: false },
@@ -158,8 +166,7 @@ const PrivateNavigator = () => {
                       navigation.goBack();
                     }
                   }}
-                  style={{ paddingLeft: 16, margin: 8 }}
-                >
+                  style={{ paddingLeft: 16, margin: 8 }}>
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),
