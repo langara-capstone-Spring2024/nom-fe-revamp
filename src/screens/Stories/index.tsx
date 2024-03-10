@@ -13,11 +13,15 @@ const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
     {
+      name: "AdTemplateOne",
+      onPress: () => NavigationService.navigate("AdTemplateOneCollection"),
+    },
+    {
       name: "SVG",
       onPress: () => NavigationService.navigate("SVGCollection"),
     },
     {
-      name: "AdTemplateTwoCollection",
+      name: "AdTemplateTwo",
       onPress: () => NavigationService.navigate("AdTemplateTwoCollection"),
     },
     {

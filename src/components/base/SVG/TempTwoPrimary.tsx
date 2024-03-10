@@ -4,7 +4,7 @@ import { SVGProps } from "./SVG.props";
 import { View } from "react-native";
 import { useWindowDimensions } from "react-native";
 
-const TempTwoPrimary = ({ width, fill }: SVGProps): JSX.Element => {
+const TempTwoPrimary = ({ fill }: SVGProps): JSX.Element => {
   const originalWidth = 216;
   const originalHeight = 200;
 

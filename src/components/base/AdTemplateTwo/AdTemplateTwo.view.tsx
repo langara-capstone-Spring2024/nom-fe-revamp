@@ -8,7 +8,7 @@ import { TempTwoAccent, TempTwoPrimary } from "../SVG";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useWindowDimensions } from "react-native";
 
-const AdTemplate = (props: AdTemplateTwoProps) => {
+const AdTemplateOne = (props: AdTemplateTwoProps) => {
   const {
     image,
     headline,
@@ -26,20 +26,6 @@ const AdTemplate = (props: AdTemplateTwoProps) => {
   return (
     <>
       <View style={styles.container}>
-        {/* {variant === 1 && (
-        <>
-          <View style={styles.tempOneAccent} />
-          <View style={styles.tempOnePrimary} />
-          <View style={styles.tempOnePrimaryRec} />
-          <Typography variant="title4" otherStyle={styles.tempOneHeadline}>
-            {headline}
-          </Typography>
-          <Typography variant="bodyXs" otherStyle={styles.tempOneTagline}>
-            {tagline}
-          </Typography>
-        </>
-      )}
-      <Image source={{ uri }} style={styles.image} /> */}
         <TouchableOpacity
           onPress={() => console.log("pressed")}
           style={{ position: "relative" }}>
@@ -67,18 +53,22 @@ const AdTemplate = (props: AdTemplateTwoProps) => {
               width: 340,
               height: 164,
               position: "absolute",
-              top:8,
+              top: 8,
               marginLeft: -36,
               zIndex: 2,
             }}>
             <TempTwoAccent fill={secondary} />
           </View>
-          <Typography variant="title4" otherStyle={styles.tempTwoHeadline}>{headline}</Typography>
-          <Typography variant="bodyXs" otherStyle={styles.tempTwoTagline}>{tagline}</Typography>
+          <Typography variant="title4" otherStyle={styles.tempTwoHeadline}>
+            {headline}
+          </Typography>
+          <Typography variant="bodyXs" otherStyle={styles.tempTwoTagline}>
+            {tagline}
+          </Typography>
         </TouchableOpacity>
       </View>
     </>
   );
 };
 
-export default AdTemplate;
+export default AdTemplateOne;

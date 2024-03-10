@@ -42,7 +42,8 @@ import DatePicker from "../../components/base/DatePicker";
 import ButtonCollection from "../../collections/base/Button";
 import { CardField } from "@stripe/stripe-react-native";
 import useKeyboard from "../../utils/hooks/useKeyboard";
-import AdTemplateTwoCollection from "../../components/base/AdTemplateTwo";
+import AdTemplateTwo from "../../components/base/AdTemplateTwo";
+import AdTemplateOne from "../../components/base/AdTemplateOne";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -142,8 +143,17 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               icon={<View style={styles.accentSquare} />}
             />
           </View>
-          <View style={{ position: "relative" }}>
-            <AdTemplateTwoCollection
+          <View
+            style={{ position: "relative", flexDirection: "column", gap: 8 }}>
+            <AdTemplateOne
+              image={localImage}
+              headline="Up to 50% off!"
+              tagline="Lorem ipsum dolor sit amet est officiis."
+              variant={2}
+              primary="#FFBF41"
+              secondary={""}
+            />
+            <AdTemplateTwo
               image={localImage}
               headline="Up to 50% off!"
               tagline="Lorem ipsum dolor sit amet est officiis."
