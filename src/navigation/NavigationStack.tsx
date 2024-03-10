@@ -191,14 +191,14 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="PrivateStack"
           component={PrivateNavigator}
           options={{
             headerShown: false,
           }}
-        /> */}
-        {isLoggedIn ? (
+        />
+        {/* {isLoggedIn ? (
           <Stack.Screen
             name="PrivateStack"
             component={PrivateNavigator}
@@ -214,7 +214,7 @@ const App = () => {
               headerShown: false,
             }}
           />
-        )}
+        )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

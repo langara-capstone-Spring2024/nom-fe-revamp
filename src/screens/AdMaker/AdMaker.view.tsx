@@ -42,6 +42,7 @@ import DatePicker from "../../components/base/DatePicker";
 import ButtonCollection from "../../collections/base/Button";
 import { CardField } from "@stripe/stripe-react-native";
 import useKeyboard from "../../utils/hooks/useKeyboard";
+import AdTemplate from "../../components/base/AdTemplate";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -104,7 +105,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
       showPrompt)
       ? styles.openModalContainer
       : styles.container;
-
+  console.log(localImage);
   const content = () => {
     if (page === 1) {
       return (
@@ -139,6 +140,16 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               buttonSize="chipSize"
               iconPosition="left"
               icon={<View style={styles.accentSquare} />}
+            />
+          </View>
+          <View style={{ position: "relative" }}>
+            <AdTemplate
+              image={localImage}
+              headline="Up to 50% off!"
+              tagline="Lorem ipsum dolor sit amet est officiis."
+              variant={2}
+              primary="#FFBF41"
+              secondary="#3C3C3C"
             />
           </View>
         </>

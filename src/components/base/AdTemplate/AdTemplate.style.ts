@@ -7,14 +7,21 @@ const windowWidth = Dimensions.get("window").width;
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      maxHeight: 180,
+      maxHeight: 200,
+      // position: "relative",
     },
     image: {
       width: "100%",
       height: "100%",
-      borderRadius: 24,
-      resizeMode: "cover",
-      borderColor: t.Surface["brand-medium"],
+      // borderRadius: 24,
+      // resizeMode: "cover",
+      // borderColor: t.Surface["brand-medium"],
+    },
+    overlay: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1, // Adjust the zIndex as needed
     },
     tempOnePrimary: {
       height: 145,
@@ -60,6 +67,26 @@ const createStyles = (theme: Theme) =>
       left: "18%",
       zIndex: 3,
       width: 130,
+    },
+    tempTwoHeadline: {
+      position: "absolute",
+      top: "25%",
+      right: "13%",
+      zIndex: 3,
+      width: 130,
+      height: 48,
+      fontFamily: "PublicSansBold",
+      textAlign: "right",
+      color: "#3C3C3C",
+    },
+    tempTwoTagline: {
+      position: "absolute",
+      top: "50%",
+      right: "13%",
+      zIndex: 3,
+      width: 130,
+      color: "#3C3C3C",
+      textAlign: "right",
     },
   });
 

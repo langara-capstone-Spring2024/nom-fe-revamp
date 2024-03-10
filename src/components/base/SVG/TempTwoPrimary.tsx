@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { Svg, Rect, Path, Defs, Mask } from "react-native-svg";
+import { SVGProps } from "./SVG.props";
 
-const TempTwoPrimary = ({
-  width,
-  height,
-  fill,
-}: {
-  width: number;
-  height: number;
-  fill: string;
-}): JSX.Element => {
+const TempTwoPrimary = ({ width, height, fill }: SVGProps): JSX.Element => {
   return (
     <Svg width={width} height={height}>
       <Defs>

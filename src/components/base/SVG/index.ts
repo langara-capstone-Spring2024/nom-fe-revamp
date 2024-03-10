@@ -12,3 +12,5 @@ export { default as ScannerRightTop } from "./ScannerRightTop";
 export { default as ScannerSuccess } from "./ScannerSuccess";
 export { default as TempTwoPrimary } from "./TempTwoPrimary";
 export { default as TempTwoAccent } from "./TempTwoAccent";
+export { default as TempThreePrimary } from "./TempThreePrimary";
+export { default as TempThreeAccent } from "./TempThreeAccent";

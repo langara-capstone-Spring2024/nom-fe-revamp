@@ -13,13 +13,16 @@ const AdTemplateCollection = () => {
 
   return (
     <ScrollView>
-      <AdTemplate
-        uri={imageUrl}
-        headline="Nam quis in te nulla."
-        tagline="Lorem ipsum dolor sit amet est officiis."
-        variant={1}
-      />
-      <TempTwoPrimary width={216} height={200} fill="pink" />
+      <View>
+        <AdTemplate
+          uri={imageUrl}
+          headline="Up to 50% off!"
+          tagline="Lorem ipsum dolor sit amet est officiis."
+          variant={2}
+          primary="#FFBF41"
+          secondary="#3C3C3C"
+        />
+      </View>
     </ScrollView>
   );
 };
