@@ -1,4 +1,10 @@
-import { Image, LayoutChangeEvent, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  LayoutChangeEvent,
+  RefreshControl,
+  View,
+} from "react-native";
 import createStyles from "./ConsumerHome.style";
 import { ConsumerHomeGeneratedProps } from "./ConsumerHome.props";
 import React, { useMemo, useRef, useState } from "react";
@@ -10,19 +16,21 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Typography from "../../components/base/Typography";
 import DishCard from "../../components/base/DishCard";
 import { ArrowRight } from "../../components/base/SVG";
-import Button from "../../components/base/Button";
 
 const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
   const {
+    isFetchingMerchants,
     isRatingsReady,
     isDiscountsReady,
     isMenuDiscountsReady,
+    isRefreshing,
     keyword,
     setKeyword,
     merchants,
     ratingsData,
     discountsData,
     menuDiscountsData,
+    handleRefresh,
   } = props;
 
   const ref = useRef<ScrollView | null>(null);
@@ -57,8 +65,11 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
           ref.current.scrollTo({ y: y - bias - 33 });
         }
       }}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+      }
     >
-      <View style={{ paddingHorizontal: 16, marginBottom: -32 }}>
+      <View style={styles.addressContainer}>
         <Typography>
           Langara College, West 49th Avenue, Vancouver, BC, Canada
         </Typography>
@@ -77,19 +88,14 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
       </View>
       <ScrollView
         horizontal
-        style={{
-          marginTop: -32,
-          paddingBottom: 16,
-          borderBottomWidth: 1,
-          borderBottomColor: "#D4D4D4",
-        }}
+        style={styles.cuisineTypesContainer}
         contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
         showsHorizontalScrollIndicator={false}
       >
         <View>
           <Image
             source={require("../../../assets/cuisine/Boba Tea.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Dessert
@@ -98,7 +104,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <View>
           <Image
             source={require("../../../assets/cuisine/Burger.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Burger
@@ -107,7 +113,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <View>
           <Image
             source={require("../../../assets/cuisine/Dessert.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Dessert
@@ -116,7 +122,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <View>
           <Image
             source={require("../../../assets/cuisine/Hot Pot.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Hot Pot
@@ -125,7 +131,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <View>
           <Image
             source={require("../../../assets/cuisine/Pizza.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Pizza
@@ -134,7 +140,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <View>
           <Image
             source={require("../../../assets/cuisine/Sushi.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Sushi
@@ -143,7 +149,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <View>
           <Image
             source={require("../../../assets/cuisine/Taco.png")}
-            style={{ width: 100, aspectRatio: 1 }}
+            style={styles.cuisineType}
           />
           <Typography variant="label2" alignment="center">
             Taco
@@ -154,67 +160,101 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <Typography variant="title5">Browse Cusines</Typography>
         <ArrowRight />
       </View>
-      {merchants && isRatingsReady && isDiscountsReady && (
-        <View style={styles.listContainer}>
-          {merchants.map((merchant, index) => (
-            <RestaurantCard
-              imageUrl={merchant.imageUrls[0]}
-              restaurantName={merchant.name}
-              cost={Number(merchant.cost)}
-              rating={
-                ratingsData[index].data.reduce(
-                  (totalRating, rating) => totalRating + rating.rating,
-                  0
-                ) / ratingsData[index].data.length || 0
-              }
-              cuisineType={merchant.cuisineType}
-              distance="3.7km"
-              cityName="Vancouver"
-              coupons={discountsData[index].data.map((discount) => ({
-                time: `${new Date(discount.validFromTime).getHours()}:${
-                  10 < new Date(discount.validFromTime).getMinutes()
-                    ? new Date(discount.validFromTime).getMinutes()
-                    : "0" + new Date(discount.validFromTime).getMinutes()
-                }`,
-                // TODO
-                // DB will be changed
-                // amount: discount.percentDiscount,
-                amount: 30,
-              }))}
-              key={index}
-            />
-          ))}
-        </View>
-      )}
-      <View style={styles.titleContainer}>
-        <Typography variant="title5">Dishes for you</Typography>
-        <ArrowRight />
-      </View>
-      {isRatingsReady && isMenuDiscountsReady && (
-        <View style={styles.listContainer}>
-          {menuDiscountsData
-            .map((menuDiscountData, index) =>
-              menuDiscountData.data.map((menuDiscount, itemIndex) => (
-                <DishCard
-                  imageUrl={menuDiscount.menu.imageUrl}
-                  dishName={menuDiscount.menu.name}
-                  rating={
-                    ratingsData[index].data.reduce(
-                      (totalRating, rating) => totalRating + rating.rating,
-                      0
-                    ) / ratingsData[index].data.length || 0
-                  }
-                  cuisineType={menuDiscount.menu.cuisineType}
-                  cityName="Vancouver"
-                  discountAmount={30}
-                  cost={Number(menuDiscount.merchant.cost)}
-                  bordered
-                  key={itemIndex}
-                />
-              ))
-            )
-            .flat()}
-        </View>
+      {!isFetchingMerchants ? (
+        <>
+          {0 < merchants.length ? (
+            <>
+              {isRatingsReady && isDiscountsReady && isMenuDiscountsReady && (
+                <>
+                  <View style={styles.listContainer}>
+                    {merchants.map((merchant, merchantItemIndex) => (
+                      <RestaurantCard
+                        imageUrl={merchant.imageUrls[0]}
+                        restaurantName={merchant.name}
+                        cost={Number(merchant.cost)}
+                        rating={
+                          ratingsData[merchantItemIndex].data.reduce(
+                            (totalRating, rating) =>
+                              totalRating + rating.rating,
+                            0
+                          ) / ratingsData[merchantItemIndex].data.length || 0
+                        }
+                        cuisineType={merchant.cuisineType}
+                        distance="3.7km"
+                        cityName="Vancouver"
+                        coupons={discountsData[merchantItemIndex].data.map(
+                          (discount) => ({
+                            time: `${new Date(
+                              discount.validFromTime
+                            ).getHours()}:${
+                              10 < new Date(discount.validFromTime).getMinutes()
+                                ? new Date(discount.validFromTime).getMinutes()
+                                : "0" +
+                                  new Date(discount.validFromTime).getMinutes()
+                            }`,
+                            // TODO
+                            // DB will be changed
+                            // amount: discount.percentDiscount,
+                            amount: 30,
+                          })
+                        )}
+                        key={merchantItemIndex}
+                      />
+                    ))}
+                  </View>
+                  <View style={styles.titleContainer}>
+                    <Typography variant="title5">Dishes for you</Typography>
+                    <ArrowRight />
+                  </View>
+                  <View style={styles.listContainer}>
+                    {0 <
+                    merchants
+                      .map((merchant, merchantItemIndex) =>
+                        menuDiscountsData[merchantItemIndex].data.map(
+                          (menuDiscount, menuDiscountItemIndex) => <></>
+                        )
+                      )
+                      .flat().length ? (
+                      merchants
+                        .map((merchant, merchantItemIndex) =>
+                          menuDiscountsData[merchantItemIndex].data.map(
+                            (menuDiscount, menuDiscountItemIndex) => (
+                              <DishCard
+                                imageUrl={menuDiscount.menu.imageUrl}
+                                dishName={menuDiscount.menu.name}
+                                rating={
+                                  ratingsData[merchantItemIndex].data.reduce(
+                                    (totalRating, rating) =>
+                                      totalRating + rating.rating,
+                                    0
+                                  ) /
+                                    ratingsData[merchantItemIndex].data
+                                      .length || 0
+                                }
+                                cuisineType={menuDiscount.menu.cuisineType}
+                                cityName="Vancouver"
+                                discountAmount={30}
+                                cost={Number(menuDiscount.merchant.cost)}
+                                bordered
+                                key={menuDiscountItemIndex}
+                              />
+                            )
+                          )
+                        )
+                        .flat()
+                    ) : (
+                      <Typography alignment="center">No results</Typography>
+                    )}
+                  </View>
+                </>
+              )}
+            </>
+          ) : (
+            <Typography alignment="center">No results</Typography>
+          )}
+        </>
+      ) : (
+        <ActivityIndicator />
       )}
     </ScrollView>
   );

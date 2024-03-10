@@ -3,21 +3,33 @@ import { GetMerchants } from "../../services/react-query/queries/user";
 import ConsumerHomeView from "./ConsumerHome.view";
 import { GetRatingsByMerchants } from "../../services/react-query/queries/rating";
 import { GetActiveDiscountsByMerchants } from "../../services/react-query/queries/discount";
-import { Menu } from "../../types";
 import { GetMenuDiscountsByMerchants } from "../../services/react-query/queries/menuDiscount";
 
 const ConsumerHome = () => {
-  const { data: merchants = [] } = GetMerchants();
+  const [isRatingsReady, setIsRatingsReady] = useState<boolean>(false);
+  const [isDiscountsReady, setIsDiscountsReady] = useState<boolean>(false);
+  const [isMenuDiscountsReady, setIsMenuDiscountsReady] =
+    useState<boolean>(false);
+  const [isRefreshing, setIsRefrshing] = useState<boolean>(false);
+  const [keyword, setKeyword] = useState<string>("");
+
+  const {
+    data: merchants = [],
+    refetch: refetchMerchants,
+    isFetching: isFetchingMerchants,
+  } = GetMerchants(keyword);
 
   const ratingsData = GetRatingsByMerchants(merchants);
   const discountsData = GetActiveDiscountsByMerchants(merchants);
   const menuDiscountsData = GetMenuDiscountsByMerchants(merchants);
 
-  const [isRatingsReady, setIsRatingsReady] = useState<boolean>(false);
-  const [isDiscountsReady, setIsDiscountsReady] = useState<boolean>(false);
-  const [isMenuDiscountsReady, setIsMenuDiscountsReady] =
-    useState<boolean>(false);
-  const [keyword, setKeyword] = useState<string>("");
+  const handleRefresh = () => {
+    setIsRefrshing(true);
+    refetchMerchants();
+    setTimeout(() => {
+      setIsRefrshing(false);
+    }, 1000);
+  };
 
   useEffect(() => {
     setIsRatingsReady(false);
@@ -32,7 +44,25 @@ const ConsumerHome = () => {
   }, [ratingsData]);
 
   useEffect(() => {
+    setIsRatingsReady(false);
+    if (ratingsData.length === 0) {
+      return;
+    }
+    let result = true;
+    ratingsData.forEach((ratingData) => {
+      if (!ratingData.data) {
+        result = false;
+        return;
+      }
+    });
+    setIsRatingsReady(result);
+  }, [ratingsData]);
+
+  useEffect(() => {
     setIsDiscountsReady(false);
+    if (discountsData.length === 0) {
+      return;
+    }
     let result = true;
     discountsData.forEach((discountData) => {
       if (!discountData.data) {
@@ -45,6 +75,9 @@ const ConsumerHome = () => {
 
   useEffect(() => {
     setIsMenuDiscountsReady(false);
+    if (menuDiscountsData.length === 0) {
+      return;
+    }
     let result = true;
     menuDiscountsData.forEach((menuDiscountData) => {
       if (!menuDiscountData.data) {
@@ -55,31 +88,19 @@ const ConsumerHome = () => {
     setIsMenuDiscountsReady(result);
   }, [menuDiscountsData]);
 
-  // useEffect(() => {
-  //   if (isMenuDiscountsReady) {
-  //     console.log(
-  //       menuDiscountsData
-  //         .map((menuDiscountData) => {
-  //           return menuDiscountData.data.map((menuDiscount) => {
-  //             // console.log(menuDiscount.menu.name);
-  //             return <>{menuDiscount.menu.name}</>;
-  //           });
-  //         })
-  //         .flat()
-  //     );
-  //   }
-  // }, [isMenuDiscountsReady]);
-
   const generatedProps = {
+    isFetchingMerchants,
     isRatingsReady,
     isDiscountsReady,
     isMenuDiscountsReady,
+    isRefreshing,
     keyword,
     setKeyword,
     merchants,
     ratingsData,
     discountsData,
     menuDiscountsData,
+    handleRefresh,
   };
   return <ConsumerHomeView {...generatedProps} />;
 };

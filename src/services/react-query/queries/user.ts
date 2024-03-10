@@ -6,17 +6,18 @@ import { RNQueryClient } from "../query-client";
 import FormData from "form-data";
 import { Merchant } from "../../../types";
 
-export const GetMerchants = () => {
+export const GetMerchants = (keyword: string) => {
   const userService = new UserService();
   userService.cancelRequests();
 
   return useQuery<Merchant[]>({
-    queryKey: [QUERY_KEYS.MERCHANTS],
+    queryKey: [QUERY_KEYS.MERCHANTS, keyword],
     queryFn: async () => {
-      const response: AxiosResponse = await userService.getMerchants();
-
-      if (response.status === 200) {
+      try {
+        const response: AxiosResponse = await userService.getMerchants(keyword);
         return response.data;
+      } catch (error) {
+        return [];
       }
     },
   });

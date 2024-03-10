@@ -41,7 +41,7 @@ const RestaurantCard = (props: RestaurantCardProps) => {
           </View>
           <View style={{ flexDirection: "row", gap: 4 }}>
             <Typography variant="bodyXs" color="subtle">
-              {rating}
+              {rating.toFixed(1)}
             </Typography>
             <Rating
               type="custom"

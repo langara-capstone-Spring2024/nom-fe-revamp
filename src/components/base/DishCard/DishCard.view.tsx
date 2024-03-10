@@ -36,7 +36,7 @@ const DishCard = (props: DishCardProps) => {
         <Typography>{dishName}</Typography>
         <View style={{ flexDirection: "row", gap: 4 }}>
           <Typography variant="bodySm" color="subtle">
-            {rating}
+            {rating.toFixed(1)}
           </Typography>
           <Rating
             type="custom"
