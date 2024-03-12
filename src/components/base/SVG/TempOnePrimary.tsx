@@ -5,18 +5,14 @@ import { View } from "react-native";
 
 const TempOnePrimary = ({ fill }: SVGProps): JSX.Element => {
   return (
-    <Svg
-      width="139"
-      height="138"
-      viewBox="0 0 139 138"
-      fill="none">
-      <Path
-        d="M130.95 1.15039H1.35034V130.75H130.95V1.15039Z"
-        stroke={fill}
-        stroke-width="0.9"
-      />
-      <Path d="M138.6 7H8.10034V137.5H138.6V7Z" fill={fill} />
-    </Svg>
+      <Svg viewBox="0 0 131 131" fill="none">
+        <Path
+          stroke={fill}
+          strokeWidth={0.9}
+          d="M1.35 1.262h129.6v129.6H1.35z"
+        />
+        <Path d="M.1.113h130.5v130.5H.1z" fill={fill} />
+      </Svg>
   );
 };
 
