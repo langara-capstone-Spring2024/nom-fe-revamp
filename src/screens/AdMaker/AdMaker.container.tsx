@@ -239,9 +239,7 @@ const AdMaker = () => {
   };
 
   const { data: savedCards } = GetAllSavedCards();
-  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState(
-    savedCards[0].paymentMethodId
-  );
+  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState("");
   const handleSelectedPmChange = (value: string) => {
     setSelectedPaymentMethodId(value);
   };
