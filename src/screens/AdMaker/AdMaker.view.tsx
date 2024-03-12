@@ -44,6 +44,8 @@ import { CardField } from "@stripe/stripe-react-native";
 import useKeyboard from "../../utils/hooks/useKeyboard";
 import AdTemplateTwo from "../../components/base/AdTemplateTwo";
 import AdTemplateOne from "../../components/base/AdTemplateOne";
+import { Check } from "../../components/base/SVG";
+import NavigationService from "../../navigation/NavigationService";
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -92,6 +94,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     otherSnapPoints,
     setShowPrompt,
     handleGenerateAiText,
+    isCreateAdSuccess,
+    openSuccess,
+    setOpenSuccess,
+    setPage,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -106,7 +112,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
       showPrompt)
       ? styles.openModalContainer
       : styles.container;
-  console.log(localImage);
   const content = () => {
     if (page === 1) {
       return (
@@ -542,6 +547,36 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </BottomSheetModal>
         </BottomSheetModalProvider>
       )}
+
+      <Portal>
+        <Modal
+          style={{ backgroundColor: "#0000004D", flex: 1 }}
+          dismissable={false}
+          visible={openSuccess}
+          onDismiss={() => setOpenSuccess(false)}
+          contentContainerStyle={styles.successModalContainer}>
+          <Check />
+          <Typography variant="title5" otherStyle={styles.successModal}>
+            Success!
+          </Typography>
+          <Typography
+            variant="body"
+            otherStyle={{ textAlign: "center", marginBottom: 36 }}>
+            Your ad campaign has been created successfully!
+          </Typography>
+          <Button
+            variant="primary"
+            buttonSize="lg"
+            text="Home"
+            takeFullWidth
+            onPress={() => {
+              NavigationService.navigate("MerchantHome");
+              setOpenSuccess(false);
+              setPage(1);
+            }}
+          />
+        </Modal>
+      </Portal>
     </View>
   );
 };

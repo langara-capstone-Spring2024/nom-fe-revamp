@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { RNQueryClient } from "../query-client";
 import { AdService } from "../../AdService";
-import { AdPrice } from "../../../types";
+import { AdPaylaod, AdPrice } from "../../../types";
 import { AxiosResponse } from "axios";
 
 export const GetPrices = () => {
@@ -25,6 +25,24 @@ export const GeneratetAiText = () => {
   return useMutation({
     mutationFn: async (payload: string) => {
       const response: AxiosResponse = await adService.generateAiText(payload);
+      return response.data;
+    },
+    onSuccess: () => {
+      RNQueryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.AD],
+        exact: true,
+      });
+    },
+  });
+};
+
+export const CreateAd = () => {
+  const adService = new AdService();
+  adService.cancelRequests();
+
+  return useMutation({
+    mutationFn: async (payload: AdPaylaod) => {
+      const response: AxiosResponse = await adService.createAd(payload);
       return response.data;
     },
     onSuccess: () => {

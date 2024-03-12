@@ -6,6 +6,7 @@ export interface IAdSlice {
   next: () => void;
   isAdScreen: boolean;
   setAdScreen: (v: boolean) => void;
+  setPage: (v: number) => void;
 }
 
 export const createAdSlice: StateCreator<IAdSlice> = (set) => ({
@@ -32,6 +33,14 @@ export const createAdSlice: StateCreator<IAdSlice> = (set) => ({
       return {
         ...state,
         isAdScreen: v,
+      };
+    });
+  },
+  setPage: (v) => {
+    set((state) => {
+      return {
+        ...state,
+        page: v,
       };
     });
   },
