@@ -77,6 +77,11 @@ export interface AdMakerGeneratedProps {
   description: string;
   setDescription: (v: string) => void;
   handleGenerateAiText: () => void;
+
+  isCreateAdSuccess: boolean;
+  openSuccess: boolean;
+  setOpenSuccess: (v: boolean) => void;
+  setPage: (v: number) => void;
 }
 
 interface Card {

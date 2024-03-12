@@ -5,9 +5,10 @@ import { colorKit } from "reanimated-color-picker";
 import { useSharedValue } from "react-native-reanimated";
 import type { returnedResults } from "reanimated-color-picker";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { LayoutAnimation } from "react-native";
+import { v4 as uuidv4 } from "uuid";
 import { getDates, getDaysOfWeekInRange } from "../../utils/transformDate";
 import {
+  CreateAd,
   GeneratetAiText,
   GetPrices,
 } from "../../services/react-query/queries/ad";
@@ -18,13 +19,17 @@ import {
   GetAllSavedCards,
 } from "../../services/react-query/queries/stripe";
 import { createPaymentMethod } from "@stripe/stripe-react-native";
+import { S3Params } from "../../types/S3Params";
+import { S3 } from "aws-sdk";
+import NavigationService from "../../navigation/NavigationService";
 
 const AdMaker = () => {
-  const { prev, next, page, setAdScreen } = useStore((state) => ({
+  const { prev, next, page, setAdScreen, setPage } = useStore((state) => ({
     setAdScreen: state.setAdScreen,
     prev: state.previous,
     next: state.next,
     page: state.page,
+    setPage: state.setPage,
   }));
 
   useEffect(() => {
@@ -234,23 +239,72 @@ const AdMaker = () => {
   };
 
   const { data: savedCards } = GetAllSavedCards();
-  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState("");
-
+  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState(
+    savedCards[0].paymentMethodId
+  );
   const handleSelectedPmChange = (value: string) => {
     setSelectedPaymentMethodId(value);
   };
 
-  const confirm = () => {
-    console.log("Confirm!");
-    console.log("🚀 ~ AdMaker ~ totalPrice:", totalAdPrice);
-    console.log("🚀 ~ AdMaker ~ selectedEndDate:", selectedEndDate);
-    console.log("🚀 ~ AdMaker ~ selectedStartDate:", selectedStartDate);
-    console.log("🚀 ~ AdMaker ~ selectedAccentColor:", selectedAccentColor);
-    console.log("🚀 ~ AdMaker ~ selectedPrimaryColor:", selectedPrimaryColor);
-    console.log("🚀 ~ AdMaker ~ localImage:", localImage);
-    console.log("🚀 ~ AdMaker ~ headline:", headline);
-    console.log("🚀 ~ AdMaker ~ tagline:", tagline);
+  const s3 = new S3({
+    accessKeyId: process.env.EXPO_PUBLIC_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.EXPO_PUBLIC_AWS_SECRET_ACCESS_KEY,
+    region: process.env.EXPO_PUBLIC_AWS_REGION,
+  });
+
+  const { mutate: createAd, isSuccess: isCreateAdSuccess } = CreateAd();
+
+  const [openSuccess, setOpenSuccess] = useState(false);
+
+  const confirm = async () => {
+    if (localImage) {
+      const uuid = uuidv4();
+      const response = await fetch(localImage.uri || "");
+      const blob = await response.blob();
+      const contentType = response.headers.get("Content-Type");
+
+      if (!contentType) return;
+
+      const params = {
+        Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME || "",
+        Key: `uploads/${uuid}`,
+        Body: blob,
+        ContentType: contentType,
+      };
+
+      try {
+        const result = await s3.upload(params).promise();
+        let imageUrl = result.Location;
+        if (
+          !!imageUrl &&
+          !!totalAdPrice &&
+          !!selectedEndDate &&
+          !!selectedStartDate &&
+          !!selectedAccentColor &&
+          !!selectedPrimaryColor &&
+          !!headline &&
+          !!tagline
+        ) {
+          createAd({
+            template: 1,
+            headline,
+            tagline,
+            startDate: selectedStartDate,
+            endDate: selectedEndDate,
+            amount: totalAdPrice,
+            imageUrl,
+            paymentMethodId: selectedPaymentMethodId,
+          });
+        }
+      } catch (error) {
+        console.error("Error uploading image to S3:", error);
+      }
+    }
   };
+
+  useEffect(() => {
+    setOpenSuccess(isCreateAdSuccess);
+  }, [isCreateAdSuccess]);
   //end of page 4
 
   const generatedProps = {
@@ -311,6 +365,10 @@ const AdMaker = () => {
     setDescription,
     otherSnapPoints,
     handleGenerateAiText,
+    isCreateAdSuccess,
+    openSuccess,
+    setOpenSuccess,
+    setPage,
   };
 
   return <AdMakerView {...generatedProps} />;

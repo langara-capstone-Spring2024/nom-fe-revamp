@@ -22,3 +22,4 @@ export { default as TempOnePrimary } from "./TempOnePrimary";
 export { default as TempOneAccent } from "./TempOneAccent";
 export { default as TempThreeAccent } from "./TempThreeAccent";
 export { default as ScannerTab } from "./ScannerTab";
+export { default as Check } from "./Check";
