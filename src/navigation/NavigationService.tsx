@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  ItemsCollection: undefined;
   AdTemplateThreeCollection: undefined;
   AdTemplateOneCollection: undefined;
   SVGCollection: undefined;
@@ -53,6 +54,7 @@ type Collections = {
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
   PromoDetails: undefined;
+  Items: undefined;
   MerchantAccount: undefined;
   ConsumerAccount: undefined;
   MerchantHome: undefined;

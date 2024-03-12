@@ -5,6 +5,7 @@ import { GetAllActiveDiscount } from "../../services/react-query/queries/discoun
 import { Text, Alert } from "react-native";
 import NavigationService from "../../navigation/NavigationService";
 import { useStore } from "../../store";
+import PromoDetails from "../PromoDetails";
 
 const Promo = () => {
   const currentDate = new Date();
@@ -21,7 +22,7 @@ const Promo = () => {
       const combinedData = { item, title };
       useStore.setState({ selectedItem: combinedData });
       useStore.setState({ accordionExpanded: true });
-      NavigationService.navigate("PromoDetails");
+      NavigationService.navigate("PromoDetails", undefined, "Items");
     },
     []
   );

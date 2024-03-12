@@ -57,6 +57,7 @@ import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
+import Items from "../screens/Items";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -112,6 +113,7 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
+    { func: Items, customName: "Items", custom: false },
   ];
   const {
     isAdScreen,
@@ -166,7 +168,8 @@ const PrivateNavigator = () => {
                       navigation.goBack();
                     }
                   }}
-                  style={{ paddingLeft: 16, margin: 8 }}>
+                  style={{ paddingLeft: 16, margin: 8 }}
+                >
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),

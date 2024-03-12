@@ -5,9 +5,9 @@ import { theme as t } from "../../utils/Theme";
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     promoDetailsContainer: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
+      flex: 1,
+    },
+    scrollView: {
       flex: 1,
     },
     promoMain: {
@@ -15,6 +15,10 @@ const createStyles = (theme: Theme) =>
       paddingVertical: 32,
     },
     promoFooter: {
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
       backgroundColor: t.Content["invert-strong"],
       paddingHorizontal: 16,
       paddingTop: 16,
