@@ -27,7 +27,15 @@ const AdTemplateOne = (props: AdTemplateOneProps) => {
         {image && (
           <Image
             source={{ uri: image.uri }}
-            style={[styles.image, { height: 180, width: 350, marginLeft: -40 }]}
+            style={[
+              styles.image,
+              {
+                // height: 180,
+                // width: 350,
+                // marginLeft: -40,
+                borderRadius: 24,
+              },
+            ]}
           />
         )}
         <View
@@ -35,8 +43,8 @@ const AdTemplateOne = (props: AdTemplateOneProps) => {
             width: 166,
             height: 150,
             position: "absolute",
-            left: 0,
-            top: 15,
+            // left: -10,
+            top: 20,
             zIndex: 1,
           }}>
           <TempOnePrimary fill={primary} />
@@ -47,18 +55,18 @@ const AdTemplateOne = (props: AdTemplateOneProps) => {
             height: 180,
             position: "absolute",
             top: 0,
-            marginLeft: -48,
+            // marginLeft: -48,
             // left:0,
             zIndex: 0,
           }}>
           <TempOneAccent fill={secondary} />
         </View>
         <Typography variant="title4" otherStyle={styles.headline}>
-            {headline}
-          </Typography>
-          <Typography variant="bodyXs" otherStyle={styles.tagline}>
-            {tagline}
-          </Typography>
+          {headline}
+        </Typography>
+        <Typography variant="bodyXs" otherStyle={styles.tagline}>
+          {tagline}
+        </Typography>
       </TouchableOpacity>
     </View>
   );

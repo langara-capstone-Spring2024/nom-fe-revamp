@@ -5,17 +5,12 @@ import { View } from "react-native";
 import { useWindowDimensions } from "react-native";
 
 const TempTwoPrimary = ({ fill }: SVGProps): JSX.Element => {
-  const originalWidth = 216;
-  const originalHeight = 200;
-
   return (
-    <Svg
-      width={"100%"}
-      height={"100%"}
-      preserveAspectRatio="xMinYMin slice"
-      viewBox={`0 0 ${originalWidth} ${originalHeight}`}>
+    <Svg viewBox="0 0 195 180" fill="none">
       <Path
-        d="M7.217 47.063C14.957 23.604 10.01 5.766 6.605.001L215.986 0v200.001H86.412c-4.065-8.857-6.792-19.659-6.637-32.441.54-44.384-5.284-46.564-47.03-55.629-41.748-9.066-35.203-35.544-25.528-64.868Z"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M78.3711 180H171C183.996 180 194.58 169.67 194.988 156.772V23.2277C194.58 10.3362 184.006 0.00942933 171.018 6.45375e-06C171.012 2.15149e-06 171.006 0 171 0L6.54502 0.000451924C9.60974 5.18921 14.0622 21.2439 7.09625 42.3568C-1.6112 68.7479 -7.50196 92.5785 30.0703 100.737C67.6425 108.896 72.8838 110.858 72.3984 150.804C72.2586 162.307 74.7126 172.029 78.3711 180Z"
         fill={fill}
       />
     </Svg>

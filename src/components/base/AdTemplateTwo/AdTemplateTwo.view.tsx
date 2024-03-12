@@ -32,10 +32,7 @@ const AdTemplateOne = (props: AdTemplateTwoProps) => {
           {image && (
             <Image
               source={{ uri: image.uri }}
-              style={[
-                styles.image,
-                { height: 180, width: 350, marginLeft: -40 },
-              ]}
+              style={[styles.image, { marginLeft: -40, borderRadius: 24 }]}
             />
           )}
           <View

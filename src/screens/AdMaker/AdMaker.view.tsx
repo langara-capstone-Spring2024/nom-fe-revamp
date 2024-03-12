@@ -5,6 +5,7 @@ import {
   Touchable,
   Keyboard,
   TextInput,
+  Dimensions,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import createStyles from "./AdMaker.style";
@@ -46,6 +47,9 @@ import AdTemplateTwo from "../../components/base/AdTemplateTwo";
 import AdTemplateOne from "../../components/base/AdTemplateOne";
 import { Check } from "../../components/base/SVG";
 import NavigationService from "../../navigation/NavigationService";
+
+const { width, height } = Dimensions.get("window");
+
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -150,22 +154,26 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </View>
           <View
             style={{ position: "relative", flexDirection: "column", gap: 8 }}>
-            <AdTemplateOne
-              image={localImage}
-              headline="Up to 50% off!"
-              tagline="Lorem ipsum dolor sit amet est officiis."
-              variant={2}
-              primary="#FFBF41"
-              secondary="#3C3C3C"
-            />
-            <AdTemplateTwo
-              image={localImage}
-              headline="Up to 50% off!"
-              tagline="Lorem ipsum dolor sit amet est officiis."
-              variant={2}
-              primary="#FFBF41"
-              secondary="#3C3C3C"
-            />
+            <View style={{ height: 180, width: 350 }}>
+              <AdTemplateOne
+                image={localImage}
+                headline="Up to 50% off!"
+                tagline="Lorem ipsum dolor sit amet est officiis."
+                variant={2}
+                primary="#FFBF41"
+                secondary="#3C3C3C"
+              />
+            </View>
+            <View style={{ height: 180, width: width-36, borderWidth: 1, borderColor: 'red', marginLeft: -40 }}>
+              {/* <AdTemplateTwo
+                image={localImage}
+                headline="Up to 50% off!"
+                tagline="Lorem ipsum dolor sit amet est officiis."
+                variant={2}
+                primary="#FFBF41"
+                secondary="#3C3C3C"
+              /> */}
+            </View>
           </View>
         </>
       );

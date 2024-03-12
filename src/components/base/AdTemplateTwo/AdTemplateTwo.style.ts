@@ -70,7 +70,7 @@ const createStyles = (theme: Theme) =>
     },
     tempTwoHeadline: {
       position: "absolute",
-      top: "21%",
+      top: "22.5%",
       right: "8%",
       zIndex: 3,
       width: 130,
@@ -78,15 +78,17 @@ const createStyles = (theme: Theme) =>
       fontFamily: "PublicSansBold",
       color: "#3C3C3C",
       textAlign: "right",
+      fontSize: 18,
     },
     tempTwoTagline: {
       position: "absolute",
       top: "50%",
       right: "8%",
       zIndex: 3,
-      width: 130,
+      width: 100,
       color: "#3C3C3C",
       textAlign: "right",
+      fontSize: 9,
     },
   });
 
