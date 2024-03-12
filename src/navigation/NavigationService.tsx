@@ -3,6 +3,7 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+ OrderCardCollection: undefined;
   AdTemplateThreeCollection: undefined;
   AdTemplateOneCollection: undefined;
   SVGCollection: undefined;
