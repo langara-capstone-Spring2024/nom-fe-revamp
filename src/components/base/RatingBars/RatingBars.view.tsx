@@ -11,10 +11,12 @@ const RatingBars = (props: RatingBarsProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const totalNumber = ratingNumbers.reduce(
-    (totalRatingNumber, ratingNumber) => totalRatingNumber + ratingNumber,
-    0
-  );
+  const totalNumber = ratingNumbers
+    .reverse()
+    .reduce(
+      (totalRatingNumber, ratingNumber) => totalRatingNumber + ratingNumber,
+      0
+    );
 
   return (
     <View style={styles.listCcontainer}>
