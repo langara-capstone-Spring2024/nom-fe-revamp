@@ -75,16 +75,18 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     reviewNumber={ratings.length}
                   />
                 </View>
-                <CouponCarousel
-                  coupons={discounts.map((discount) => ({
-                    time: `${new Date(discount.validFromTime).getHours()}:${
-                      10 < new Date(discount.validFromTime).getMinutes()
-                        ? new Date(discount.validFromTime).getMinutes()
-                        : "0" + new Date(discount.validFromTime).getMinutes()
-                    }`,
-                    amount: discount.percentDiscount * 100,
-                  }))}
-                />
+                <View style={{ marginHorizontal: -16 }}>
+                  <CouponCarousel
+                    coupons={discounts.map((discount) => ({
+                      time: `${new Date(discount.validFromTime).getHours()}:${
+                        10 < new Date(discount.validFromTime).getMinutes()
+                          ? new Date(discount.validFromTime).getMinutes()
+                          : "0" + new Date(discount.validFromTime).getMinutes()
+                      }`,
+                      amount: discount.percentDiscount * 100,
+                    }))}
+                  />
+                </View>
               </View>
             </View>
             <View style={styles.sectionContainer}>
