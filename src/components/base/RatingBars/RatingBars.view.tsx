@@ -19,11 +19,13 @@ const RatingBars = (props: RatingBarsProps) => {
     );
 
   return (
-    <View style={styles.listCcontainer}>
+    <View>
       {ratingNumbers.map((ratingNumber, index) => (
         <View style={styles.itemContainer} key={index}>
           <View style={styles.numberContainer}>
-            <Typography>{ratingNumbers.length - index}</Typography>
+            <Typography variant="bodyXs">
+              {ratingNumbers.length - index}
+            </Typography>
           </View>
           <View style={styles.barContainer}>
             <View
