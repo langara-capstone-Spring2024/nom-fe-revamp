@@ -10,25 +10,27 @@ const createStyles = (theme: Theme) =>
       aspectRatio: 1,
     },
     ratingContainer: {
-      padding: 16,
       flexDirection: "row",
       gap: 48,
       alignItems: "center",
+    },
+    divider: {
+      backgroundColor: t.Border.default,
+      width: 1,
+      alignSelf: "stretch",
     },
     reviewContainer: {
       borderTopColor: t.Border.default,
       borderTopWidth: 1,
       paddingVertical: 16,
     },
-    detailContainer: {
-      padding: 16,
-    },
     sectionContainer: {
+      padding: 16,
       backgroundColor: t.Surface.default,
+      gap: 32,
     },
-    titleContainer: {
-      paddingVertical: 16,
-      paddingHorizontal: 16,
+    sectionBodyContainer: {
+      gap: 16,
     },
   });
 

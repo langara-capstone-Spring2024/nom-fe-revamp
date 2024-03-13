@@ -58,116 +58,109 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
               </Pressable>
             </View>
             <View style={styles.sectionContainer}>
-              <View style={{ marginTop: -64, paddingHorizontal: 16 }}>
-                <RestaurantDescription
-                  name={merchant.name}
-                  address={merchant.address}
-                  cuisineType={merchant.cuisineType}
-                  reservationNumber={234}
-                  cost={merchant.cost}
-                  rating={
-                    ratings.reduce(
-                      (totalRating, rating) => totalRating + rating.rating,
-                      0
-                    ) / ratings.length || 0
-                  }
-                  reviewNumber={ratings.length}
-                />
-              </View>
-              <View style={{ padding: 16, gap: 16 }}>
-                <View>
-                  <CouponCarousel
-                    coupons={discounts.map((discount) => ({
-                      time: `${new Date(discount.validFromTime).getHours()}:${
-                        10 < new Date(discount.validFromTime).getMinutes()
-                          ? new Date(discount.validFromTime).getMinutes()
-                          : "0" + new Date(discount.validFromTime).getMinutes()
-                      }`,
-                      amount: discount.percentDiscount * 100,
-                    }))}
-                  />
-                </View>
-              </View>
-            </View>
-            <View style={styles.sectionContainer}>
-              <View style={styles.titleContainer}>
-                <Typography variant="title5">Reviews</Typography>
-              </View>
-              <View style={styles.ratingContainer}>
-                <View>
-                  <Typography variant="title3" weight="700">
-                    {(
-                      ratings.reduce(
-                        (totalRating, rating) => totalRating + rating.rating,
-                        0
-                      ) / ratings.length || 0
-                    ).toFixed(1)}
-                  </Typography>
-                  <Rating
-                    type="custom"
-                    ratingCount={5}
-                    startingValue={
+              <View style={styles.sectionBodyContainer}>
+                <View style={{ marginTop: -64 }}>
+                  <RestaurantDescription
+                    name={merchant.name}
+                    address={merchant.address}
+                    cuisineType={merchant.cuisineType}
+                    reservationNumber={234}
+                    cost={merchant.cost}
+                    rating={
                       ratings.reduce(
                         (totalRating, rating) => totalRating + rating.rating,
                         0
                       ) / ratings.length || 0
                     }
-                    imageSize={16}
-                    tintColor="#FAFAFA"
-                    ratingBackgroundColor="lightgray"
-                    ratingColor="orange"
-                    readonly
-                  />
-                  <Typography variant="bodyXs" color="subtle">
-                    {ratings.length} Ratings
-                  </Typography>
-                </View>
-                <View
-                  style={{
-                    backgroundColor: "#D4D4D4",
-                    width: 1,
-                    alignSelf: "stretch",
-                  }}
-                ></View>
-                <View style={{ flex: 1 }}>
-                  <RatingBars
-                    ratingNumbers={Array.from(
-                      { length: 5 },
-                      (_, index) => index + 1
-                    ).map((_, index) =>
-                      ratings
-                        .filter((rating) => rating.rating === index + 1)
-                        .reduce(
-                          (totalRatingNumber, rating) => totalRatingNumber + 1,
-                          0
-                        )
-                    )}
+                    reviewNumber={ratings.length}
                   />
                 </View>
-              </View>
-              <View
-                style={{ backgroundColor: "#FAFAFA", paddingHorizontal: 16 }}
-              >
-                {ratings.map((rating, index) => (
-                  <View style={styles.reviewContainer} key={index}>
-                    <ReviewCard
-                      avatarImageUrl={`https://picsum.photos/360?random=${
-                        index + 1
-                      }`}
-                      userName={`${rating.consumer.user.firstName} ${rating.consumer.user.lastName}`}
-                      postedDate={new Date(rating.createdAt)}
-                      rating={rating.rating}
-                      content={rating.comment}
-                    />
-                  </View>
-                ))}
+                <CouponCarousel
+                  coupons={discounts.map((discount) => ({
+                    time: `${new Date(discount.validFromTime).getHours()}:${
+                      10 < new Date(discount.validFromTime).getMinutes()
+                        ? new Date(discount.validFromTime).getMinutes()
+                        : "0" + new Date(discount.validFromTime).getMinutes()
+                    }`,
+                    amount: discount.percentDiscount * 100,
+                  }))}
+                />
               </View>
             </View>
             <View style={styles.sectionContainer}>
-              <View style={styles.titleContainer}>
+              <View>
+                <Typography variant="title5">Reviews</Typography>
+              </View>
+              <View style={styles.sectionBodyContainer}>
+                <View style={styles.ratingContainer}>
+                  <View>
+                    <Typography variant="title3" weight="700">
+                      {(
+                        ratings.reduce(
+                          (totalRating, rating) => totalRating + rating.rating,
+                          0
+                        ) / ratings.length || 0
+                      ).toFixed(1)}
+                    </Typography>
+                    <Rating
+                      type="custom"
+                      ratingCount={5}
+                      startingValue={
+                        ratings.reduce(
+                          (totalRating, rating) => totalRating + rating.rating,
+                          0
+                        ) / ratings.length || 0
+                      }
+                      imageSize={16}
+                      tintColor="#FAFAFA"
+                      ratingBackgroundColor="lightgray"
+                      ratingColor="orange"
+                      readonly
+                    />
+                    <Typography variant="bodyXs" color="subtle">
+                      {ratings.length} Ratings
+                    </Typography>
+                  </View>
+                  <View style={styles.divider}></View>
+                  <View style={{ flex: 1 }}>
+                    <RatingBars
+                      ratingNumbers={Array.from(
+                        { length: 5 },
+                        (_, index) => index + 1
+                      ).map((_, index) =>
+                        ratings
+                          .filter((rating) => rating.rating === index + 1)
+                          .reduce(
+                            (totalRatingNumber, rating) =>
+                              totalRatingNumber + 1,
+                            0
+                          )
+                      )}
+                    />
+                  </View>
+                </View>
+                <View>
+                  {ratings.map((rating, index) => (
+                    <View style={styles.reviewContainer} key={index}>
+                      <ReviewCard
+                        avatarImageUrl={`https://picsum.photos/360?random=${
+                          index + 1
+                        }`}
+                        userName={`${rating.consumer.user.firstName} ${rating.consumer.user.lastName}`}
+                        postedDate={new Date(rating.createdAt)}
+                        rating={rating.rating}
+                        content={rating.comment}
+                      />
+                    </View>
+                  ))}
+                </View>
+              </View>
+            </View>
+            <View style={styles.sectionContainer}>
+              <View>
                 <Typography variant="title5">Detail</Typography>
               </View>
-              <View style={styles.detailContainer}>
+              <View style={styles.sectionBodyContainer}>
                 <RestaurantDetail
                   address={merchant.address}
                   latitude={49.22442010000001}
