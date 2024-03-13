@@ -51,6 +51,16 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
         text="Menu"
         onPress={() => NavigationService.navigate("Menu")}
       />
+      <Button
+        variant="primary"
+        buttonSize="lg"
+        text="RestaurantProfile"
+        onPress={() =>
+          NavigationService.navigate("RestaurantProfile", {
+            merchantId: "65ea6dae414d8ca1714871d7",
+          })
+        }
+      />
       <Modal visible={isVisible}>
         <SafeAreaView style={{ alignItems: "center" }}>
           <View style={{ padding: 16 }}>
