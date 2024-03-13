@@ -11,7 +11,8 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
-import OrderCardCollection from '../collections/base/OrderCard'
+import RestaurantDetailCollection from "../collections/base/RestaurantDetail";
+import OrderCardCollection from "../collections/base/OrderCard";
 import AdTemplateThreeCollection from "../collections/base/AdTemplateThree";
 import AdTemplateOneCollection from "../collections/base/AdTemplateOne";
 import AdTemplateTwoCollection from "../collections/base/AdTemplateTwo";
@@ -66,7 +67,8 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-{func: OrderCardCollection, custom: false},
+    { func: RestaurantDetailCollection, custom: false },
+    { func: OrderCardCollection, custom: false },
     { func: AdTemplateThreeCollection, custom: false },
     { func: AdTemplateOneCollection, custom: false },
     { func: SVGCollection, customName: "", custom: false },
@@ -168,7 +170,8 @@ const PrivateNavigator = () => {
                       navigation.goBack();
                     }
                   }}
-                  style={{ paddingLeft: 16, margin: 8 }}>
+                  style={{ paddingLeft: 16, margin: 8 }}
+                >
                   <AntDesign name="arrowleft" size={24} color="black" />
                 </TouchableOpacity>
               ),
