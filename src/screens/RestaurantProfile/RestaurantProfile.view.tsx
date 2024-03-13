@@ -158,7 +158,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
             </View>
             <View style={styles.sectionContainer}>
               <View>
-                <Typography variant="title5">Detail</Typography>
+                <Typography variant="title5">Details</Typography>
               </View>
               <View style={styles.sectionBodyContainer}>
                 <RestaurantDetail

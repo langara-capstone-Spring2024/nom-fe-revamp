@@ -39,10 +39,6 @@ const RestaurantProfile = () => {
     navigation.setOptions({ headerShown: false, useHeaderHeight: 1 });
   }, []);
 
-  useEffect(() => {
-    console.log(merchant?.operatingTimes);
-  }, [merchant]);
-
   const generatedProps = {
     isRefreshing,
     merchant,
