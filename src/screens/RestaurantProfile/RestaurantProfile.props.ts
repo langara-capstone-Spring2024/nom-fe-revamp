@@ -8,4 +8,5 @@ export interface RestaurantProfileGeneratedProps {
   discounts: Discount[];
   ratings: Rating[];
   handleRefresh: () => void;
+  handleNext: () => void;
 }

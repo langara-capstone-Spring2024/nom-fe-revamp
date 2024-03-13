@@ -31,8 +31,8 @@ const RestaurantProfile = () => {
     }, 1000);
   };
 
-  const handleBack = () => {
-    NavigationService.goBack();
+  const handleNext = () => {
+    console.log("Next");
   };
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const RestaurantProfile = () => {
     discounts,
     ratings,
     handleRefresh,
+    handleNext,
   };
   return <RestaurantProfileView {...generatedProps} />;
 };

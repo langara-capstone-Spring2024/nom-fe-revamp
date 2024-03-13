@@ -24,6 +24,16 @@ const createStyles = (theme: Theme) =>
       borderTopWidth: 1,
       paddingVertical: 16,
     },
+    buttonContainer: {
+      position: "absolute",
+      bottom: 0,
+      backgroundColor: "white",
+      alignItems: "center",
+      padding: 12,
+      paddingBottom: 32,
+      borderTopColor: t.Border.default,
+      borderTopWidth: 1,
+    },
     sectionContainer: {
       padding: 16,
       backgroundColor: t.Surface.default,

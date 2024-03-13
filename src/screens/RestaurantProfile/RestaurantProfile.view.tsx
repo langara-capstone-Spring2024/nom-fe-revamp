@@ -8,7 +8,7 @@ import {
 import createStyles from "./RestaurantProfile.style";
 import { RestaurantProfileGeneratedProps } from "./RestaurantProfile.props";
 import React, { useMemo } from "react";
-import { SegmentedButtons, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import RestaurantDescription from "../../components/base/RestaurantDescription";
 import ReviewCard from "../../components/base/ReviewCard";
 import Typography from "../../components/base/Typography";
@@ -18,9 +18,17 @@ import CouponCarousel from "../../components/base/CouponCarousel";
 import { Rating } from "react-native-ratings";
 import { Arrow } from "../../components/base/SVG";
 import NavigationService from "../../navigation/NavigationService";
+import Button from "../../components/base/Button";
 
 const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
-  const { isRefreshing, merchant, discounts, ratings, handleRefresh } = props;
+  const {
+    isRefreshing,
+    merchant,
+    discounts,
+    ratings,
+    handleRefresh,
+    handleNext,
+  } = props;
 
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -29,7 +37,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
     <>
       <ScrollView
         style={styles.container}
-        contentContainerStyle={{ gap: 8 }}
+        contentContainerStyle={{ gap: 8, paddingBottom: 112 }}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
@@ -175,6 +183,14 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
           </>
         )}
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <Button
+          text="Next"
+          onPress={handleNext}
+          takeFullWidth
+          isDisabled={discounts.length !== 0 ? false : true}
+        />
+      </View>
     </>
   );
 };
