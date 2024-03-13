@@ -152,21 +152,23 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     />
                   </View>
                 </View>
-                <View>
-                  {ratings.map((rating, index) => (
-                    <View style={styles.reviewContainer} key={index}>
-                      <ReviewCard
-                        avatarImageUrl={`https://picsum.photos/360?random=${
-                          index + 1
-                        }`}
-                        userName={`${rating.consumer.user.firstName} ${rating.consumer.user.lastName}`}
-                        postedDate={new Date(rating.createdAt)}
-                        rating={rating.rating}
-                        content={rating.comment}
-                      />
-                    </View>
-                  ))}
-                </View>
+                {ratings.length !== 0 && (
+                  <View>
+                    {ratings.map((rating, index) => (
+                      <View style={styles.reviewContainer} key={index}>
+                        <ReviewCard
+                          avatarImageUrl={`https://picsum.photos/360?random=${
+                            index + 1
+                          }`}
+                          userName={`${rating.consumer.user.firstName} ${rating.consumer.user.lastName}`}
+                          postedDate={new Date(rating.createdAt)}
+                          rating={rating.rating}
+                          content={rating.comment}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             </View>
             <View style={styles.sectionContainer}>
