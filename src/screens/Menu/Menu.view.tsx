@@ -12,6 +12,8 @@ import TextArea from "../../components/base/TextArea";
 import Typography from "../../components/base/Typography";
 import Button from "../../components/base/Button";
 import MenuImagePicker from "../../components/base/MenuImagePicker";
+import useKeyboard from "../../utils/hooks/useKeyboard";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const MenuView = (props: MenuGeneratedProps) => {
   const {
@@ -36,8 +38,9 @@ const MenuView = (props: MenuGeneratedProps) => {
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const isDisabled = !name || !price;
+  const isDisabled = !name || !price || !!nameError || !!priceError;
   const [remainingChars, setRemainingChars] = useState(100);
+  const isKeyboardOpen = useKeyboard();
 
   const handleDescriptionChange = (text: string) => {
     if (text.length <= 100) {
@@ -48,11 +51,13 @@ const MenuView = (props: MenuGeneratedProps) => {
 
   return isAddingMenuItem ? (
     <View style={styles.addItemContainer}>
-      <ScrollView>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.keyboard}
+        extraScrollHeight={90}
+      >
         <View style={styles.imagePicker}>
           <MenuImagePicker image={localImage} setImage={handleImageChange} />
         </View>
-
         <View style={styles.inputContainer}>
           <View style={styles.nameContainer}>
             <TextInputField
@@ -62,7 +67,6 @@ const MenuView = (props: MenuGeneratedProps) => {
               error={nameError}
             />
           </View>
-
           <View style={styles.priceContainer}>
             <View style={styles.priceTextfieldContainer}>
               <TextInputField
@@ -72,7 +76,6 @@ const MenuView = (props: MenuGeneratedProps) => {
                 error={priceError}
               />
             </View>
-
             <View
               style={
                 priceError ? styles.errorPriceCurrency : styles.priceCurrency
@@ -83,7 +86,6 @@ const MenuView = (props: MenuGeneratedProps) => {
               </Typography>
             </View>
           </View>
-
           <View style={styles.textareaContainer}>
             <TextArea
               label="Description (optional)"
@@ -92,13 +94,11 @@ const MenuView = (props: MenuGeneratedProps) => {
               maxLength={100}
             />
           </View>
-
           <Typography variant="bodyXs" alignment="right" color="subtle">
             {100 - remainingChars}/100
           </Typography>
         </View>
-        
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       <View style={styles.buttonContainer}>
         <Button

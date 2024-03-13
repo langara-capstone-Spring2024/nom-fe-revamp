@@ -54,7 +54,7 @@ const createStyles = (theme: Theme) =>
       flex: 1,
     },
 
-    textareaContainer:{
+    textareaContainer: {
       marginBottom: 2,
     },
 
@@ -64,6 +64,10 @@ const createStyles = (theme: Theme) =>
       left: 0,
       right: 0,
       paddingHorizontal: 16,
+    },
+
+    keyboard: {
+      // marginLeft: -36,
     },
   });
 

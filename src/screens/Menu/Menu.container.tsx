@@ -37,7 +37,6 @@ const Menu = () => {
 
   const { data: menuItems, error } = GetMenu();
 
-
   if (error) {
     console.error("Error fetching menu items:", error);
   }
@@ -77,40 +76,50 @@ const Menu = () => {
         const response = await fetch(localImage.uri || "");
         const blob = await response.blob();
         const contentType = response.headers.get("Content-Type");
-
+  
         if (!contentType) return;
-
+  
         const params: S3Params = {
           Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME || "",
           Key: `uploads/${uuid}`,
           Body: blob,
           ContentType: contentType,
         };
-
+  
         // Upload the image to S3
         const result = await s3.upload(params).promise();
         console.log(result.Location);
-
-        // Add menu item to MongoDB
+  
+        // Add menu item to MongoDB with image URL
         const menuItemData = {
           imageUrl: result.Location,
-          name: name,
+          name,
           originalPrice: price,
-          description: description,
+          description: description || "",
         };
-
+  
         addMenu({ formData: menuItemData });
-
-        setName("");
-        setPrice("");
-        setDescription("");
-        setLocalImage(undefined);
-        setIsAddingMenuItem(false);
+      } else {
+        const menuItemData = {
+          imageUrl: undefined,
+          name,
+          originalPrice: price,
+          description: description || "",
+        };
+  
+        addMenu({ formData: menuItemData });
       }
+  
+      setName("");
+      setPrice("");
+      setDescription("");
+      setLocalImage(undefined);
+      setIsAddingMenuItem(false);
     } catch (error) {
       console.error("Error adding menu item:", error);
     }
   };
+  
 
   const generatedProps = {
     localImage: localImage,

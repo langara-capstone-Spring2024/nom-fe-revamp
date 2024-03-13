@@ -20,7 +20,7 @@ export interface MenuGeneratedProps {
   nameError: string;
   setNameError: (text: string) => void;
   priceError: string;
-  setPriceError: (text: string ) => void;
-  handlePriceChange: (text: string ) => void;
-  handleNameChange: (text: string ) => void;
+  setPriceError: (text: string) => void;
+  handlePriceChange: (text: string) => void;
+  handleNameChange: (text: string) => void;
 }

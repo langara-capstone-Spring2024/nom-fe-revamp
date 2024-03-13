@@ -28,19 +28,19 @@ export const addMenuItem = () => {
       formData,
     }: {
       formData: {
-        imageUrl: String;
-        name: String;
-        originalPrice: String;
-        description: String;
+        imageUrl?: string;
+        name: string;
+        originalPrice: string;
+        description?: string;
       };
     }) => {
       const { imageUrl, name, originalPrice, description } = formData;
 
       const response = await menuService.addMenuItem(
-        imageUrl,
+        imageUrl !== undefined ? imageUrl : "",
         name,
         originalPrice,
-        description
+        description !== undefined ? description : ""
       );
 
       return response.data;
