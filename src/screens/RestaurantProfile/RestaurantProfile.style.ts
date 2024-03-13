@@ -5,9 +5,17 @@ import { theme as t } from "../../utils/Theme";
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: { flex: 1 },
+    segmentContainer: {
+      marginHorizontal: -16,
+      borderBottomColor: t.Border.default,
+      borderBottomWidth: 1,
+    },
     image: {
       width: "100%",
       aspectRatio: 1,
+    },
+    carouselContainer: {
+      marginHorizontal: -16,
     },
     ratingContainer: {
       flexDirection: "row",

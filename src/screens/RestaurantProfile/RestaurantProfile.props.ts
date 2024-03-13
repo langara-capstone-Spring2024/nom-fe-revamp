@@ -1,4 +1,4 @@
-import { Merchant } from "../../types";
+import { Merchant, Option } from "../../types";
 import { Discount } from "../../types/Discounts";
 import { Rating } from "../../types/Rating";
 

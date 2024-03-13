@@ -2,12 +2,10 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import RestaurantProfileView from "./RestaurantProfile.view";
 import { useEffect, useState } from "react";
 import { GetMerchant } from "../../services/react-query/queries/user";
-import NavigationService from "../../navigation/NavigationService";
 import { GetRatingsByMerchant } from "../../services/react-query/queries/rating";
-import {
-  GetActiveDiscountsByMerchant,
-  GetActiveDiscountsByMerchants,
-} from "../../services/react-query/queries/discount";
+import { GetActiveDiscountsByMerchant } from "../../services/react-query/queries/discount";
+import { Pressable } from "react-native";
+import { Arrow } from "../../components/base/SVG";
 
 const RestaurantProfile = () => {
   const { merchantId } = useRoute().params as {
@@ -36,7 +34,10 @@ const RestaurantProfile = () => {
   };
 
   useEffect(() => {
-    navigation.setOptions({ headerShown: false, useHeaderHeight: 1 });
+    navigation.setOptions({
+      headerTitle: merchant?.name,
+      headerShown: false,
+    });
   }, []);
 
   const generatedProps = {
