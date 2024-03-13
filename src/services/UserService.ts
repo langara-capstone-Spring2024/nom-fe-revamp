@@ -12,6 +12,16 @@ export class UserService extends BaseService {
     return response;
   }
 
+  async getMerchant(merchantId: string) {
+    const response = await apiClient.get("api/merchant", {
+      params: {
+        merchantId: merchantId,
+      },
+    });
+
+    return response;
+  }
+
   async addImage(formData: FormData) {
     // const response = await apiClient.post("api/upload-multi", formData);
 

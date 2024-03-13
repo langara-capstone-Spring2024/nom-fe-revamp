@@ -59,6 +59,7 @@ import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
+import RestaurantProfile from "../screens/RestaurantProfile";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -116,6 +117,11 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
+    {
+      func: RestaurantProfile,
+      customName: "Restaurant Profile",
+      custom: false,
+    },
   ];
   const {
     isAdScreen,

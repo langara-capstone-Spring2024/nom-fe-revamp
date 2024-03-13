@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Image,
   LayoutChangeEvent,
+  Pressable,
   RefreshControl,
   SafeAreaView,
   View,
@@ -16,7 +17,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Typography from "../../components/base/Typography";
 import DishCard from "../../components/base/DishCard";
-import { ArrowRight } from "../../components/base/SVG";
+import { Arrow } from "../../components/base/SVG";
+import NavigationService from "../../navigation/NavigationService";
 
 const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
   const {
@@ -160,7 +162,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         </ScrollView>
         <View style={styles.titleContainer} onLayout={handleLayoutY}>
           <Typography variant="title5">Browse Cusines</Typography>
-          <ArrowRight />
+          <Arrow />
         </View>
         {!isFetchingMerchants ? (
           <>
@@ -170,48 +172,54 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                   <>
                     <View style={styles.listContainer}>
                       {merchants.map((merchant, merchantItemIndex) => (
-                        <RestaurantCard
-                          imageUrl={merchant.imageUrls[0]}
-                          restaurantName={merchant.name}
-                          cost={Number(merchant.cost)}
-                          rating={
-                            ratingsData[merchantItemIndex].data.reduce(
-                              (totalRating, rating) =>
-                                totalRating + rating.rating,
-                              0
-                            ) / ratingsData[merchantItemIndex].data.length || 0
-                          }
-                          cuisineType={merchant.cuisineType}
-                          distance="3.7km"
-                          cityName="Vancouver"
-                          coupons={discountsData[merchantItemIndex].data.map(
-                            (discount) => ({
-                              time: `${new Date(
-                                discount.validFromTime
-                              ).getHours()}:${
-                                10 <
-                                new Date(discount.validFromTime).getMinutes()
-                                  ? new Date(
-                                      discount.validFromTime
-                                    ).getMinutes()
-                                  : "0" +
-                                    new Date(
-                                      discount.validFromTime
-                                    ).getMinutes()
-                              }`,
-                              // TODO
-                              // DB will be changed
-                              // amount: discount.percentDiscount,
-                              amount: 30,
+                        <Pressable
+                          onPress={() =>
+                            NavigationService.navigate("RestaurantProfile", {
+                              merchantId: merchant._id,
                             })
-                          )}
+                          }
                           key={merchantItemIndex}
-                        />
+                        >
+                          <RestaurantCard
+                            imageUrl={merchant.imageUrls[0]}
+                            restaurantName={merchant.name}
+                            cost={merchant.cost}
+                            rating={
+                              ratingsData[merchantItemIndex].data.reduce(
+                                (totalRating, rating) =>
+                                  totalRating + rating.rating,
+                                0
+                              ) / ratingsData[merchantItemIndex].data.length ||
+                              0
+                            }
+                            cuisineType={merchant.cuisineType}
+                            distance="3.7km"
+                            cityName="Vancouver"
+                            coupons={discountsData[merchantItemIndex].data.map(
+                              (discount) => ({
+                                time: `${new Date(
+                                  discount.validFromTime
+                                ).getHours()}:${
+                                  10 <
+                                  new Date(discount.validFromTime).getMinutes()
+                                    ? new Date(
+                                        discount.validFromTime
+                                      ).getMinutes()
+                                    : "0" +
+                                      new Date(
+                                        discount.validFromTime
+                                      ).getMinutes()
+                                }`,
+                                amount: discount.percentDiscount * 100,
+                              })
+                            )}
+                          />
+                        </Pressable>
                       ))}
                     </View>
                     <View style={styles.titleContainer}>
                       <Typography variant="title5">Dishes for you</Typography>
-                      <ArrowRight />
+                      <Arrow />
                     </View>
                     <View style={styles.listContainer}>
                       {0 <
@@ -241,7 +249,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                                   cuisineType={menuDiscount.menu.cuisineType}
                                   cityName="Vancouver"
                                   discountAmount={30}
-                                  cost={Number(menuDiscount.merchant.cost)}
+                                  cost={menuDiscount.merchant.cost}
                                   bordered
                                   key={menuDiscountItemIndex}
                                 />

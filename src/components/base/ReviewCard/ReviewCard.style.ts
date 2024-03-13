@@ -7,6 +7,7 @@ const createStyles = (theme: Theme) =>
     container: {
       gap: 8,
       alignItems: "flex-start",
+      backgroundColor: t.Surface.default,
     },
     headerContainer: {
       flexDirection: "row",
