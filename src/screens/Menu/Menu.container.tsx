@@ -30,13 +30,13 @@ const Menu = () => {
   const [nameError, setNameError] = useState<string>("");
   const [priceError, setPriceError] = useState<string>("");
   const [updatedMenu, setUpdatedMenu] = useState<Menus[]>([]);
+  const [remainingChars, setRemainingChars] = useState(100);
 
   useEffect(() => {
     setMenuScreen(true);
   }, []);
 
   const { data: menuItems, error } = GetMenu();
-
 
   if (error) {
     console.error("Error fetching menu items:", error);
@@ -77,38 +77,55 @@ const Menu = () => {
         const response = await fetch(localImage.uri || "");
         const blob = await response.blob();
         const contentType = response.headers.get("Content-Type");
-
+  
         if (!contentType) return;
-
+  
         const params: S3Params = {
           Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME || "",
           Key: `uploads/${uuid}`,
           Body: blob,
           ContentType: contentType,
         };
-
+  
         // Upload the image to S3
         const result = await s3.upload(params).promise();
         console.log(result.Location);
-
-        // Add menu item to MongoDB
+  
+        // Add menu item to MongoDB with image URL
         const menuItemData = {
           imageUrl: result.Location,
-          name: name,
+          name,
           originalPrice: price,
-          description: description,
+          description: description || "",
         };
-
+  
         addMenu({ formData: menuItemData });
-
-        setName("");
-        setPrice("");
-        setDescription("");
-        setLocalImage(undefined);
-        setIsAddingMenuItem(false);
+      } else {
+        const menuItemData = {
+          imageUrl: undefined,
+          name,
+          originalPrice: price,
+          description: description || "",
+        };
+  
+        addMenu({ formData: menuItemData });
       }
+  
+      setName("");
+      setPrice("");
+      setDescription("");
+      setLocalImage(undefined);
+      setIsAddingMenuItem(false);
     } catch (error) {
       console.error("Error adding menu item:", error);
+    }
+  };
+
+  
+  const handleDescriptionChange = (text: string) => {
+    if (text.length <= 100) {
+      setDescription(text);
+      setRemainingChars(100 - text.length);
     }
   };
 
@@ -131,6 +148,8 @@ const Menu = () => {
     setPriceError: setPriceError,
     handleNameChange: handleNameChange,
     handlePriceChange: handlePriceChange,
+    handleDescriptionChange: handleDescriptionChange,
+    remainingChars: remainingChars
   };
 
   return <MenuView {...generatedProps} />;

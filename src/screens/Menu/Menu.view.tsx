@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { View, ScrollView } from "react-native";
 import createStyles from "./Menu.style";
 import MenuCard from "../../components/base/MenuCard";
@@ -12,6 +12,8 @@ import TextArea from "../../components/base/TextArea";
 import Typography from "../../components/base/Typography";
 import Button from "../../components/base/Button";
 import MenuImagePicker from "../../components/base/MenuImagePicker";
+import useKeyboard from "../../utils/hooks/useKeyboard";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const MenuView = (props: MenuGeneratedProps) => {
   const {
@@ -33,53 +35,64 @@ const MenuView = (props: MenuGeneratedProps) => {
     setNameError,
     priceError,
     setPriceError,
+    handleDescriptionChange,
+    remainingChars
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const isDisabled = !name || !price;
+  const isDisabled = !name || !price || !!nameError || !!priceError;
+  const isKeyboardOpen = useKeyboard();
 
   return isAddingMenuItem ? (
     <View style={styles.addItemContainer}>
-      <View style={styles.imagePicker}>
-        <MenuImagePicker image={localImage} setImage={handleImageChange} />
-      </View>
-
-      <View style={styles.inputContainer}>
-        <View style={styles.nameContainer}>
-          <TextInputField
-            label="Name"
-            value={name}
-            setValue={handleNameChange}
-            error={nameError}
-          />
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.keyboard}
+        extraScrollHeight={90}
+      >
+        <View style={styles.imagePicker}>
+          <MenuImagePicker image={localImage} setImage={handleImageChange} />
         </View>
-
-        <View style={styles.priceContainer}>
-          <View style={styles.priceTextfieldContainer}>
+        <View style={styles.inputContainer}>
+          <View style={styles.nameContainer}>
             <TextInputField
-              label="Price"
-              value={price}
-              setValue={handlePriceChange}
-              error={priceError}
+              label="Name"
+              value={name}
+              setValue={handleNameChange}
+              error={nameError}
             />
           </View>
-          <View
-            style={
-              priceError ? styles.errorPriceCurrency : styles.priceCurrency
-            }
-          >
-            <Typography variant="body" color="primary">
-              CA$
-            </Typography>
+          <View style={styles.priceContainer}>
+            <View style={styles.priceTextfieldContainer}>
+              <TextInputField
+                label="Price"
+                value={price}
+                setValue={handlePriceChange}
+                error={priceError}
+              />
+            </View>
+            <View
+              style={
+                priceError ? styles.errorPriceCurrency : styles.priceCurrency
+              }
+            >
+              <Typography variant="body" color="primary">
+                CA$
+              </Typography>
+            </View>
           </View>
+          <View style={styles.textareaContainer}>
+            <TextArea
+              label="Description (optional)"
+              value={description}
+              setValue={handleDescriptionChange}
+              maxLength={100}
+            />
+          </View>
+          <Typography variant="bodyXs" alignment="right" color="subtle">
+            {100 - remainingChars}/100
+          </Typography>
         </View>
-
-        <TextArea
-          label="Description (optional)"
-          value={description}
-          setValue={onDescriptionChange}
-        />
-      </View>
+      </KeyboardAwareScrollView>
 
       <View style={styles.buttonContainer}>
         <Button
@@ -101,7 +114,8 @@ const MenuView = (props: MenuGeneratedProps) => {
       />
       <ScrollView>
         <View style={styles.menuCardContainer}>
-          {menuItems && menuItems.length > 0 &&  
+          {menuItems &&
+            menuItems.length > 0 &&
             menuItems.map((item: Menus) => (
               <MenuCard
                 key={item._id}

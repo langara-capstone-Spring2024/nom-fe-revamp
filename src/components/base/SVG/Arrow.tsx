@@ -1,7 +1,7 @@
 import { SvgXml } from "react-native-svg";
 import { SVGProps } from "./SVG.props";
 
-const ArrowRight = (props: SVGProps) => {
+const Arrow = (props: SVGProps) => {
   const { fill, width, height, stroke, style } = props;
 
   const xml = `
@@ -13,4 +13,4 @@ const ArrowRight = (props: SVGProps) => {
   return <SvgXml xml={xml} style={style} />;
 };
 
-export default ArrowRight;
+export default Arrow;

@@ -5,7 +5,7 @@ import RatingBars from "../../components/base/RatingBars";
 const RatingBarsCollection = () => {
   return (
     <View style={styles.container}>
-      <RatingBars ratingNumbers={[5, 4, 3, 2, 5]} />
+      <RatingBars ratingNumbers={[10, 4, 3, 2, 5]} />
     </View>
   );
 };

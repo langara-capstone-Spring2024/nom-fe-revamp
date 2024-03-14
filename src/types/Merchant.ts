@@ -1,3 +1,6 @@
+import { OperatingTime } from "./OperatingTime";
+import { User } from "./User";
+
 export interface Merchant {
   _id: string;
   name: string;
@@ -14,11 +17,8 @@ export interface Merchant {
     | "Mexican"
     | "Thai"
     | "Others";
-  cost: "1" | "2" | "3" | "4";
-  openings: Date[];
-  closings: Date[];
+  cost: 1 | 2 | 3 | 4;
+  operatingTimes: OperatingTime[];
   isVerified: boolean;
-  user: {
-    email: string;
-  };
+  user: User;
 }

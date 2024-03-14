@@ -124,6 +124,25 @@ export const GetActiveDiscountsByMerchants = (merchants: Merchant[]) => {
   });
 };
 
+export const GetActiveDiscountsByMerchant = (merchantId: string) => {
+  const discountService = new DiscountService();
+  discountService.cancelRequests();
+
+  return useQuery<Discount[]>({
+    queryKey: [QUERY_KEYS.DISCOUNTS, merchantId],
+    queryFn: async () => {
+      try {
+        const response: AxiosResponse =
+          await discountService.getActiveDiscountsByMerchant(merchantId);
+
+        return response.data;
+      } catch (error) {
+        return [];
+      }
+    },
+  });
+};
+
 export const GetDiscount = (discountId: string) => {
   const discountService = new DiscountService();
   discountService.cancelRequests();

@@ -29,7 +29,9 @@ const MenuCard = (props: MenuCardProps) => {
           </Typography>
         </View>
         <Typography variant="bodySm" alignment="left" color="medium">
-          {truncateDescription(itemDescription, 64)}
+          {itemDescription
+            ? truncateDescription(itemDescription, 64)
+            : "No description available"}
         </Typography>
       </View>
 

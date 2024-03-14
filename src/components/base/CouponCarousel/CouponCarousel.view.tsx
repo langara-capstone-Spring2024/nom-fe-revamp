@@ -7,7 +7,7 @@ import Coupon from "../Coupon/Coupon.view";
 import { Pressable } from "react-native";
 
 const CouponCarousel = (props: CouponCarouselProps) => {
-  const { coupons, onSelect, unselectable } = props;
+  const { coupons, onSelect = () => null, unselectable } = props;
 
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);

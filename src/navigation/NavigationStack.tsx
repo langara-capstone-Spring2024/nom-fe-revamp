@@ -11,6 +11,7 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import SegmentCollection from "../collections/base/Segment";
 import RestaurantDetailCollection from "../collections/base/RestaurantDetail";
 import OrderCardCollection from "../collections/base/OrderCard";
 import AdTemplateThreeCollection from "../collections/base/AdTemplateThree";
@@ -60,6 +61,7 @@ import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
 import Items from "../screens/Items";
+import RestaurantProfile from "../screens/RestaurantProfile";
 import OrderDetails from "../screens/OrderDetails";
 
 const Stack = createStackNavigator();
@@ -69,7 +71,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
-
+    { func: SegmentCollection, custom: false },
     { func: RestaurantDetailCollection, custom: false },
     { func: OrderCardCollection, custom: false },
     { func: AdTemplateThreeCollection, custom: false },
@@ -120,6 +122,11 @@ const PrivateNavigator = () => {
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
     { func: Items, customName: "Items", custom: false },
+    {
+      func: RestaurantProfile,
+      customName: "Restaurant Profile",
+      custom: false,
+    },
     { func: OrderDetails, customName: "Order Details", custom: false },
   ];
   const {

@@ -17,7 +17,7 @@ const SampleScreen = (): JSX.Element => {
     isError: isErrorOnMerchants,
     data: merchants,
     refetch: refetchMerchants,
-  } = GetMerchants();
+  } = GetMerchants("");
 
   const onLogout = async () => {
     try {

@@ -15,6 +15,7 @@ const createStyles = (theme: Theme) =>
       marginBottom: 16,
     },
     typography: {
+      flex: 1,
       lineHeight: undefined,
     },
     nameContainer: {

@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { ReviewCardProps } from "./ReviewCard.props";
 import createStyles from "./ReviewCard.style";
 import React, { useMemo } from "react";
@@ -25,7 +25,7 @@ const ReviewCard = (props: ReviewCardProps) => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <UserAvatar source={avatarImageUrl} sizing="large" />
-        <View>
+        <View style={{ flex: 1, alignItems: "flex-start" }}>
           <Typography>{userName}</Typography>
           <Typography variant="bodyXs" color="subtle">
             {getDays(postedDate) === 0
@@ -34,19 +34,19 @@ const ReviewCard = (props: ReviewCardProps) => {
               ? `${getDays(postedDate)} day ago`
               : `${getDays(postedDate)} days ago`}
           </Typography>
+          <Rating
+            type="custom"
+            ratingCount={5}
+            startingValue={rating}
+            imageSize={16}
+            tintColor="#FAFAFA"
+            ratingBackgroundColor="lightgray"
+            ratingColor="orange"
+            readonly
+          />
         </View>
       </View>
-      <Rating
-        type="custom"
-        ratingCount={5}
-        startingValue={rating}
-        imageSize={16}
-        tintColor="white"
-        ratingBackgroundColor="lightgray"
-        ratingColor="orange"
-        readonly
-      />
-      <Text>{content}</Text>
+      <Typography color="subtle">{content}</Typography>
     </View>
   );
 };
