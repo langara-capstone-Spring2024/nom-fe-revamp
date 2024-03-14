@@ -59,6 +59,7 @@ import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
+import OrderDetails from "../screens/OrderDetails";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -67,6 +68,7 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+
     { func: RestaurantDetailCollection, custom: false },
     { func: OrderCardCollection, custom: false },
     { func: AdTemplateThreeCollection, custom: false },
@@ -116,6 +118,7 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
+    { func: OrderDetails, customName: "Order Details", custom: false },
   ];
   const {
     isAdScreen,
