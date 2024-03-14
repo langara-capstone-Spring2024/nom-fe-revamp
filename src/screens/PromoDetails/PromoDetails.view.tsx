@@ -68,7 +68,7 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
               />
             </TouchableOpacity>
             {!!selectedMenuItemIds &&
-              selectedMenuItemIds.map((menu) => (
+              selectedMenuItemIds.map((menu, index) => (
                 <MenuList
                   menuId={menu._id || ""}
                   menuName={menu.name}
@@ -76,6 +76,7 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
                   menuImage={""}
                   key={menu._id}
                   hideRadioButton
+                  isLast={index === selectedMenuItemIds.length - 1}
                 />
               ))}
           </Accordion>

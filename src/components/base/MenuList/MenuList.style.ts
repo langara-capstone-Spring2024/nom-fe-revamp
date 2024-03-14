@@ -31,7 +31,6 @@ const createStyles = (theme: Theme) =>
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      borderBottomWidth: 1,
       borderBottomColor: t.Border.default,
       paddingVertical: 24,
     },

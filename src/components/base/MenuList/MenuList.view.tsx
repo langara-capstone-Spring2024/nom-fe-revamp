@@ -18,6 +18,7 @@ const MenuList = (props: MenuListProps) => {
     selected,
     handleSelect,
     hideRadioButton,
+    isLast,
   } = props;
   return (
     <TouchableWithoutFeedback
@@ -41,7 +42,7 @@ const MenuList = (props: MenuListProps) => {
             </View>
           )}
         </View>
-        <View style={styles.menuRight}>
+        <View style={[styles.menuRight, { borderBottomWidth: isLast ? 0 : 1 }]}>
           <View style={styles.menuDetailsContainer}>
             <View>
               <Typography>{menuName}</Typography>

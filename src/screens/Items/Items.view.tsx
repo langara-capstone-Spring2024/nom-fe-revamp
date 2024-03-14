@@ -16,7 +16,7 @@ const Items = (props: ItemsGeneratedProps) => {
     <View style={styles.itemContainer}>
       <View style={styles.itemList}>
         {allMenu ? (
-          allMenu.map((menu) => (
+          allMenu.map((menu, index) => (
             <MenuList
               key={menu._id}
               menuId={menu._id}
@@ -25,6 +25,7 @@ const Items = (props: ItemsGeneratedProps) => {
               menuPrice={menu.originalPrice}
               handleSelect={() => handleSelectMenu(menu)}
               selected={selectedMenuIds.includes(menu)}
+              isLast={index === allMenu.length - 1}
             />
           ))
         ) : (
