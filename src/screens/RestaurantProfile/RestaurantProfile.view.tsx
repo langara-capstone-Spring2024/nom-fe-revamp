@@ -23,14 +23,19 @@ import Button from "../../components/base/Button";
 import Segment from "../../components/base/Segment";
 import { useNavigation } from "@react-navigation/native";
 import { Option } from "../../types";
+import MenuCard from "../../components/base/MenuCard";
 
 const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
   const {
     isRefreshing,
+    selectedCoupon,
     merchant,
+    consumerDiscounts,
     discounts,
+    menuDiscounts,
     ratings,
     handleRefresh,
+    handleSelectCoupon,
     handleNext,
   } = props;
 
@@ -134,17 +139,27 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     <View style={styles.sectionBodyContainer}>
                       <View style={styles.carouselContainer}>
                         <CouponCarousel
-                          coupons={discounts.map((discount) => ({
+                          coupon={selectedCoupon}
+                          coupons={discounts.map((discountMapItem) => ({
+                            _id: discountMapItem._id,
                             time: `${new Date(
-                              discount.validFromTime
+                              discountMapItem.validFromTime
                             ).getHours()}:${
-                              10 < new Date(discount.validFromTime).getMinutes()
-                                ? new Date(discount.validFromTime).getMinutes()
+                              10 <
+                              new Date(
+                                discountMapItem.validFromTime
+                              ).getMinutes()
+                                ? new Date(
+                                    discountMapItem.validFromTime
+                                  ).getMinutes()
                                 : "0" +
-                                  new Date(discount.validFromTime).getMinutes()
+                                  new Date(
+                                    discountMapItem.validFromTime
+                                  ).getMinutes()
                             }`,
-                            amount: discount.percentDiscount * 100,
+                            amount: discountMapItem.percentDiscount * 100,
                           }))}
+                          onSelect={handleSelectCoupon}
                         />
                       </View>
                     </View>
@@ -176,7 +191,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                         name={merchant.name}
                         address={merchant.address}
                         cuisineType={merchant.cuisineType}
-                        reservationNumber={234}
+                        reservationNumber={consumerDiscounts.length}
                         cost={merchant.cost}
                         rating={
                           ratings.reduce(
@@ -198,17 +213,27 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     {discounts.length !== 0 && (
                       <View style={styles.carouselContainer}>
                         <CouponCarousel
-                          coupons={discounts.map((discount) => ({
+                          coupon={selectedCoupon}
+                          coupons={discounts.map((discountMapItem) => ({
+                            _id: discountMapItem._id,
                             time: `${new Date(
-                              discount.validFromTime
+                              discountMapItem.validFromTime
                             ).getHours()}:${
-                              10 < new Date(discount.validFromTime).getMinutes()
-                                ? new Date(discount.validFromTime).getMinutes()
+                              10 <
+                              new Date(
+                                discountMapItem.validFromTime
+                              ).getMinutes()
+                                ? new Date(
+                                    discountMapItem.validFromTime
+                                  ).getMinutes()
                                 : "0" +
-                                  new Date(discount.validFromTime).getMinutes()
+                                  new Date(
+                                    discountMapItem.validFromTime
+                                  ).getMinutes()
                             }`,
-                            amount: discount.percentDiscount * 100,
+                            amount: discountMapItem.percentDiscount * 100,
                           }))}
+                          onSelect={handleSelectCoupon}
                         />
                       </View>
                     )}
@@ -225,7 +250,71 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
               <View>
                 <Typography variant="title5">Menu</Typography>
               </View>
-              <View style={styles.sectionBodyContainer}></View>
+              {menuDiscounts.filter((menuDiscountFilterItem) =>
+                selectedCoupon
+                  ? menuDiscountFilterItem.discount._id === selectedCoupon?._id
+                  : true
+              ).length !== 0 && (
+                <View style={styles.sectionBodyContainer}>
+                  {menuDiscounts
+                    .filter((menuDiscountFilterItem) =>
+                      selectedCoupon
+                        ? menuDiscountFilterItem.discount._id ===
+                          selectedCoupon?._id
+                        : true
+                    )
+                    .map((menuDiscountMapItem, menuDiscountMapItemIndex) => (
+                      <View
+                        style={[
+                          { flexDirection: "row", gap: 16, paddingVertical: 8 },
+                          menuDiscountMapItemIndex !==
+                            menuDiscounts.length - 1 && {
+                            borderBottomColor: "#DADADA",
+                            borderBottomWidth: 1,
+                          },
+                        ]}
+                        key={menuDiscountMapItemIndex}
+                      >
+                        <View style={{ flex: 7, gap: 4 }}>
+                          <Typography>
+                            {menuDiscountMapItem.menu.name}
+                          </Typography>
+                          <View style={{ flexDirection: "row", gap: 16 }}>
+                            <Typography
+                              variant="bodySm"
+                              color="subtle"
+                              otherStyle={{
+                                textDecorationLine: "line-through",
+                              }}
+                            >
+                              $
+                              {(
+                                menuDiscountMapItem.menu.originalPrice *
+                                menuDiscountMapItem.discount.percentDiscount
+                              ).toFixed(2)}
+                            </Typography>
+                            <Typography variant="bodySm" color="subtle">
+                              ${menuDiscountMapItem.menu.originalPrice}
+                            </Typography>
+                          </View>
+                          <Typography variant="bodySm" color="subtle">
+                            {menuDiscountMapItem.menu.description}
+                          </Typography>
+                        </View>
+                        <View style={{ flex: 3 }}>
+                          <Image
+                            source={{ uri: menuDiscountMapItem.menu.imageUrl }}
+                            style={{
+                              width: "100%",
+                              aspectRatio: 1,
+                              borderRadius: 12,
+                            }}
+                          />
+                        </View>
+                      </View>
+                    ))}
+                </View>
+              )}
             </View>
             <View
               onLayout={(event: LayoutChangeEvent) =>
@@ -286,16 +375,19 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                 </View>
                 {ratings.length !== 0 && (
                   <View>
-                    {ratings.map((rating, index) => (
-                      <View style={styles.reviewContainer} key={index}>
+                    {ratings.map((ratingMapItem, ratingMapItemIndex) => (
+                      <View
+                        style={styles.reviewContainer}
+                        key={ratingMapItemIndex}
+                      >
                         <ReviewCard
                           avatarImageUrl={`https://picsum.photos/360?random=${
-                            index + 1
+                            ratingMapItemIndex + 1
                           }`}
-                          userName={`${rating.consumer.user.firstName} ${rating.consumer.user.lastName}`}
-                          postedDate={new Date(rating.createdAt)}
-                          rating={rating.rating}
-                          content={rating.comment}
+                          userName={`${ratingMapItem.consumer.user.firstName} ${ratingMapItem.consumer.user.lastName}`}
+                          postedDate={new Date(ratingMapItem.createdAt)}
+                          rating={ratingMapItem.rating}
+                          content={ratingMapItem.comment}
                         />
                       </View>
                     ))}
@@ -330,7 +422,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
           text="Next"
           onPress={handleNext}
           takeFullWidth
-          isDisabled={discounts.length !== 0 ? false : true}
+          isDisabled={discounts.length !== 0 && selectedCoupon ? false : true}
         />
       </View>
     </>

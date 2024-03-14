@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import CouponCarousel from "../../components/base/CouponCarousel";
+import { Coupon } from "../../types/Coupon";
 
 const CouponCarouselCollection = () => {
-  const coupons: { time: string; amount: number }[] = [
+  const coupons: Coupon[] = [
     { time: "1:30", amount: 15 },
     { time: "2:00", amount: 15 },
     { time: "2:30", amount: 20 },
@@ -13,17 +14,24 @@ const CouponCarouselCollection = () => {
     { time: "4:30", amount: 15 },
   ];
 
-  const [index, setIndex] = useState<number>(0);
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon>({
+    time: "1:30",
+    amount: 15,
+  });
 
-  const handleSelect = (index: number) => {
-    setIndex(index);
+  const handleSelect = (coupon: { time: string; amount: number }) => {
+    setSelectedCoupon(coupon);
   };
 
   return (
     <View style={styles.container}>
-      <CouponCarousel coupons={coupons} onSelect={handleSelect} />
+      <CouponCarousel
+        coupon={selectedCoupon}
+        coupons={coupons}
+        onSelect={handleSelect}
+      />
       <Text>
-        Time : {coupons[index].time}, Amount : {coupons[index].amount}
+        Time : {selectedCoupon.time}, Amount : {selectedCoupon.amount}
       </Text>
     </View>
   );
