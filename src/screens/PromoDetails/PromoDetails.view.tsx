@@ -64,6 +64,7 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
                 hasBottomDescription={true}
                 bottomDescription="Add or edit items"
                 style={{ paddingVertical: 40 }}
+                titleColor="info-medium"
               />
             </TouchableOpacity>
             {!!selectedMenuItemIds &&
