@@ -4,7 +4,7 @@ import { SVGProps } from "./SVG.props";
 
 const TempTwoAccent = ({ width, height, fill }: SVGProps) => {
   return (
-    <Svg viewBox="0 0 342 166" fill="none">
+    <Svg viewBox="0 0 342 166" fill="none" height="100%" width="100%">
       <Path d="M323.1 58.7012H198V56.9012H323.1V58.7012Z" fill={fill} />
       <Path d="M248.4 79.4012H323.1V77.6012H248.4V79.4012Z" fill={fill} />
       <Path

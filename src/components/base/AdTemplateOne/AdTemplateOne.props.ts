@@ -1,3 +1,4 @@
+import { TextStyle, ViewStyle } from "react-native";
 import { Image } from "../../../types";
 
 export interface AdTemplateOneProps {
@@ -9,4 +10,5 @@ export interface AdTemplateOneProps {
   secondary: string;
   width?: string;
   height?: string;
+  style?: TextStyle & ViewStyle;
 }

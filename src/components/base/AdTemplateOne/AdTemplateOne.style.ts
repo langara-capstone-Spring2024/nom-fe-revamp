@@ -8,9 +8,10 @@ const createStyles = (theme: Theme) =>
       position: "relative",
       width: "100%",
       height: "100%",
+      borderRadius: 24,
+      overflow: "hidden",
     },
     image: {
-      borderRadius: 24,
       position: "absolute",
       top: 0,
       left: 0,

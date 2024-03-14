@@ -17,13 +17,14 @@ const AdTemplateOne = (props: AdTemplateOneProps) => {
     secondary,
     width,
     height,
+    style
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   return (
     <TouchableWithoutFeedback
       onPress={() => console.log("pressed")}
-      style={styles.container}>
+      style={[styles.container, {...style}]}>
       {image && (
         <Image
           resizeMode="cover"

@@ -21,6 +21,7 @@ const AdTemplateOne = (props: AdTemplateTwoProps) => {
     secondary,
     width,
     height,
+    style,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -29,49 +30,27 @@ const AdTemplateOne = (props: AdTemplateTwoProps) => {
   return (
     <TouchableWithoutFeedback
       onPress={() => console.log("pressed")}
-      style={{ position: "relative" }}>
-       {image && (
-          <Image
-            resizeMode="cover"
-            source={{ uri: image.uri }}
-            style={[
-              styles.image,
-              {
-                // height: 180,
-                // width: 350,
-                // marginLeft: -40,
-                borderRadius: 24,
-              },
-            ]}
-          />
-        )}
-      {/* <View
-        style={{
-          width: 196,
-          height: 180,
-          position: "absolute",
-          right: 0,
-          zIndex: 1,
-        }}>
+      style={[styles.container, { ...style }]}>
+      {image && (
+        <Image
+          resizeMode="cover"
+          source={{ uri: image.uri }}
+          style={styles.image}
+        />
+      )}
+      <View style={styles.primary}>
         <TempTwoPrimary fill={primary} />
       </View>
-      <View
-        style={{
-          width: 340,
-          height: 164,
-          position: "absolute",
-          top: 8,
-          marginLeft: -36,
-          zIndex: 2,
-        }}>
+      <View style={styles.secondary}>
         <TempTwoAccent fill={secondary} />
       </View>
-      <Typography variant="title4" otherStyle={styles.tempTwoHeadline}>
+
+      <Typography variant="title4" otherStyle={styles.headline}>
         {headline}
       </Typography>
-      <Typography variant="bodyXs" otherStyle={styles.tempTwoTagline}>
+      <Typography variant="bodyXs" otherStyle={styles.tagline}>
         {tagline}
-      </Typography> */}
+      </Typography>
     </TouchableWithoutFeedback>
   );
 };

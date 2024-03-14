@@ -157,9 +157,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 height: 180,
                 width: 350,
                 marginLeft: -40,
-                borderWidth: 1,
-                borderColor: "red",
-                borderRadius: 24,
               }}>
               <AdTemplateOne
                 image={localImage}
@@ -168,16 +165,14 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 variant={2}
                 primary="#FFBF41"
                 secondary="#3C3C3C"
+                // style={{ borderColor: "red", borderWidth: 1 }}
               />
             </View>
-            {/* <View
+            <View
               style={{
                 height: 180,
                 width: 350,
                 marginLeft: -40,
-                borderWidth: 1,
-                borderColor: "red",
-                borderRadius: 24,
               }}>
               <AdTemplateTwo
                 image={localImage}
@@ -187,7 +182,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 primary="#FFBF41"
                 secondary="#3C3C3C"
               />
-            </View> */}
+            </View>
           </View>
         </>
       );

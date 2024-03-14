@@ -6,7 +6,7 @@ import { useWindowDimensions } from "react-native";
 
 const TempTwoPrimary = ({ fill }: SVGProps): JSX.Element => {
   return (
-    <Svg viewBox="0 0 195 180" fill="none">
+    <Svg width="100%" height="100%" viewBox="0 0 195 180" fill="none">
       <Path
         fill-rule="evenodd"
         clip-rule="evenodd"
