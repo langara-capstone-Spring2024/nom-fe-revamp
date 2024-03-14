@@ -3,7 +3,7 @@ import { AdTemplateThreeProps } from "./AdTemplateThree.props";
 import createStyles from "./AdTemplateThree.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
-import { TempThreePrimary, TempOneAccent } from "../SVG";
+import { TempThreePrimary, TempOneAccent, TempThreeAccent } from "../SVG";
 import Typography from "../Typography";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
@@ -33,12 +33,12 @@ const AdTemplateThree = (props: AdTemplateThreeProps) => {
         />
       )}
       <View style={styles.primary}>
-        <TempThreePrimary fill={primary} />
+        {/* <TempThreePrimary fill={primary} /> */}
       </View>
-      {/* <View style={styles.secondary}>
-        <TempOneAccent fill={secondary} />
+      <View style={styles.secondary}>
+        <TempThreeAccent fill={secondary} />
       </View>
-      <Typography variant="title4" otherStyle={styles.headline}>
+      {/* <Typography variant="title4" otherStyle={styles.headline}>
         {headline}
       </Typography>
       <Typography variant="bodyXs" otherStyle={styles.tagline}>

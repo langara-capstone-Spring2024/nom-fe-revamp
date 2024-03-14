@@ -186,7 +186,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 secondary={selectedAccentColor}
               />
             </View>
-            {/* <View
+            <View
               style={{
                 height: 180,
                 width: 350,
@@ -200,7 +200,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 primary={selectedPrimaryColor}
                 secondary={selectedAccentColor}
               />
-            </View> */}
+            </View>
           </View>
         </View>
       );
@@ -474,9 +474,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   swatchStyle={styles.swatchStyle}
                   colors={customSwatches}
                 />
-                {/* <View>
+                <View>
                   <PreviewText style={{ color: "#707070" }} />
-                </View> */}
+                </View>
               </ColorPicker>
             </View>
           </BottomSheetModal>
