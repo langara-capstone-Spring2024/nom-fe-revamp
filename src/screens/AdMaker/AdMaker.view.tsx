@@ -47,6 +47,7 @@ import AdTemplateTwo from "../../components/base/AdTemplateTwo";
 import AdTemplateOne from "../../components/base/AdTemplateOne";
 import { Check } from "../../components/base/SVG";
 import NavigationService from "../../navigation/NavigationService";
+import AdTemplateThree from "../../components/base/AdTemplateThree";
 
 const { width, height } = Dimensions.get("window");
 
@@ -131,7 +132,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
       );
     } else if (page === 2) {
       return (
-        <>
+        <View>
           <Typography variant="title5" alignment="left" color="primary">
             Select a Template
           </Typography>
@@ -158,7 +159,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               style={{
                 height: 180,
                 width: 350,
-                marginLeft: -40,
+                marginLeft: -36,
               }}>
               <AdTemplateOne
                 image={localImage}
@@ -174,7 +175,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               style={{
                 height: 180,
                 width: 350,
-                marginLeft: -40,
+                marginLeft: -36,
               }}>
               <AdTemplateTwo
                 image={localImage}
@@ -185,8 +186,23 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 secondary={selectedAccentColor}
               />
             </View>
+            {/* <View
+              style={{
+                height: 180,
+                width: 350,
+                marginLeft: -36,
+              }}>
+              <AdTemplateThree
+                image={localImage}
+                headline="Up to 50% off!"
+                tagline="Lorem ipsum dolor sit amet est officiis."
+                variant={2}
+                primary={selectedPrimaryColor}
+                secondary={selectedAccentColor}
+              />
+            </View> */}
           </View>
-        </>
+        </View>
       );
     } else if (page === 3) {
       return (

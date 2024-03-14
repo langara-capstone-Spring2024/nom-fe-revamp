@@ -50,8 +50,8 @@ const AdMaker = () => {
   const [openPrimaryModal, setOpenPrimaryModal] = useState(false);
   const [openAccentModal, setOpenAccentModal] = useState(false);
   const [idx, setIdx] = useState(0);
-  const [selectedPrimaryColor, setSelectedPrimaryColor] = useState("");
-  const [selectedAccentColor, setSelectedAccentColor] = useState("");
+  const [selectedPrimaryColor, setSelectedPrimaryColor] = useState("#FFBF41");
+  const [selectedAccentColor, setSelectedAccentColor] = useState("#3c3c3c");
 
   const customSwatches = new Array(6)
     .fill("#fff")
