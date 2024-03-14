@@ -1,3 +1,4 @@
+import { ConsumerDiscount } from "../types/ConsumerDiscount";
 import { BaseService } from "./BaseService";
 import { apiClient } from "./client";
 
@@ -26,6 +27,14 @@ export class ConsumerDiscountService extends BaseService {
       params: {
         merchantId: merchantId,
       },
+    });
+
+    return response;
+  }
+
+  async updateConsumerDiscount(consumerDiscount: ConsumerDiscount) {
+    const response = await apiClient.put("api/consumer-discount", {
+      consumerDiscount: consumerDiscount,
     });
 
     return response;

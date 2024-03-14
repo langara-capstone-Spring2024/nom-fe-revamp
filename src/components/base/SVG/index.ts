@@ -2,6 +2,7 @@ export { default as AccountTab } from "./AccountTab";
 export { default as Arrow } from "./Arrow";
 export { default as CouponSelected } from "./CouponSelected";
 export { default as CouponUnselected } from "./CouponUnselected";
+export { default as Download } from "./Download";
 export { default as HomeFilledTab } from "./HomeFilledTab";
 export { default as HomeOutlinedTab } from "./HomeOutlinedTab";
 export { default as OrdersTab } from "./OrdersTab";

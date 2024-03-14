@@ -191,7 +191,12 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                         name={merchant.name}
                         address={merchant.address}
                         cuisineType={merchant.cuisineType}
-                        reservationNumber={consumerDiscounts.length}
+                        reservationNumber={
+                          consumerDiscounts.filter(
+                            (consumerDiscountFileterItem) =>
+                              consumerDiscountFileterItem.status === "upcoming"
+                          ).length
+                        }
                         cost={merchant.cost}
                         rating={
                           ratings.reduce(
@@ -254,7 +259,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                 selectedCoupon
                   ? menuDiscountFilterItem.discount._id === selectedCoupon?._id
                   : true
-              ).length !== 0 && (
+              ).length !== 0 ? (
                 <View style={styles.sectionBodyContainer}>
                   {menuDiscounts
                     .filter((menuDiscountFilterItem) =>
@@ -314,6 +319,8 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                       </View>
                     ))}
                 </View>
+              ) : (
+                <Typography>No results</Typography>
               )}
             </View>
             <View
@@ -373,7 +380,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     />
                   </View>
                 </View>
-                {ratings.length !== 0 && (
+                {ratings.length !== 0 ? (
                   <View>
                     {ratings.map((ratingMapItem, ratingMapItemIndex) => (
                       <View
@@ -392,6 +399,8 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                       </View>
                     ))}
                   </View>
+                ) : (
+                  <Typography>No results</Typography>
                 )}
               </View>
             </View>

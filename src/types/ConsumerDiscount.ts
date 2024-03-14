@@ -1,5 +1,6 @@
 import { Consumer } from "./Consumer";
 import { Discount } from "./Discounts";
+import { Merchant } from "./Merchant";
 
 export interface ConsumerDiscount {
   _id: string;
@@ -7,5 +8,6 @@ export interface ConsumerDiscount {
   qrIdentification: string;
   status: "upcoming" | "redeemed" | "cancelled";
   consumer: Consumer;
+  merchant: Merchant;
   discount: Discount;
 }

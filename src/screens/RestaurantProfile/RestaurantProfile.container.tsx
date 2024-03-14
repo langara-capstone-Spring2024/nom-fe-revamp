@@ -26,17 +26,24 @@ const RestaurantProfile = () => {
 
   const { data: merchant = null, refetch: refetchMerchant } =
     GetMerchant(merchantId);
-  const { data: consumerDiscounts = [] } =
+  const { data: consumerDiscounts = [], refetch: refetchConsumerDiscounts } =
     GetConsumerDiscountsByMerchant(merchantId);
-  const { data: discounts = [] } = GetActiveDiscountsByMerchant(merchantId);
-  const { data: menuDiscounts = [] } = GetMenuDiscountsByMerchant(merchantId);
-  const { data: ratings = [] } = GetRatingsByMerchant(merchantId);
+  const { data: discounts = [], refetch: refetchDiscounts } =
+    GetActiveDiscountsByMerchant(merchantId);
+  const { data: menuDiscounts = [], refetch: refetchMenuDiscounts } =
+    GetMenuDiscountsByMerchant(merchantId);
+  const { data: ratings = [], refetch: refetchRatings } =
+    GetRatingsByMerchant(merchantId);
   const { data: consumerDiscount, mutate: mutateConsumerDiscount } =
     AddConsumerDiscount();
 
   const handleRefresh = () => {
     setIsRefreshing(true);
     refetchMerchant();
+    refetchConsumerDiscounts();
+    refetchDiscounts();
+    refetchMenuDiscounts();
+    refetchRatings();
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
