@@ -54,12 +54,20 @@ const createStyles = (theme: Theme) =>
       flex: 1,
     },
 
+    textareaContainer: {
+      marginBottom: 2,
+    },
+
     buttonContainer: {
       position: "absolute",
       bottom: 16,
       left: 0,
       right: 0,
       paddingHorizontal: 16,
+    },
+
+    keyboard: {
+      // marginLeft: -36,
     },
   });
 
