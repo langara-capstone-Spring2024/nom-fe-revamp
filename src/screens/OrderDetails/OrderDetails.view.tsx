@@ -24,6 +24,18 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
     handlePressConfirm,
     modalVisible,
     setModalVisible,
+    customerName,
+    couponNo,
+    discount,
+    date,
+    status,
+    operation,
+    validFromTime,
+    validToTime,
+    menuId,
+    menuImage,
+    menuName,
+    menuPrice,
   } = props;
 
   const RightItemComponent = () => (
@@ -35,14 +47,14 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
     <View style={styles.container}>
       <View style={styles.orderCardContainer}>
         <OrderCard
-          customerName="John Doe"
-          couponNo="123456"
-          discount={10}
-          date={new Date()}
-          status="Upcoming"
-          operation={new Date()}
-          validFromTime={new Date()}
-          validToTime={new Date()}
+          customerName={customerName}
+          couponNo={couponNo}
+          discount={discount}
+          date={date}
+          status={status}
+          operation={operation}
+          validFromTime={validFromTime}
+          validToTime={validToTime}
         />
       </View>
 
@@ -53,10 +65,10 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
           rightItem={<RightItemComponent />}
         >
           <MenuList
-            menuId="1"
-            menuImage="https://picsum.photos/360?random=1"
-            menuName="Chicken Wings"
-            menuPrice={17.99}
+            menuId={menuId}
+            menuImage={menuImage}
+            menuName={menuName}
+            menuPrice={menuPrice}
             handleSelect={() => {}}
             selected={false}
             hideRadioButton={true}
