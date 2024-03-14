@@ -1,6 +1,9 @@
 import ItemsView from "./Items.view";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GetMenu } from "../../services/react-query/queries/menu";
+import { useStore } from "../../store";
+import NavigationService from "../../navigation/NavigationService";
+import { MenuItem } from "../PromoDetails/PromoDetails.props";
 
 const Items = () => {
   const {
@@ -9,9 +12,9 @@ const Items = () => {
     error: allMenuError,
   } = GetMenu();
 
-  const [selectedMenuIds, setSelectedMenuIds] = useState<string[]>([]);
+  const [selectedMenuIds, setSelectedMenuIds] = useState<MenuItem[]>([]);
 
-  const handleSelectMenu = (menuId: string) => {
+  const handleSelectMenu = (menuId: MenuItem) => {
     const isSelected = selectedMenuIds?.includes(menuId);
 
     if (isSelected) {
@@ -21,12 +24,17 @@ const Items = () => {
     }
   };
 
-  console.log("selectedMenuIds: ", selectedMenuIds);
+  const handleSave = () => {
+    useStore.setState({ selectedMenuItemIds: selectedMenuIds });
+    NavigationService.navigate("PromoDetails");
+  };
+
   const generatedProps = {
     // generated props here
     allMenu,
     handleSelectMenu,
     selectedMenuIds,
+    handleSave,
   };
   return <ItemsView {...generatedProps} />;
 };

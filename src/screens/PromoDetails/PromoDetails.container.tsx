@@ -19,7 +19,7 @@ const PromoDetails = () => {
   const {
     mutate: addDiscountMutation,
     data: discountPayload,
-    isPending,
+    isPending: addDiscountisPending,
   } = AddDiscount();
   const currentDateTime = new Date();
   const currentDateString = currentDateTime.toISOString().split("T")[0];
@@ -37,7 +37,8 @@ const PromoDetails = () => {
     Array.from({ length: 100 }, (_, index) => `${(index + 1) * 10}`)[0]
   );
   const selectedItem = useStore((state) => state.selectedItem);
-  console.log("selectedItem: ", selectedItem);
+  const selectedMenuItemIds = useStore((state) => state.selectedMenuItemIds);
+
   const formatDate = (dateString: string): string => {
     const date = new Date(`${dateString}T00:00:00Z`);
     const formattedDate = date.toLocaleDateString("en-US", {
@@ -167,10 +168,11 @@ const PromoDetails = () => {
         validToTime: selectedEndDateTime.toISOString(),
         validFromDate: storedDate,
         validToDate: storedDate,
+        menuIds: selectedMenuItemIds,
       };
       console.log("discountPayload: ", discountPayload);
 
-      await addDiscountMutation(discountPayload);
+      addDiscountMutation(discountPayload);
     } catch (error) {
       console.error("Error adding discount:", error);
     }
@@ -280,6 +282,7 @@ const PromoDetails = () => {
     accordionList,
     handleSubmitDiscount,
     selectedItem,
+    selectedMenuItemIds,
   };
   return <PromoDetailsView {...generatedProps} />;
 };

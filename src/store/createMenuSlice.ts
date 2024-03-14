@@ -1,10 +1,12 @@
 import { StateCreator } from "zustand";
+import { MenuItem } from "../screens/PromoDetails/PromoDetails.props";
 
 export interface IMenuSlice {
   isMenuScreen: boolean;
   setMenuScreen: (isMenuScreen: boolean) => void;
   isAddingMenuItem: boolean;
   setIsAddingMenuItem: (isAddingItem: boolean) => void;
+  menuData: MenuItem[];
 }
 
 export const createMenuSlice: StateCreator<IMenuSlice> = (set) => ({
@@ -16,4 +18,5 @@ export const createMenuSlice: StateCreator<IMenuSlice> = (set) => ({
   setIsAddingMenuItem: (isAddingItem): void => {
     set({ isAddingMenuItem: isAddingItem });
   },
+  menuData: [],
 });

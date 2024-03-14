@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, Alert, Button } from "react-native";
+import { View, Image, TouchableOpacity, Button } from "react-native";
 import { AgendaItemProps } from "./AgendaItem.props";
 import createStyles from "./AgendaItem.style";
 import React, { useMemo, useCallback } from "react";
@@ -32,14 +32,16 @@ const AgendaItem = (props: AgendaItemProps) => {
       <View style={styles.rightContent}>
         <Typography>{item.discount}% Off</Typography>
         <View style={[styles.flex, styles.subtext]}>
-          {item.menuCount && (
-            <View style={[styles.flex, styles.menu]}>
-              <Image source={MenuIcon} />
-              <Typography variant="bodySm" color="subtle">
-                {item.menuCount} Items
-              </Typography>
-            </View>
-          )}
+          <Typography>
+            {item.menuCount && (
+              <View style={[styles.flex, styles.menu]}>
+                <Image source={MenuIcon} />
+                <Typography variant="bodySm" color="subtle">
+                  {item.menuCount} Items
+                </Typography>
+              </View>
+            )}
+          </Typography>
           {item.discountCount && (
             <>
               <View style={[styles.flex, styles.discount]}>

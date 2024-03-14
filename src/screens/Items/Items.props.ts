@@ -1,5 +1,7 @@
+import { MenuItem } from "../PromoDetails/PromoDetails.props";
 export interface ItemsGeneratedProps {
   allMenu: any[];
-  handleSelectMenu: (menuId: string) => void;
-  selectedMenuIds: string[];
+  handleSelectMenu: (menuId: MenuItem) => void;
+  selectedMenuIds: MenuItem[];
+  handleSave: () => void;
 }

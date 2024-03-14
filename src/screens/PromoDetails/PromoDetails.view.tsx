@@ -16,18 +16,18 @@ import { useStore } from "../../store";
 import { Entypo } from "@expo/vector-icons";
 import Typography from "../../components/base/Typography";
 import NavigationService from "../../navigation/NavigationService";
-import ItemList from "../../components/base/ItemList";
+import MenuList from "../../components/base/MenuList";
 
 const PromoDetails = (props: PromoDetailsGeneratedProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const { accordionList, handleSubmitDiscount, selectedItem } = props;
+  const {
+    accordionList,
+    handleSubmitDiscount,
+    selectedItem,
+    selectedMenuItemIds,
+  } = props;
   const expandedStatus = useStore((state) => state.accordionExpanded);
-  const RightItemComponent = () => (
-    <View>
-      <Typography color="inactive">0 Items</Typography>
-    </View>
-  );
 
   return (
     <View style={styles.promoDetailsContainer}>
@@ -43,7 +43,13 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
           <Accordion
             title="Items"
             hasRightItem={true}
-            rightItem={<RightItemComponent />}
+            rightItem={
+              <View>
+                <Typography color="inactive">
+                  {!!selectedMenuItemIds && selectedMenuItemIds.length} Items
+                </Typography>
+              </View>
+            }
           >
             <TouchableOpacity
               onPress={() => NavigationService.navigate("Items")}
@@ -60,6 +66,17 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
                 style={{ paddingVertical: 40 }}
               />
             </TouchableOpacity>
+            {!!selectedMenuItemIds &&
+              selectedMenuItemIds.map((menu) => (
+                <MenuList
+                  menuId={menu._id || ""}
+                  menuName={menu.name}
+                  menuPrice={Number(menu.originalPrice)}
+                  menuImage={""}
+                  key={menu._id}
+                  hideRadioButton
+                />
+              ))}
           </Accordion>
         </View>
       </ScrollView>

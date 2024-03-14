@@ -47,7 +47,8 @@ export const GetAllActiveDiscount = () => {
                   minute: "2-digit",
                 }),
                 discount: discount,
-                menuCount: 5,
+                menuCount: item.menuIds.length,
+                menuData: item.menuIds,
               });
             } else {
               //if new date title, add a new group for new date
@@ -65,7 +66,8 @@ export const GetAllActiveDiscount = () => {
                       minute: "2-digit",
                     }),
                     discount: discount,
-                    menuCount: 5,
+                    menuCount: item.menuIds.length,
+                    menuData: item.menuIds,
                   },
                 ],
               });

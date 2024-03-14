@@ -1,3 +1,4 @@
+import { MenuItem } from "../screens/PromoDetails/PromoDetails.props";
 export interface Discounts {
   label?: string;
   description?: string;
@@ -7,6 +8,8 @@ export interface Discounts {
   validToTime: string;
   validFromDate: string;
   validToDate: string;
+  menuIds: MenuItem[];
+  menuData?: MenuItem[];
 }
 
 export interface Discount {
@@ -19,6 +22,8 @@ export interface Discount {
   validToTime: string;
   validFromDate: string;
   validToDate: string;
+  menuIds: MenuItem[];
+  menuData?: MenuItem[];
 }
 
 export interface FormattedDiscount {
