@@ -2,6 +2,8 @@ const QUERY_KEYS = {
   CONSUMERS: "Consumers",
   MERCHANTS: "Merchants",
   MERCHANT: "Merchant",
+  CONSUMER_DISCOUNTS: "ConsumerDiscounts",
+  CONSUMER_DISCOUNT: "ConsumerDiscount",
   RATINGS: "Ratings",
   DISCOUNTS: "Discounts",
   MENU_DISCOUNTS: "MenuDiscounts",

@@ -1,5 +1,8 @@
+import { Coupon } from "../../../types/Coupon";
+
 export interface CouponCarouselProps {
-  coupons: { time: string; amount: number }[];
-  onSelect?: (index: number) => void;
+  coupon?: Coupon;
+  coupons: Coupon[];
+  onSelect?: (coupon: Coupon) => void;
   unselectable?: boolean;
 }
