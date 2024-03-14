@@ -30,6 +30,7 @@ const Menu = () => {
   const [nameError, setNameError] = useState<string>("");
   const [priceError, setPriceError] = useState<string>("");
   const [updatedMenu, setUpdatedMenu] = useState<Menus[]>([]);
+  const [remainingChars, setRemainingChars] = useState(100);
 
   useEffect(() => {
     setMenuScreen(true);
@@ -119,7 +120,14 @@ const Menu = () => {
       console.error("Error adding menu item:", error);
     }
   };
+
   
+  const handleDescriptionChange = (text: string) => {
+    if (text.length <= 100) {
+      setDescription(text);
+      setRemainingChars(100 - text.length);
+    }
+  };
 
   const generatedProps = {
     localImage: localImage,
@@ -140,6 +148,8 @@ const Menu = () => {
     setPriceError: setPriceError,
     handleNameChange: handleNameChange,
     handlePriceChange: handlePriceChange,
+    handleDescriptionChange: handleDescriptionChange,
+    remainingChars: remainingChars
   };
 
   return <MenuView {...generatedProps} />;

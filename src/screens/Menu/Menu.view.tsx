@@ -35,19 +35,13 @@ const MenuView = (props: MenuGeneratedProps) => {
     setNameError,
     priceError,
     setPriceError,
+    handleDescriptionChange,
+    remainingChars
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   const isDisabled = !name || !price || !!nameError || !!priceError;
-  const [remainingChars, setRemainingChars] = useState(100);
   const isKeyboardOpen = useKeyboard();
-
-  const handleDescriptionChange = (text: string) => {
-    if (text.length <= 100) {
-      onDescriptionChange(text);
-      setRemainingChars(100 - text.length);
-    }
-  };
 
   return isAddingMenuItem ? (
     <View style={styles.addItemContainer}>

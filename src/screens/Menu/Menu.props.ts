@@ -23,4 +23,6 @@ export interface MenuGeneratedProps {
   setPriceError: (text: string) => void;
   handlePriceChange: (text: string) => void;
   handleNameChange: (text: string) => void;
+  handleDescriptionChange: (text: string) => void;
+  remainingChars: number;
 }
