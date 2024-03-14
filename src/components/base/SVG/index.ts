@@ -1,5 +1,5 @@
 export { default as AccountTab } from "./AccountTab";
-export { default as ArrowRight } from "./ArrowRight";
+export { default as Arrow } from "./Arrow";
 export { default as CouponSelected } from "./CouponSelected";
 export { default as CouponUnselected } from "./CouponUnselected";
 export { default as HomeFilledTab } from "./HomeFilledTab";
@@ -8,6 +8,7 @@ export { default as OrdersTab } from "./OrdersTab";
 export { default as RestaurantDescriptionCoupon } from "./RestaurantDescriptionCoupon";
 export { default as RestaurantDescriptionCutlery } from "./RestaurantDescriptionCutlery";
 export { default as RestaurantDescriptionLocation } from "./RestaurantDescriptionLocation";
+export { default as RestaurantDetailLocation } from "./RestaurantDetailLocation";
 export { default as ScannerError } from "./ScannerError";
 export { default as ScannerLeftBottom } from "./ScannerLeftBottom";
 export { default as ScannerLeftTop } from "./ScannerLeftTop";

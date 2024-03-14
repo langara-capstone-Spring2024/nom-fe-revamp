@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { RestaurantDescriptionProps } from "./RestaurantDescription.props";
 import createStyles from "./RestaurantDescription.style";
 import React, { useMemo } from "react";
-import { useTheme } from "react-native-paper";
+import { Card, useTheme } from "react-native-paper";
 import Typography from "../Typography";
 import {
   RestaurantDescriptionCoupon,
@@ -24,7 +24,7 @@ const RestaurantDescription = (props: RestaurantDescriptionProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
-    <View style={styles.container}>
+    <Card style={styles.container}>
       <View style={styles.header}>
         <View style={styles.nameContainer}>
           <Typography variant="title3">{name}</Typography>
@@ -40,7 +40,6 @@ const RestaurantDescription = (props: RestaurantDescriptionProps) => {
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {cuisineType}
           </Typography>
-          <Typography variant="bodySm">・</Typography>
           <RestaurantDescriptionCoupon />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {reservationNumber} reservations
@@ -64,7 +63,7 @@ const RestaurantDescription = (props: RestaurantDescriptionProps) => {
           <Typography variant="bodyXs">Cost</Typography>
         </View>
         <View style={styles.footerCenterItemContainer}>
-          <Typography weight="700">{rating}</Typography>
+          <Typography weight="700">{rating.toFixed(1)}</Typography>
           <Typography variant="bodyXs">Ratings</Typography>
         </View>
         <View style={styles.footerItemContainer}>
@@ -76,7 +75,7 @@ const RestaurantDescription = (props: RestaurantDescriptionProps) => {
           <Typography variant="bodyXs">Reviews</Typography>
         </View>
       </View>
-    </View>
+    </Card>
   );
 };
 

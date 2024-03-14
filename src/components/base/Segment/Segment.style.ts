@@ -4,15 +4,9 @@ import { theme as t } from "../../../utils/Theme";
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    container: {
-      gap: 8,
-      alignItems: "flex-start",
-      backgroundColor: t.Surface.default,
-    },
-    headerContainer: {
-      flexDirection: "row",
-      gap: 16,
-      alignItems: "center",
+    optionContainer: {
+      paddingHorizontal: 16,
     },
   });
+
 export default createStyles;

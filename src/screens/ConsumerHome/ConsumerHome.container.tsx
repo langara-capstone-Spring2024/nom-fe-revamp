@@ -13,7 +13,7 @@ const ConsumerHome = () => {
   const [isDiscountsReady, setIsDiscountsReady] = useState<boolean>(false);
   const [isMenuDiscountsReady, setIsMenuDiscountsReady] =
     useState<boolean>(false);
-  const [isRefreshing, setIsRefrshing] = useState<boolean>(false);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
 
   const {
@@ -27,10 +27,10 @@ const ConsumerHome = () => {
   const menuDiscountsData = GetMenuDiscountsByMerchants(merchants);
 
   const handleRefresh = () => {
-    setIsRefrshing(true);
+    setIsRefreshing(true);
     refetchMerchants();
     setTimeout(() => {
-      setIsRefrshing(false);
+      setIsRefreshing(false);
     }, 1000);
   };
 

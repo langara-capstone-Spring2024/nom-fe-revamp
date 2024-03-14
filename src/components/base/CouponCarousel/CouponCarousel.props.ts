@@ -1,5 +1,5 @@
 export interface CouponCarouselProps {
   coupons: { time: string; amount: number }[];
-  onSelect: (index: number) => void;
+  onSelect?: (index: number) => void;
   unselectable?: boolean;
 }

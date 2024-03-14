@@ -4,9 +4,6 @@ import { theme as t } from "../../../utils/Theme";
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    listCcontainer: {
-      gap: 4,
-    },
     itemContainer: { flexDirection: "row", gap: 8, alignItems: "center" },
     numberContainer: {
       width: 16,
