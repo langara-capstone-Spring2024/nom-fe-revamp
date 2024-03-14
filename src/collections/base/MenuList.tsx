@@ -25,6 +25,7 @@ const MenuListCollection = () => {
         menuPrice={17.99}
         handleSelect={() => handleSelectMenu("1")}
         selected={selectedMenuIds.includes("1")}
+        hideRadioButton={false}
       />
       <MenuList
         menuId="2"
@@ -33,6 +34,7 @@ const MenuListCollection = () => {
         menuPrice={17.99}
         handleSelect={() => handleSelectMenu("2")}
         selected={selectedMenuIds.includes("2")}
+        hideRadioButton={false}
       />
     </View>
   );
