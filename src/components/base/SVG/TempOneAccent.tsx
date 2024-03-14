@@ -4,7 +4,7 @@ import { SVGProps } from "./SVG.props";
 
 const TempOneAccent = ({ fill }: SVGProps): JSX.Element => {
   return (
-    <Svg viewBox="0 0 141 180" fill="none">
+    <Svg viewBox="0 0 141 180" fill="none" height={"100%"} width="100%">
       <Path
         fill-rule="evenodd"
         clip-rule="evenodd"

@@ -50,7 +50,6 @@ import NavigationService from "../../navigation/NavigationService";
 
 const { width, height } = Dimensions.get("window");
 
-
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
     localImage,
@@ -152,9 +151,16 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               icon={<View style={styles.accentSquare} />}
             />
           </View>
-          <View
-            style={{ position: "relative", flexDirection: "column", gap: 8 }}>
-            <View style={{ height: 180, width: 350 }}>
+          <View style={{ flexDirection: "column", gap: 8 }}>
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginLeft: -40,
+                borderWidth: 1,
+                borderColor: "red",
+                borderRadius: 24,
+              }}>
               <AdTemplateOne
                 image={localImage}
                 headline="Up to 50% off!"
@@ -164,16 +170,24 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 secondary="#3C3C3C"
               />
             </View>
-            <View style={{ height: 180, width: width-36, borderWidth: 1, borderColor: 'red', marginLeft: -40 }}>
-              {/* <AdTemplateTwo
+            {/* <View
+              style={{
+                height: 180,
+                width: 350,
+                marginLeft: -40,
+                borderWidth: 1,
+                borderColor: "red",
+                borderRadius: 24,
+              }}>
+              <AdTemplateTwo
                 image={localImage}
                 headline="Up to 50% off!"
                 tagline="Lorem ipsum dolor sit amet est officiis."
                 variant={2}
                 primary="#FFBF41"
                 secondary="#3C3C3C"
-              /> */}
-            </View>
+              />
+            </View> */}
           </View>
         </>
       );
