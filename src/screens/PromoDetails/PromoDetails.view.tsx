@@ -17,6 +17,7 @@ import { Entypo } from "@expo/vector-icons";
 import Typography from "../../components/base/Typography";
 import NavigationService from "../../navigation/NavigationService";
 import MenuList from "../../components/base/MenuList";
+import { theme as t } from "../../utils/Theme";
 
 const PromoDetails = (props: PromoDetailsGeneratedProps) => {
   const theme = useTheme();
@@ -63,7 +64,11 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
                 isLast={true}
                 hasBottomDescription={true}
                 bottomDescription="Add or edit items"
-                style={{ paddingVertical: 40 }}
+                style={{
+                  paddingVertical: 40,
+                  borderBottomWidth: 1,
+                  borderBottomColor: t.Border.default,
+                }}
                 titleColor="info-medium"
               />
             </TouchableOpacity>

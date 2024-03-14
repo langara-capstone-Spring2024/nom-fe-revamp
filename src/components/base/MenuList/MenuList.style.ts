@@ -36,7 +36,7 @@ const createStyles = (theme: Theme) =>
     },
     menuDetailsContainer: {
       display: "flex",
-      width: "74%",
+      width: "76%",
     },
     radioButton: {
       width: 20,
