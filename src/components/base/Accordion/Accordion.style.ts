@@ -7,6 +7,8 @@ const createStyles = (theme: Theme) =>
     wrapper: {
       backgroundColor: t.Surface.overlay,
       borderRadius: 16,
+      borderColor: t.Border["default"],
+      borderWidth: 1,
     },
     headerContainer: {
       overflow: "hidden",

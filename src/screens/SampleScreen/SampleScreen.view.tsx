@@ -51,6 +51,12 @@ const SampleScreen = (props: SampleScreenGeneratedProps) => {
         text="Menu"
         onPress={() => NavigationService.navigate("Menu")}
       />
+      <Button
+        variant="primary"
+        buttonSize="lg"
+        text="Order Details"
+        onPress={() => NavigationService.navigate("OrderDetails")}
+      />
       <Modal visible={isVisible}>
         <SafeAreaView style={{ alignItems: "center" }}>
           <View style={{ padding: 16 }}>
