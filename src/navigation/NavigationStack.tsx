@@ -11,6 +11,8 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import RestaurantDetailCollection from "../collections/base/RestaurantDetail";
+import OrderCardCollection from "../collections/base/OrderCard";
 import AdTemplateThreeCollection from "../collections/base/AdTemplateThree";
 import AdTemplateOneCollection from "../collections/base/AdTemplateOne";
 import AdTemplateTwoCollection from "../collections/base/AdTemplateTwo";
@@ -58,6 +60,7 @@ import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
 import Items from "../screens/Items";
+import OrderDetails from "../screens/OrderDetails";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -66,6 +69,9 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+
+    { func: RestaurantDetailCollection, custom: false },
+    { func: OrderCardCollection, custom: false },
     { func: AdTemplateThreeCollection, custom: false },
     { func: AdTemplateOneCollection, custom: false },
     { func: SVGCollection, customName: "", custom: false },
@@ -114,6 +120,7 @@ const PrivateNavigator = () => {
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
     { func: Items, customName: "Items", custom: false },
+    { func: OrderDetails, customName: "Order Details", custom: false },
   ];
   const {
     isAdScreen,
