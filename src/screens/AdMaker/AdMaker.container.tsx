@@ -52,6 +52,7 @@ const AdMaker = () => {
   const [idx, setIdx] = useState(0);
   const [selectedPrimaryColor, setSelectedPrimaryColor] = useState("#FFBF41");
   const [selectedAccentColor, setSelectedAccentColor] = useState("#3c3c3c");
+  const [selectedTemplate, setSelectedTemplate] = useState(1);
 
   const customSwatches = new Array(6)
     .fill("#fff")
@@ -283,7 +284,7 @@ const AdMaker = () => {
           !!tagline
         ) {
           createAd({
-            template: 1,
+            template: selectedTemplate,
             headline,
             tagline,
             startDate: selectedStartDate,
@@ -304,6 +305,7 @@ const AdMaker = () => {
   }, [isCreateAdSuccess]);
   //end of page 4
 
+  console.log(selectedTemplate);
   const generatedProps = {
     // generated props here
     handleImageChange,
@@ -368,6 +370,8 @@ const AdMaker = () => {
     setPage,
     selectedAccentColor,
     selectedPrimaryColor,
+    setSelectedTemplate,
+    selectedTemplate,
   };
 
   return <AdMakerView {...generatedProps} />;

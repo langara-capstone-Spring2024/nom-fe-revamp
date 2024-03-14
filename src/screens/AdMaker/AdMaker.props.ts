@@ -84,7 +84,10 @@ export interface AdMakerGeneratedProps {
   setPage: (v: number) => void;
 
   selectedPrimaryColor: string;
-  selectedAccentColor: string
+  selectedAccentColor: string;
+
+  selectedTemplate: number;
+  setSelectedTemplate: (v: number) => void;
 }
 
 interface Card {

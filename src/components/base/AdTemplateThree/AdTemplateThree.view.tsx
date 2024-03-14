@@ -12,7 +12,6 @@ const AdTemplateThree = (props: AdTemplateThreeProps) => {
     image,
     headline,
     tagline,
-    variant,
     primary = "#FFBF41",
     secondary,
     width,

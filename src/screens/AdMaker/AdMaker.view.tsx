@@ -104,6 +104,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     setPage,
     selectedPrimaryColor,
     selectedAccentColor,
+    selectedTemplate,
+    setSelectedTemplate,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -165,10 +167,14 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 image={localImage}
                 headline="Up to 50% off!"
                 tagline="Lorem ipsum dolor sit amet est officiis."
-                variant={2}
                 primary={selectedPrimaryColor}
                 secondary={selectedAccentColor}
-                // style={{ borderColor: "red", borderWidth: 1 }}
+                onSelectTemplate={(v) => setSelectedTemplate(v)}
+                style={
+                  selectedTemplate === 1
+                    ? { borderWidth: 2, borderColor: "#E51E35" }
+                    : {}
+                }
               />
             </View>
             <View
@@ -178,27 +184,17 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 marginLeft: -36,
               }}>
               <AdTemplateTwo
+                onSelectTemplate={(v) => setSelectedTemplate(v)}
                 image={localImage}
                 headline="Up to 50% off!"
                 tagline="Lorem ipsum dolor sit amet est officiis."
-                variant={2}
                 primary={selectedPrimaryColor}
                 secondary={selectedAccentColor}
-              />
-            </View>
-            <View
-              style={{
-                height: 180,
-                width: 350,
-                marginLeft: -36,
-              }}>
-              <AdTemplateThree
-                image={localImage}
-                headline="Up to 50% off!"
-                tagline="Lorem ipsum dolor sit amet est officiis."
-                variant={2}
-                primary={selectedPrimaryColor}
-                secondary={selectedAccentColor}
+                style={
+                  selectedTemplate === 2
+                    ? { borderWidth: 2, borderColor: "#E51E35" }
+                    : {}
+                }
               />
             </View>
           </View>
@@ -211,11 +207,33 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             Edit Ad Text
           </Typography>
           <KeyboardAwareScrollView style={styles.keyboard}>
-            <View style={styles.editAdTextImageContainer}>
-              <Image
-                source={{ uri: localImage?.uri }}
-                style={styles.editAdTextImage}
-              />
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginTop: 36,
+                marginBottom: 36,
+              }}>
+              {selectedTemplate === 1 && (
+                <AdTemplateOne
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                />
+              )}
+              {selectedTemplate === 2 && (
+                <AdTemplateTwo
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                />
+              )}
             </View>
             <TouchableOpacity
               style={styles.generateAdTextContainer}
@@ -283,11 +301,33 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             contentContainerStyle={{
               paddingBottom: 280,
             }}>
-            <View style={[styles.editAdTextImageContainer, { marginLeft: 0 }]}>
-              <Image
-                source={{ uri: localImage?.uri }}
-                style={styles.editAdTextImage}
-              />
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginTop: 36,
+                marginBottom: 36,
+              }}>
+              {selectedTemplate === 1 && (
+                <AdTemplateOne
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                />
+              )}
+              {selectedTemplate === 2 && (
+                <AdTemplateTwo
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                />
+              )}
             </View>
             <View style={styles.campaignDetailsWrapper}>
               <Typography
@@ -424,14 +464,25 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
         </View>
       )}
       <View style={styles.buttonContainer}>
-        <Button
-          variant="primary"
-          buttonSize="lg"
-          text={page == 4 ? "Confirm" : "Next"}
-          takeFullWidth
-          onPress={page == 4 ? confirm : next}
-          isDisabled={!localImage && page === 1}
-        />
+        {page === 4 ? (
+          <Button
+            variant="primary"
+            buttonSize="lg"
+            text={"Confirm"}
+            takeFullWidth
+            onPress={page == 4 ? confirm : next}
+            isDisabled={!selectedPaymentMethodId}
+          />
+        ) : (
+          <Button
+            variant="primary"
+            buttonSize="lg"
+            text={"Next"}
+            takeFullWidth
+            onPress={page == 4 ? confirm : next}
+            isDisabled={!localImage && page === 1}
+          />
+        )}
       </View>
       {page === 2 && (
         <BottomSheetModalProvider>
@@ -474,9 +525,9 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   swatchStyle={styles.swatchStyle}
                   colors={customSwatches}
                 />
-                <View>
+                {/* <View>
                   <PreviewText style={{ color: "#707070" }} />
-                </View>
+                </View> */}
               </ColorPicker>
             </View>
           </BottomSheetModal>

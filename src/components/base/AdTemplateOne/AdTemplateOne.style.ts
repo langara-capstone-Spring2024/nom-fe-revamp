@@ -30,7 +30,7 @@ const createStyles = (theme: Theme) =>
       width: "100%",
       height: "100%",
       zIndex: 0,
-      marginLeft: -104,
+      marginLeft: -107,
     },
     headline: {
       position: "absolute",

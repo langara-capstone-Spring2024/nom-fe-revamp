@@ -16,12 +16,12 @@ const AdTemplateOne = (props: AdTemplateTwoProps) => {
     image,
     headline,
     tagline,
-    variant,
     primary = "#FFBF41",
     secondary,
     width,
     height,
     style,
+    onSelectTemplate
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -29,7 +29,7 @@ const AdTemplateOne = (props: AdTemplateTwoProps) => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() => console.log("pressed")}
+      onPress={() => onSelectTemplate(2)}
       style={[styles.container, { ...style }]}>
       {image && (
         <Image
