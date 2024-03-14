@@ -21,7 +21,6 @@ import {
 import { createPaymentMethod } from "@stripe/stripe-react-native";
 import { S3Params } from "../../types/S3Params";
 import { S3 } from "aws-sdk";
-import NavigationService from "../../navigation/NavigationService";
 
 const AdMaker = () => {
   const { prev, next, page, setAdScreen, setPage } = useStore((state) => ({
@@ -367,6 +366,8 @@ const AdMaker = () => {
     openSuccess,
     setOpenSuccess,
     setPage,
+    selectedAccentColor,
+    selectedPrimaryColor,
   };
 
   return <AdMakerView {...generatedProps} />;

@@ -82,6 +82,9 @@ export interface AdMakerGeneratedProps {
   openSuccess: boolean;
   setOpenSuccess: (v: boolean) => void;
   setPage: (v: number) => void;
+
+  selectedPrimaryColor: string;
+  selectedAccentColor: string
 }
 
 interface Card {

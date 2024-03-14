@@ -101,6 +101,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     openSuccess,
     setOpenSuccess,
     setPage,
+    selectedPrimaryColor,
+    selectedAccentColor,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -163,8 +165,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 headline="Up to 50% off!"
                 tagline="Lorem ipsum dolor sit amet est officiis."
                 variant={2}
-                primary="#FFBF41"
-                secondary="#3C3C3C"
+                primary={selectedPrimaryColor}
+                secondary={selectedAccentColor}
                 // style={{ borderColor: "red", borderWidth: 1 }}
               />
             </View>
@@ -179,8 +181,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 headline="Up to 50% off!"
                 tagline="Lorem ipsum dolor sit amet est officiis."
                 variant={2}
-                primary="#FFBF41"
-                secondary="#3C3C3C"
+                primary={selectedPrimaryColor}
+                secondary={selectedAccentColor}
               />
             </View>
           </View>
