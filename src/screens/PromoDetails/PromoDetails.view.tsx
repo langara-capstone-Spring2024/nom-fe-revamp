@@ -55,22 +55,28 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
             <TouchableOpacity
               onPress={() => NavigationService.navigate("Items")}
             >
-              <List
-                title="Add Item"
-                hasRightIcon={true}
-                rightIcon={
-                  <Entypo name="chevron-small-right" size={24} color="black" />
-                }
-                isLast={true}
-                hasBottomDescription={true}
-                bottomDescription="Add or edit items"
-                style={{
-                  paddingVertical: 40,
-                  borderBottomWidth: 1,
-                  borderBottomColor: t.Border.default,
-                }}
-                titleColor="info-medium"
-              />
+              {!selectedItem && (
+                <List
+                  title="Add Item"
+                  hasRightIcon={true}
+                  rightIcon={
+                    <Entypo
+                      name="chevron-small-right"
+                      size={24}
+                      color="black"
+                    />
+                  }
+                  isLast={true}
+                  hasBottomDescription={true}
+                  bottomDescription="Add or edit items"
+                  style={{
+                    paddingVertical: 40,
+                    borderBottomWidth: selectedMenuItemIds.length > 0 ? 1 : 0,
+                    borderBottomColor: t.Border.default,
+                  }}
+                  titleColor="info-medium"
+                />
+              )}
             </TouchableOpacity>
             {!!selectedMenuItemIds &&
               selectedMenuItemIds.map((menu, index) => (
@@ -95,6 +101,7 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
             buttonSize="md"
             takeFullWidth
             onPress={handleSubmitDiscount}
+            isDisabled={selectedMenuItemIds.length < 1 && true}
           />
         </View>
       )}
