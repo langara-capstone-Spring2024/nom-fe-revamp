@@ -11,6 +11,7 @@ import Typography from "../../components/base/Typography";
 import MenuList from "../../components/base/MenuList";
 import Button from "../../components/base/Button";
 import { Check } from "../../components/base/SVG";
+import { Menu } from "../../types/Menus";
 
 const OrderDetails = (props: OrderDetailsGeneratedProps) => {
   const theme = useTheme();
@@ -24,6 +25,15 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
     handlePressConfirm,
     modalVisible,
     setModalVisible,
+    customerName,
+    couponNo,
+    discount,
+    date,
+    status,
+    operation,
+    validFromTime,
+    validToTime,
+    menus,
   } = props;
 
   const RightItemComponent = () => (
@@ -35,14 +45,14 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
     <View style={styles.container}>
       <View style={styles.orderCardContainer}>
         <OrderCard
-          customerName="John Doe"
-          couponNo="123456"
-          discount={10}
-          date={new Date()}
-          status="Upcoming"
-          operation={new Date()}
-          validFromTime={new Date()}
-          validToTime={new Date()}
+          customerName={customerName}
+          couponNo={couponNo}
+          discount={discount}
+          date={date}
+          status={status}
+          operation={operation}
+          validFromTime={validFromTime}
+          validToTime={validToTime}
         />
       </View>
 
@@ -52,15 +62,20 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
           hasRightItem={true}
           rightItem={<RightItemComponent />}
         >
-          <MenuList
-            menuId="1"
-            menuImage="https://picsum.photos/360?random=1"
-            menuName="Chicken Wings"
-            menuPrice={17.99}
-            handleSelect={() => {}}
-            selected={false}
-            hideRadioButton={true}
-          />
+          {menus &&
+            menus.length > 0 &&
+            menus.map((menu: Menu) => (
+              <MenuList
+                key={menu._id}
+                menuId={menu._id}
+                menuImage={menu.imageUrl}
+                menuName={menu.name}
+                menuPrice={Number(menu.originalPrice)}
+                handleSelect={() => {}}
+                selected={false}
+                hideRadioButton={true}
+              />
+            ))}
         </Accordion>
       </View>
 

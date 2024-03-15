@@ -11,4 +11,15 @@ export class MenuDiscountService extends BaseService {
 
     return response;
   }
+
+  async getMenuDiscountsByMerchantAndDiscount(
+    merchantId: string,
+    discountId: string
+  ) {
+    const response = await apiClient.get(
+      `api/menu-discounts/merchant/${merchantId}/discount/${discountId}`
+    );
+
+    return response;
+  }
 }

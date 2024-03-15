@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 import { GetMerchant } from "../../services/react-query/queries/user";
 import { GetRatingsByMerchant } from "../../services/react-query/queries/rating";
 import { GetActiveDiscountsByMerchant } from "../../services/react-query/queries/discount";
-import { Pressable } from "react-native";
-import { Arrow } from "../../components/base/SVG";
+import { Coupon } from "../../types/Coupon";
+import {
+  AddConsumerDiscount,
+  GetConsumerDiscountsByMerchant,
+} from "../../services/react-query/queries/consumerDiscount";
+import NavigationService from "../../navigation/NavigationService";
+import { GetMenuDiscountsByMerchant } from "../../services/react-query/queries/menuDiscount";
 
 const RestaurantProfile = () => {
   const { merchantId } = useRoute().params as {
@@ -15,22 +20,46 @@ const RestaurantProfile = () => {
   const navigation = useNavigation();
 
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | undefined>(
+    undefined
+  );
 
   const { data: merchant = null, refetch: refetchMerchant } =
     GetMerchant(merchantId);
-  const { data: discounts = [] } = GetActiveDiscountsByMerchant(merchantId);
-  const { data: ratings = [] } = GetRatingsByMerchant(merchantId);
+  const { data: consumerDiscounts = [], refetch: refetchConsumerDiscounts } =
+    GetConsumerDiscountsByMerchant(merchantId);
+  const { data: discounts = [], refetch: refetchDiscounts } =
+    GetActiveDiscountsByMerchant(merchantId);
+  const { data: menuDiscounts = [], refetch: refetchMenuDiscounts } =
+    GetMenuDiscountsByMerchant(merchantId);
+  const { data: ratings = [], refetch: refetchRatings } =
+    GetRatingsByMerchant(merchantId);
+  const { data: consumerDiscount, mutate: mutateConsumerDiscount } =
+    AddConsumerDiscount();
 
   const handleRefresh = () => {
     setIsRefreshing(true);
     refetchMerchant();
+    refetchConsumerDiscounts();
+    refetchDiscounts();
+    refetchMenuDiscounts();
+    refetchRatings();
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
   };
 
+  const handleSelectCoupon = (coupon: Coupon) => {
+    setSelectedCoupon(coupon);
+  };
+
   const handleNext = () => {
-    console.log("Next");
+    if (selectedCoupon && selectedCoupon._id) {
+      mutateConsumerDiscount({
+        merchantId: merchantId,
+        discountId: selectedCoupon._id,
+      });
+    }
   };
 
   useEffect(() => {
@@ -40,12 +69,24 @@ const RestaurantProfile = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (consumerDiscount) {
+      NavigationService.navigate("ConsumerDiscount", {
+        consumerDiscountId: consumerDiscount._id,
+      });
+    }
+  }, [consumerDiscount]);
+
   const generatedProps = {
     isRefreshing,
+    selectedCoupon,
     merchant,
+    consumerDiscounts,
     discounts,
+    menuDiscounts,
     ratings,
     handleRefresh,
+    handleSelectCoupon,
     handleNext,
   };
   return <RestaurantProfileView {...generatedProps} />;

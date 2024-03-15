@@ -63,6 +63,7 @@ import PromoDetails from "../screens/PromoDetails";
 import Items from "../screens/Items";
 import RestaurantProfile from "../screens/RestaurantProfile";
 import OrderDetails from "../screens/OrderDetails";
+import ConsumerDiscount from "../screens/ConsumerDiscount";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -128,6 +129,7 @@ const PrivateNavigator = () => {
       custom: false,
     },
     { func: OrderDetails, customName: "Order Details", custom: false },
+    { func: ConsumerDiscount, customName: "Consumer Discount", custom: false },
   ];
   const {
     isAdScreen,

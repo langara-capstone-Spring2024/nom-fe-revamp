@@ -2,6 +2,8 @@ const QUERY_KEYS = {
   CONSUMERS: "Consumers",
   MERCHANTS: "Merchants",
   MERCHANT: "Merchant",
+  CONSUMER_DISCOUNTS: "ConsumerDiscounts",
+  CONSUMER_DISCOUNT: "ConsumerDiscount",
   RATINGS: "Ratings",
   DISCOUNTS: "Discounts",
   MENU_DISCOUNTS: "MenuDiscounts",
@@ -13,6 +15,7 @@ const QUERY_KEYS = {
   MENUS: "Menus",
   S3: "S3",
   DISCOUNT: "Discounts",
+  CONSUMER_DISCOUNTS: "ConsumerDiscounts"
 };
 
 export { QUERY_KEYS };
