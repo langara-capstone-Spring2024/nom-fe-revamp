@@ -1,4 +1,4 @@
-import { useQueries } from "@tanstack/react-query";
+import { useQuery, useQueries } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { Merchant } from "../../../types";
@@ -32,5 +32,27 @@ export const GetMenuDiscountsByMerchants = (merchants: Merchant[]) => {
         }
       },
     })),
+  });
+};
+
+
+export const GetMenuDiscountsByMerchantAndDiscount = (merchantId: string, discountId: string) => {
+  const menuDiscountService = new MenuDiscountService();
+  menuDiscountService.cancelRequests();
+
+  return useQuery({
+    queryKey: [QUERY_KEYS.MENU_DISCOUNTS, merchantId, discountId],
+    queryFn: async () => {
+      try {
+        const response: AxiosResponse = await menuDiscountService.getMenuDiscountsByMerchantAndDiscount(
+          merchantId, discountId
+        );
+        const consumerDiscounts: MenuDiscount[] = response.data;
+        return consumerDiscounts;
+      } catch (error) {
+        console.error("Error fetching discount:", error);
+        throw error;
+      }
+    },
   });
 };

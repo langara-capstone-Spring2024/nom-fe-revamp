@@ -1,4 +1,6 @@
 import { GestureResponderEvent } from "react-native";
+import { MenuListProps } from "../../components/base/MenuList/MenuList.props";
+import { Menus } from "../../types/Menus";
 
 export interface OrderDetailsGeneratedProps {
   handlePressConfirm?:
@@ -8,7 +10,7 @@ export interface OrderDetailsGeneratedProps {
   setOpenSuccess: (v: boolean) => void;
   modalVisible: boolean;
   setModalVisible: (v: boolean) => void;
-  customerName: String, 
+  customerName: string, 
   couponNo: string,
   discount: number, 
   date: Date, 
@@ -16,11 +18,7 @@ export interface OrderDetailsGeneratedProps {
   validToTime: Date,
   status: String, 
   operation: Date,
-  menuId: string;
-  menuImage: string;
-  menuName: string;
-  menuPrice: number;
-  selected?: boolean;
-  handleSelect: (menuId: string) => void;
-  hideRadioButton: boolean;
+  menus: Menus[],
+  setMenuDiscountList: (text: string ) => void
+
 }

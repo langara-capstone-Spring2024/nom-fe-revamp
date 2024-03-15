@@ -20,5 +20,7 @@ export interface Merchant {
   isVerified: boolean;
   user: {
     email: string;
+    firstName: string;
+    lastName: string;
   };
 }

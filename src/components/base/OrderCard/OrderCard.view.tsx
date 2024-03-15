@@ -19,25 +19,23 @@ const OrderCard = (props: OrderCardProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const formatTime = (time: Date) => {
+  const formatTime = (timeString: Date) => {
     const options = {
       hour: "numeric",
       minute: "numeric",
-    } as Intl.DateTimeFormatOptions;
-    return time.toLocaleTimeString("en-US", options);
+      hour12: true,
+    };
+    return new Date(timeString).toLocaleTimeString("en-US", options);
   };
+  
 
-  const formattedValidTime = `${formatTime(validFromTime)} - ${formatTime(
-    validToTime
-  )}`;
-
-  const formattedDate = (date: Date) => {
+  const formatDate = (dateString: Date) => {
     const options = {
       year: "numeric",
-      month: "short",
-      day: "2-digit",
-    } as Intl.DateTimeFormatOptions;
-    return date.toLocaleDateString("en-US", options);
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   return (
@@ -61,7 +59,7 @@ const OrderCard = (props: OrderCardProps) => {
             Date
           </Typography>
           <Typography variant="body" alignment="left" color="medium">
-            {formattedDate(date)}
+            {formatDate(date)}
           </Typography>
         </View>
         <View>
@@ -77,7 +75,7 @@ const OrderCard = (props: OrderCardProps) => {
             Time
           </Typography>
           <Typography variant="body" alignment="left" color="primary">
-            {formattedValidTime}
+            {formatTime(validFromTime)} - {formatTime(validToTime)}
           </Typography>
         </View>
       </View>

@@ -11,6 +11,7 @@ import Typography from "../../components/base/Typography";
 import MenuList from "../../components/base/MenuList";
 import Button from "../../components/base/Button";
 import { Check } from "../../components/base/SVG";
+import { Menus } from "../../types/Menus";
 
 const OrderDetails = (props: OrderDetailsGeneratedProps) => {
   const theme = useTheme();
@@ -32,10 +33,7 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
     operation,
     validFromTime,
     validToTime,
-    menuId,
-    menuImage,
-    menuName,
-    menuPrice,
+    menus,
   } = props;
 
   const RightItemComponent = () => (
@@ -64,15 +62,20 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
           hasRightItem={true}
           rightItem={<RightItemComponent />}
         >
-          <MenuList
-            menuId={menuId}
-            menuImage={menuImage}
-            menuName={menuName}
-            menuPrice={menuPrice}
-            handleSelect={() => {}}
-            selected={false}
-            hideRadioButton={true}
-          />
+          {menus &&
+            menus.length > 0 &&
+            menus.map((menu: Menus) => (
+              <MenuList
+                key={menu._id}
+                menuId={menu._id}
+                menuImage={menu.imageUrl}
+                menuName={menu.name}
+                menuPrice={Number(menu.originalPrice)}
+                handleSelect={() => {}}
+                selected={false}
+                hideRadioButton={true}
+              />
+            ))}
         </Accordion>
       </View>
 
