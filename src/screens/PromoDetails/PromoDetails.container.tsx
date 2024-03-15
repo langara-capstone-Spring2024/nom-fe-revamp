@@ -98,6 +98,9 @@ const PromoDetails = () => {
   ) => {
     //setSelectedStartDateTime(selectedStartDateTime || currentDateTime);
     if (selectedStartDateTime) {
+      const endTime = new Date(selectedStartDateTime.getTime() + 30 * 60000);
+      setSelectedEndDateTime(endTime);
+
       setSelectedStartDateTime(
         new Date(
           `${storedDate}T${selectedStartDateTime.toISOString().split("T")[1]}`
