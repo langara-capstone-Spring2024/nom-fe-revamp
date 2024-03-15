@@ -5,6 +5,7 @@ import {
   Touchable,
   Keyboard,
   TextInput,
+  Dimensions,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import createStyles from "./AdMaker.style";
@@ -46,6 +47,9 @@ import AdTemplateTwo from "../../components/base/AdTemplateTwo";
 import AdTemplateOne from "../../components/base/AdTemplateOne";
 import { Check } from "../../components/base/SVG";
 import NavigationService from "../../navigation/NavigationService";
+import AdTemplateThree from "../../components/base/AdTemplateThree";
+
+const { width, height } = Dimensions.get("window");
 
 const AdMaker = (props: AdMakerGeneratedProps) => {
   const {
@@ -98,6 +102,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     openSuccess,
     setOpenSuccess,
     setPage,
+    selectedPrimaryColor,
+    selectedAccentColor,
+    selectedTemplate,
+    setSelectedTemplate,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -126,7 +134,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
       );
     } else if (page === 2) {
       return (
-        <>
+        <View>
           <Typography variant="title5" alignment="left" color="primary">
             Select a Template
           </Typography>
@@ -148,26 +156,49 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               icon={<View style={styles.accentSquare} />}
             />
           </View>
-          <View
-            style={{ position: "relative", flexDirection: "column", gap: 8 }}>
-            <AdTemplateOne
-              image={localImage}
-              headline="Up to 50% off!"
-              tagline="Lorem ipsum dolor sit amet est officiis."
-              variant={2}
-              primary="#FFBF41"
-              secondary="#3C3C3C"
-            />
-            <AdTemplateTwo
-              image={localImage}
-              headline="Up to 50% off!"
-              tagline="Lorem ipsum dolor sit amet est officiis."
-              variant={2}
-              primary="#FFBF41"
-              secondary="#3C3C3C"
-            />
+          <View style={{ flexDirection: "column", gap: 8 }}>
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginLeft: -36,
+              }}>
+              <AdTemplateOne
+                image={localImage}
+                headline="Up to 50% off!"
+                tagline="Lorem ipsum dolor sit amet est officiis."
+                primary={selectedPrimaryColor}
+                secondary={selectedAccentColor}
+                onSelectTemplate={(v) => setSelectedTemplate(v)}
+                style={
+                  selectedTemplate === 1
+                    ? { borderWidth: 2, borderColor: "#E51E35" }
+                    : {}
+                }
+              />
+            </View>
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginLeft: -36,
+              }}>
+              <AdTemplateTwo
+                onSelectTemplate={(v) => setSelectedTemplate(v)}
+                image={localImage}
+                headline="Up to 50% off!"
+                tagline="Lorem ipsum dolor sit amet est officiis."
+                primary={selectedPrimaryColor}
+                secondary={selectedAccentColor}
+                style={
+                  selectedTemplate === 2
+                    ? { borderWidth: 2, borderColor: "#E51E35" }
+                    : {}
+                }
+              />
+            </View>
           </View>
-        </>
+        </View>
       );
     } else if (page === 3) {
       return (
@@ -176,11 +207,33 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             Edit Ad Text
           </Typography>
           <KeyboardAwareScrollView style={styles.keyboard}>
-            <View style={styles.editAdTextImageContainer}>
-              <Image
-                source={{ uri: localImage?.uri }}
-                style={styles.editAdTextImage}
-              />
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginTop: 36,
+                marginBottom: 36,
+              }}>
+              {selectedTemplate === 1 && (
+                <AdTemplateOne
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                />
+              )}
+              {selectedTemplate === 2 && (
+                <AdTemplateTwo
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                />
+              )}
             </View>
             <TouchableOpacity
               style={styles.generateAdTextContainer}
@@ -248,11 +301,33 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             contentContainerStyle={{
               paddingBottom: 280,
             }}>
-            <View style={[styles.editAdTextImageContainer, { marginLeft: 0 }]}>
-              <Image
-                source={{ uri: localImage?.uri }}
-                style={styles.editAdTextImage}
-              />
+            <View
+              style={{
+                height: 180,
+                width: 350,
+                marginTop: 36,
+                marginBottom: 36,
+              }}>
+              {selectedTemplate === 1 && (
+                <AdTemplateOne
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                />
+              )}
+              {selectedTemplate === 2 && (
+                <AdTemplateTwo
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                />
+              )}
             </View>
             <View style={styles.campaignDetailsWrapper}>
               <Typography
@@ -389,14 +464,25 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
         </View>
       )}
       <View style={styles.buttonContainer}>
-        <Button
-          variant="primary"
-          buttonSize="lg"
-          text={page == 4 ? "Confirm" : "Next"}
-          takeFullWidth
-          onPress={page == 4 ? confirm : next}
-          isDisabled={!localImage && page === 1}
-        />
+        {page === 4 ? (
+          <Button
+            variant="primary"
+            buttonSize="lg"
+            text={"Confirm"}
+            takeFullWidth
+            onPress={page == 4 ? confirm : next}
+            isDisabled={!selectedPaymentMethodId}
+          />
+        ) : (
+          <Button
+            variant="primary"
+            buttonSize="lg"
+            text={"Next"}
+            takeFullWidth
+            onPress={page == 4 ? confirm : next}
+            isDisabled={!localImage && page === 1}
+          />
+        )}
       </View>
       {page === 2 && (
         <BottomSheetModalProvider>

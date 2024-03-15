@@ -60,6 +60,7 @@ import Promo from "../screens/Promo";
 import Menu from "./../screens/Menu";
 import SVGCollection from "../collections/base/SVG";
 import PromoDetails from "../screens/PromoDetails";
+import Items from "../screens/Items";
 import RestaurantProfile from "../screens/RestaurantProfile";
 import OrderDetails from "../screens/OrderDetails";
 import ConsumerDiscount from "../screens/ConsumerDiscount";
@@ -121,6 +122,7 @@ const PrivateNavigator = () => {
     { func: Menu, customName: "Menu", custom: false },
     { func: ChangePasswordCollection, custom: false },
     { func: PromoDetails, customName: "Promo Details", custom: false },
+    { func: Items, customName: "Items", custom: false },
     {
       func: RestaurantProfile,
       customName: "Restaurant Profile",

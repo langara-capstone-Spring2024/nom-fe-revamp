@@ -1,36 +1,47 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { S3 } from "aws-sdk";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import MultipleImagePicker from "../../components/base/MultipleImagePicker";
-import { Image as ImageType } from "../../types";
 import Button from "../../components/base/Button";
-import FormData from "form-data";
-import { AddImage } from "../../services/react-query/queries/user";
+import { Image as ImageType } from "../../types";
+
+const s3 = new S3({
+  accessKeyId: process.env.EXPO_PUBLIC_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.EXPO_PUBLIC_AWS_SECRET_ACCESS_KEY,
+  region: process.env.EXPO_PUBLIC_AWS_REGION,
+});
 
 const MultipleImagePickerCollection = () => {
   const [localImages, setLocalImages] = useState<ImageType[]>([]);
   const [remoteImages, setRemoteImages] = useState<string[]>([]);
 
-  const { mutate: addImageMutate, data: addImageData, isPending } = AddImage();
-
   const handleUpload = async () => {
-    const formData = new FormData();
-    localImages.forEach((localImage) => {
-      formData.append("image", {
-        uri: localImage.uri,
-        name: localImage.fileName,
-        type: localImage.type,
-      });
+    localImages.forEach(async (localImage) => {
+      if (process.env.EXPO_PUBLIC_AWS_BUCKET_NAME && localImage.uri) {
+        const uuid = uuidv4();
+        const response = await fetch(localImage.uri);
+        const blob = await response.blob();
+        const contentType = response.headers.get("Content-Type");
+
+        if (contentType) {
+          const params = {
+            Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME,
+            Key: `uploads/${uuid}-${localImage.fileName}`,
+            Body: blob,
+            ContentType: contentType,
+          };
+
+          const result = await s3.upload(params).promise();
+
+          if (result.Location) {
+            setRemoteImages((oldValue) => [...oldValue, result.Location]);
+          }
+        }
+      }
     });
-
-    addImageMutate(formData);
   };
-
-  useEffect(() => {
-    if (addImageData && addImageData.results) {
-      const data = addImageData.results as { Key: string }[];
-      setRemoteImages(data.map((dataItem) => dataItem.Key));
-    }
-  }, [addImageData]);
 
   return (
     <ScrollView
@@ -41,7 +52,7 @@ const MultipleImagePickerCollection = () => {
         <Text>Local Images</Text>
         <MultipleImagePicker images={localImages} setImages={setLocalImages} />
       </View>
-      <View style={{ marginBottom: 32 }}>
+      <View style={{ marginBottom: 32, alignItems: "center" }}>
         <Button
           text="Upload"
           variant="primary"
@@ -51,22 +62,23 @@ const MultipleImagePickerCollection = () => {
       </View>
       <View>
         <Text>Remote Images</Text>
-        {!isPending && (
-          <>
-            <View style={styles.list}>
-              {remoteImages.map((remoteImage, itemIndex) => (
-                <View style={styles.item} key={itemIndex}>
-                  <Image source={{ uri: remoteImage }} style={styles.image} />
-                </View>
-              ))}
+        <View
+          style={[
+            styles.list,
+            { margin: 0 < remoteImages.length ? -4 : undefined },
+          ]}
+        >
+          {remoteImages.map((remoteImage, itemIndex) => (
+            <View style={styles.item} key={itemIndex}>
+              <Image source={{ uri: remoteImage }} style={styles.image} />
             </View>
-            <View>
-              {remoteImages.map((remoteImage, itemIndex) => (
-                <Text key={itemIndex}>{remoteImage}</Text>
-              ))}
-            </View>
-          </>
-        )}
+          ))}
+        </View>
+        <View>
+          {remoteImages.map((remoteImage, itemIndex) => (
+            <Text key={itemIndex}>{remoteImage}</Text>
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -77,6 +89,7 @@ export default MultipleImagePickerCollection;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#FAFAFA",
   },
   list: {
     width: "100%",
@@ -92,6 +105,7 @@ const styles = StyleSheet.create({
     height: "100%",
     aspectRatio: 1,
     borderRadius: 8,
+    padding: 4,
   },
   image: {
     width: "100%",

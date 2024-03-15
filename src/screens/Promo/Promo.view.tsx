@@ -46,7 +46,7 @@ const Promo = (props: PromoGeneratedProps) => {
         todayBottomMargin={16}
       >
         <ExpandableCalendarComponent markedDates={marked.current} />
-        {activeDiscounts ? (
+        {activeDiscounts && activeDiscounts.length > 0 ? (
           <AgendaList
             sections={activeDiscounts}
             renderItem={renderItem}

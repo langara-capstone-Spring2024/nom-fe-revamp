@@ -1,10 +1,11 @@
 import { MarkedDates } from "react-native-calendars/src/types";
 import PromoView from "./Promo.view";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GetAllActiveDiscount } from "../../services/react-query/queries/discount";
 import { Text, Alert } from "react-native";
 import NavigationService from "../../navigation/NavigationService";
 import { useStore } from "../../store";
+import PromoDetails from "../PromoDetails";
 
 const Promo = () => {
   const currentDate = new Date();
@@ -18,9 +19,11 @@ const Promo = () => {
 
   const handleAgendaPress = useCallback(
     ({ item, title }: { item: any; title: string }) => {
+      console.log("ITEMmenuData: ", item.menuData);
       const combinedData = { item, title };
       useStore.setState({ selectedItem: combinedData });
       useStore.setState({ accordionExpanded: true });
+      useStore.setState({ selectedMenuItemIds: item.menuData });
       NavigationService.navigate("PromoDetails");
     },
     []
@@ -104,6 +107,7 @@ const Promo = () => {
 
   const handleAddDiscount = () => {
     useStore.setState({ selectedItem: null });
+    useStore.setState({ selectedMenuItemIds: [] });
     setDateValue(INITIAL_DATE);
     NavigationService.navigate("PromoDetails");
     console.log("INITIAL_DATE: ", INITIAL_DATE);

@@ -1,5 +1,11 @@
 import PromoDetailsView from "./PromoDetails.view";
-import { View, Image, Text, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  TouchableWithoutFeedback,
+  Alert,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
@@ -19,17 +25,18 @@ const PromoDetails = () => {
   const {
     mutate: addDiscountMutation,
     data: discountPayload,
-    isPending,
+    isPending: addDiscountisPending,
   } = AddDiscount();
   const currentDateTime = new Date();
   const currentDateString = currentDateTime.toISOString().split("T")[0];
   const storedDate = getDateValue(useStore());
   const [selectedStartDate, setSelectedStartDate] = useState(currentDateString);
   const [selectedEndDate, setSelectedEndDate] = useState("");
+  const endTime = new Date(new Date().getTime() + 30 * 60000);
   const [selectedStartDateTime, setSelectedStartDateTime] = useState(
     new Date()
   );
-  const [selectedEndDateTime, setSelectedEndDateTime] = useState(new Date());
+  const [selectedEndDateTime, setSelectedEndDateTime] = useState(endTime);
   const [rateIsVisible, setRateIsVisible] = useState(false);
   const [calendarIsVisible, setCalendarIsVisible] = useState(false);
   const [timeIsVisible, setTimeIsVisible] = useState<string | null>(null);
@@ -38,6 +45,8 @@ const PromoDetails = () => {
   );
   const selectedItem = useStore((state) => state.selectedItem);
   console.log("selectedItem: ", selectedItem);
+  const selectedMenuItemIds = useStore((state) => state.selectedMenuItemIds);
+
   const formatDate = (dateString: string): string => {
     const date = new Date(`${dateString}T00:00:00Z`);
     const formattedDate = date.toLocaleDateString("en-US", {
@@ -110,6 +119,14 @@ const PromoDetails = () => {
     selectedEndDateTime?: Date
   ) => {
     if (selectedEndDateTime) {
+      // filter for end time not to be before start time
+      if (
+        selectedStartDateTime &&
+        selectedEndDateTime < selectedStartDateTime
+      ) {
+        Alert.alert("Error", "End time cannot be before start time");
+        return;
+      }
       setSelectedEndDateTime(
         new Date(
           `${storedDate}T${selectedEndDateTime.toISOString().split("T")[1]}`
@@ -167,10 +184,11 @@ const PromoDetails = () => {
         validToTime: selectedEndDateTime.toISOString(),
         validFromDate: storedDate,
         validToDate: storedDate,
+        menuIds: selectedMenuItemIds,
       };
       console.log("discountPayload: ", discountPayload);
 
-      await addDiscountMutation(discountPayload);
+      addDiscountMutation(discountPayload);
     } catch (error) {
       console.error("Error adding discount:", error);
     }
@@ -252,7 +270,7 @@ const PromoDetails = () => {
       hiddenComponent: (
         <WheelPicker
           pickerData={Array.from(
-            { length: 100 },
+            { length: 10 },
             (_, index) => `${(index + 1) * 10}`
           )}
           onValueChange={pickerValueChange}
@@ -280,6 +298,7 @@ const PromoDetails = () => {
     accordionList,
     handleSubmitDiscount,
     selectedItem,
+    selectedMenuItemIds,
   };
   return <PromoDetailsView {...generatedProps} />;
 };
