@@ -20,7 +20,7 @@ const Items = (props: ItemsGeneratedProps) => {
             <MenuList
               key={menu._id}
               menuId={menu._id}
-              menuImage={""}
+              menuImage={menu.imageUrl}
               menuName={menu.name}
               menuPrice={menu.originalPrice}
               handleSelect={() => handleSelectMenu(menu)}
