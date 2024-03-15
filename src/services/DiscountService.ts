@@ -51,12 +51,7 @@ export class DiscountService extends BaseService {
         console.error("Error: storedDataString is null or undefined");
       }
 
-      const res = await apiClient.post("api/discount", discountPayload, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const res = await apiClient.post("api/discount", discountPayload);
 
       return res;
     } catch (error) {
