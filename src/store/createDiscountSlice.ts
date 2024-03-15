@@ -16,7 +16,9 @@ export const createDiscountSlice: StateCreator<IDiscountSlice> = (set) => ({
   accordionExpanded: false,
   setSelectedItem: (item) => set({ selectedItem: item }),
   setAccordionExpanded: (expanded) => set({ accordionExpanded: expanded }),
-  selectedMenuItemIds: [{ _id: "", merchant: "", name: "", originalPrice: "" }],
+  selectedMenuItemIds: [
+    { _id: "", merchant: "", name: "", originalPrice: "", imageUrl: "" },
+  ],
   setSelectedMenuItemIds: (item: MenuItem[]) =>
     set({ selectedMenuItemIds: item }),
 });

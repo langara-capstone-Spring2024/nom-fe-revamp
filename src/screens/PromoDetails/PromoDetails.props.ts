@@ -11,4 +11,5 @@ export type MenuItem = {
   merchant: string;
   name: string;
   originalPrice: string;
+  imageUrl: string;
 };

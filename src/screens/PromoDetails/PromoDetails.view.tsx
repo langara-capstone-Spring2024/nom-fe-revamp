@@ -78,7 +78,7 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
                   menuId={menu._id || ""}
                   menuName={menu.name}
                   menuPrice={Number(menu.originalPrice)}
-                  menuImage={""}
+                  menuImage={menu.imageUrl}
                   key={menu._id}
                   hideRadioButton
                   isLast={index === selectedMenuItemIds.length - 1}
