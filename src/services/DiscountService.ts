@@ -37,22 +37,7 @@ export class DiscountService extends BaseService {
 
   async addDiscount(discountPayload: Discounts) {
     try {
-      const storedDataString = await AsyncStorage.getItem("storage");
-      let accessToken;
-      if (storedDataString) {
-        // Parse the JSON string into an object
-        const storedData = JSON.parse(storedDataString) as {
-          state: { accessToken: string };
-        };
-
-        accessToken = storedData?.state?.accessToken || null;
-        console.log("accessToken: ", accessToken);
-      } else {
-        console.error("Error: storedDataString is null or undefined");
-      }
-
       const res = await apiClient.post("api/discount", discountPayload);
-
       return res;
     } catch (error) {
       console.log("Error: ", error);
