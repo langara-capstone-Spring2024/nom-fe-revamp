@@ -17,13 +17,12 @@ import RestaurantDetail from "../../components/base/RestaurantDetail";
 import RatingBars from "../../components/base/RatingBars";
 import CouponCarousel from "../../components/base/CouponCarousel";
 import { Rating } from "react-native-ratings";
-import { Arrow } from "../../components/base/SVG";
 import NavigationService from "../../navigation/NavigationService";
 import Button from "../../components/base/Button";
 import Segment from "../../components/base/Segment";
 import { useNavigation } from "@react-navigation/native";
 import { Option } from "../../types";
-import MenuCard from "../../components/base/MenuCard";
+import { AntDesign } from "@expo/vector-icons";
 
 const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
   const {
@@ -72,9 +71,9 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
               setIsZoomed(false);
               ref.current?.scrollTo({ y: 0 });
             }}
-            style={{ marginLeft: 16, transform: [{ rotate: "180deg" }] }}
+            style={{ paddingLeft: 16, margin: 8 }}
           >
-            <Arrow />
+            <AntDesign name="arrowleft" size={24} color="black" />
           </Pressable>
         );
       },
@@ -177,11 +176,12 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     onPress={() => NavigationService.goBack()}
                     style={{
                       position: "absolute",
-                      top: 64,
-                      left: 16,
+                      top: 48,
+                      paddingLeft: 16,
+                      margin: 8,
                     }}
                   >
-                    <Arrow style={{ transform: [{ rotate: "180deg" }] }} />
+                    <AntDesign name="arrowleft" size={24} color="black" />
                   </Pressable>
                 </View>
                 <View style={styles.sectionContainer}>
@@ -271,10 +271,9 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                     .map((menuDiscountMapItem, menuDiscountMapItemIndex) => (
                       <View
                         style={[
-                          { flexDirection: "row", gap: 16, paddingVertical: 8 },
+                          styles.menuContainer,
                           menuDiscountMapItemIndex !==
                             menuDiscounts.length - 1 && {
-                            borderBottomColor: "#DADADA",
                             borderBottomWidth: 1,
                           },
                         ]}
@@ -309,11 +308,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                         <View style={{ flex: 3 }}>
                           <Image
                             source={{ uri: menuDiscountMapItem.menu.imageUrl }}
-                            style={{
-                              width: "100%",
-                              aspectRatio: 1,
-                              borderRadius: 12,
-                            }}
+                            style={styles.menuImage}
                           />
                         </View>
                       </View>

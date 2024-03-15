@@ -39,6 +39,23 @@ const createStyles = (theme: Theme) =>
       backgroundColor: t.Surface["warning-light"],
       paddingHorizontal: 8,
     },
+    menuContainer: {
+      flexDirection: "row",
+      gap: 16,
+      paddingVertical: 8,
+      borderTopColor: t.Border.default,
+      borderTopWidth: 1,
+    },
+    menuImage: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 12,
+    },
+    modal: {
+      paddingVertical: 32,
+      paddingHorizontal: 16,
+      gap: 16,
+    },
   });
 
 export default createStyles;

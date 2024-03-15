@@ -24,7 +24,7 @@ export const GetMerchants = (keyword: string) => {
   });
 };
 
-export const GetMerchant = (merchantId: string) => {
+export const GetMerchant = (merchantId?: string) => {
   const userService = new UserService();
   userService.cancelRequests();
 
@@ -32,14 +32,16 @@ export const GetMerchant = (merchantId: string) => {
     queryKey: [QUERY_KEYS.MERCHANT, merchantId],
     enabled: merchantId !== undefined,
     queryFn: async () => {
-      try {
-        const response: AxiosResponse = await userService.getMerchant(
-          merchantId
-        );
+      if (merchantId) {
+        try {
+          const response: AxiosResponse = await userService.getMerchant(
+            merchantId
+          );
 
-        return response.data;
-      } catch (error) {
-        return null;
+          return response.data;
+        } catch (error) {
+          return null;
+        }
       }
     },
   });
