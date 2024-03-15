@@ -39,4 +39,13 @@ export class ConsumerDiscountService extends BaseService {
 
     return response;
   }
+
+  async getConsumerDiscountById(id: string) {
+    const response = await apiClient.get(`api/consumer-discounts/${id}`);
+    return response;
+  }
 }
+
+
+
+
