@@ -11,7 +11,7 @@ import Typography from "../../components/base/Typography";
 import MenuList from "../../components/base/MenuList";
 import Button from "../../components/base/Button";
 import { Check } from "../../components/base/SVG";
-import { Menus } from "../../types/Menus";
+import { Menu } from "../../types/Menus";
 
 const OrderDetails = (props: OrderDetailsGeneratedProps) => {
   const theme = useTheme();
@@ -64,7 +64,7 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
         >
           {menus &&
             menus.length > 0 &&
-            menus.map((menu: Menus) => (
+            menus.map((menu: Menu) => (
               <MenuList
                 key={menu._id}
                 menuId={menu._id}

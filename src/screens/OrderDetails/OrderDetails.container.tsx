@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import OrderDetailsView from "./OrderDetails.view";
 import { useStore } from "../../store";
-import { GetConsumerDiscountsById } from "../../services/react-query/queries/consumerDiscount";
+import { GetConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
 import { ConsumerDiscount } from "../../types/ConsumerDiscount";
 import { Discount } from "../../types/Discounts";
 import { GetMenuDiscountsByMerchantAndDiscount } from "../../services/react-query/queries/menuDiscount";
@@ -11,12 +11,13 @@ const OrderDetails = () => {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { data: consumerDiscount, error } = GetConsumerDiscountsById(
-    "65f25b90eef36f50cdf37443"
+  const { data: consumerDiscount, error } = GetConsumerDiscount(
+    "65f3cbcb0502554c66ad86e8"
   );
-  console.log(consumerDiscount);
 
-  const { data: menuDiscounts, error: menuDiscountError } = GetMenuDiscountsByMerchantAndDiscount("65c6c8b74eb7c69237fc8238", "65f255c452bc2faaeca9fbe3")
+  const { data: menuDiscounts, error: menuDiscountError } = GetMenuDiscountsByMerchantAndDiscount(
+    consumerDiscount?.merchant._id || "", 
+    consumerDiscount?.discount._id || "")
   console.log(menuDiscounts)
 
   const { prev, next, page } = useStore((state) => ({
@@ -34,6 +35,7 @@ const OrderDetails = () => {
   };
 
   const discount = consumerDiscount?.discount
+  const consumer = consumerDiscount?.consumer
 
   const generatedProps = {
     handlePressConfirm: handlePressConfirm,
@@ -41,7 +43,7 @@ const OrderDetails = () => {
     setOpenSuccess: setOpenSuccess,
     modalVisible: modalVisible,
     setModalVisible: setModalVisible,
-    customerName: `${discount?.merchant.user.firstName} ${discount?.merchant.user.lastName}`,
+    customerName: `${consumer?.user.firstName} ${consumer?.user.lastName}`,
     couponNo:  consumerDiscount?.qrIdentification || "",
     discount: discount?.percentDiscount || 0,
     date: discount?.validFromDate || new Date(),
@@ -49,7 +51,7 @@ const OrderDetails = () => {
     validToTime: discount?.validToTime || new Date(),
     status: consumerDiscount?.status || "",
     operation: consumerDiscount?.updatedAt || new Date(),
-    menus: []
+    menus: menuDiscounts?.map(menuDiscount => menuDiscount.menu) || []
   };
 
   return <OrderDetailsView {...generatedProps} />;

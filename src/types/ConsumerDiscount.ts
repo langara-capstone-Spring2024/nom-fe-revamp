@@ -1,18 +1,6 @@
 import { Consumer } from "./Consumer";
-import { Discount } from "./Discounts";
+import { DiscountV2 } from "./Discounts";
 import { Merchant } from "./Merchant";
-
-export interface ConsumerDiscountV2 {
-    _id: string;
-    consumer: Consumer;
-    discount: Discount;
-    percentDiscount: number;
-    qrCode: string;
-    qrIdentification: string;
-    status: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }
 
 export interface ConsumerDiscount {
   _id: string;
@@ -21,5 +9,6 @@ export interface ConsumerDiscount {
   status: "upcoming" | "redeemed" | "cancelled";
   consumer: Consumer;
   merchant: Merchant;
-  discount: Discount;
+  discount: DiscountV2;
+  updatedAt: Date;
 }

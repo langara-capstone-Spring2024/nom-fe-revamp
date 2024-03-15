@@ -20,7 +20,7 @@ const OrderCard = (props: OrderCardProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   const formatTime = (timeString: Date) => {
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       hour: "numeric",
       minute: "numeric",
       hour12: true,
@@ -30,7 +30,7 @@ const OrderCard = (props: OrderCardProps) => {
   
 
   const formatDate = (dateString: Date) => {
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -68,7 +68,7 @@ const OrderCard = (props: OrderCardProps) => {
               Discount
             </Typography>
             <Typography variant="body" alignment="left" color="primary">
-              {discount}% Off
+              {discount*100}% Off
             </Typography>
           </View>
           <Typography variant="body" alignment="left" color="subtle">
@@ -93,7 +93,7 @@ const OrderCard = (props: OrderCardProps) => {
             Operation
           </Typography>
           <Typography variant="body" alignment="left" color="primary">
-            {status === "Upcoming" ? "N/A" : formatTime(operation)}
+            {status === "upcoming" ? "N/A" : formatTime(operation)}
           </Typography>
         </View>
       </View>

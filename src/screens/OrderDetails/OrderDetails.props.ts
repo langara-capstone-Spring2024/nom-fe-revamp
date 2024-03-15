@@ -1,6 +1,6 @@
 import { GestureResponderEvent } from "react-native";
 import { MenuListProps } from "../../components/base/MenuList/MenuList.props";
-import { Menus } from "../../types/Menus";
+import { Menu } from "../../types/Menus";
 
 export interface OrderDetailsGeneratedProps {
   handlePressConfirm?:
@@ -18,7 +18,5 @@ export interface OrderDetailsGeneratedProps {
   validToTime: Date,
   status: String, 
   operation: Date,
-  menus: Menus[],
-  setMenuDiscountList: (text: string ) => void
-
+  menus: Menu[],
 }
