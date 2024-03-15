@@ -3,7 +3,7 @@ import { ConsumerDiscountService } from "../../ConsumerDiscountService";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { AxiosResponse } from "axios";
 import { ConsumerDiscount } from "../../../types/ConsumerDiscount";
-import { RNQueryClient } from "../query-client";}
+import { RNQueryClient } from "../query-client";
 
 export const AddConsumerDiscount = () => {
   const consumerDiscountService = new ConsumerDiscountService();
