@@ -27,7 +27,6 @@ const OrderCard = (props: OrderCardProps) => {
     };
     return new Date(timeString).toLocaleTimeString("en-US", options);
   };
-  
 
   const formatDate = (dateString: Date) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -37,6 +36,10 @@ const OrderCard = (props: OrderCardProps) => {
     };
     return new Date(dateString).toLocaleDateString("en-US", options);
   };
+
+  function capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   return (
     <View style={styles.container}>
@@ -68,7 +71,7 @@ const OrderCard = (props: OrderCardProps) => {
               Discount
             </Typography>
             <Typography variant="body" alignment="left" color="primary">
-              {discount*100}% Off
+              {discount * 100}% Off
             </Typography>
           </View>
           <Typography variant="body" alignment="left" color="subtle">
@@ -85,7 +88,7 @@ const OrderCard = (props: OrderCardProps) => {
             Status
           </Typography>
           <Typography variant="body" alignment="left" color="warning-strong">
-            {status}
+            {capitalizeFirstLetter(status)}
           </Typography>
         </View>
         <View>

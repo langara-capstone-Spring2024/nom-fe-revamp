@@ -10,13 +10,13 @@ export interface OrderDetailsGeneratedProps {
   setOpenSuccess: (v: boolean) => void;
   modalVisible: boolean;
   setModalVisible: (v: boolean) => void;
-  customerName: string, 
-  couponNo: string,
-  discount: number, 
-  date: Date, 
-  validFromTime: Date, 
-  validToTime: Date,
-  status: String, 
-  operation: Date,
-  menus: Menu[],
+  customerName: string;
+  couponNo: string;
+  discount: number;
+  date: Date;
+  validFromTime: Date;
+  validToTime: Date;
+  status: string;
+  operation: Date;
+  menus: Menu[];
 }

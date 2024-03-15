@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import OrderDetailsView from "./OrderDetails.view";
 import { useStore } from "../../store";
-import { GetConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
+import {
+  GetConsumerDiscount,
+  UpdateConsumerDiscount,
+} from "../../services/react-query/queries/consumerDiscount";
 import { ConsumerDiscount } from "../../types/ConsumerDiscount";
 import { Discount } from "../../types/Discounts";
 import { GetMenuDiscountsByMerchantAndDiscount } from "../../services/react-query/queries/menuDiscount";
-import { View } from "react-native";
 
 const OrderDetails = () => {
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -15,10 +17,12 @@ const OrderDetails = () => {
     "65f3cbcb0502554c66ad86e8"
   );
 
-  const { data: menuDiscounts, error: menuDiscountError } = GetMenuDiscountsByMerchantAndDiscount(
-    consumerDiscount?.merchant._id || "", 
-    consumerDiscount?.discount._id || "")
-  console.log(menuDiscounts)
+  const { data: menuDiscounts, error: menuDiscountError } =
+    GetMenuDiscountsByMerchantAndDiscount(
+      "65ecc4140cfbb230ac6cc439" || consumerDiscount?.merchant._id,
+      "65f3cbcb0502554c66ad86e8" || consumerDiscount?.discount._id
+    );
+  console.log(menuDiscounts);
 
   const { prev, next, page } = useStore((state) => ({
     prev: state.previous,
@@ -26,16 +30,29 @@ const OrderDetails = () => {
     page: state.page,
   }));
 
+  const { mutate: updateDiscountStatus } = UpdateConsumerDiscount();
+
   const handlePressConfirm = () => {
     if (!modalVisible) {
       setOpenSuccess(true);
+      if (consumerDiscount?._id) {
+        const updatedDiscount = {
+          ...consumerDiscount,
+          status: "redeemed" as "upcoming" | "redeemed" | "cancelled"
+        };
+
+        updateDiscountStatus({ consumerDiscount: updatedDiscount });
+        setOpenSuccess(true);
+      } else {
+        console.error("ConsumerDiscount ID is undefined.");
+      }
     } else {
       console.log("Navigating to home...");
     }
   };
 
-  const discount = consumerDiscount?.discount
-  const consumer = consumerDiscount?.consumer
+  const discount = consumerDiscount?.discount;
+  const consumer = consumerDiscount?.consumer;
 
   const generatedProps = {
     handlePressConfirm: handlePressConfirm,
@@ -44,14 +61,20 @@ const OrderDetails = () => {
     modalVisible: modalVisible,
     setModalVisible: setModalVisible,
     customerName: `${consumer?.user.firstName} ${consumer?.user.lastName}`,
-    couponNo:  consumerDiscount?.qrIdentification || "",
+    couponNo: consumerDiscount?.qrIdentification || "",
     discount: discount?.percentDiscount || 0,
-    date: discount?.validFromDate || new Date(),
-    validFromTime: discount?.validFromTime || new Date(),
-    validToTime: discount?.validToTime || new Date(),
+    date: discount?.validFromDate
+      ? new Date(discount.validFromDate)
+      : new Date(),
+    validFromTime: discount?.validFromTime
+      ? new Date(discount.validFromTime)
+      : new Date(),
+    validToTime: discount?.validToTime
+      ? new Date(discount.validToTime)
+      : new Date(),
     status: consumerDiscount?.status || "",
-    operation: consumerDiscount?.updatedAt || new Date(),
-    menus: menuDiscounts?.map(menuDiscount => menuDiscount.menu) || []
+    operation: new Date(consumerDiscount?.updatedAt || Date.now()),
+    menus: menuDiscounts?.map((menuDiscount) => menuDiscount.menu) || [],
   };
 
   return <OrderDetailsView {...generatedProps} />;

@@ -1,6 +1,6 @@
 import { Consumer } from "./Consumer";
-import { DiscountV2 } from "./Discounts";
 import { Merchant } from "./Merchant";
+import { Discount } from "./Discounts";
 
 export interface ConsumerDiscount {
   _id: string;
@@ -9,6 +9,6 @@ export interface ConsumerDiscount {
   status: "upcoming" | "redeemed" | "cancelled";
   consumer: Consumer;
   merchant: Merchant;
-  discount: DiscountV2;
+  discount: Discount;
   updatedAt: Date;
 }
