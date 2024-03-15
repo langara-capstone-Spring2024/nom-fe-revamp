@@ -3,8 +3,8 @@ import { NavigationContainerRef } from "@react-navigation/native";
 
 type Collections = {
   // PLOP_COMPONENT_TYPE
+  ItemsCollection: undefined;
   SegmentCollection: undefined;
-
   RestaurantDetailCollection: undefined;
   OrderCardCollection: undefined;
   AdTemplateThreeCollection: undefined;
@@ -60,6 +60,7 @@ export type RootStackParamList = {
   OrderDetails: undefined;
   RestaurantProfile: { merchantId: string };
   PromoDetails: undefined;
+  Items: undefined;
   MerchantAccount: undefined;
   ConsumerAccount: undefined;
   MerchantHome: undefined;

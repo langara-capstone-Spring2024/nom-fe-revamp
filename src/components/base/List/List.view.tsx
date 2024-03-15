@@ -22,6 +22,7 @@ const List = (props: ListProps) => {
     hiddenComponent,
     hiddenComponentIsVisible,
     style,
+    titleColor,
   } = props;
 
   const theme = useTheme();
@@ -39,7 +40,7 @@ const List = (props: ListProps) => {
           ]}
         >
           <View>
-            <Typography>{title}</Typography>
+            <Typography color={titleColor}>{title}</Typography>
             {hasBottomDescription && (
               <Typography variant="bodyXs">{bottomDescription}</Typography>
             )}

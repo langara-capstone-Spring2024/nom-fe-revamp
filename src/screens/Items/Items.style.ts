@@ -4,17 +4,14 @@ import { theme as t } from "../../utils/Theme";
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    promoDetailsContainer: {
+    itemContainer: {
       flex: 1,
     },
-    scrollView: {
-      flex: 1,
-    },
-    promoMain: {
+    itemList: {
       paddingHorizontal: 16,
       paddingVertical: 32,
     },
-    promoFooter: {
+    itemButton: {
       position: "absolute",
       bottom: 0,
       left: 0,

@@ -1,3 +1,4 @@
+import { MenuItem } from "../../../screens/PromoDetails/PromoDetails.props";
 export interface AgendaItemProps {
   item: ItemType;
   title: Date;
@@ -12,4 +13,5 @@ interface ItemType {
   discount: number;
   menuCount: number;
   discountCount: number;
+  menuData: MenuItem[];
 }

@@ -1,3 +1,4 @@
+import { MenuItem } from "../screens/PromoDetails/PromoDetails.props";
 import { Merchant } from "./Merchant";
 
 export interface Discounts {
@@ -9,6 +10,8 @@ export interface Discounts {
   validToTime: string;
   validFromDate: string;
   validToDate: string;
+  menuIds: MenuItem[];
+  menuData?: MenuItem[];
 }
 
 export interface Discount {
@@ -21,6 +24,8 @@ export interface Discount {
   validToTime: string;
   validFromDate: string;
   validToDate: string;
+  menuIds: MenuItem[];
+  menuData?: MenuItem[];
   merchant: Merchant;
 }
 
