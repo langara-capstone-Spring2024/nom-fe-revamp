@@ -24,7 +24,7 @@ const createStyles = (theme: Theme) =>
       borderBottomColor: t.Border["default"],
       flexDirection: "row",
       //   justifyContent: "space-between",
-      gap: 65,
+      gap: 30,
       paddingTop: 16,
       paddingBottom: 16,
     },
@@ -34,7 +34,7 @@ const createStyles = (theme: Theme) =>
     bottomContainer: {
       flexDirection: "row",
       //   justifyContent: "space-between",
-      gap: 75,
+      gap: 85,
       paddingTop: 16,
     },
   });

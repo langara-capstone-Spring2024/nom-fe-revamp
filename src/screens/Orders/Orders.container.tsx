@@ -1,3 +1,4 @@
+import React from 'react';
 import OrdersView from './Orders.view';
 
 const Orders = () => {

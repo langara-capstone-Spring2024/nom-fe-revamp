@@ -1,6 +1,6 @@
 import { Consumer } from "./Consumer";
-import { Discount } from "./Discounts";
 import { Merchant } from "./Merchant";
+import { Discount } from "./Discounts";
 
 export interface ConsumerDiscount {
   _id: string;
@@ -10,4 +10,5 @@ export interface ConsumerDiscount {
   consumer: Consumer;
   merchant: Merchant;
   discount: Discount;
+  updatedAt: Date;
 }
