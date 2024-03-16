@@ -311,8 +311,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               {selectedTemplate === 1 && (
                 <AdTemplateOne
                   image={localImage}
-                  headline="Up to 50% off!"
-                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  headline={headline}
+                  tagline={tagline}
                   primary={selectedPrimaryColor}
                   secondary={selectedAccentColor}
                   onSelectTemplate={(v) => setSelectedTemplate(v)}
@@ -322,8 +322,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 <AdTemplateTwo
                   onSelectTemplate={(v) => setSelectedTemplate(v)}
                   image={localImage}
-                  headline="Up to 50% off!"
-                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  headline={headline}
+                  tagline={headline}
                   primary={selectedPrimaryColor}
                   secondary={selectedAccentColor}
                 />
