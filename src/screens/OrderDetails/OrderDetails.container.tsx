@@ -14,13 +14,13 @@ const OrderDetails = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const { data: consumerDiscount, error } = GetConsumerDiscount(
-    "65f3cbcb0502554c66ad86e8"
+    "65f4f262a146d152b8caab59"
   );
 
   const { data: menuDiscounts, error: menuDiscountError } =
     GetMenuDiscountsByMerchantAndDiscount(
       "65ecc4140cfbb230ac6cc439" || consumerDiscount?.merchant._id,
-      "65f3cbcb0502554c66ad86e8" || consumerDiscount?.discount._id
+      "65f4ec9ca88fea5aa9d671ae" || consumerDiscount?.discount._id
     );
   console.log(menuDiscounts);
 
@@ -38,7 +38,7 @@ const OrderDetails = () => {
       if (consumerDiscount?._id) {
         const updatedDiscount = {
           ...consumerDiscount,
-          status: "redeemed" as "upcoming" | "redeemed" | "cancelled"
+          status: "redeemed" as "upcoming" | "redeemed" | "cancelled",
         };
 
         updateDiscountStatus({ consumerDiscount: updatedDiscount });
