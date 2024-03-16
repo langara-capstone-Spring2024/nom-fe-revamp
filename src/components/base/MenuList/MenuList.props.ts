@@ -4,6 +4,7 @@ export interface MenuListProps {
   menuName: string;
   menuPrice: number;
   selected?: boolean;
-  handleSelect: (menuId: string) => void;
-  hideRadioButton: boolean;
+  handleSelect?: (menuId: string) => void;
+  hideRadioButton?: boolean;
+  isLast?: boolean;
 }

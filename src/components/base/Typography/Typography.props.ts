@@ -8,7 +8,7 @@ export interface TypographyProps {
   alignment?: TextAlign;
   weight?: Weight;
   otherStyle?: TextStyle & ViewStyle;
-  color?: keyof (typeof theme)["Content"];
+  color?: keyof (typeof theme)["Content"] | string;
   children: any;
 }
 

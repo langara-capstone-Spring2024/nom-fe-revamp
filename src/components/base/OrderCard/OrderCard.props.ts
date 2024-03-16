@@ -1,10 +1,10 @@
 export interface OrderCardProps {
-    customerName: String, 
+    customerName: string, 
     couponNo: string,
     discount: number, 
     date: Date, 
     validFromTime: Date, 
     validToTime: Date,
-    status: String, 
+    status: string, 
     operation: Date,
 }

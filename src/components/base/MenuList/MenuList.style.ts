@@ -31,13 +31,12 @@ const createStyles = (theme: Theme) =>
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      borderBottomWidth: 1,
       borderBottomColor: t.Border.default,
       paddingVertical: 24,
     },
     menuDetailsContainer: {
       display: "flex",
-      width: "74%",
+      width: "76%",
     },
     radioButton: {
       width: 20,

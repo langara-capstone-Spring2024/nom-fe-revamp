@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
 import { ConsumerDiscountService } from "../../ConsumerDiscountService";
-import { ConsumerDiscount } from "../../../types/ConsumerDiscount";
 import { QUERY_KEYS } from "../../../config/query-keys";
 import { AxiosResponse } from "axios";
+import { ConsumerDiscount } from "../../../types/ConsumerDiscount";
 import { RNQueryClient } from "../query-client";
 
 export const AddConsumerDiscount = () => {
@@ -100,13 +100,6 @@ export const UpdateConsumerDiscount = () => {
         queryKey: [
           QUERY_KEYS.CONSUMER_DISCOUNT,
           variables.consumerDiscount._id,
-        ],
-        exact: true,
-      });
-      RNQueryClient.invalidateQueries({
-        queryKey: [
-          QUERY_KEYS.CONSUMER_DISCOUNTS,
-          variables.consumerDiscount.merchant._id,
         ],
         exact: true,
       });

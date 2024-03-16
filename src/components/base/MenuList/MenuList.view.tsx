@@ -18,6 +18,7 @@ const MenuList = (props: MenuListProps) => {
     selected,
     handleSelect,
     hideRadioButton,
+    isLast,
   } = props;
   return (
     <TouchableWithoutFeedback
@@ -41,7 +42,7 @@ const MenuList = (props: MenuListProps) => {
             </View>
           )}
         </View>
-        <View style={styles.menuRight}>
+        <View style={[styles.menuRight, { borderBottomWidth: isLast ? 0 : 1 }]}>
           <View style={styles.menuDetailsContainer}>
             <View>
               <Typography>{menuName}</Typography>
@@ -59,10 +60,10 @@ const MenuList = (props: MenuListProps) => {
                       ? t.Surface["info-medium"]
                       : t.Border.default,
                   },
-                  selected && styles.radioButtonDot,
+                  !!selected && styles.radioButtonDot,
                 ]}
               >
-                {selected && <Entypo name="check" size={16} color="white" />}
+                {!!selected && <Entypo name="check" size={16} color="white" />}
               </View>
             )}
           </View>
