@@ -21,7 +21,7 @@ import {
   OrdersTab,
   ScannerTab,
 } from "../../base/SVG";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -97,6 +97,9 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                       <OrdersTab fill={focused ? "#E51E35" : "#939393"} />
                     </View>
                   ),
+                  tabBarButton: ({ children, style }) => (
+                    <Pressable style={style}>{children}</Pressable>
+                  ),
                 }}
               />
               <Tab.Screen
@@ -117,6 +120,9 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                     >
                       <AccountTab fill={focused ? "#E51E35" : "#939393"} />
                     </View>
+                  ),
+                  tabBarButton: ({ children, style }) => (
+                    <Pressable style={style}>{children}</Pressable>
                   ),
                 }}
               />
@@ -150,8 +156,11 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                 component={MerchantAccount}
                 options={{
                   tabBarLabel: "Acount",
-                  tabBarIcon: ({ color, size, focused }) => (
+                  tabBarIcon: ({ focused }) => (
                     <AccountTab fill={focused ? "black" : "#939393"} />
+                  ),
+                  tabBarButton: ({ children, style }) => (
+                    <Pressable style={style}>{children}</Pressable>
                   ),
                 }}
               />
