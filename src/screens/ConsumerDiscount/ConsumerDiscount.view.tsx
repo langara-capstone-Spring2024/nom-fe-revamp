@@ -285,14 +285,14 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                           textDecorationLine: "line-through",
                         }}
                       >
+                        ${menuDiscountMapItem.menu.originalPrice}
+                      </Typography>
+                      <Typography variant="bodySm" color="subtle">
                         $
                         {(
                           menuDiscountMapItem.menu.originalPrice *
                           menuDiscountMapItem.discount.percentDiscount
                         ).toFixed(2)}
-                      </Typography>
-                      <Typography variant="bodySm" color="subtle">
-                        ${menuDiscountMapItem.menu.originalPrice}
                       </Typography>
                     </View>
                     <Typography variant="bodySm" color="subtle">

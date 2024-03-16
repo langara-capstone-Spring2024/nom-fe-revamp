@@ -11,6 +11,7 @@ const QUERY_KEYS = {
   AUTH: "Auth",
   STRIPE_PAYMENT: "STRIPE_PAYMENT",
   STRIPE_CARDS: "STRIPE_CARDS",
+  ADS: "ADS",
   AD: "AD",
   MENUS: "Menus",
   S3: "S3",

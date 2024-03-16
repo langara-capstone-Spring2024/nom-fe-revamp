@@ -1,3 +1,5 @@
+import { Menu } from "./Menus";
+
 export interface Discounts {
   label?: string;
   description?: string;
@@ -19,6 +21,7 @@ export interface Discount {
   validToTime: string;
   validFromDate: string;
   validToDate: string;
+  menuIds: Menu[];
 }
 
 export interface FormattedDiscount {
