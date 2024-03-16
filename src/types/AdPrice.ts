@@ -11,5 +11,7 @@ export interface AdPaylaod {
   endDate: string;
   amount: number;
   imageUrl: string;
+  primary: string;
+  accent: string;
   paymentMethodId: string;
 }

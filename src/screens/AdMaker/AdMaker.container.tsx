@@ -281,7 +281,9 @@ const AdMaker = () => {
           !!selectedAccentColor &&
           !!selectedPrimaryColor &&
           !!headline &&
-          !!tagline
+          !!tagline &&
+          !!selectedPrimaryColor &&
+          !!selectedAccentColor
         ) {
           createAd({
             template: selectedTemplate,
@@ -291,6 +293,8 @@ const AdMaker = () => {
             endDate: selectedEndDate,
             amount: totalAdPrice,
             imageUrl,
+            primary: selectedPrimaryColor,
+            accent: selectedAccentColor,
             paymentMethodId: selectedPaymentMethodId,
           });
         }
