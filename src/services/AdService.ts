@@ -3,6 +3,12 @@ import { BaseService } from "./BaseService";
 import { apiClient } from "./client";
 
 export class AdService extends BaseService {
+  async getAds() {
+    const response = await apiClient.get("api/ads/");
+
+    return response;
+  }
+
   async getPrices() {
     const response = await apiClient.get("api/ad/price");
     return response;

@@ -17,6 +17,17 @@ const createStyles = (theme: Theme) =>
     carouselContainer: {
       marginHorizontal: -16,
     },
+    menuContainer: {
+      flexDirection: "row",
+      gap: 16,
+      paddingVertical: 8,
+      borderBottomColor: t.Border.default,
+    },
+    menuImage: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 12,
+    },
     ratingContainer: {
       flexDirection: "row",
       gap: 48,
@@ -35,7 +46,7 @@ const createStyles = (theme: Theme) =>
     buttonContainer: {
       position: "absolute",
       bottom: 0,
-      backgroundColor: "white",
+      backgroundColor: t.Surface.default,
       alignItems: "center",
       padding: 12,
       paddingBottom: 32,

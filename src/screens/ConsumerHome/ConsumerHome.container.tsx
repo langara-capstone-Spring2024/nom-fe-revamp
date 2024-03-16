@@ -5,6 +5,7 @@ import { GetRatingsByMerchants } from "../../services/react-query/queries/rating
 import { GetActiveDiscountsByMerchants } from "../../services/react-query/queries/discount";
 import { GetMenuDiscountsByMerchants } from "../../services/react-query/queries/menuDiscount";
 import { useNavigation } from "@react-navigation/native";
+import { GetAds } from "../../services/react-query/queries/ad";
 
 const ConsumerHome = () => {
   const navigation = useNavigation();
@@ -15,6 +16,12 @@ const ConsumerHome = () => {
     useState<boolean>(false);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
+
+  const {
+    data: ads = [],
+    refetch: refetchAds,
+    isFetching: isFetchingAds,
+  } = GetAds();
 
   const {
     data: merchants = [],
@@ -28,6 +35,7 @@ const ConsumerHome = () => {
 
   const handleRefresh = () => {
     setIsRefreshing(true);
+    refetchAds();
     refetchMerchants();
     setTimeout(() => {
       setIsRefreshing(false);
@@ -107,8 +115,10 @@ const ConsumerHome = () => {
     isDiscountsReady,
     isMenuDiscountsReady,
     isRefreshing,
+    isFetchingAds,
     keyword,
     setKeyword,
+    ads,
     merchants,
     ratingsData,
     discountsData,

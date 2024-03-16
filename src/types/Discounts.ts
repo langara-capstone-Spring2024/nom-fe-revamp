@@ -1,3 +1,5 @@
+import { Menu } from "./Menus";
+
 import { MenuItem } from "../screens/PromoDetails/PromoDetails.props";
 import { Merchant } from "./Merchant";
 

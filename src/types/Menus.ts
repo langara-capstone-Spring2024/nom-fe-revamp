@@ -1,3 +1,5 @@
+import { Merchant } from "./Merchant";
+
 export interface Menus {
   _id: string;
   name: string;
@@ -22,4 +24,5 @@ export interface Menu {
     | "Mexican"
     | "Thai"
     | "Others";
+  merchant: Merchant;
 }

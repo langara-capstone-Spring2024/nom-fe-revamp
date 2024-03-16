@@ -34,7 +34,7 @@ export const GetMenuDiscountsByMerchants = (merchants: Merchant[]) => {
   });
 };
 
-export const GetMenuDiscountsByMerchant = (merchantId: string) => {
+export const GetMenuDiscountsByMerchant = (merchantId?: string) => {
   const menuDiscountService = new MenuDiscountService();
   menuDiscountService.cancelRequests();
 
@@ -42,14 +42,39 @@ export const GetMenuDiscountsByMerchant = (merchantId: string) => {
     queryKey: [QUERY_KEYS.MENU_DISCOUNTS, merchantId],
     enabled: merchantId !== undefined,
     queryFn: async () => {
-      try {
-        const response = await menuDiscountService.getMenuDiscountsMerchant(
-          merchantId
-        );
+      if (merchantId) {
+        try {
+          const response = await menuDiscountService.getMenuDiscountsMerchant(
+            merchantId
+          );
 
-        return response.data;
-      } catch (error) {
-        return [];
+          return response.data;
+        } catch (error) {
+          return [];
+        }
+      }
+    },
+  });
+};
+
+export const GetMenuDiscountsByDiscount = (discountId?: string) => {
+  const menuDiscountService = new MenuDiscountService();
+  menuDiscountService.cancelRequests();
+
+  return useQuery<MenuDiscount[]>({
+    queryKey: [QUERY_KEYS.MENU_DISCOUNTS, discountId],
+    enabled: discountId !== undefined,
+    queryFn: async () => {
+      if (discountId) {
+        try {
+          const response = await menuDiscountService.getMenuDiscountsDiscount(
+            discountId
+          );
+
+          return response.data;
+        } catch (error) {
+          return [];
+        }
       }
     },
   });

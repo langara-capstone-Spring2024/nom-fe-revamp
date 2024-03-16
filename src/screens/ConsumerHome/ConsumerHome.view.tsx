@@ -27,8 +27,10 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
     isDiscountsReady,
     isMenuDiscountsReady,
     isRefreshing,
+    isFetchingAds,
     keyword,
     setKeyword,
+    ads,
     merchants,
     ratingsData,
     discountsData,
@@ -160,7 +162,36 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
             </Typography>
           </View>
         </ScrollView>
-        <View style={styles.titleContainer} onLayout={handleLayoutY}>
+        {/* <View style={styles.titleContainer}>
+          <Typography variant="title5">Exciting offers this week!</Typography>
+          <Arrow />
+        </View>
+        {!isFetchingAds ? (
+          <>
+            {0 < ads.length ? (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+              >
+                {ads.map((adMapItem, adMapItemIndex) =>
+                  adMapItem.template === "1" ? (
+                    <></>
+                  ) : adMapItem.template === "2" ? (
+                    <></>
+                  ) : (
+                    <></>
+                  )
+                )}
+              </ScrollView>
+            ) : (
+              <Typography alignment="center">No results</Typography>
+            )}
+          </>
+        ) : (
+          <ActivityIndicator />
+        )} */}
+        <View onLayout={handleLayoutY} style={styles.titleContainer}>
           <Typography variant="title5">Browse Cusines</Typography>
           <Arrow />
         </View>
@@ -224,38 +255,79 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                     <View style={styles.listContainer}>
                       {0 <
                       merchants
-                        .map((merchant, merchantItemIndex) =>
+                        .map((merchantMapItem, merchantItemIndex) =>
                           menuDiscountsData[merchantItemIndex].data.map(
-                            (menuDiscount, menuDiscountItemIndex) => <></>
+                            (menuDiscountMapItem, menuDiscountItemIndex) => (
+                              <></>
+                            )
                           )
                         )
                         .flat().length ? (
                         merchants
-                          .map((merchant, merchantItemIndex) =>
-                            menuDiscountsData[merchantItemIndex].data.map(
-                              (menuDiscount, menuDiscountItemIndex) => (
-                                <DishCard
-                                  imageUrl={menuDiscount.menu.imageUrl}
-                                  dishName={menuDiscount.menu.name}
-                                  rating={
-                                    ratingsData[merchantItemIndex].data.reduce(
-                                      (totalRating, rating) =>
-                                        totalRating + rating.rating,
-                                      0
-                                    ) /
-                                      ratingsData[merchantItemIndex].data
-                                        .length || 0
-                                  }
-                                  cuisineType={menuDiscount.menu.cuisineType}
-                                  cityName="Vancouver"
-                                  discountAmount={30}
-                                  cost={menuDiscount.merchant.cost}
-                                  bordered
-                                  key={menuDiscountItemIndex}
-                                />
-                              )
-                            )
-                          )
+                          .map((merchantMapItem, merchantItemIndex) => {
+                            const menuIds: string[] = [];
+
+                            return menuDiscountsData[
+                              merchantItemIndex
+                            ].data.map(
+                              (menuDiscountMapItem, menuDiscountItemIndex) => {
+                                if (
+                                  !menuIds.includes(
+                                    menuDiscountMapItem.menu._id
+                                  )
+                                ) {
+                                  menuIds.push(menuDiscountMapItem.menu._id);
+                                  let discountAmount = 0;
+
+                                  menuDiscountsData[merchantItemIndex].data
+                                    .filter(
+                                      (menuDiscountFilterItem) =>
+                                        menuDiscountFilterItem.menu._id ===
+                                        menuDiscountMapItem.menu._id
+                                    )
+                                    .forEach((menuDiscountItem) => {
+                                      if (
+                                        discountAmount <
+                                        menuDiscountItem.discount
+                                          .percentDiscount
+                                      ) {
+                                        discountAmount =
+                                          menuDiscountItem.discount
+                                            .percentDiscount;
+                                      }
+                                    });
+
+                                  return (
+                                    <DishCard
+                                      imageUrl={
+                                        menuDiscountMapItem.menu.imageUrl
+                                      }
+                                      dishName={menuDiscountMapItem.menu.name}
+                                      rating={
+                                        ratingsData[
+                                          merchantItemIndex
+                                        ].data.reduce(
+                                          (totalRating, rating) =>
+                                            totalRating + rating.rating,
+                                          0
+                                        ) /
+                                          ratingsData[merchantItemIndex].data
+                                            .length || 0
+                                      }
+                                      cuisineType={
+                                        menuDiscountMapItem.menu.cuisineType
+                                      }
+                                      cityName="Vancouver"
+                                      discountAmount={discountAmount * 100}
+                                      cost={menuDiscountMapItem.merchant.cost}
+                                      bordered
+                                      key={menuDiscountItemIndex}
+                                    />
+                                  );
+                                }
+                              }
+                            );
+                          })
                           .flat()
                       ) : (
                         <Typography alignment="center">No results</Typography>

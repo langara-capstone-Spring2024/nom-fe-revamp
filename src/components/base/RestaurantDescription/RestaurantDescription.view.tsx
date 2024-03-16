@@ -4,11 +4,8 @@ import createStyles from "./RestaurantDescription.style";
 import React, { useMemo } from "react";
 import { Card, useTheme } from "react-native-paper";
 import Typography from "../Typography";
-import {
-  RestaurantDescriptionCoupon,
-  RestaurantDescriptionCutlery,
-  RestaurantDescriptionLocation,
-} from "../SVG";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const RestaurantDescription = (props: RestaurantDescriptionProps) => {
   const {
@@ -30,17 +27,25 @@ const RestaurantDescription = (props: RestaurantDescriptionProps) => {
           <Typography variant="title3">{name}</Typography>
         </View>
         <View style={styles.addressContainer}>
-          <RestaurantDescriptionLocation />
+          <Ionicons name="location-outline" size={16} color="black" />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {address}
           </Typography>
         </View>
         <View style={styles.cuisineTypereservationNumberContainer}>
-          <RestaurantDescriptionCutlery />
+          <MaterialCommunityIcons
+            name="silverware-variant"
+            size={16}
+            color="black"
+          />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {cuisineType}
           </Typography>
-          <RestaurantDescriptionCoupon />
+          <MaterialCommunityIcons
+            name="ticket-percent-outline"
+            size={16}
+            color="black"
+          />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {reservationNumber} reservations
           </Typography>

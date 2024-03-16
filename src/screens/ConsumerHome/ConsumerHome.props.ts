@@ -3,8 +3,10 @@ import { Merchant } from "../../types";
 import { Discount } from "../../types/Discounts";
 import { MenuDiscount } from "../../types/MenuDiscount";
 import { Rating } from "../../types/Rating";
+import { Ad } from "../../types/Ad";
 
 export interface ConsumerHomeGeneratedProps {
+  isFetchingAds: boolean;
   isFetchingMerchants: boolean;
   isRatingsReady: boolean;
   isDiscountsReady: boolean;
@@ -12,6 +14,7 @@ export interface ConsumerHomeGeneratedProps {
   isRefreshing: boolean;
   keyword: string;
   setKeyword: (keyword: string) => void;
+  ads: Ad[];
   merchants: Merchant[];
   ratingsData: {
     data: Rating[];

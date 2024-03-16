@@ -31,7 +31,7 @@ export const AddConsumerDiscount = () => {
   });
 };
 
-export const GetConsumerDiscount = (consumerDiscountId: string) => {
+export const GetConsumerDiscount = (consumerDiscountId?: string) => {
   const consumerDiscountService = new ConsumerDiscountService();
   consumerDiscountService.cancelRequests();
 
@@ -39,19 +39,23 @@ export const GetConsumerDiscount = (consumerDiscountId: string) => {
     queryKey: [QUERY_KEYS.CONSUMER_DISCOUNT, consumerDiscountId],
     enabled: consumerDiscountId !== undefined,
     queryFn: async () => {
-      try {
-        const response: AxiosResponse =
-          await consumerDiscountService.getConsumerDiscount(consumerDiscountId);
+      if (consumerDiscountId) {
+        try {
+          const response: AxiosResponse =
+            await consumerDiscountService.getConsumerDiscount(
+              consumerDiscountId
+            );
 
-        return response.data;
-      } catch (error) {
-        return null;
+          return response.data;
+        } catch (error) {
+          return null;
+        }
       }
     },
   });
 };
 
-export const GetConsumerDiscountsByMerchant = (merchantId: string) => {
+export const GetConsumerDiscountsByMerchant = (merchantId?: string) => {
   const consumerDiscountService = new ConsumerDiscountService();
   consumerDiscountService.cancelRequests();
 
@@ -59,15 +63,17 @@ export const GetConsumerDiscountsByMerchant = (merchantId: string) => {
     queryKey: [QUERY_KEYS.CONSUMER_DISCOUNTS, merchantId],
     enabled: merchantId !== undefined,
     queryFn: async () => {
-      try {
-        const response =
-          await consumerDiscountService.getConsumerDiscountsMerchant(
-            merchantId
-          );
+      if (merchantId) {
+        try {
+          const response =
+            await consumerDiscountService.getConsumerDiscountsMerchant(
+              merchantId
+            );
 
-        return response.data;
-      } catch (error) {
-        return [];
+          return response.data;
+        } catch (error) {
+          return [];
+        }
       }
     },
   });

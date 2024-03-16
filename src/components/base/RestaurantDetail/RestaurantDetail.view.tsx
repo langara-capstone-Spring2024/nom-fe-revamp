@@ -4,7 +4,7 @@ import createStyles from "./RestaurantDetail.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
 import Map from "../Map";
-import { RestaurantDetailLocation } from "../SVG";
+import { Ionicons } from "@expo/vector-icons";
 import Typography from "../Typography";
 
 const RestaurantDetail = (props: RestaurantDetailProps) => {
@@ -19,7 +19,7 @@ const RestaurantDetail = (props: RestaurantDetailProps) => {
     <View style={styles.container}>
       <View>
         <View style={styles.addressContainer}>
-          <RestaurantDetailLocation />
+          <Ionicons name="location-outline" size={16} color="black" />
           <Typography variant="bodySm" otherStyle={styles.typography}>
             {address}
           </Typography>

@@ -33,18 +33,21 @@ export const GetRatingsByMerchants = (merchants: Merchant[]) => {
   });
 };
 
-export const GetRatingsByMerchant = (merchantId: string) => {
+export const GetRatingsByMerchant = (merchantId?: string) => {
   const ratingService = new RatingService();
   ratingService.cancelRequests();
 
   return useQuery<Rating[]>({
     queryKey: [QUERY_KEYS.RATINGS, merchantId],
     queryFn: async () => {
-      try {
-        const response = await ratingService.getRatingsMerchant(merchantId);
-        return response.data;
-      } catch (error) {
-        return null;
+      if (merchantId) {
+        try {
+          const response = await ratingService.getRatingsMerchant(merchantId);
+
+          return response.data;
+        } catch (error) {
+          return [];
+        }
       }
     },
   });
