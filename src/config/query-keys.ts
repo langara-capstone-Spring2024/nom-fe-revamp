@@ -16,7 +16,6 @@ const QUERY_KEYS = {
   MENUS: "Menus",
   S3: "S3",
   DISCOUNT: "Discounts",
-  CONSUMER_DISCOUNTS: "ConsumerDiscounts"
 };
 
 export { QUERY_KEYS };
