@@ -8,10 +8,20 @@ import {
 import { ConsumerDiscount } from "../../types/ConsumerDiscount";
 import { Discount } from "../../types/Discounts";
 import { GetMenuDiscountsByMerchantAndDiscount } from "../../services/react-query/queries/menuDiscount";
+import { getConsumerDiscountsByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
 
 const OrderDetails = () => {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+
+  
+  const { data: customerDiscountAll, error: customerDiscounterror } =
+  getConsumerDiscountsByMerchantConsumerDiscount(
+    "65ecc4140cfbb230ac6cc439",
+    "65c34586e977ebbebeaff2a2",
+    "65f4ec9ca88fea5aa9d671ae"
+  );
+  console.log(customerDiscountAll)
 
   const { data: consumerDiscount, error } = GetConsumerDiscount(
     "65f4f262a146d152b8caab59"
@@ -22,13 +32,7 @@ const OrderDetails = () => {
       "65ecc4140cfbb230ac6cc439" || consumerDiscount?.merchant._id,
       "65f4ec9ca88fea5aa9d671ae" || consumerDiscount?.discount._id
     );
-  console.log(menuDiscounts);
-
-  const { prev, next, page } = useStore((state) => ({
-    prev: state.previous,
-    next: state.next,
-    page: state.page,
-  }));
+  // console.log(menuDiscounts);
 
   const { mutate: updateDiscountStatus } = UpdateConsumerDiscount();
 

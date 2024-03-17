@@ -4,6 +4,7 @@ import { QUERY_KEYS } from "../../../config/query-keys";
 import { AxiosResponse } from "axios";
 import { ConsumerDiscount } from "../../../types/ConsumerDiscount";
 import { RNQueryClient } from "../query-client";
+import { useStore } from "zustand";
 
 export const AddConsumerDiscount = () => {
   const consumerDiscountService = new ConsumerDiscountService();
@@ -103,6 +104,40 @@ export const UpdateConsumerDiscount = () => {
         ],
         exact: true,
       });
+    },
+  });
+};
+
+
+export const getConsumerDiscountsByMerchantConsumerDiscount = (
+  merchantId: string,
+  discountId: string,
+  consumerId: string
+) => {
+  const consumerDiscountService = new ConsumerDiscountService();
+  consumerDiscountService.cancelRequests();
+
+  return useQuery<ConsumerDiscount, Error>({
+    queryKey: [
+      QUERY_KEYS.CONSUMER_DISCOUNT,
+      merchantId,
+      discountId,
+      consumerId,
+    ],
+    queryFn: async () => {
+      try {
+        const response: AxiosResponse<ConsumerDiscount> =
+          await consumerDiscountService.getConsumerDiscountsByMerchantConsumerDiscount(
+            merchantId,
+            discountId,
+            consumerId
+          );
+        const consumerDiscount: ConsumerDiscount = response.data;
+        return consumerDiscount;
+      } catch (error) {
+        console.error("Error fetching consumer discount:", error);
+        throw new Error("Failed to fetch consumer discount");
+      }
     },
   });
 };
