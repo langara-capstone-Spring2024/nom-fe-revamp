@@ -108,8 +108,7 @@ export const UpdateConsumerDiscount = () => {
   });
 };
 
-
-export const getConsumerDiscountsByMerchantConsumerDiscount = (
+export const getConsumerDiscountByMerchantConsumerDiscount = (
   merchantId: string,
   discountId: string,
   consumerId: string

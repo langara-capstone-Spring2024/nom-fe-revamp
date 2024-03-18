@@ -1,40 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OrderDetailsView from "./OrderDetails.view";
 import { useStore } from "../../store";
 import {
   GetConsumerDiscount,
   UpdateConsumerDiscount,
 } from "../../services/react-query/queries/consumerDiscount";
-import { ConsumerDiscount } from "../../types/ConsumerDiscount";
-import { Discount } from "../../types/Discounts";
+
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { GetMenuDiscountsByMerchantAndDiscount } from "../../services/react-query/queries/menuDiscount";
-import { getConsumerDiscountsByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
+import { getConsumerDiscountByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
+import { RootStackParamList } from "../../navigation/NavigationService";
+
+type OrderDetailsScreenRouteProp = RouteProp<
+  RootStackParamList,
+  "OrderDetails"
+>;
 
 const OrderDetails = () => {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [status, setStatus] = useState("upcoming");
+  const [operation, setOperation] = useState(new Date());
 
-  
-  const { data: customerDiscountAll, error: customerDiscounterror } =
-  getConsumerDiscountsByMerchantConsumerDiscount(
-    "65ecc4140cfbb230ac6cc439",
-    "65c34586e977ebbebeaff2a2",
-    "65f4ec9ca88fea5aa9d671ae"
-  );
-  console.log(customerDiscountAll)
+  const route = useRoute<OrderDetailsScreenRouteProp>();
+  const { discountId, merchantId, consumerId } = route.params;
+  console.log(`discountId: ${discountId}`);
+  console.log(`merchantId: ${merchantId}`);
+  console.log(`consumerId: ${consumerId}`);
 
-  const { data: consumerDiscount, error } = GetConsumerDiscount(
-    "65f4f262a146d152b8caab59"
-  );
-
-  const { data: menuDiscounts, error: menuDiscountError } =
-    GetMenuDiscountsByMerchantAndDiscount(
-      "65ecc4140cfbb230ac6cc439" || consumerDiscount?.merchant._id,
-      "65f4ec9ca88fea5aa9d671ae" || consumerDiscount?.discount._id
+  const { data: consumerDiscount, error: customerDiscounterror } =
+    getConsumerDiscountByMerchantConsumerDiscount(
+      merchantId,
+      discountId,
+      consumerId
     );
-  // console.log(menuDiscounts);
+
+  console.log(`consumerDiscount: ${consumerDiscount}`);
+  console.log(consumerDiscount?._id || "");
+
+  const getMenuDiscountsResult = GetMenuDiscountsByMerchantAndDiscount(
+    consumerDiscount?.merchant?._id || "",
+    consumerDiscount?.discount?._id || ""
+  );
 
   const { mutate: updateDiscountStatus } = UpdateConsumerDiscount();
+
+  const menuDiscounts =
+    consumerDiscount !== undefined ? getMenuDiscountsResult.data || [] : [];
+
+  useEffect(() => {
+    setStatus(consumerDiscount?.status || "upcoming");
+    setOperation(consumerDiscount?.updatedAt || new Date());
+  }, [consumerDiscount]);
 
   const handlePressConfirm = () => {
     if (!modalVisible) {
@@ -47,6 +64,9 @@ const OrderDetails = () => {
 
         updateDiscountStatus({ consumerDiscount: updatedDiscount });
         setOpenSuccess(true);
+
+        setStatus("redeemed");
+        setOperation(new Date());
       } else {
         console.error("ConsumerDiscount ID is undefined.");
       }
@@ -76,9 +96,9 @@ const OrderDetails = () => {
     validToTime: discount?.validToTime
       ? new Date(discount.validToTime)
       : new Date(),
-    status: consumerDiscount?.status || "",
-    operation: new Date(consumerDiscount?.updatedAt || Date.now()),
-    menus: menuDiscounts?.map((menuDiscount) => menuDiscount.menu) || [],
+    status: status,
+    operation: operation,
+    menus: menuDiscounts.map((menuDiscount) => menuDiscount.menu) || [],
   };
 
   return <OrderDetailsView {...generatedProps} />;

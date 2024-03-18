@@ -259,7 +259,7 @@ const AccordionCollection = () => {
 
       <View style={{ padding: 20 }}>
         <Accordion
-          title="Items"
+          title="Item(s)"
           hasRightItem={true}
           rightItem={<RightItemComponent />}
         >

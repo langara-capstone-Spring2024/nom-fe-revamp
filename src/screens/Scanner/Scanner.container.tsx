@@ -1,6 +1,6 @@
 import NavigationService from "../../navigation/NavigationService";
 import ScannerView from "./Scanner.view";
-import { getConsumerDiscountsByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
+import { getConsumerDiscountByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
 import { useState } from "react";
 import { useStore } from "zustand";
 
@@ -32,7 +32,11 @@ const Scanner = () => {
   };
 
   const handleSuccess = () => {
-    NavigationService.navigate("OrderDetails");
+    NavigationService.navigate("OrderDetails", {
+      merchantId: merchantId,
+      discountId: discountId,
+      consumerId: consumerId,
+    });
   };
 
   const generatedProps = {
