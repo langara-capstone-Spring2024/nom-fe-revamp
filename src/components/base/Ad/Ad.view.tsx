@@ -10,6 +10,7 @@ const Ad = (props: AdProps) => {
     template,
     primary = "#FFBF41",
     accent = "#3C3C3C",
+    imageUrl,
     headline,
     tagline,
   } = props;
@@ -21,10 +22,7 @@ const Ad = (props: AdProps) => {
     <View style={styles.container}>
       {template === "1" ? (
         <>
-          <Image
-            source={{ uri: "https://picsum.photos/360?random=1" }}
-            style={styles.image}
-          />
+          <Image source={{ uri: imageUrl }} style={styles.image} />
           <Image
             source={require("../../../../assets/template/1_S.png")}
             tintColor={accent}

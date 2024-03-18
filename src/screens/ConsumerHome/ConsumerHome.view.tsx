@@ -192,6 +192,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                       template={adMapItem.template}
                       primary={adMapItem.primary}
                       accent={adMapItem.accent}
+                      imageUrl={adMapItem.imageUrl}
                       headline={adMapItem.headline}
                       tagline={adMapItem.tagline}
                     />

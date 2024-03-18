@@ -9,6 +9,7 @@ const AdCollection = () => {
         template="1"
         primary="#FFBF41"
         accent="#3C3C3C"
+        imageUrl="https://picsum.photos/360?random=1"
         headline="Nam quis inte nulla."
         tagline="Lorem ipsum dolor sit amet est officiis."
       />
@@ -16,6 +17,7 @@ const AdCollection = () => {
         template="2"
         primary="#FFBF41"
         accent="#3C3C3C"
+        imageUrl="https://picsum.photos/360?random=1"
         headline="Nam quis inte nulla."
         tagline="Lorem ipsum dolor sit amet est officiis."
       />
