@@ -39,8 +39,16 @@ export class ConsumerDiscountService extends BaseService {
 
     return response;
   }
+
+  async getConsumerDiscountsByMerchantConsumerDiscount(
+    merchantId: string,
+    discountId: string,
+    consumerId: string
+  ) {
+    const response = await apiClient.get(
+      `api/consumer-discounts/merchant/${merchantId}/consumer/${consumerId}/discount/${discountId}`
+    );
+
+    return response;
+  }
 }
-
-
-
-

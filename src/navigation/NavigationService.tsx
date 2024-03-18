@@ -57,7 +57,7 @@ type Collections = {
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
   ConsumerDiscount: { consumerDiscountId: string };
-  OrderDetails: undefined;
+  OrderDetails: { merchantId: string, discountId: string, consumerId: string };
   RestaurantProfile: { merchantId: string };
   PromoDetails: undefined;
   Items: undefined;
