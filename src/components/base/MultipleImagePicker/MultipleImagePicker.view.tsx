@@ -43,7 +43,7 @@ const MultipleImagePicker = (props: MultipleImagePickerProps) => {
   };
 
   return (
-    <>
+    <View>
       <View>
         {0 < images.length ? (
           <Pressable onPress={handlePickImages}>
@@ -86,13 +86,12 @@ const MultipleImagePicker = (props: MultipleImagePickerProps) => {
           ))}
         </View>
       )}
-      {error ||
-        (innerError && (
-          <Typography variant="bodyXs" color="error-medium">
-            {error || innerError}
-          </Typography>
-        ))}
-    </>
+      {(error || innerError) && (
+        <Typography variant="bodyXs" color="error-medium">
+          {error || innerError}
+        </Typography>
+      )}
+    </View>
   );
 };
 

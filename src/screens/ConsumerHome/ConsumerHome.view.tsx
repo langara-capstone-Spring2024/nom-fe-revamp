@@ -18,6 +18,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Typography from "../../components/base/Typography";
 import DishCard from "../../components/base/DishCard";
 import { Arrow } from "../../components/base/SVG";
+import { theme as t } from "../../utils/Theme";
 import NavigationService from "../../navigation/NavigationService";
 
 const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
@@ -55,11 +56,15 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: t.Surface.default }}>
       <ScrollView
         ref={ref}
         style={styles.container}
-        contentContainerStyle={{ paddingTop: 16, paddingBottom: 32, gap: 32 }}
+        contentContainerStyle={{
+          padding: 16,
+          paddingBottom: 32,
+          gap: 32,
+        }}
         stickyHeaderIndices={[1]}
         onScrollEndDrag={(event) => {
           if (
@@ -95,7 +100,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         <ScrollView
           horizontal
           style={styles.cuisineTypesContainer}
-          contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+          contentContainerStyle={{ gap: 16 }}
           showsHorizontalScrollIndicator={false}
         >
           <View>
