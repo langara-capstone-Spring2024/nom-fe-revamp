@@ -88,6 +88,10 @@ export interface AdMakerGeneratedProps {
 
   selectedTemplate: number;
   setSelectedTemplate: (v: number) => void;
+
+  //loading states
+  aiIsLoading: boolean;
+  isConfirmLoading: boolean;
 }
 
 interface Card {
