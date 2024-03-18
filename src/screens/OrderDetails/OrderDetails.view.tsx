@@ -38,7 +38,9 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
 
   const RightItemComponent = () => (
     <View>
-      <Typography color="inactive">1 Item</Typography>
+      <Typography color="inactive">
+        {menus.length} {menus.length > 0 ? "Items" : "Item"}
+      </Typography>
     </View>
   );
   return (
@@ -83,7 +85,9 @@ const OrderDetails = (props: OrderDetailsGeneratedProps) => {
         <Button
           variant="primary"
           buttonSize="lg"
-          text={modalVisible ? "Home" : "Confirm Coupon"}
+          text={
+            modalVisible || status == "redeemed" ? "Home" : "Confirm Coupon"
+          }
           takeFullWidth
           onPress={handlePressConfirm}
         />

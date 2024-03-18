@@ -99,10 +99,9 @@ export const GetMenuDiscountsByMerchantAndDiscount = (
         const menuDiscounts: MenuDiscount[] = response.data;
         return menuDiscounts;
       } catch (error) {
-        console.error("Error fetching menu discounts:", error);
+        // console.error("Error fetching menu discounts:", error);
         throw new Error("Failed to fetch menu discounts");
       }
     },
   });
 };
-
