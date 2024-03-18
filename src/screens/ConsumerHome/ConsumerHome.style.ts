@@ -9,8 +9,11 @@ const createStyles = (theme: Theme) =>
     },
     addressContainer: { marginBottom: -32 },
     serchContainer: {
-      paddingVertical: 16,
+      marginHorizontal: -16,
+      padding: 16,
       backgroundColor: t.Surface.default,
+      borderBottomColor: t.Border.default,
+      borderBottomWidth: 1,
     },
     cuisineTypesContainer: {
       marginHorizontal: -16,
