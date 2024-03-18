@@ -57,9 +57,9 @@ type Collections = {
 // insert a value on the type to pass a param
 export type RootStackParamList = {
   // PLOP_SCREEN_TYPE
- MerchantRegistration: undefined;
+  MerchantRegistration: undefined;
   ConsumerDiscount: { consumerDiscountId: string };
-  OrderDetails: { merchantId: string, discountId: string, consumerId: string };
+  OrderDetails: { merchantId: string; discountId: string; consumerId: string };
   RestaurantProfile: { merchantId: string };
   PromoDetails: undefined;
   Items: undefined;
