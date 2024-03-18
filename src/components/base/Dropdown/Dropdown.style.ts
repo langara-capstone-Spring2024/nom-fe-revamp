@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     marginBottom: 6.5,
     color: "#3c3c3c",
   },
-
   dropdown: {
     backgroundColor: "white",
     height: 50,
