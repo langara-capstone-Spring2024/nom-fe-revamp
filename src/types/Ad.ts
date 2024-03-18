@@ -9,5 +9,7 @@ export interface Ad {
   startDate: Date;
   endDate: Date;
   amount: number;
+  primary: string;
+  accent: string;
   merchantId: Merchant;
 }

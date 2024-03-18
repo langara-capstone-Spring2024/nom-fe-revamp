@@ -20,6 +20,7 @@ import DishCard from "../../components/base/DishCard";
 import { Arrow } from "../../components/base/SVG";
 import { theme as t } from "../../utils/Theme";
 import NavigationService from "../../navigation/NavigationService";
+import Ad from "../../components/base/Ad";
 
 const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
   const {
@@ -44,6 +45,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
+  const [width, setWidth] = useState<number>(0);
   const [bias, setBais] = useState<number>(0);
   const [y, setY] = useState<number>(0);
 
@@ -71,9 +73,9 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
             ref &&
             ref.current &&
             0 < event.nativeEvent.contentOffset.y &&
-            event.nativeEvent.contentOffset.y < y - bias - 33
+            event.nativeEvent.contentOffset.y < y - bias - 32
           ) {
-            ref.current.scrollTo({ y: y - bias - 33 });
+            ref.current.scrollTo({ y: y - bias - 32 });
           }
         }}
         refreshControl={
@@ -167,7 +169,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
             </Typography>
           </View>
         </ScrollView>
-        {/* <View style={styles.titleContainer}>
+        <View style={styles.titleContainer}>
           <Typography variant="title5">Exciting offers this week!</Typography>
           <Arrow />
         </View>
@@ -177,17 +179,24 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
               <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+                contentContainerStyle={{
+                  gap: 16,
+                }}
+                onLayout={(event: LayoutChangeEvent) =>
+                  setWidth(event.nativeEvent.layout.width)
+                }
               >
-                {ads.map((adMapItem, adMapItemIndex) =>
-                  adMapItem.template === "1" ? (
-                    <></>
-                  ) : adMapItem.template === "2" ? (
-                    <></>
-                  ) : (
-                    <></>
-                  )
-                )}
+                {ads.map((adMapItem, adMapItemIndex) => (
+                  <View style={{ width: width }} key={adMapItemIndex}>
+                    <Ad
+                      template={adMapItem.template}
+                      primary={adMapItem.primary}
+                      accent={adMapItem.accent}
+                      headline={adMapItem.headline}
+                      tagline={adMapItem.tagline}
+                    />
+                  </View>
+                ))}
               </ScrollView>
             ) : (
               <Typography alignment="center">No results</Typography>
@@ -195,7 +204,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
           </>
         ) : (
           <ActivityIndicator />
-        )} */}
+        )}
         <View onLayout={handleLayoutY} style={styles.titleContainer}>
           <Typography variant="title5">Browse Cusines</Typography>
           <Arrow />
