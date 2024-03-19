@@ -1,7 +1,14 @@
-export interface LoginGeneratedProps {
+import { FormikHelpers } from "formik";
+import * as Yup from "yup";
+
+export type LoginForm = {
   email: string;
   password: string;
-  onEmailChange: (text: string) => void;
-  onPasswordChange: (text: string) => void;
-  onLogin: () => Promise<void>;
+};
+
+export interface LoginGeneratedProps {
+  isErrorOnSignin: boolean;
+  initialValues: LoginForm;
+  validationSchema: Yup.ObjectSchema<LoginForm>;
+  handleSubmit: (form: LoginForm, helpers: FormikHelpers<LoginForm>) => void;
 }
