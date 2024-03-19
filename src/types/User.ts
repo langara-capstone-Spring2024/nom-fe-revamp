@@ -3,6 +3,7 @@ export interface UserToken {
   refreshToken: string;
   firstName: string;
   lastName: string;
+  merchantId: string;
 }
 
 export interface LoginPayload {
