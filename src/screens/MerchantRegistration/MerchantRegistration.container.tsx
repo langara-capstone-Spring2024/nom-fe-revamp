@@ -16,7 +16,7 @@ import NavigationService from "../../navigation/NavigationService";
 import {
   Register,
   AddMerchant,
-  useLoginMutation,
+  Signin,
 } from "../../services/react-query/queries/auth";
 
 const s3 = new S3({
@@ -54,7 +54,7 @@ const MerchantRegistration = () => {
 
   const { data: user, mutate: mutateRegister } = Register();
   const { data: merchant, mutate: mutateMerchant } = AddMerchant();
-  const { mutate: mutateLogin } = useLoginMutation();
+  const { mutate: mutateSignin } = Signin();
 
   const basicValidationSchema = Yup.object({
     firstName: Yup.string().required("Your first name is required"),
