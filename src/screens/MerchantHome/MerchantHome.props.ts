@@ -1,1 +1,3 @@
-export interface MerchantHomeGeneratedProps {}
+export interface MerchantHomeGeneratedProps {
+  merchantName: string;
+}
