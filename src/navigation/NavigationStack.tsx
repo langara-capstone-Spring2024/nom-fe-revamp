@@ -11,6 +11,9 @@ import BottomNavigation from "../components/layout/BottomNavigation";
 import ChangePassword from "../screens/ChangePassword";
 
 // PLOP_INJECT_COLLECTION_IMPORT
+import ArticlesCollection from "../collections/base/Articles";
+import SegmentedControlCollection from "../collections/base/SegmentedControl";
+import MerchantDashboardCollection from "../collections/base/MerchantDashboard";
 import AdCollection from "../collections/base/Ad";
 import LoadingAnimationCollection from "../collections/base/LoadingAnimation";
 import SegmentCollection from "../collections/base/Segment";
@@ -67,6 +70,7 @@ import RestaurantProfile from "../screens/RestaurantProfile";
 import OrderDetails from "../screens/OrderDetails";
 import ConsumerDiscount from "../screens/ConsumerDiscount";
 import MerchantRegistration from "../screens/MerchantRegistration";
+import MerchantHome from "../screens/MerchantHome";
 
 const Stack = createStackNavigator();
 const PublicStack = createStackNavigator();
@@ -75,6 +79,9 @@ const PrivateStack = createStackNavigator();
 const PrivateNavigator = () => {
   const components = [
     // PLOP_INJECT_NAVIGATOR_SCREEN
+    { func: ArticlesCollection, custom: false },
+    { func: SegmentedControlCollection, custom: false },
+    { func: MerchantDashboardCollection, custom: false },
     { func: AdCollection, custom: false },
     { func: LoadingAnimationCollection, custom: false },
     { func: SegmentCollection, custom: false },
@@ -138,6 +145,11 @@ const PrivateNavigator = () => {
     {
       func: MerchantRegistration,
       customName: "Merchant Registration",
+      custom: false,
+    },
+    {
+      func: MerchantHome,
+      customName: "Merchant Home",
       custom: false,
     },
   ];

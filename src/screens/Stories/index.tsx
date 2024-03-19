@@ -12,6 +12,9 @@ interface ButtonItem {
 const Stories = () => {
   const collections: ButtonItem[] = [
     /*_PLOP_INJECT_COMPONENT_SCREEN */
+{name: 'Articles', onPress: () => NavigationService.navigate('ArticlesCollection')},
+{name: 'SegmentedControl', onPress: () => NavigationService.navigate('SegmentedControlCollection')},
+{name: 'MerchantDashboard', onPress: () => NavigationService.navigate('MerchantDashboardCollection')},
     { name: "Ad", onPress: () => NavigationService.navigate("AdCollection") },
     {
       name: "LoadingAnimation",

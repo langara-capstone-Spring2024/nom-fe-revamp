@@ -34,7 +34,7 @@ const createStyles = (theme: Theme) =>
       height: 56,
       padding: 16,
       borderRadius: 16,
-      backgroundColor: t.Surface["brand-light"],
+      backgroundColor: t.Surface["brand-medium"],
       shadowColor: t.Border.default,
       shadowOpacity: 1,
       shadowOffset: { width: 0, height: 4 },

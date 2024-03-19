@@ -78,7 +78,7 @@ const Promo = (props: PromoGeneratedProps) => {
           onPress={handleAddDiscount}
           style={styles.fixedAddButton}
         >
-          <AntDesign name="plus" size={24} color="black" />
+          <AntDesign name="plus" size={24} color="white" />
         </TouchableOpacity>
       </View>
     </View>
