@@ -48,6 +48,7 @@ import AdTemplateOne from "../../components/base/AdTemplateOne";
 import { Check } from "../../components/base/SVG";
 import NavigationService from "../../navigation/NavigationService";
 import AdTemplateThree from "../../components/base/AdTemplateThree";
+import LoadingAnimation from "../../components/base/LoadingAnimation";
 
 const { width, height } = Dimensions.get("window");
 
@@ -106,6 +107,8 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     selectedAccentColor,
     selectedTemplate,
     setSelectedTemplate,
+    aiIsLoading,
+    isConfirmLoading,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme as any), [theme]);
@@ -217,8 +220,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               {selectedTemplate === 1 && (
                 <AdTemplateOne
                   image={localImage}
-                  headline="Up to 50% off!"
-                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  headline={headline ?? "Up to 50% off!"}
+                  tagline={
+                    tagline ?? "Lorem ipsum dolor sit amet est officiis."
+                  }
                   primary={selectedPrimaryColor}
                   secondary={selectedAccentColor}
                   onSelectTemplate={(v) => setSelectedTemplate(v)}
@@ -228,8 +233,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                 <AdTemplateTwo
                   onSelectTemplate={(v) => setSelectedTemplate(v)}
                   image={localImage}
-                  headline="Up to 50% off!"
-                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  headline={headline ?? "Up to 50% off!"}
+                  tagline={
+                    tagline ?? "Lorem ipsum dolor sit amet est officiis."
+                  }
                   primary={selectedPrimaryColor}
                   secondary={selectedAccentColor}
                 />
@@ -293,7 +300,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     } else if (page === 4) {
       return (
         <>
-          <Typography variant="title5" alignment="left" color="primary">
+          <Typography
+            variant="title5"
+            alignment="left"
+            color="primary"
+            otherStyle={{ marginBottom: 36 }}>
             Confirm & Pay
           </Typography>
           <ScrollView
@@ -480,7 +491,10 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
             text={"Next"}
             takeFullWidth
             onPress={page == 4 ? confirm : next}
-            isDisabled={!localImage && page === 1}
+            isDisabled={
+              (!localImage && page === 1) ||
+              (page === 3 && !tagline && !headline)
+            }
           />
         )}
       </View>
@@ -663,6 +677,12 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           />
         </Modal>
       </Portal>
+
+      {(aiIsLoading || isConfirmLoading) && (
+        <View style={styles.loading}>
+          <LoadingAnimation />
+        </View>
+      )}
     </View>
   );
 };

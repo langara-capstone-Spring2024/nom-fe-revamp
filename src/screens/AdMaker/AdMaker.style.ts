@@ -300,6 +300,20 @@ const createStyles = (theme: Theme) =>
       fontFamily: "PublicSansBold",
       marginTop: 26,
     },
+
+    loading: {
+      position: "absolute",
+      borderWidth: 1,
+      borderColor: "red",
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "#0000004D",
+    },
   });
 
 export default createStyles;

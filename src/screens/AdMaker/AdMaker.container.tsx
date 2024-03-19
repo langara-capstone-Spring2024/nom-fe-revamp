@@ -71,7 +71,6 @@ const AdMaker = () => {
   const accentSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handleSheetChanges = useCallback((index: number) => {
-    // console.log("handleSheetChanges", index);
     setIdx(index);
   }, []);
 
@@ -140,21 +139,12 @@ const AdMaker = () => {
     mutate: generateAiText,
     data,
     isSuccess: isSuccessAi,
+    isPending: aiIsLoading,
   } = GeneratetAiText();
-
   const handleGenerateAiText = async () => {
     try {
       if (description) {
         generateAiText(description);
-      }
-
-      if (isSuccessAi) {
-        console.log(data);
-        setTagline(data.t);
-        setHeadline(data.h);
-        promptSheetModalRef.current?.close();
-        setShowPrompt(false);
-        setDescription("");
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -164,6 +154,14 @@ const AdMaker = () => {
     }
   };
 
+  useEffect(() => {
+    if (isSuccessAi) {
+      promptSheetModalRef.current?.close();
+      setTagline(data.t ?? "");
+      setHeadline(data.h ?? "");
+      setDescription("");
+    }
+  }, [data?.t, data?.h]);
   //end of page 3
 
   //start of page 4
@@ -250,7 +248,11 @@ const AdMaker = () => {
     region: process.env.EXPO_PUBLIC_AWS_REGION,
   });
 
-  const { mutate: createAd, isSuccess: isCreateAdSuccess } = CreateAd();
+  const {
+    mutate: createAd,
+    isSuccess: isCreateAdSuccess,
+    isPending: isConfirmLoading,
+  } = CreateAd();
 
   const [openSuccess, setOpenSuccess] = useState(false);
 
@@ -309,7 +311,6 @@ const AdMaker = () => {
   }, [isCreateAdSuccess]);
   //end of page 4
 
-  console.log(selectedTemplate);
   const generatedProps = {
     // generated props here
     handleImageChange,
@@ -376,6 +377,9 @@ const AdMaker = () => {
     selectedPrimaryColor,
     setSelectedTemplate,
     selectedTemplate,
+
+    aiIsLoading,
+    isConfirmLoading,
   };
 
   return <AdMakerView {...generatedProps} />;
