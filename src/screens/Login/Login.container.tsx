@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import LoginView from "./Login.view";
 import { useStore } from "../../store";
 import { useLoginMutation } from "../../services/react-query/queries/auth";
+import NavigationService from "../../navigation/NavigationService";
+import MerchantHome from "../MerchantHome";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
@@ -29,12 +31,13 @@ const Login = (): JSX.Element => {
       loginMutation.mutate(credentials, {
         onSuccess: (result) => {
           console.log(result);
-          const { accessToken, refreshToken } = result;
+          const { accessToken, refreshToken, merchantId } = result;
           setTokens(accessToken, refreshToken);
           setIsLoggedIn(true);
 
           // for displaying what's saved on AsyncStorage
           useStore.getState().displayAsyncStorageData();
+          //NavigationService.navigate("MerchantHome", { merchantId });
         },
         onError: (error) => {
           console.error("Login Error:", error);
