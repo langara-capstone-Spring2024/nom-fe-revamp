@@ -9,7 +9,10 @@ import {
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { GetMenuDiscountsByMerchantAndDiscount } from "../../services/react-query/queries/menuDiscount";
 import { getConsumerDiscountByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
-import { RootStackParamList } from "../../navigation/NavigationService";
+import NavigationService, {
+  RootStackParamList,
+} from "../../navigation/NavigationService";
+import LoadingAnimation from "../../components/base/LoadingAnimation";
 
 type OrderDetailsScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -21,6 +24,7 @@ const OrderDetails = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [status, setStatus] = useState("upcoming");
   const [operation, setOperation] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true);
 
   const route = useRoute<OrderDetailsScreenRouteProp>();
   const { discountId, merchantId, consumerId } = route.params;
@@ -43,6 +47,10 @@ const OrderDetails = () => {
     consumerDiscount?.discount?._id || ""
   );
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [getMenuDiscountsResult]);
+
   const { mutate: updateDiscountStatus } = UpdateConsumerDiscount();
 
   const menuDiscounts =
@@ -54,7 +62,13 @@ const OrderDetails = () => {
   }, [consumerDiscount]);
 
   const handlePressConfirm = () => {
-    if (!modalVisible) {
+    if (status === "redeemed") {
+      NavigationService.navigate("MerchantHome");
+      console.log("Navigating to home because status is redeemed...");
+      return;
+    }
+
+    if (!modalVisible || status === "upcoming") {
       setOpenSuccess(true);
       if (consumerDiscount?._id) {
         const updatedDiscount = {
@@ -71,7 +85,7 @@ const OrderDetails = () => {
         console.error("ConsumerDiscount ID is undefined.");
       }
     } else {
-      console.log("Navigating to home...");
+      NavigationService.navigate("MerchantHome");
     }
   };
 
@@ -101,7 +115,11 @@ const OrderDetails = () => {
     menus: menuDiscounts.map((menuDiscount) => menuDiscount.menu) || [],
   };
 
-  return <OrderDetailsView {...generatedProps} />;
+  return isLoading ? (
+    <LoadingAnimation />
+  ) : (
+    <OrderDetailsView {...generatedProps} />
+  );
 };
 
 export default OrderDetails;

@@ -230,7 +230,7 @@ const Scanner = (props: ScannerProps) => {
                     Success!
                   </Typography>
                   <Typography alignment="center">
-                    Customer's coupon has been redeemed successfully
+                    Customer's coupon has been scanned successfully
                   </Typography>
                   <Button text="Order Details" onPress={handleSuccess} takeFullWidth />
                 </View>
