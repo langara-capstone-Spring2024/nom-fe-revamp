@@ -92,7 +92,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
             value={keyword}
             leftIcon={<Ionicons name="search" size={28} color="#686868" />}
             setValue={setKeyword}
-            bgColor="#E5E5E5"
+            backgroundColor="#E5E5E5"
             sizing="lg"
             rounded
             noborder
