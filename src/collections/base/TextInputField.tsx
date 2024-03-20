@@ -4,7 +4,6 @@ import TextInputField from "../../components/base/TextInputField";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const TextInputFieldCollection = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
 
   const handleSearch = () => {
@@ -12,12 +11,7 @@ const TextInputFieldCollection = () => {
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "black" : "white" },
-      ]}
-    >
+    <View style={[styles.container]}>
       <View
         style={{
           marginBottom: 32,
@@ -25,10 +19,7 @@ const TextInputFieldCollection = () => {
           alignItems: "center",
           justifyContent: "flex-end",
         }}
-      >
-        <Ionicons name="moon" color={isDarkMode ? "white" : "black"} />
-        <Switch value={isDarkMode} onValueChange={setIsDarkMode} />
-      </View>
+      ></View>
       <View style={{ marginBottom: 32 }}>
         <TextInputField
           label="Name"
@@ -36,11 +27,8 @@ const TextInputFieldCollection = () => {
           value={value}
           setValue={setValue}
           leftIcon={<Ionicons name="person" size={24} />}
-          isDarkMode={isDarkMode}
         />
-        <Text style={{ color: isDarkMode ? "white" : "black" }}>
-          Value : {value}
-        </Text>
+        <Text>Value : {value}</Text>
       </View>
       <View style={{ marginBottom: 32 }}>
         <TextInputField
@@ -49,11 +37,8 @@ const TextInputFieldCollection = () => {
           value={value}
           setValue={setValue}
           secured
-          isDarkMode={isDarkMode}
         />
-        <Text style={{ color: isDarkMode ? "white" : "black" }}>
-          Value : {value}
-        </Text>
+        <Text>Value : {value}</Text>
       </View>
       <View style={{ marginBottom: 32 }}>
         <TextInputField
@@ -64,11 +49,8 @@ const TextInputFieldCollection = () => {
           rightIcon={<Ionicons name="search" size={24} />}
           onRightPress={handleSearch}
           rounded
-          isDarkMode={isDarkMode}
         />
-        <Text style={{ color: isDarkMode ? "white" : "black" }}>
-          Value : {value}
-        </Text>
+        <Text>Value : {value}</Text>
       </View>
     </View>
   );
