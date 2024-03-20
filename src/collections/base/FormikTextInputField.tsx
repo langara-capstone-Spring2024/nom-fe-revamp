@@ -8,8 +8,6 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 type Form = { name: string; email: string };
 
 const FormikTextInputFieldCollection = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
   const [result, setResult] = useState<Form>({
     name: "",
     email: "",
@@ -40,12 +38,7 @@ const FormikTextInputFieldCollection = () => {
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "black" : "white" },
-      ]}
-    >
+    <View style={[styles.container]}>
       <View
         style={{
           marginBottom: 32,
@@ -53,10 +46,7 @@ const FormikTextInputFieldCollection = () => {
           alignItems: "center",
           justifyContent: "flex-end",
         }}
-      >
-        <Ionicons name="moon" color={isDarkMode ? "white" : "black"} />
-        <Switch value={isDarkMode} onValueChange={setIsDarkMode} />
-      </View>
+      ></View>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -72,7 +62,6 @@ const FormikTextInputFieldCollection = () => {
                 setValue={handleChange("name")}
                 leftIcon={<Ionicons name="person" size={24} />}
                 error={touched.name ? errors.name : ""}
-                isDarkMode={isDarkMode}
               />
             </View>
             <View style={{ marginBottom: 32 }}>
@@ -83,19 +72,14 @@ const FormikTextInputFieldCollection = () => {
                 setValue={handleChange("email")}
                 leftIcon={<Ionicons name="mail" size={24} />}
                 error={touched.email ? errors.email : ""}
-                isDarkMode={isDarkMode}
               />
             </View>
             <Button title="Submit" onPress={() => handleSubmit()} />
           </>
         )}
       </Formik>
-      <Text style={{ color: isDarkMode ? "white" : "black" }}>
-        Name : {result.name}
-      </Text>
-      <Text style={{ color: isDarkMode ? "white" : "black" }}>
-        Email : {result.email}
-      </Text>
+      <Text>Name : {result.name}</Text>
+      <Text>Email : {result.email}</Text>
     </View>
   );
 };

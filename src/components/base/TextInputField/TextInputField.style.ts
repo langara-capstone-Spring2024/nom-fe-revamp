@@ -5,8 +5,10 @@ import { theme as t } from "../../../utils/Theme";
 const styles = StyleSheet.create({
   container: {},
   label: {
-    marginBottom: 6.5,
-    color: "#3c3c3c",
+    marginBottom: 8,
+  },
+  leftIconContainer: {
+    paddingRight: 8,
   },
   textInputFieldContainer: {
     flexDirection: "row",
@@ -21,8 +23,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     fontSize: 16,
-    lineHeight: 21,
   },
+  rightIconContainer: { paddingLeft: 8 },
   error: {
     marginTop: 8,
     paddingHorizontal: 8,
