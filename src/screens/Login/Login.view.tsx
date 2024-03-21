@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import Button from "../../components/base/Button";
 import TextInputField from "../../components/base/TextInputField";
 import Typography from "../../components/base/Typography";
+import NavigationService from "../../navigation/NavigationService";
 
 const LoginView = (props: LoginGeneratedProps) => {
   const { isErrorOnSignin, initialValues, validationSchema, handleSubmit } =
@@ -74,7 +75,11 @@ const LoginView = (props: LoginGeneratedProps) => {
                   <Typography variant="bodyXs" color="subtle">
                     Don't have an account?
                   </Typography>
-                  <Pressable>
+                  <Pressable
+                    onPress={() =>
+                      NavigationService.navigate("RegistrationRole")
+                    }
+                  >
                     <Typography
                       variant="bodyXs"
                       color="info-medium"
