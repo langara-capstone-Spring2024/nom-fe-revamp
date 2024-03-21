@@ -18,6 +18,7 @@ import {
   AddMerchant,
   Signin,
 } from "../../services/react-query/queries/auth";
+import { useStore } from "../../store";
 
 const s3 = new S3({
   accessKeyId: process.env.EXPO_PUBLIC_AWS_ACCESS_KEY_ID,
@@ -27,6 +28,11 @@ const s3 = new S3({
 
 const MerchantRegistration = () => {
   const navigation = useNavigation();
+
+  const { setIsLoggedIn, setTokens } = useStore((state) => ({
+    setIsLoggedIn: state.setIsLoggedIn,
+    setTokens: state.setTokens,
+  }));
 
   const [page, setPage] = useState<number>(1);
   const [basicInitialValues, setBasicInitialValues] = useState<BasicForm>({
@@ -62,13 +68,16 @@ const MerchantRegistration = () => {
     email: Yup.string()
       .email("Invalid email format")
       .required("Your email is required"),
-    password: Yup.string().required("Your password is required"),
+    password: Yup.string()
+      .required("Your password is required")
+      .min(6, "Your password must be at least 6 characters"),
     confirmPassword: Yup.string()
       .required("Your confirm password is required")
       .oneOf(
         [Yup.ref("password")],
         "Your password and confirm password must match"
-      ),
+      )
+      .min(6, "Your password must be at least 6 characters"),
   });
 
   const additionalValidationSchema = Yup.object({
@@ -145,10 +154,25 @@ const MerchantRegistration = () => {
   };
 
   const handleSuccess = () => {
-    NavigationService.navigate("MerchantHome");
+    mutateSignin(
+      {
+        email: basicInitialValues.email,
+        password: basicInitialValues.password,
+      },
+      {
+        onSuccess: (data) => {
+          setTokens(data.accessToken, data.refreshToken);
+          setIsLoggedIn(true);
+        },
+      }
+    );
   };
 
   useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+    });
+
     if (page === 1) {
       navigation.setOptions({
         headerTitle: "Create your account",
