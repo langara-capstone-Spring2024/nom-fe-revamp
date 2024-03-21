@@ -6,11 +6,13 @@ import { Text, Alert } from "react-native";
 import NavigationService from "../../navigation/NavigationService";
 import { useStore } from "../../store";
 import PromoDetails from "../PromoDetails";
+import LoadingAnimation from "../../components/base/LoadingAnimation";
 
 const Promo = () => {
   const currentDate = new Date();
   const INITIAL_DATE = currentDate.toISOString().split("T")[0];
   const { dateValue, setDateValue } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
   const formattedDate = currentDate.toLocaleString("en-US", {
     weekday: "long",
     month: "long",
@@ -78,9 +80,13 @@ const Promo = () => {
     error: activeDiscountsError,
     status: activeDiscountsStatus,
   } = GetAllActiveDiscount();
-  if (activeDiscountsStatus === "pending") {
-    return <Text>Loading...</Text>;
-  }
+  useEffect(() => {
+    if (activeDiscountsStatus === "pending") {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [activeDiscountsStatus]);
   if (activeDiscountsError) {
     console.error("Error fetching discounts:", activeDiscountsError);
   }
@@ -125,7 +131,11 @@ const Promo = () => {
     handleButtonPress,
     handleAddDiscount,
   };
-  return <PromoView {...generatedProps} />;
+  return isLoading ? (
+    <LoadingAnimation /> 
+  ) : (
+    <PromoView {...generatedProps} />
+  );
 };
 
 export default Promo;

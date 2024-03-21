@@ -1,8 +1,6 @@
 import NavigationService from "../../navigation/NavigationService";
 import ScannerView from "./Scanner.view";
-import { getConsumerDiscountByMerchantConsumerDiscount } from "../../services/react-query/queries/consumerDiscount";
 import { useState } from "react";
-import { useStore } from "zustand";
 
 const Scanner = () => {
   const [merchantId, setMerchantId] = useState<string>("");
@@ -48,6 +46,7 @@ const Scanner = () => {
     discountId,
   };
   return <ScannerView {...generatedProps} />;
+  
 };
 
 export default Scanner;

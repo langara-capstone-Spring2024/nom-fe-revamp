@@ -10,6 +10,8 @@ import { S3 } from "aws-sdk";
 import "react-native-get-random-values";
 import { MenuService } from "../../services/MenuService";
 import { addMenuItem } from "./../../services/react-query/queries/menu";
+import LoadingAnimation from "../../components/base/LoadingAnimation";
+
 
 const Menu = () => {
   const { setMenuScreen, isAddingMenuItem, setIsAddingMenuItem } = useStore(
@@ -19,10 +21,12 @@ const Menu = () => {
       setIsAddingMenuItem: state.setIsAddingMenuItem,
     })
   );
+
   const [localImage, setLocalImage] = useState<Image>();
   const handleImageChange = (image?: Image) => {
     setLocalImage(image);
   };
+  const [isLoading, setIsLoading] = useState(true);
 
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<string>("");
@@ -32,15 +36,17 @@ const Menu = () => {
   const [updatedMenu, setUpdatedMenu] = useState<Menus[]>([]);
   const [remainingChars, setRemainingChars] = useState(100);
 
-  useEffect(() => {
-    setMenuScreen(true);
-  }, []);
-
   const { data: menuItems, error } = GetMenu();
 
   if (error) {
     console.error("Error fetching menu items:", error);
   }
+
+  useEffect(() => {
+    setMenuScreen(true);
+    if(menuItems !== undefined)
+    setIsLoading(false);
+  }, [menuItems]);
 
   const handleNameChange = (text: string) => {
     if (!text.trim()) {
@@ -72,25 +78,26 @@ const Menu = () => {
 
   const onPressAddItem = async () => {
     try {
+      setIsLoading(true);
       if (localImage) {
         const uuid = uuidv4();
         const response = await fetch(localImage.uri || "");
         const blob = await response.blob();
         const contentType = response.headers.get("Content-Type");
-  
+
         if (!contentType) return;
-  
+
         const params: S3Params = {
           Bucket: process.env.EXPO_PUBLIC_AWS_BUCKET_NAME || "",
           Key: `uploads/${uuid}`,
           Body: blob,
           ContentType: contentType,
         };
-  
+
         // Upload the image to S3
         const result = await s3.upload(params).promise();
         console.log(result.Location);
-  
+
         // Add menu item to MongoDB with image URL
         const menuItemData = {
           imageUrl: result.Location,
@@ -98,7 +105,7 @@ const Menu = () => {
           originalPrice: price,
           description: description || "",
         };
-  
+
         addMenu({ formData: menuItemData });
       } else {
         const menuItemData = {
@@ -107,10 +114,10 @@ const Menu = () => {
           originalPrice: price,
           description: description || "",
         };
-  
+
         addMenu({ formData: menuItemData });
       }
-  
+
       setName("");
       setPrice("");
       setDescription("");
@@ -118,10 +125,12 @@ const Menu = () => {
       setIsAddingMenuItem(false);
     } catch (error) {
       console.error("Error adding menu item:", error);
+    } finally {
+      // This block runs regardless of the previous blocks' outcomes
+      setIsLoading(false); // Ensure loading is stopped after operation is complete or if an error occurs
     }
   };
 
-  
   const handleDescriptionChange = (text: string) => {
     if (text.length <= 100) {
       setDescription(text);
@@ -149,10 +158,14 @@ const Menu = () => {
     handleNameChange: handleNameChange,
     handlePriceChange: handlePriceChange,
     handleDescriptionChange: handleDescriptionChange,
-    remainingChars: remainingChars
+    remainingChars: remainingChars,
   };
 
-  return <MenuView {...generatedProps} />;
+  return isLoading ? (
+    <LoadingAnimation /> // Show this when loading
+  ) : (
+    <MenuView {...generatedProps} /> // Otherwise, show the main content
+  );
 };
 
 export default Menu;

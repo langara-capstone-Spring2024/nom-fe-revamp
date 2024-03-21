@@ -20,6 +20,7 @@ import DateTimeSelector from "../../components/base/DateTimeSelector";
 import WheelPicker from "../../components/base/WheelPicker";
 import Chips from "../../components/base/Chips";
 import { AddDiscount } from "../../services/react-query/queries/discount";
+import LoadingAnimation from "../../components/base/LoadingAnimation";
 
 const PromoDetails = () => {
   const {
@@ -40,6 +41,7 @@ const PromoDetails = () => {
   const [rateIsVisible, setRateIsVisible] = useState(false);
   const [calendarIsVisible, setCalendarIsVisible] = useState(false);
   const [timeIsVisible, setTimeIsVisible] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [pickerSelectedValue, pickerSetSelectedValue] = useState(
     Array.from({ length: 100 }, (_, index) => `${(index + 1) * 10}`)[0]
   );
@@ -179,6 +181,7 @@ const PromoDetails = () => {
 
   const handleSubmitDiscount = async () => {
     try {
+      setIsLoading(true);
       const discountPayload = {
         label: "test",
         description: "test",
@@ -194,6 +197,8 @@ const PromoDetails = () => {
       addDiscountMutation(discountPayload);
     } catch (error) {
       console.error("Error adding discount:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -303,7 +308,11 @@ const PromoDetails = () => {
     selectedItem,
     selectedMenuItemIds,
   };
-  return <PromoDetailsView {...generatedProps} />;
+  return isLoading ? (
+    <LoadingAnimation />
+  ) : (
+    <PromoDetailsView {...generatedProps} />
+  );
 };
 
 export default PromoDetails;
