@@ -24,12 +24,14 @@ import Ad from "../../components/base/Ad";
 
 const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
   const {
+    isFetchingAds,
     isFetchingMerchants,
+    isErrorOnAds,
+    isErrorOnMerchants,
     isRatingsReady,
     isDiscountsReady,
     isMenuDiscountsReady,
     isRefreshing,
-    isFetchingAds,
     keyword,
     setKeyword,
     ads,
@@ -173,41 +175,132 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
           <Typography variant="title5">Exciting offers this week!</Typography>
           <Arrow />
         </View>
-        {!isFetchingAds ? (
+        {!isErrorOnAds ? (
           <>
-            {0 < ads.length ? (
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{
-                  gap: 16,
-                }}
-                onLayout={(event: LayoutChangeEvent) =>
-                  setWidth(event.nativeEvent.layout.width)
-                }
-              >
-                {ads.map((adMapItem, adMapItemIndex) => (
-                  <View style={{ width: width }} key={adMapItemIndex}>
-                    <Ad
-                      template={adMapItem.template}
-                      primary={adMapItem.primary}
-                      accent={adMapItem.accent}
-                      imageUrl={adMapItem.imageUrl}
-                      headline={adMapItem.headline}
-                      tagline={adMapItem.tagline}
-                    />
-                  </View>
-                ))}
-              </ScrollView>
+            {!isFetchingAds ? (
+              <>
+                {0 < ads.length ? (
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{
+                      gap: 16,
+                    }}
+                    onLayout={(event: LayoutChangeEvent) =>
+                      setWidth(event.nativeEvent.layout.width)
+                    }
+                  >
+                    {ads.map((adMapItem, adMapItemIndex) => (
+                      <View style={{ width: width }} key={adMapItemIndex}>
+                        <Ad
+                          template={adMapItem.template}
+                          primary={adMapItem.primary}
+                          accent={adMapItem.accent}
+                          imageUrl={adMapItem.imageUrl}
+                          headline={adMapItem.headline}
+                          tagline={adMapItem.tagline}
+                        />
+                      </View>
+                    ))}
+                  </ScrollView>
+                ) : (
+                  <Typography alignment="center">No results</Typography>
+                )}
+              </>
             ) : (
-              <Typography alignment="center">No results</Typography>
+              <ActivityIndicator />
             )}
           </>
         ) : (
-          <ActivityIndicator />
+          <Typography alignment="center" color="error-medium">
+            Failed to load
+          </Typography>
         )}
         <View onLayout={handleLayoutY} style={styles.titleContainer}>
           <Typography variant="title5">Browse Cusines</Typography>
+          <Arrow />
+        </View>
+        {!isErrorOnMerchants ? (
+          <>
+            {!isFetchingMerchants ? (
+              <>
+                {0 < merchants.length ? (
+                  <>
+                    {isRatingsReady &&
+                      isDiscountsReady &&
+                      isMenuDiscountsReady && (
+                        <>
+                          <View style={styles.listContainer}>
+                            {merchants.map((merchant, merchantItemIndex) => (
+                              <Pressable
+                                onPress={() =>
+                                  NavigationService.navigate(
+                                    "RestaurantProfile",
+                                    {
+                                      merchantId: merchant._id,
+                                    }
+                                  )
+                                }
+                                key={merchantItemIndex}
+                              >
+                                <RestaurantCard
+                                  imageUrl={merchant.imageUrls[0]}
+                                  restaurantName={merchant.name}
+                                  cost={merchant.cost}
+                                  rating={
+                                    ratingsData[merchantItemIndex].data.reduce(
+                                      (totalRating, rating) =>
+                                        totalRating + rating.rating,
+                                      0
+                                    ) /
+                                      ratingsData[merchantItemIndex].data
+                                        .length || 0
+                                  }
+                                  cuisineType={merchant.cuisineType}
+                                  distance="3.7km"
+                                  cityName="Vancouver"
+                                  coupons={discountsData[
+                                    merchantItemIndex
+                                  ].data.map((discount) => ({
+                                    time: `${new Date(
+                                      discount.validFromTime
+                                    ).getHours()}:${
+                                      10 <
+                                      new Date(
+                                        discount.validFromTime
+                                      ).getMinutes()
+                                        ? new Date(
+                                            discount.validFromTime
+                                          ).getMinutes()
+                                        : "0" +
+                                          new Date(
+                                            discount.validFromTime
+                                          ).getMinutes()
+                                    }`,
+                                    amount: discount.percentDiscount * 100,
+                                  }))}
+                                />
+                              </Pressable>
+                            ))}
+                          </View>
+                        </>
+                      )}
+                  </>
+                ) : (
+                  <Typography alignment="center">No results</Typography>
+                )}
+              </>
+            ) : (
+              <ActivityIndicator />
+            )}
+          </>
+        ) : (
+          <Typography alignment="center" color="error-medium">
+            Failed to load
+          </Typography>
+        )}
+        <View style={styles.titleContainer}>
+          <Typography variant="title5">Dishes for you</Typography>
           <Arrow />
         </View>
         {!isFetchingMerchants ? (
@@ -216,57 +309,6 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
               <>
                 {isRatingsReady && isDiscountsReady && isMenuDiscountsReady && (
                   <>
-                    <View style={styles.listContainer}>
-                      {merchants.map((merchant, merchantItemIndex) => (
-                        <Pressable
-                          onPress={() =>
-                            NavigationService.navigate("RestaurantProfile", {
-                              merchantId: merchant._id,
-                            })
-                          }
-                          key={merchantItemIndex}
-                        >
-                          <RestaurantCard
-                            imageUrl={merchant.imageUrls[0]}
-                            restaurantName={merchant.name}
-                            cost={merchant.cost}
-                            rating={
-                              ratingsData[merchantItemIndex].data.reduce(
-                                (totalRating, rating) =>
-                                  totalRating + rating.rating,
-                                0
-                              ) / ratingsData[merchantItemIndex].data.length ||
-                              0
-                            }
-                            cuisineType={merchant.cuisineType}
-                            distance="3.7km"
-                            cityName="Vancouver"
-                            coupons={discountsData[merchantItemIndex].data.map(
-                              (discount) => ({
-                                time: `${new Date(
-                                  discount.validFromTime
-                                ).getHours()}:${
-                                  10 <
-                                  new Date(discount.validFromTime).getMinutes()
-                                    ? new Date(
-                                        discount.validFromTime
-                                      ).getMinutes()
-                                    : "0" +
-                                      new Date(
-                                        discount.validFromTime
-                                      ).getMinutes()
-                                }`,
-                                amount: discount.percentDiscount * 100,
-                              })
-                            )}
-                          />
-                        </Pressable>
-                      ))}
-                    </View>
-                    <View style={styles.titleContainer}>
-                      <Typography variant="title5">Dishes for you</Typography>
-                      <Arrow />
-                    </View>
                     <View style={styles.listContainer}>
                       {0 <
                       merchants

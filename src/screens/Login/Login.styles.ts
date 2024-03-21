@@ -22,10 +22,6 @@ const styles = StyleSheet.create({
     gap: 32,
     backgroundColor: t.Surface.default,
   },
-  error: {
-    marginTop: 8,
-    paddingHorizontal: 8,
-  },
 });
 
 export default styles;

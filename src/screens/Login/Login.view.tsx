@@ -6,13 +6,17 @@ import Button from "../../components/base/Button";
 import TextInputField from "../../components/base/TextInputField";
 import Typography from "../../components/base/Typography";
 import NavigationService from "../../navigation/NavigationService";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LoginView = (props: LoginGeneratedProps) => {
   const { isErrorOnSignin, initialValues, validationSchema, handleSubmit } =
     props;
 
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView
+      style={styles.container}
+      contentContainerStyle={{ flex: 1 }}
+    >
       <Image
         source={require("../../../assets/login.jpg")}
         style={styles.image}
@@ -57,6 +61,7 @@ const LoginView = (props: LoginGeneratedProps) => {
               <View>
                 <Button
                   text="Login"
+                  buttonSize="lg"
                   onPress={() => handleSubmit()}
                   takeFullWidth
                 />
@@ -94,7 +99,7 @@ const LoginView = (props: LoginGeneratedProps) => {
           )}
         </Formik>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 

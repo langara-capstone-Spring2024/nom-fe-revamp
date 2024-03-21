@@ -12,6 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
   const {
     isVisible,
+    isErrorUpdateConsumerDiscount,
     consumerDiscount,
     menuDiscounts,
     handleOpen,
@@ -245,6 +246,7 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
             <View>
               <Button
                 text="Download QR"
+                buttonSize="lg"
                 icon={<AntDesign name="download" size={16} color="white" />}
                 iconPosition="right"
                 onPress={handleDownload}
@@ -252,10 +254,16 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
               />
               <Button
                 text="Cancel"
+                buttonSize="lg"
                 variant="ghost"
                 onPress={handleCancel}
                 takeFullWidth
               />
+              {isErrorUpdateConsumerDiscount && (
+                <Typography alignment="center" color="error-medium">
+                  Failed to cancel
+                </Typography>
+              )}
             </View>
           </View>
         )}

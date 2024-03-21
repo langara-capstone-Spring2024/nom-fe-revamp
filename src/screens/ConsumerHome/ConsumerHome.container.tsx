@@ -21,12 +21,14 @@ const ConsumerHome = () => {
     data: ads = [],
     refetch: refetchAds,
     isFetching: isFetchingAds,
+    isError: isErrorOnAds,
   } = GetAds();
 
   const {
     data: merchants = [],
     refetch: refetchMerchants,
     isFetching: isFetchingMerchants,
+    isError: isErrorOnMerchants,
   } = GetMerchants(keyword);
 
   const ratingsData = GetRatingsByMerchants(merchants);
@@ -110,12 +112,14 @@ const ConsumerHome = () => {
   }, [menuDiscountsData]);
 
   const generatedProps = {
+    isFetchingAds,
     isFetchingMerchants,
+    isErrorOnAds,
+    isErrorOnMerchants,
     isRatingsReady,
     isDiscountsReady,
     isMenuDiscountsReady,
     isRefreshing,
-    isFetchingAds,
     keyword,
     setKeyword,
     ads,

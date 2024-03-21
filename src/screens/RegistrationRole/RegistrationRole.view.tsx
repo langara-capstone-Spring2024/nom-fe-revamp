@@ -170,6 +170,7 @@ const RegistrationRole = (props: RegistrationRoleGeneratedProps) => {
         <View>
           <Button
             text="Continue"
+            buttonSize="lg"
             onPress={handleContinue}
             isDisabled={!selectedRole && true}
             takeFullWidth

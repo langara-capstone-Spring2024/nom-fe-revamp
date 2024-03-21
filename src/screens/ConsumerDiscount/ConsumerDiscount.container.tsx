@@ -21,7 +21,10 @@ const ConsumerDiscount = () => {
   const { data: menuDiscounts = [] } = GetMenuDiscountsByDiscount(
     consumerDiscount?.discount._id
   );
-  const { mutate: mutateConsumerDiscount } = UpdateConsumerDiscount();
+  const {
+    mutate: mutateConsumerDiscount,
+    isError: isErrorUpdateConsumerDiscount,
+  } = UpdateConsumerDiscount();
 
   const handleOpen = () => {
     setIsVisible(true);
@@ -47,6 +50,7 @@ const ConsumerDiscount = () => {
 
   const generatedProps = {
     isVisible,
+    isErrorUpdateConsumerDiscount,
     consumerDiscount,
     menuDiscounts,
     handleOpen,

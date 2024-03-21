@@ -12,10 +12,12 @@ import MultipleImagePicker from "../../components/base/MultipleImagePicker";
 import Dropdown from "../../components/base/Dropdown";
 import AutoComplete from "../../components/base/AutoComplete";
 import Typography from "../../components/base/Typography";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
   const {
     page,
+    isErrorRegister,
     basicInitialValues,
     additionalInitialValues,
     businessInitialValues,
@@ -48,7 +50,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
           />
         )}
       </View>
-      <ScrollView
+      <KeyboardAwareScrollView
         style={styles.container}
         contentContainerStyle={{
           flex: 1,
@@ -123,6 +125,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                 <View>
                   <Button
                     text="Create Account"
+                    buttonSize="lg"
                     onPress={() => handleSubmit()}
                     takeFullWidth
                   />
@@ -221,6 +224,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                 <View>
                   <Button
                     text="Next"
+                    buttonSize="lg"
                     onPress={() => handleSubmit()}
                     takeFullWidth
                   />
@@ -260,9 +264,15 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                   <View>
                     <Button
                       text="Next"
+                      buttonSize="lg"
                       onPress={() => handleSubmit()}
                       takeFullWidth
                     />
+                    {isErrorRegister && (
+                      <Typography alignment="center" color="error-medium">
+                        Failed to register
+                      </Typography>
+                    )}
                   </View>
                 </>
               )}
@@ -286,6 +296,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
               </View>
               <Button
                 text="Explore the app"
+                buttonSize="lg"
                 onPress={handleSuccess}
                 takeFullWidth
               />
@@ -293,7 +304,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
             <View></View>
           </>
         )}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

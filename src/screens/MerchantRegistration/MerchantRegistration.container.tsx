@@ -58,7 +58,11 @@ const MerchantRegistration = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-  const { data: user, mutate: mutateRegister } = Register();
+  const {
+    data: user,
+    mutate: mutateRegister,
+    isError: isErrorRegister,
+  } = Register();
   const { data: merchant, mutate: mutateMerchant } = AddMerchant();
   const { mutate: mutateSignin } = Signin();
 
@@ -104,7 +108,7 @@ const MerchantRegistration = () => {
   });
 
   const businessValidationSchema = Yup.object({
-    license: Yup.string().required("Your license is required"),
+    license: Yup.string().required("Your business license number is required"),
   });
 
   const handleSubmitBasic = (values: BasicForm) => {
@@ -277,6 +281,7 @@ const MerchantRegistration = () => {
 
   const generatedProps = {
     page,
+    isErrorRegister,
     basicInitialValues,
     additionalInitialValues,
     businessInitialValues,

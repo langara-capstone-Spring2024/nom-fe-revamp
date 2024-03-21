@@ -35,6 +35,7 @@ export type BusinessForm = {
 
 export interface MerchantRegistrationGeneratedProps {
   page: number;
+  isErrorRegister: boolean;
   basicInitialValues: BasicForm;
   additionalInitialValues: AdditionalForm;
   businessInitialValues: BusinessForm;

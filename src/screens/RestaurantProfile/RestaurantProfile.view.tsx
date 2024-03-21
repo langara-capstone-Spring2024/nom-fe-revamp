@@ -27,6 +27,7 @@ import { AntDesign } from "@expo/vector-icons";
 const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
   const {
     isRefreshing,
+    isErrorOnAddConsumerDiscount,
     selectedCoupon,
     merchant,
     consumerDiscounts,
@@ -424,10 +425,16 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
       <View style={styles.buttonContainer}>
         <Button
           text="Next"
+          buttonSize="lg"
           onPress={handleNext}
           takeFullWidth
           isDisabled={discounts.length !== 0 && selectedCoupon ? false : true}
         />
+        {isErrorOnAddConsumerDiscount && (
+          <Typography alignment="center" color="error-medium">
+            Failed to redeem
+          </Typography>
+        )}
       </View>
     </>
   );

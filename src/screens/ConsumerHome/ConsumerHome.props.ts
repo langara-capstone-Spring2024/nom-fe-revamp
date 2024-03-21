@@ -8,6 +8,8 @@ import { Ad } from "../../types/Ad";
 export interface ConsumerHomeGeneratedProps {
   isFetchingAds: boolean;
   isFetchingMerchants: boolean;
+  isErrorOnAds: boolean;
+  isErrorOnMerchants: boolean;
   isRatingsReady: boolean;
   isDiscountsReady: boolean;
   isMenuDiscountsReady: boolean;
