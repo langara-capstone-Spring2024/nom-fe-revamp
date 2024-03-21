@@ -1,13 +1,17 @@
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import { AdTemplateThreeProps } from "./AdTemplateThree.props";
 import createStyles from "./AdTemplateThree.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
-import { TempThreePrimary, TempOneAccent, TempThreeAccent } from "../SVG";
 import Typography from "../Typography";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { TempThreeAccent, TempThreePrimary } from "../SVG";
+import {
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
+import { useWindowDimensions } from "react-native";
 
-const AdTemplateThree = (props: AdTemplateThreeProps) => {
+const AdTemplateOne = (props: AdTemplateThreeProps) => {
   const {
     image,
     headline,
@@ -17,12 +21,15 @@ const AdTemplateThree = (props: AdTemplateThreeProps) => {
     width,
     height,
     style,
+    onSelectTemplate
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const windowWidth = useWindowDimensions().width;
+
   return (
     <TouchableWithoutFeedback
-      onPress={() => console.log("pressed")}
+      onPress={() => onSelectTemplate(2)}
       style={[styles.container, { ...style }]}>
       {image && (
         <Image
@@ -32,19 +39,20 @@ const AdTemplateThree = (props: AdTemplateThreeProps) => {
         />
       )}
       <View style={styles.primary}>
-        {/* <TempThreePrimary fill={primary} /> */}
+        <TempThreePrimary fill={primary} />
       </View>
       <View style={styles.secondary}>
         <TempThreeAccent fill={secondary} />
       </View>
-      {/* <Typography variant="title4" otherStyle={styles.headline}>
+
+      <Typography variant="title4" otherStyle={styles.headline}>
         {headline}
       </Typography>
       <Typography variant="bodyXs" otherStyle={styles.tagline}>
         {tagline}
-      </Typography> */}
+      </Typography>
     </TouchableWithoutFeedback>
   );
 };
 
-export default AdTemplateThree;
+export default AdTemplateOne;

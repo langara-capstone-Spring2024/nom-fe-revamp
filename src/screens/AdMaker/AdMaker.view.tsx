@@ -159,48 +159,67 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               icon={<View style={styles.accentSquare} />}
             />
           </View>
-          <View style={{ flexDirection: "column", gap: 8 }}>
-            <View
-              style={{
-                height: 180,
-                width: 350,
-                marginLeft: -36,
-              }}>
-              <AdTemplateOne
-                image={localImage}
-                headline="Up to 50% off!"
-                tagline="Lorem ipsum dolor sit amet est officiis."
-                primary={selectedPrimaryColor}
-                secondary={selectedAccentColor}
-                onSelectTemplate={(v) => setSelectedTemplate(v)}
-                style={
-                  selectedTemplate === 1
-                    ? { borderWidth: 2, borderColor: "#E51E35" }
-                    : {}
-                }
-              />
+          <ScrollView style={{ marginLeft: -36 }}>
+            <View style={{ flexDirection: "column", gap: 8 }}>
+              <View
+                style={{
+                  height: 180,
+                  width: 350,
+                }}>
+                <AdTemplateOne
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  style={
+                    selectedTemplate === 1
+                      ? { borderWidth: 2, borderColor: "#E51E35" }
+                      : {}
+                  }
+                />
+              </View>
+              <View
+                style={{
+                  height: 180,
+                  width: 350,
+                }}>
+                <AdTemplateTwo
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  style={
+                    selectedTemplate === 2
+                      ? { borderWidth: 2, borderColor: "#E51E35" }
+                      : {}
+                  }
+                />
+              </View>
+              <View
+                style={{
+                  height: 180,
+                  width: 350,
+                }}>
+                <AdTemplateThree
+                  onSelectTemplate={(v) => setSelectedTemplate(v)}
+                  image={localImage}
+                  headline="Up to 50% off!"
+                  tagline="Lorem ipsum dolor sit amet est officiis."
+                  primary={selectedPrimaryColor}
+                  secondary={selectedAccentColor}
+                  style={
+                    selectedTemplate === 2
+                      ? { borderWidth: 2, borderColor: "#E51E35" }
+                      : {}
+                  }
+                />
+              </View>
             </View>
-            <View
-              style={{
-                height: 180,
-                width: 350,
-                marginLeft: -36,
-              }}>
-              <AdTemplateTwo
-                onSelectTemplate={(v) => setSelectedTemplate(v)}
-                image={localImage}
-                headline="Up to 50% off!"
-                tagline="Lorem ipsum dolor sit amet est officiis."
-                primary={selectedPrimaryColor}
-                secondary={selectedAccentColor}
-                style={
-                  selectedTemplate === 2
-                    ? { borderWidth: 2, borderColor: "#E51E35" }
-                    : {}
-                }
-              />
-            </View>
-          </View>
+          </ScrollView>
         </View>
       );
     } else if (page === 3) {

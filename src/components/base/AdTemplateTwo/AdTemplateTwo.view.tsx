@@ -11,7 +11,7 @@ import {
 } from "react-native-gesture-handler";
 import { useWindowDimensions } from "react-native";
 
-const AdTemplateOne = (props: AdTemplateTwoProps) => {
+const AdTemplateTwo = (props: AdTemplateTwoProps) => {
   const {
     image,
     headline,
@@ -55,4 +55,4 @@ const AdTemplateOne = (props: AdTemplateTwoProps) => {
   );
 };
 
-export default AdTemplateOne;
+export default AdTemplateTwo;

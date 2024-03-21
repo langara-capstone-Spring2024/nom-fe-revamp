@@ -10,4 +10,5 @@ export interface AdTemplateThreeProps {
   width?: string;
   height?: string;
   style?: TextStyle & ViewStyle;
+  onSelectTemplate: (v: number) => void;
 }
