@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AutoCompleteProps } from "./AutoComplete.props";
 import {
   GooglePlacesAutocomplete,
@@ -10,13 +10,15 @@ import Typography from "../Typography";
 import styles from "./AutoComplete.style";
 
 const AutoComplete = (props: AutoCompleteProps) => {
-  const { label, placeholder, value, setValue, error } = props;
+  const { label, placeholder, sizing = "md", value, setValue, error } = props;
 
-  const ref = useRef<GooglePlacesAutocompleteRef>(null);
+  const outerRef = useRef<GooglePlacesAutocompleteRef | null>(null);
+
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    if (value) {
-      ref.current?.setAddressText(value.address || "");
+    if (value && value.address) {
+      outerRef.current?.setAddressText(value.address);
     }
   }, [value]);
 
@@ -28,7 +30,13 @@ const AutoComplete = (props: AutoCompleteProps) => {
         </Typography>
       )}
       <GooglePlacesAutocomplete
-        ref={ref}
+        ref={(innerRef) => {
+          outerRef.current = innerRef;
+
+          if (innerRef?.isFocused() !== undefined) {
+            setIsFocused(innerRef.isFocused());
+          }
+        }}
         placeholder={placeholder || ""}
         query={{
           key: process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY,
@@ -49,11 +57,11 @@ const AutoComplete = (props: AutoCompleteProps) => {
         disableScroll
         styles={{
           textInputContainer: {
-            paddingVertical: 8,
+            paddingVertical: sizing === "sm" ? 8 : sizing === "lg" ? 18 : 12,
             paddingHorizontal: 16,
             borderRadius: 8,
             borderWidth: 1,
-            borderColor: t.Border.neutral,
+            borderColor: isFocused ? t.Border["info-strong"] : t.Border.neutral,
             backgroundColor: "white",
             flexDirection: "row",
           },

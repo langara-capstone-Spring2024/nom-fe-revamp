@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, TextInput, Pressable } from "react-native";
 import { TextInputFieldProps } from "./TextInputField.props";
 import styles from "./TextInputField.style";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -46,7 +46,7 @@ const TextInputField = (props: TextInputFieldProps) => {
           },
           noborder && { borderWidth: undefined, borderColor: undefined },
           sizing === "sm"
-            ? { paddingVertical: 6, paddingHorizontal: 16 }
+            ? { paddingVertical: 8, paddingHorizontal: 16 }
             : sizing === "lg"
             ? { paddingVertical: 18, paddingHorizontal: 16 }
             : { paddingVertical: 12, paddingHorizontal: 16 },

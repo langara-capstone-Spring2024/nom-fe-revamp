@@ -55,16 +55,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
           />
         )}
       </View>
-      <KeyboardAwareScrollView
-        keyboardShouldPersistTaps="handled"
-        style={styles.container}
-        contentContainerStyle={{
-          flex: 1,
-          padding: 16,
-          paddingBottom: 32,
-          justifyContent: "space-between",
-        }}
-      >
+      <View style={{ flex: 1, padding: 16 }}>
         {page === 1 ? (
           <Formik
             initialValues={basicInitialValues}
@@ -81,73 +72,80 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
               errors,
             }) => (
               <>
-                <View style={{ gap: 16 }}>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <TextInputField
-                        label="First Name"
-                        value={values.firstName}
-                        setValue={handleChange("firstName")}
-                        error={touched.firstName ? errors.firstName : ""}
-                      />
+                <View style={{ flex: 1 }}>
+                  <KeyboardAwareScrollView
+                    keyboardShouldPersistTaps="handled"
+                    contentContainerStyle={{
+                      gap: 16,
+                    }}
+                  >
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <TextInputField
+                          label="First Name"
+                          value={values.firstName}
+                          setValue={handleChange("firstName")}
+                          error={touched.firstName ? errors.firstName : ""}
+                        />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <TextInputField
+                          label="Last Name"
+                          value={values.lastName}
+                          setValue={handleChange("lastName")}
+                          error={touched.lastName ? errors.lastName : ""}
+                        />
+                      </View>
                     </View>
-                    <View style={{ flex: 1 }}>
-                      <TextInputField
-                        label="Last Name"
-                        value={values.lastName}
-                        setValue={handleChange("lastName")}
-                        error={touched.lastName ? errors.lastName : ""}
-                      />
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <TextInputField
+                          label="Email"
+                          value={values.email}
+                          setValue={handleChange("email")}
+                          error={touched.email ? errors.email : ""}
+                        />
+                      </View>
                     </View>
-                  </View>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <TextInputField
-                        label="Email"
-                        value={values.email}
-                        setValue={handleChange("email")}
-                        error={touched.email ? errors.email : ""}
-                      />
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <TextInputField
+                          label="Password"
+                          value={values.password}
+                          setValue={(value) => {
+                            setTouched({ password: true });
+                            handleChange("password")(value);
+                          }}
+                          error={
+                            touched.password || touched.confirmPassword
+                              ? errors.password
+                              : ""
+                          }
+                          secured
+                        />
+                      </View>
                     </View>
-                  </View>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <TextInputField
-                        label="Password"
-                        value={values.password}
-                        setValue={(value) => {
-                          setTouched({ password: true });
-                          handleChange("password")(value);
-                        }}
-                        error={
-                          touched.password || touched.confirmPassword
-                            ? errors.password
-                            : ""
-                        }
-                        secured
-                      />
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <TextInputField
+                          label="Confirm Password"
+                          value={values.confirmPassword}
+                          setValue={(value) => {
+                            setTouched({ confirmPassword: true });
+                            handleChange("confirmPassword")(value);
+                          }}
+                          error={
+                            touched.password || touched.confirmPassword
+                              ? errors.confirmPassword
+                              : ""
+                          }
+                          secured
+                        />
+                      </View>
                     </View>
-                  </View>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <TextInputField
-                        label="Confirm Password"
-                        value={values.confirmPassword}
-                        setValue={(value) => {
-                          setTouched({ confirmPassword: true });
-                          handleChange("confirmPassword")(value);
-                        }}
-                        error={
-                          touched.password || touched.confirmPassword
-                            ? errors.confirmPassword
-                            : ""
-                        }
-                        secured
-                      />
-                    </View>
-                  </View>
+                  </KeyboardAwareScrollView>
                 </View>
-                <View>
+                <View style={{ paddingBottom: 16 }}>
                   <Button
                     text="Create Account"
                     buttonSize="lg"
@@ -174,79 +172,86 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
               errors,
             }) => (
               <>
-                <View style={{ gap: 16 }}>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <MultipleImagePicker
-                      images={images}
-                      setImages={(images) => {
-                        setImages(images);
-                        setFieldValue("imageNumber", images.length);
-                      }}
-                      error={touched.imageNumber ? errors.imageNumber : ""}
-                    />
-                  </View>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <TextInputField
-                        label="Restaurant Name"
-                        value={values.restaurantName}
-                        setValue={handleChange("restaurantName")}
-                        error={
-                          touched.restaurantName ? errors.restaurantName : ""
-                        }
-                      />
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <Dropdown
-                        label="Category"
-                        placeholder="Select restaurant category"
-                        options={[
-                          { label: "American", value: "American" },
-                          { label: "Chinese", value: "Chinese" },
-                          { label: "Indian", value: "Indian" },
-                          { label: "Italian", value: "Italian" },
-                          { label: "Japanese", value: "Japanese" },
-                          { label: "Korean", value: "Korean" },
-                          { label: "Mexican", value: "Mexican" },
-                          { label: "Thai", value: "Thai" },
-                          { label: "Others", value: "Others" },
-                        ]}
-                        value={values.category}
-                        setValue={handleChange("category")}
-                        error={touched.category ? errors.category : ""}
-                      />
-                    </View>
-                  </View>
-                  <View style={{ flexDirection: "row", gap: 16 }}>
-                    <View style={{ flex: 1 }}>
-                      <AutoComplete
-                        label="Location"
-                        value={{
-                          address: values.address,
-                          latitude: values.latitude,
-                          longitude: values.longitude,
+                <View style={{ flex: 1 }}>
+                  <KeyboardAwareScrollView
+                    keyboardShouldPersistTaps="handled"
+                    contentContainerStyle={{
+                      gap: 16,
+                    }}
+                  >
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <MultipleImagePicker
+                        images={images}
+                        setImages={(images) => {
+                          setImages(images);
+                          setFieldValue("imageNumber", images.length);
                         }}
-                        setValue={(place) => {
-                          setFieldValue("address", place.address);
-                          setFieldValue("latitude", place.latitude);
-                          setFieldValue("longitude", place.longitude);
-                        }}
-                        error={
-                          touched.address &&
-                          touched.latitude &&
-                          touched.longitude
-                            ? errors.address ||
-                              errors.latitude ||
-                              errors.longitude
-                            : ""
-                        }
+                        error={touched.imageNumber ? errors.imageNumber : ""}
                       />
                     </View>
-                  </View>
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <TextInputField
+                          label="Restaurant Name"
+                          value={values.restaurantName}
+                          setValue={handleChange("restaurantName")}
+                          error={
+                            touched.restaurantName ? errors.restaurantName : ""
+                          }
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <Dropdown
+                          label="Category"
+                          placeholder="Select restaurant category"
+                          options={[
+                            { label: "American", value: "American" },
+                            { label: "Chinese", value: "Chinese" },
+                            { label: "Indian", value: "Indian" },
+                            { label: "Italian", value: "Italian" },
+                            { label: "Japanese", value: "Japanese" },
+                            { label: "Korean", value: "Korean" },
+                            { label: "Mexican", value: "Mexican" },
+                            { label: "Thai", value: "Thai" },
+                            { label: "Others", value: "Others" },
+                          ]}
+                          value={values.category}
+                          setValue={handleChange("category")}
+                          error={touched.category ? errors.category : ""}
+                        />
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
+                        <AutoComplete
+                          label="Location"
+                          value={{
+                            address: values.address,
+                            latitude: values.latitude,
+                            longitude: values.longitude,
+                          }}
+                          setValue={(place) => {
+                            setFieldValue("address", place.address);
+                            setFieldValue("latitude", place.latitude);
+                            setFieldValue("longitude", place.longitude);
+                          }}
+                          error={
+                            touched.address &&
+                            touched.latitude &&
+                            touched.longitude
+                              ? errors.address ||
+                                errors.latitude ||
+                                errors.longitude
+                              : ""
+                          }
+                        />
+                      </View>
+                    </View>
+                  </KeyboardAwareScrollView>
                 </View>
-                <View>
+                <View style={{ paddingBottom: 16 }}>
                   <Button
                     text="Next"
                     buttonSize="lg"
@@ -267,26 +272,33 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
             >
               {({ handleChange, handleSubmit, values, touched, errors }) => (
                 <>
-                  <View style={{ gap: 16 }}>
-                    <Image
-                      source={require("../../../assets/business.png")}
-                      style={{
-                        width: "75%",
-                        alignSelf: "center",
+                  <View style={{ flex: 1 }}>
+                    <KeyboardAwareScrollView
+                      keyboardShouldPersistTaps="handled"
+                      contentContainerStyle={{
+                        gap: 16,
                       }}
-                    />
-                    <View style={{ flexDirection: "row", gap: 16 }}>
-                      <View style={{ flex: 1 }}>
-                        <TextInputField
-                          label="Business License Number"
-                          value={values.license}
-                          setValue={handleChange("license")}
-                          error={touched.license ? errors.license : ""}
-                        />
+                    >
+                      <Image
+                        source={require("../../../assets/business.png")}
+                        style={{
+                          width: "75%",
+                          alignSelf: "center",
+                        }}
+                      />
+                      <View style={{ flexDirection: "row", gap: 16 }}>
+                        <View style={{ flex: 1 }}>
+                          <TextInputField
+                            label="Business License Number"
+                            value={values.license}
+                            setValue={handleChange("license")}
+                            error={touched.license ? errors.license : ""}
+                          />
+                        </View>
                       </View>
-                    </View>
+                    </KeyboardAwareScrollView>
                   </View>
-                  <View>
+                  <View style={{ paddingBottom: 16 }}>
                     <Button
                       text="Next"
                       buttonSize="lg"
@@ -305,31 +317,38 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
           </>
         ) : (
           <>
-            <View></View>
-            <View style={{ gap: 64 }}>
-              <View>
-                <Image
-                  source={require("../../../assets/registration.png")}
-                  style={{ width: "50%", alignSelf: "center" }}
+            <KeyboardAwareScrollView
+              keyboardShouldPersistTaps="handled"
+              contentContainerStyle={{
+                gap: 16,
+              }}
+            >
+              <View></View>
+              <View style={{ gap: 64 }}>
+                <View>
+                  <Image
+                    source={require("../../../assets/registration.png")}
+                    style={{ width: "50%", alignSelf: "center" }}
+                  />
+                  <Typography variant="title2" alignment="center">
+                    Success!
+                  </Typography>
+                  <Typography alignment="center">
+                    You're ready to start using nom!
+                  </Typography>
+                </View>
+                <Button
+                  text="Explore the app"
+                  buttonSize="lg"
+                  onPress={handleSuccess}
+                  takeFullWidth
                 />
-                <Typography variant="title2" alignment="center">
-                  Success!
-                </Typography>
-                <Typography alignment="center">
-                  You're ready to start using nom!
-                </Typography>
               </View>
-              <Button
-                text="Explore the app"
-                buttonSize="lg"
-                onPress={handleSuccess}
-                takeFullWidth
-              />
-            </View>
-            <View></View>
+              <View></View>
+            </KeyboardAwareScrollView>
           </>
         )}
-      </KeyboardAwareScrollView>
+      </View>
     </SafeAreaView>
   );
 };

@@ -11,9 +11,9 @@ const Dropdown = (props: DropdownProps) => {
     label,
     placeholder,
     sizing = "md",
+    options,
     value,
     setValue = () => null,
-    options,
     error,
   } = props;
 
@@ -38,10 +38,10 @@ const Dropdown = (props: DropdownProps) => {
         style={[
           styles.dropdown,
           sizing === "sm"
-            ? { paddingVertical: 3, paddingHorizontal: 16 }
+            ? { paddingVertical: 0.5, paddingHorizontal: 16 }
             : sizing === "lg"
-            ? { paddingVertical: 9, paddingHorizontal: 16 }
-            : { paddingVertical: 6, paddingHorizontal: 16 },
+            ? { paddingVertical: 10.5, paddingHorizontal: 16 }
+            : { paddingVertical: 4.5, paddingHorizontal: 16 },
           isFocused && { borderColor: t.Border["info-strong"] },
         ]}
         data={options}
@@ -50,6 +50,7 @@ const Dropdown = (props: DropdownProps) => {
         labelField="label"
         valueField="value"
         value={value}
+        mode="modal"
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={(item) => {
