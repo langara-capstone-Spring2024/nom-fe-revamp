@@ -12,7 +12,6 @@ import { MenuService } from "../../services/MenuService";
 import { addMenuItem } from "./../../services/react-query/queries/menu";
 import LoadingAnimation from "../../components/base/LoadingAnimation";
 
-
 const Menu = () => {
   const { setMenuScreen, isAddingMenuItem, setIsAddingMenuItem } = useStore(
     (state) => ({
@@ -44,8 +43,7 @@ const Menu = () => {
 
   useEffect(() => {
     setMenuScreen(true);
-    if(menuItems !== undefined)
-    setIsLoading(false);
+    if (menuItems !== undefined) setIsLoading(false);
   }, [menuItems]);
 
   const handleNameChange = (text: string) => {
@@ -58,9 +56,12 @@ const Menu = () => {
   };
 
   const handlePriceChange = (text: string) => {
+    const isValidPrice = /^[1-9]\d*(\.\d{1,3})?$|^0\.\d{1,3}$/.test(text);
+    const parsedPrice = parseFloat(text);
+
     if (!text.trim()) {
       setPriceError("Please indicate the price");
-    } else if (!/^\d+(\.\d{1,3})?$/.test(text)) {
+    } else if (!isValidPrice || parsedPrice <= 0) {
       setPriceError("Invalid price format");
     } else {
       setPriceError("");
