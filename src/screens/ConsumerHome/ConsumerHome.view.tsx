@@ -42,27 +42,14 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
     handleRefresh,
   } = props;
 
-  const ref = useRef<ScrollView | null>(null);
-
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   const [width, setWidth] = useState<number>(0);
-  const [bias, setBais] = useState<number>(0);
-  const [y, setY] = useState<number>(0);
-
-  const handleLayoutBias = (event: LayoutChangeEvent) => {
-    setBais(event.nativeEvent.layout.height);
-  };
-
-  const handleLayoutY = (event: LayoutChangeEvent) => {
-    setY(event.nativeEvent.layout.y);
-  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: t.Surface.default }}>
       <ScrollView
-        ref={ref}
         style={styles.container}
         contentContainerStyle={{
           padding: 16,
@@ -70,16 +57,6 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
           gap: 32,
         }}
         stickyHeaderIndices={[1]}
-        onScrollEndDrag={(event) => {
-          if (
-            ref &&
-            ref.current &&
-            0 < event.nativeEvent.contentOffset.y &&
-            event.nativeEvent.contentOffset.y < y - bias - 32
-          ) {
-            ref.current.scrollTo({ y: y - bias - 32 });
-          }
-        }}
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
         }
@@ -89,7 +66,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
             Langara College, West 49th Avenue, Vancouver, BC, Canada
           </Typography>
         </View>
-        <View style={styles.serchContainer} onLayout={handleLayoutBias}>
+        <View style={styles.serchContainer}>
           <TextInputField
             value={keyword}
             leftIcon={<Ionicons name="search" size={28} color="#686868" />}
@@ -216,7 +193,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
             Failed to load
           </Typography>
         )}
-        <View onLayout={handleLayoutY} style={styles.titleContainer}>
+        <View style={styles.titleContainer}>
           <Typography variant="title5">Browse Cusines</Typography>
           <Arrow />
         </View>

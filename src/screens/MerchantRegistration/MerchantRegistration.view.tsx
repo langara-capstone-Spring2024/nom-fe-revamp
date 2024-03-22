@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Image } from "react-native";
+import { View, SafeAreaView, Image } from "react-native";
 import createStyles from "./MerchantRegistration.style";
 import { MerchantRegistrationGeneratedProps } from "./MerchantRegistration.props";
 import React, { useMemo } from "react";
@@ -36,7 +36,12 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: t.Surface.default }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: t.Surface.default,
+      }}
+    >
       <View style={{ padding: 16 }}>
         {(page === 1 || page === 2 || page === 3) && (
           <Progress.Bar
@@ -51,6 +56,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
         )}
       </View>
       <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
         style={styles.container}
         contentContainerStyle={{
           flex: 1,

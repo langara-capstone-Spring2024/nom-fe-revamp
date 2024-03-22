@@ -60,6 +60,9 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
   const [menuY, setMenuY] = useState<number | undefined>(undefined);
   const [ratingsY, setRatingsY] = useState<number | undefined>(undefined);
   const [detailsY, setDetailsY] = useState<number | undefined>(undefined);
+  const [buttonHeight, setButtonHeight] = useState<number | undefined>(
+    undefined
+  );
 
   const handleSelectSegment = (option: Option) => {
     navigation.setOptions({
@@ -120,7 +123,10 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
       <ScrollView
         ref={ref}
         style={[styles.container, isZoomed && { marginTop: 48 }]}
-        contentContainerStyle={{ gap: 8, paddingBottom: 112 }}
+        contentContainerStyle={{
+          gap: 8,
+          paddingBottom: buttonHeight ? buttonHeight + 16 : undefined,
+        }}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
@@ -422,7 +428,12 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
           </>
         )}
       </ScrollView>
-      <View style={styles.buttonContainer}>
+      <View
+        onLayout={(event: LayoutChangeEvent) =>
+          setButtonHeight(event.nativeEvent.layout.height)
+        }
+        style={styles.buttonContainer}
+      >
         <Button
           text="Next"
           buttonSize="lg"
