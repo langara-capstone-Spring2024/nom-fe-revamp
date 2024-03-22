@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { Theme } from "../../../config/theme-config";
+import { theme as t } from "../../../utils/Theme";
 
 const styles = StyleSheet.create({
   label: {
-    marginBottom: 6.5,
-    color: "#3c3c3c",
+    marginBottom: 8,
   },
   error: {
     marginTop: 8,

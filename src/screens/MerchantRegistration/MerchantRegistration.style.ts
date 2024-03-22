@@ -4,9 +4,6 @@ import { theme as t } from "../../utils/Theme";
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-    },
     progressBar: {
       marginHorizontal: 32,
     },

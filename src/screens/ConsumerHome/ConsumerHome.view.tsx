@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import createStyles from "./ConsumerHome.style";
 import { ConsumerHomeGeneratedProps } from "./ConsumerHome.props";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTheme } from "react-native-paper";
 import RestaurantCard from "../../components/base/RestaurantCard";
 import TextInputField from "../../components/base/TextInputField";
@@ -68,6 +68,7 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         </View>
         <View style={styles.serchContainer}>
           <TextInputField
+            placeholder="Input text..."
             value={keyword}
             leftIcon={<Ionicons name="search" size={28} color="#686868" />}
             setValue={setKeyword}

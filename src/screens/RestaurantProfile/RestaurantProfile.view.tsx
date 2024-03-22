@@ -435,7 +435,7 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
         style={styles.buttonContainer}
       >
         <Button
-          text="Next"
+          text="Claim"
           buttonSize="lg"
           onPress={handleNext}
           takeFullWidth

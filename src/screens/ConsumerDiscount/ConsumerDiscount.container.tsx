@@ -6,6 +6,9 @@ import {
 } from "../../services/react-query/queries/consumerDiscount";
 import { useEffect, useState } from "react";
 import { GetMenuDiscountsByDiscount } from "../../services/react-query/queries/menuDiscount";
+import NavigationService from "../../navigation/NavigationService";
+import * as FileSystem from "expo-file-system";
+import * as MediaLibrary from "expo-media-library";
 
 const ConsumerDiscount = () => {
   const { consumerDiscountId } = useRoute().params as {
@@ -22,6 +25,7 @@ const ConsumerDiscount = () => {
     consumerDiscount?.discount._id
   );
   const {
+    data: updateConsumerDiscount,
     mutate: mutateConsumerDiscount,
     isError: isErrorUpdateConsumerDiscount,
   } = UpdateConsumerDiscount();
@@ -34,7 +38,23 @@ const ConsumerDiscount = () => {
     setIsVisible(false);
   };
 
-  const handleDownload = () => {};
+  const handleDownload = async () => {
+    if (consumerDiscount && consumerDiscount.qrCode) {
+      try {
+        const path = FileSystem.cacheDirectory + "qr.jpeg";
+
+        await FileSystem.writeAsStringAsync(path, consumerDiscount.qrCode, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+
+        await MediaLibrary.createAssetAsync(path);
+
+        await FileSystem.deleteAsync(path);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   const handleCancel = () => {
     if (consumerDiscount && consumerDiscount.status !== "cancelled") {
@@ -47,6 +67,12 @@ const ConsumerDiscount = () => {
   useEffect(() => {
     navigation.setOptions({ headerTitle: "" });
   }, []);
+
+  useEffect(() => {
+    if (updateConsumerDiscount) {
+      NavigationService.goBack();
+    }
+  }, [updateConsumerDiscount]);
 
   const generatedProps = {
     isVisible,
