@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Image } from "react-native";
+import { View, SafeAreaView, Image } from "react-native";
 import createStyles from "./MerchantRegistration.style";
 import { MerchantRegistrationGeneratedProps } from "./MerchantRegistration.props";
 import React, { useMemo } from "react";
@@ -12,10 +12,12 @@ import MultipleImagePicker from "../../components/base/MultipleImagePicker";
 import Dropdown from "../../components/base/Dropdown";
 import AutoComplete from "../../components/base/AutoComplete";
 import Typography from "../../components/base/Typography";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
   const {
     page,
+    isErrorRegister,
     basicInitialValues,
     additionalInitialValues,
     businessInitialValues,
@@ -34,7 +36,12 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: t.Surface.default }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: t.Surface.default,
+      }}
+    >
       <View style={{ padding: 16 }}>
         {(page === 1 || page === 2 || page === 3) && (
           <Progress.Bar
@@ -48,7 +55,8 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
           />
         )}
       </View>
-      <ScrollView
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
         style={styles.container}
         contentContainerStyle={{
           flex: 1,
@@ -64,7 +72,14 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
             onSubmit={handleSubmitBasic}
             enableReinitialize
           >
-            {({ handleChange, handleSubmit, values, touched, errors }) => (
+            {({
+              handleChange,
+              handleSubmit,
+              setTouched,
+              values,
+              touched,
+              errors,
+            }) => (
               <>
                 <View style={{ gap: 16 }}>
                   <View style={{ flexDirection: "row", gap: 16 }}>
@@ -100,8 +115,15 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                       <TextInputField
                         label="Password"
                         value={values.password}
-                        setValue={handleChange("password")}
-                        error={touched.password ? errors.password : ""}
+                        setValue={(value) => {
+                          setTouched({ password: true });
+                          handleChange("password")(value);
+                        }}
+                        error={
+                          touched.password || touched.confirmPassword
+                            ? errors.password
+                            : ""
+                        }
                         secured
                       />
                     </View>
@@ -111,9 +133,14 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                       <TextInputField
                         label="Confirm Password"
                         value={values.confirmPassword}
-                        setValue={handleChange("confirmPassword")}
+                        setValue={(value) => {
+                          setTouched({ confirmPassword: true });
+                          handleChange("confirmPassword")(value);
+                        }}
                         error={
-                          touched.confirmPassword ? errors.confirmPassword : ""
+                          touched.password || touched.confirmPassword
+                            ? errors.confirmPassword
+                            : ""
                         }
                         secured
                       />
@@ -123,6 +150,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                 <View>
                   <Button
                     text="Create Account"
+                    buttonSize="lg"
                     onPress={() => handleSubmit()}
                     takeFullWidth
                   />
@@ -221,6 +249,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                 <View>
                   <Button
                     text="Next"
+                    buttonSize="lg"
                     onPress={() => handleSubmit()}
                     takeFullWidth
                   />
@@ -260,9 +289,15 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                   <View>
                     <Button
                       text="Next"
+                      buttonSize="lg"
                       onPress={() => handleSubmit()}
                       takeFullWidth
                     />
+                    {isErrorRegister && (
+                      <Typography alignment="center" color="error-medium">
+                        Failed to register
+                      </Typography>
+                    )}
                   </View>
                 </>
               )}
@@ -286,6 +321,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
               </View>
               <Button
                 text="Explore the app"
+                buttonSize="lg"
                 onPress={handleSuccess}
                 takeFullWidth
               />
@@ -293,7 +329,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
             <View></View>
           </>
         )}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

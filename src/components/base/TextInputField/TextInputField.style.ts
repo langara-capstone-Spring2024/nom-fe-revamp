@@ -3,7 +3,6 @@ import { Theme } from "../../../config/theme-config";
 import { theme as t } from "../../../utils/Theme";
 
 const styles = StyleSheet.create({
-  container: {},
   label: {
     marginBottom: 8,
   },

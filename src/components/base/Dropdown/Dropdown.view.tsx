@@ -4,11 +4,28 @@ import styles from "./Dropdown.style";
 import { DropdownProps } from "./Dropdown.props";
 import { View } from "react-native";
 import Typography from "../Typography";
+import { theme as t } from "../../../utils/Theme";
 
 const Dropdown = (props: DropdownProps) => {
-  const { label, placeholder, value, setValue, options, error } = props;
+  const {
+    label,
+    placeholder,
+    sizing = "md",
+    value,
+    setValue = () => null,
+    options,
+    error,
+  } = props;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
 
   return (
     <View>
@@ -18,19 +35,27 @@ const Dropdown = (props: DropdownProps) => {
         </Typography>
       )}
       <ElementDropdown
-        style={[styles.dropdown, isFocused && { borderColor: "blue" }]}
+        style={[
+          styles.dropdown,
+          sizing === "sm"
+            ? { paddingVertical: 3, paddingHorizontal: 16 }
+            : sizing === "lg"
+            ? { paddingVertical: 9, paddingHorizontal: 16 }
+            : { paddingVertical: 6, paddingHorizontal: 16 },
+          isFocused && { borderColor: t.Border["info-strong"] },
+        ]}
         data={options}
+        maxHeight={150}
         placeholder={placeholder}
-        maxHeight={300}
         labelField="label"
         valueField="value"
         value={value}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         onChange={(item) => {
-          setValue?.(item.value);
-          setIsFocused(false);
+          setValue(item.value);
         }}
+        placeholderStyle={{ color: t.Content.subtle }}
       />
       {error && (
         <Typography variant="bodyXs" color="error-medium">

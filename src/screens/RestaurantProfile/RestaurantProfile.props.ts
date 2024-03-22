@@ -7,6 +7,7 @@ import { Rating } from "../../types/Rating";
 
 export interface RestaurantProfileGeneratedProps {
   isRefreshing: boolean;
+  isErrorOnAddConsumerDiscount: boolean;
   selectedCoupon: Coupon | undefined;
   merchant: Merchant | null;
   consumerDiscounts: ConsumerDiscount[];

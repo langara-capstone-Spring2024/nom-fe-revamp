@@ -65,7 +65,6 @@ const Scanner = (props: ScannerProps) => {
     ) {
       setStatus("busy");
       setResult(result.data);
-      
     }
   };
 
@@ -232,7 +231,11 @@ const Scanner = (props: ScannerProps) => {
                   <Typography alignment="center">
                     Customer's coupon has been scanned successfully
                   </Typography>
-                  <Button text="Order Details" onPress={handleSuccess} takeFullWidth />
+                  <Button
+                    text="Order Details"
+                    onPress={handleSuccess}
+                    takeFullWidth
+                  />
                 </View>
               </View>
             ) : (

@@ -34,8 +34,11 @@ const RestaurantProfile = () => {
     GetMenuDiscountsByMerchant(merchantId);
   const { data: ratings = [], refetch: refetchRatings } =
     GetRatingsByMerchant(merchantId);
-  const { data: consumerDiscount, mutate: mutateConsumerDiscount } =
-    AddConsumerDiscount();
+  const {
+    data: consumerDiscount,
+    mutate: mutateConsumerDiscount,
+    isError: isErrorOnAddConsumerDiscount,
+  } = AddConsumerDiscount();
 
   const handleRefresh = () => {
     setIsRefreshing(true);
@@ -79,6 +82,7 @@ const RestaurantProfile = () => {
 
   const generatedProps = {
     isRefreshing,
+    isErrorOnAddConsumerDiscount,
     selectedCoupon,
     merchant,
     consumerDiscounts,
