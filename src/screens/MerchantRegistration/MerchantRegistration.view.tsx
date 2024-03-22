@@ -72,7 +72,14 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
             onSubmit={handleSubmitBasic}
             enableReinitialize
           >
-            {({ handleChange, handleSubmit, values, touched, errors }) => (
+            {({
+              handleChange,
+              handleSubmit,
+              setTouched,
+              values,
+              touched,
+              errors,
+            }) => (
               <>
                 <View style={{ gap: 16 }}>
                   <View style={{ flexDirection: "row", gap: 16 }}>
@@ -108,8 +115,15 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                       <TextInputField
                         label="Password"
                         value={values.password}
-                        setValue={handleChange("password")}
-                        error={touched.password ? errors.password : ""}
+                        setValue={(value) => {
+                          setTouched({ password: true });
+                          handleChange("password")(value);
+                        }}
+                        error={
+                          touched.password || touched.confirmPassword
+                            ? errors.password
+                            : ""
+                        }
                         secured
                       />
                     </View>
@@ -119,9 +133,14 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                       <TextInputField
                         label="Confirm Password"
                         value={values.confirmPassword}
-                        setValue={handleChange("confirmPassword")}
+                        setValue={(value) => {
+                          setTouched({ confirmPassword: true });
+                          handleChange("confirmPassword")(value);
+                        }}
                         error={
-                          touched.confirmPassword ? errors.confirmPassword : ""
+                          touched.password || touched.confirmPassword
+                            ? errors.confirmPassword
+                            : ""
                         }
                         secured
                       />
