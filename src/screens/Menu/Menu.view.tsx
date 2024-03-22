@@ -36,7 +36,7 @@ const MenuView = (props: MenuGeneratedProps) => {
     priceError,
     setPriceError,
     handleDescriptionChange,
-    remainingChars
+    remainingChars,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -107,12 +107,12 @@ const MenuView = (props: MenuGeneratedProps) => {
     </View>
   ) : (
     <View style={styles.container}>
-      <ItemList
-        title="Add Items"
-        subtitle="Add or edit items"
-        onPress={() => setIsAddingMenuItem(true)}
-      />
       <ScrollView>
+        <ItemList
+          title="Add Items"
+          subtitle="Add or edit items"
+          onPress={() => setIsAddingMenuItem(true)}
+        />
         <View style={styles.menuCardContainer}>
           {menuItems &&
             menuItems.length > 0 &&

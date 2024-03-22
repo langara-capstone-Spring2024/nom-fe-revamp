@@ -8,7 +8,7 @@ const createStyles = (theme: Theme) =>
     container: {
       width: windowWidth - 32,
       aspectRatio: 21 / 9,
-      borderColor: t.Border["brand-strong"],
+      borderColor: t.Border["info-medium"],
       borderStyle: "dashed",
       borderRadius: 12,
       marginHorizontal: 16,

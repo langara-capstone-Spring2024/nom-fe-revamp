@@ -1,12 +1,13 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { Theme } from "../../config/theme-config";
+import { theme as t } from "./../../utils/Theme";
 const windowWidth = Dimensions.get("window").width;
 
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      // backgroundColor: "#fff",
       flex: 2,
+      marginBottom: 50,
     },
 
     addItemContainer: {
@@ -14,14 +15,12 @@ const createStyles = (theme: Theme) =>
       flex: 2,
     },
 
-    menuCardContainer: {
-      // padding: 16,
-    },
-
     imagePicker: {
       marginTop: 36,
       marginBottom: 32,
     },
+
+    menuCardContainer: {},
 
     inputContainer: {
       paddingLeft: 16,
@@ -64,6 +63,10 @@ const createStyles = (theme: Theme) =>
       left: 0,
       right: 0,
       paddingHorizontal: 16,
+      borderTopWidth: 1,
+      borderColor: t.Border["default"],
+      paddingTop: 16,
+      paddingBottom: 16,
     },
 
     keyboard: {
