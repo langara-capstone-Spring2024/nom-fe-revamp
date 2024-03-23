@@ -36,24 +36,24 @@ const MerchantRegistration = () => {
 
   const [page, setPage] = useState<number>(1);
   const [basicInitialValues, setBasicInitialValues] = useState<BasicForm>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    firstName: "test1",
+    lastName: "test1",
+    email: "test1@test.com",
+    password: "123123",
+    confirmPassword: "123123",
   });
   const [additionalInitialValues, setAdditionalInitialValues] =
     useState<AdditionalForm>({
       imageNumber: 0,
-      restaurantName: "",
-      category: "",
-      address: "",
+      restaurantName: "test1",
+      category: "American",
+      address: "Vancouver",
       latitude: 0,
       longitude: 0,
     });
   const [businessInitialValues, setBusinessInitialValues] =
     useState<BusinessForm>({
-      license: "",
+      license: "license",
     });
   const [images, setImages] = useState<Image[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -72,49 +72,49 @@ const MerchantRegistration = () => {
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
     {
       label: "Tuesday",
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
     {
       label: "Wednesday",
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
     {
       label: "Thursday",
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
     {
       label: "Friday",
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
     {
       label: "Saturday",
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
     {
       label: "Sunday",
       isClosed: false,
       isOpen: false,
       openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
-      closingTime: new Date("1970-01-02T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
     },
   ]);
 
@@ -299,7 +299,7 @@ const MerchantRegistration = () => {
         cost: 3,
         operatingTimes: operatingTimes.map((operatingTimeMapItem) => ({
           openingTime:
-            operatingTimeMapItem.isClosed || operatingTimeMapItem.openingTime
+            operatingTimeMapItem.isClosed || operatingTimeMapItem.isOpen
               ? new Date("1970-01-01T00:00:00.000-08:00")
               : operatingTimeMapItem.openingTime,
           closingTime: operatingTimeMapItem.isClosed

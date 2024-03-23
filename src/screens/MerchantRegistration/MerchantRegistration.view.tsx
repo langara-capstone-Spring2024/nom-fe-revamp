@@ -389,6 +389,16 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                                                     oldValueIndex !==
                                                     operatingTimeMapItemIndex
                                                       ? oldValue
+                                                      : operatingTimeMapItem.closingTime.getTime() <
+                                                        operatingTimeMapItem.openingTime.getTime()
+                                                      ? {
+                                                          ...operatingTimeMapItem,
+                                                          openingTime: date,
+                                                          closingTime: new Date(
+                                                            date.getTime() +
+                                                              900000
+                                                          ),
+                                                        }
                                                       : {
                                                           ...operatingTimeMapItem,
                                                           openingTime: date,
@@ -418,6 +428,16 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                                                     oldValueIndex !==
                                                     operatingTimeMapItemIndex
                                                       ? oldValue
+                                                      : operatingTimeMapItem.closingTime.getTime() <
+                                                        operatingTimeMapItem.openingTime.getTime()
+                                                      ? {
+                                                          ...operatingTimeMapItem,
+                                                          openingTime: new Date(
+                                                            date.getTime() -
+                                                              900000
+                                                          ),
+                                                          closingTime: date,
+                                                        }
                                                       : {
                                                           ...operatingTimeMapItem,
                                                           closingTime: date,

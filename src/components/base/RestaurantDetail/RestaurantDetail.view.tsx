@@ -60,14 +60,20 @@ const RestaurantDetail = (props: RestaurantDetailProps) => {
                     ? openingTime.getMinutes()
                     : "0" + openingTime.getMinutes()}{" "}
                   {12 <= openingTime.getHours() ? "PM" : "AM"} -{" "}
-                  {12 < closingTime.getHours()
-                    ? closingTime.getHours() - 12
-                    : closingTime.getHours()}
-                  :
-                  {10 < closingTime.getMinutes()
-                    ? closingTime.getMinutes()
-                    : "0" + closingTime.getMinutes()}{" "}
-                  {12 <= closingTime.getHours() ? "PM" : "AM"}
+                  {closingTime.getTime() === 115200000 ? (
+                    "11:59 PM"
+                  ) : (
+                    <>
+                      {12 < closingTime.getHours()
+                        ? closingTime.getHours() - 12
+                        : closingTime.getHours()}
+                      :
+                      {10 < closingTime.getMinutes()
+                        ? closingTime.getMinutes()
+                        : "0" + closingTime.getMinutes()}{" "}
+                      {12 <= closingTime.getHours() ? "PM" : "AM"}
+                    </>
+                  )}
                 </>
               )}
             </Typography>
