@@ -58,7 +58,8 @@ const AutoComplete = (props: AutoCompleteProps) => {
         styles={{
           textInputContainer: {
             paddingVertical: sizing === "sm" ? 8 : sizing === "lg" ? 18 : 12,
-            paddingHorizontal: 16,
+            paddingLeft: 16,
+            paddingRight: 10,
             borderRadius: 8,
             borderWidth: 1,
             borderColor: isFocused ? t.Border["info-strong"] : t.Border.neutral,
@@ -68,6 +69,7 @@ const AutoComplete = (props: AutoCompleteProps) => {
           textInput: {
             fontSize: 16,
             flex: 1,
+            paddingRight: 6,
           },
           row: {
             padding: 16,

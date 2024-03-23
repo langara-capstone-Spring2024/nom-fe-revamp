@@ -4,7 +4,7 @@ import { MerchantRegistrationGeneratedProps } from "./MerchantRegistration.props
 import React, { useMemo } from "react";
 import * as Progress from "react-native-progress";
 import { theme as t } from "../../utils/Theme";
-import { useTheme } from "react-native-paper";
+import { Switch, useTheme } from "react-native-paper";
 import Button from "../../components/base/Button";
 import TextInputField from "../../components/base/TextInputField";
 import { Formik } from "formik";
@@ -13,6 +13,8 @@ import Dropdown from "../../components/base/Dropdown";
 import AutoComplete from "../../components/base/AutoComplete";
 import Typography from "../../components/base/Typography";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Accordion from "../../components/base/Accordion";
+import DateTimeSelector from "../../components/base/DateTimeSelector";
 
 const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
   const {
@@ -25,6 +27,8 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
     additionalValidationSchema,
     businessValidationSchema,
     images,
+    operatingTimes,
+    setOperatingTimes,
     setImages,
     handleSubmitBasic,
     handleSubmitAdditional,
@@ -145,7 +149,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                     </View>
                   </KeyboardAwareScrollView>
                 </View>
-                <View style={{ paddingBottom: 16 }}>
+                <View style={styles.buttonContainer}>
                   <Button
                     text="Create Account"
                     buttonSize="lg"
@@ -225,6 +229,217 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                     </View>
                     <View style={{ flexDirection: "row", gap: 16 }}>
                       <View style={{ flex: 1 }}>
+                        <Typography variant="label2" otherStyle={styles.label}>
+                          Operating Times
+                        </Typography>
+                        <View style={{ gap: 8 }}>
+                          {operatingTimes.map(
+                            (
+                              operatingTimeMapItem,
+                              operatingTimeMapItemIndex
+                            ) => (
+                              <Accordion
+                                title={operatingTimeMapItem.label}
+                                hasRightItem
+                                rightItem={
+                                  operatingTimeMapItem.isClosed ? (
+                                    <Typography>Closed</Typography>
+                                  ) : operatingTimeMapItem.isOpen ? (
+                                    <Typography>0:00 AM - 11:59 PM</Typography>
+                                  ) : (
+                                    <Typography>
+                                      {12 <
+                                      operatingTimeMapItem.openingTime.getHours()
+                                        ? operatingTimeMapItem.openingTime.getHours() -
+                                          12
+                                        : operatingTimeMapItem.openingTime.getHours()}
+                                      :
+                                      {10 <
+                                      operatingTimeMapItem.openingTime.getMinutes()
+                                        ? operatingTimeMapItem.openingTime.getMinutes()
+                                        : "0" +
+                                          operatingTimeMapItem.openingTime.getMinutes()}{" "}
+                                      {12 <=
+                                      operatingTimeMapItem.openingTime.getHours()
+                                        ? "PM"
+                                        : "AM"}{" "}
+                                      -{" "}
+                                      {operatingTimeMapItem.closingTime.getTime() ===
+                                      115200000 ? (
+                                        "11:59 PM"
+                                      ) : (
+                                        <>
+                                          {12 <
+                                          operatingTimeMapItem.closingTime.getHours()
+                                            ? operatingTimeMapItem.closingTime.getHours() -
+                                              12
+                                            : operatingTimeMapItem.closingTime.getHours()}
+                                          :
+                                          {10 <
+                                          operatingTimeMapItem.closingTime.getMinutes()
+                                            ? operatingTimeMapItem.closingTime.getMinutes()
+                                            : "0" +
+                                              operatingTimeMapItem.closingTime.getMinutes()}{" "}
+                                          {12 <=
+                                          operatingTimeMapItem.closingTime.getHours()
+                                            ? "PM"
+                                            : "AM"}
+                                        </>
+                                      )}
+                                    </Typography>
+                                  )
+                                }
+                                wrapperStyle={{
+                                  borderColor: "white",
+                                  borderRadius: 8,
+                                }}
+                                headerStyle={{
+                                  height: "auto",
+                                  paddingLeft: undefined,
+                                  paddingRight: undefined,
+                                  paddingHorizontal: 16,
+                                  paddingVertical: 12,
+                                }}
+                                rightComponentStyle={{
+                                  gap: 8,
+                                }}
+                                iconStyle={{ margin: -4 }}
+                                key={operatingTimeMapItemIndex}
+                              >
+                                <View
+                                  style={{
+                                    paddingVertical: 16,
+                                    gap: 16,
+                                  }}
+                                >
+                                  <View
+                                    style={{
+                                      flexDirection: "row",
+                                      justifyContent: "space-between",
+                                    }}
+                                  >
+                                    <Typography>Closed</Typography>
+                                    <Switch
+                                      value={operatingTimeMapItem.isClosed}
+                                      onValueChange={(value: boolean) => {
+                                        setOperatingTimes((oldValues) =>
+                                          oldValues.map(
+                                            (oldValue, oldValueIndex) =>
+                                              oldValueIndex !==
+                                              operatingTimeMapItemIndex
+                                                ? oldValue
+                                                : {
+                                                    ...operatingTimeMapItem,
+                                                    isClosed: value,
+                                                    isOpen: value
+                                                      ? false
+                                                      : operatingTimeMapItem.isOpen,
+                                                  }
+                                          )
+                                        );
+                                      }}
+                                    />
+                                  </View>
+                                  <View
+                                    style={{
+                                      flexDirection: "row",
+                                      justifyContent: "space-between",
+                                    }}
+                                  >
+                                    <Typography>24 Hours Open</Typography>
+                                    <Switch
+                                      value={operatingTimeMapItem.isOpen}
+                                      onValueChange={(value: boolean) => {
+                                        setOperatingTimes((oldValues) =>
+                                          oldValues.map(
+                                            (oldValue, oldValueIndex) =>
+                                              oldValueIndex !==
+                                              operatingTimeMapItemIndex
+                                                ? oldValue
+                                                : {
+                                                    ...operatingTimeMapItem,
+                                                    isClosed: value
+                                                      ? false
+                                                      : operatingTimeMapItem.isClosed,
+                                                    isOpen: value,
+                                                  }
+                                          )
+                                        );
+                                      }}
+                                    />
+                                  </View>
+                                  {!operatingTimeMapItem.isClosed &&
+                                    !operatingTimeMapItem.isOpen && (
+                                      <>
+                                        <View
+                                          style={{
+                                            flexDirection: "row",
+                                            justifyContent: "space-between",
+                                          }}
+                                        >
+                                          <Typography>Opening</Typography>
+                                          <DateTimeSelector
+                                            date={
+                                              operatingTimeMapItem.openingTime
+                                            }
+                                            setDate={(date: Date) => {
+                                              setOperatingTimes((oldValues) =>
+                                                oldValues.map(
+                                                  (oldValue, oldValueIndex) =>
+                                                    oldValueIndex !==
+                                                    operatingTimeMapItemIndex
+                                                      ? oldValue
+                                                      : {
+                                                          ...operatingTimeMapItem,
+                                                          openingTime: date,
+                                                        }
+                                                )
+                                              );
+                                            }}
+                                            mode="time"
+                                            onChange={() => null}
+                                          />
+                                        </View>
+                                        <View
+                                          style={{
+                                            flexDirection: "row",
+                                            justifyContent: "space-between",
+                                          }}
+                                        >
+                                          <Typography>Closing</Typography>
+                                          <DateTimeSelector
+                                            date={
+                                              operatingTimeMapItem.closingTime
+                                            }
+                                            setDate={(date: Date) => {
+                                              setOperatingTimes((oldValues) =>
+                                                oldValues.map(
+                                                  (oldValue, oldValueIndex) =>
+                                                    oldValueIndex !==
+                                                    operatingTimeMapItemIndex
+                                                      ? oldValue
+                                                      : {
+                                                          ...operatingTimeMapItem,
+                                                          closingTime: date,
+                                                        }
+                                                )
+                                              );
+                                            }}
+                                            mode="time"
+                                            onChange={() => null}
+                                          />
+                                        </View>
+                                      </>
+                                    )}
+                                </View>
+                              </Accordion>
+                            )
+                          )}
+                        </View>
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: "row", gap: 16 }}>
+                      <View style={{ flex: 1 }}>
                         <AutoComplete
                           label="Location"
                           value={{
@@ -251,7 +466,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                     </View>
                   </KeyboardAwareScrollView>
                 </View>
-                <View style={{ paddingBottom: 16 }}>
+                <View style={styles.buttonContainer}>
                   <Button
                     text="Next"
                     buttonSize="lg"
@@ -298,7 +513,7 @@ const MerchantRegistration = (props: MerchantRegistrationGeneratedProps) => {
                       </View>
                     </KeyboardAwareScrollView>
                   </View>
-                  <View style={{ paddingBottom: 16 }}>
+                  <View style={styles.buttonContainer}>
                     <Button
                       text="Next"
                       buttonSize="lg"

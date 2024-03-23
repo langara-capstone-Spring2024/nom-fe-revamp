@@ -13,7 +13,7 @@ const RestaurantDetail = (props: RestaurantDetailProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const days: string[] = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  const days: string[] = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
 
   return (
     <View style={styles.container}>
@@ -48,22 +48,28 @@ const RestaurantDetail = (props: RestaurantDetailProps) => {
           return (
             <Typography color="subtle" key={operatingTimeItemIndex}>
               {days[operatingTimeItemIndex]} :{" "}
-              {12 < openingTime.getHours()
-                ? openingTime.getHours() - 12
-                : openingTime.getHours()}
-              :
-              {10 < openingTime.getMinutes()
-                ? openingTime.getMinutes()
-                : "0" + openingTime.getMinutes()}{" "}
-              {12 <= openingTime.getHours() ? "PM" : "AM"} -{" "}
-              {12 < closingTime.getHours()
-                ? closingTime.getHours() - 12
-                : closingTime.getHours()}
-              :
-              {10 < closingTime.getMinutes()
-                ? closingTime.getMinutes()
-                : "0" + closingTime.getMinutes()}{" "}
-              {12 <= closingTime.getHours() ? "PM" : "AM"}
+              {openingTime.getTime() === closingTime.getTime() ? (
+                "Closed"
+              ) : (
+                <>
+                  {12 < openingTime.getHours()
+                    ? openingTime.getHours() - 12
+                    : openingTime.getHours()}
+                  :
+                  {10 < openingTime.getMinutes()
+                    ? openingTime.getMinutes()
+                    : "0" + openingTime.getMinutes()}{" "}
+                  {12 <= openingTime.getHours() ? "PM" : "AM"} -{" "}
+                  {12 < closingTime.getHours()
+                    ? closingTime.getHours() - 12
+                    : closingTime.getHours()}
+                  :
+                  {10 < closingTime.getMinutes()
+                    ? closingTime.getMinutes()
+                    : "0" + closingTime.getMinutes()}{" "}
+                  {12 <= closingTime.getHours() ? "PM" : "AM"}
+                </>
+              )}
             </Typography>
           );
         })}

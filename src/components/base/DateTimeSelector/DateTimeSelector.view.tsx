@@ -23,7 +23,7 @@ const DateTimeSelector = (props: DateTimeSelectorProps) => {
   };
 
   useEffect(() => {
-    if (setDate) {
+    if (setDate && !date) {
       setDate(new Date());
     }
   }, []);
@@ -35,6 +35,7 @@ const DateTimeSelector = (props: DateTimeSelectorProps) => {
         mode={mode}
         is24Hour={is24Hour}
         display={display}
+        minuteInterval={15}
         onChange={onChange ? handleDateTimeChange : undefined}
       />
     </View>

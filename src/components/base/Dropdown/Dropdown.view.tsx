@@ -4,6 +4,7 @@ import styles from "./Dropdown.style";
 import { DropdownProps } from "./Dropdown.props";
 import { View } from "react-native";
 import Typography from "../Typography";
+import { Entypo } from "@expo/vector-icons";
 import { theme as t } from "../../../utils/Theme";
 
 const Dropdown = (props: DropdownProps) => {
@@ -56,6 +57,15 @@ const Dropdown = (props: DropdownProps) => {
         onChange={(item) => {
           setValue(item.value);
         }}
+        selectedTextStyle={{ marginRight: 8 }}
+        renderRightIcon={() => (
+          <Entypo
+            name="chevron-small-down"
+            size={24}
+            color={t.Content.inactive}
+            style={{ margin: -4 }}
+          />
+        )}
         placeholderStyle={{ color: t.Content.subtle }}
       />
       {error && (
