@@ -36,24 +36,24 @@ const MerchantRegistration = () => {
 
   const [page, setPage] = useState<number>(1);
   const [basicInitialValues, setBasicInitialValues] = useState<BasicForm>({
-    firstName: "test1",
-    lastName: "test1",
-    email: "test1@test.com",
-    password: "123123",
-    confirmPassword: "123123",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [additionalInitialValues, setAdditionalInitialValues] =
     useState<AdditionalForm>({
       imageNumber: 0,
-      restaurantName: "test1",
-      category: "American",
-      address: "Vancouver",
+      restaurantName: "",
+      category: "",
+      address: "",
       latitude: 0,
       longitude: 0,
     });
   const [businessInitialValues, setBusinessInitialValues] =
     useState<BusinessForm>({
-      license: "license",
+      license: "",
     });
   const [images, setImages] = useState<Image[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
