@@ -1,0 +1,17 @@
+import { View, Text } from "react-native";
+import createStyles from './{{ pascalCase name}}.style';
+import { {{ pascalCase name}}GeneratedProps } from './{{ pascalCase name}}.props';
+import React, { useMemo } from "react";
+import { useTheme } from "react-native-paper";
+
+const {{ pascalCase name}} = (props: {{ pascalCase name}}GeneratedProps) => {
+  const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
+  return (
+    <View> 
+      <Text>{{ pascalCase name}}</Text>
+    </View>
+  );
+};
+
+export default {{ pascalCase name}};

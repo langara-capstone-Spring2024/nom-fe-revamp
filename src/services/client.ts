@@ -7,19 +7,40 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
+interface AppState {
+  state: {
+    count: number;
+    isLoggedIn: boolean;
+    userId: number;
+    accessToken: string;
+    refreshToken: string;
+  };
+  version: number;
+}
+
 apiClient.interceptors.request.use(
   async (config) => {
-    const store = await AsyncStorage.getItem("app-storage");
-    const { state } = JSON.parse(store as string);
-    if (state.accessToken) {
-      config.headers.Authorization = `Bearer ${state.accessToken}`;
-      config.headers["Content-Type"] = "application/x-www-form-urlencoded";
+    try {
+      const storedData: string | null = await AsyncStorage.getItem("storage");
+      const parsedData: AppState | null = storedData
+        ? (JSON.parse(storedData) as AppState)
+        : null;
+      const accessToken = parsedData?.state.accessToken;
+
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+      }
+
+      config.headers["Content-Type"] = "application/json";
       config.headers["Accept"] = "application/json";
+    } catch (error) {
+      console.error("Error retrieving access token from AsyncStorage:", error);
     }
 
-    return config;
+    return Promise.resolve(config); // Resolve the config wrapped in a Promise
   },
   async (error) => {
+    // Handle request interceptor errors
     return Promise.reject(error);
   }
 );

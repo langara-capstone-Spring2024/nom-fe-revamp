@@ -1,22 +1,20 @@
 {
   "extends": "expo/tsconfig.base",
   "baseUrl": "./",
-  "paths": {
-    "src/*": ["src/*"],
-    "*": ["types/*"]
-  },
   "compilerOptions": {
     "allowJs": true,
+    "checkJs": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react-native",
-    "lib": ["es6"],
+    "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "types": ["react", "react-native", "node"]
   },
-  // "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "types/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

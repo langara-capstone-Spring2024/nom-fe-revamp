@@ -1,0 +1,1 @@
+export { default } from './ConsumerAccount.container';
