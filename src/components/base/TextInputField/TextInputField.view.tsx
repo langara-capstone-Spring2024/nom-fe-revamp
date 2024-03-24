@@ -56,11 +56,7 @@ const TextInputField = (props: TextInputFieldProps) => {
             : undefined,
         ]}
       >
-        {leftIcon && (
-          <Pressable onPress={onLeftPress} style={styles.leftIconContainer}>
-            {leftIcon}
-          </Pressable>
-        )}
+        {leftIcon && <Pressable onPress={onLeftPress}>{leftIcon}</Pressable>}
         <TextInput
           placeholder={placeholder}
           value={value}
@@ -73,22 +69,17 @@ const TextInputField = (props: TextInputFieldProps) => {
           {...rest}
         />
         {!noClear && !secured && isFocused && (
-          <Pressable
-            onPress={() => setValue("")}
-            style={styles.rightIconContainer}
-          >
+          <Pressable onPress={() => setValue("")}>
             <AntDesign
               name="closecircle"
               size={16}
               color={t.Content["content-light"]}
+              style={{ alignItems: "center" }}
             />
           </Pressable>
         )}
         {secured && (
-          <Pressable
-            onPress={() => setIsVisible((oldValue) => !oldValue)}
-            style={styles.rightIconContainer}
-          >
+          <Pressable onPress={() => setIsVisible((oldValue) => !oldValue)}>
             {isVisible ? (
               <Ionicons name="eye" size={16} color={t.Content.inactive} />
             ) : (
@@ -96,11 +87,7 @@ const TextInputField = (props: TextInputFieldProps) => {
             )}
           </Pressable>
         )}
-        {rightIcon && (
-          <Pressable onPress={onRightPress} style={styles.rightIconContainer}>
-            {rightIcon}
-          </Pressable>
-        )}
+        {rightIcon && <Pressable onPress={onRightPress}>{rightIcon}</Pressable>}
       </View>
       {error && (
         <Typography variant="bodyXs" color="error-medium">

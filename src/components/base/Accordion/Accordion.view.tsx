@@ -18,6 +18,10 @@ const Accordion = (props: AccordionProps) => {
     hasRightItem,
     rightItem,
     expanded: initialState,
+    wrapperStyle,
+    headerStyle,
+    rightComponentStyle,
+    iconStyle,
   } = props;
 
   const [expanded, setExpanded] = React.useState(initialState || false);
@@ -32,8 +36,8 @@ const Accordion = (props: AccordionProps) => {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.headerContainer}>
+    <View style={[styles.wrapper, wrapperStyle]}>
+      <View style={[styles.headerContainer, headerStyle]}>
         <TouchableOpacity
           onPress={handlePress}
           style={styles.headerContent}
@@ -43,19 +47,21 @@ const Accordion = (props: AccordionProps) => {
             {hasLeftItem && leftItem}
             <Typography>{title}</Typography>
           </View>
-          <View style={styles.rightComponent}>
+          <View style={[styles.rightComponent, rightComponentStyle]}>
             {hasRightItem && rightItem}
             {expanded ? (
               <Entypo
                 name="chevron-small-up"
                 size={24}
                 color={t.Content.inactive}
+                style={iconStyle}
               />
             ) : (
               <Entypo
                 name="chevron-small-down"
                 size={24}
                 color={t.Content.inactive}
+                style={iconStyle}
               />
             )}
           </View>

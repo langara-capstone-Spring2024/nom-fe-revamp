@@ -5,7 +5,7 @@ export interface DateTimeSelectorProps {
   is24Hour?: true | false;
   display?: Display;
   date: Date;
-  setDate?: React.Dispatch<React.SetStateAction<Date>>;
+  setDate?: (date: Date) => void;
   onChange?: (
     event: DateTimePickerEvent,
     selectedDate?: Date | undefined

@@ -1,6 +1,7 @@
 import { FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { Image } from "../../types";
+import { Dispatch, SetStateAction } from "react";
 
 export type BasicForm = {
   firstName: string;
@@ -43,6 +44,24 @@ export interface MerchantRegistrationGeneratedProps {
   additionalValidationSchema: Yup.ObjectSchema<AdditionalForm>;
   businessValidationSchema: Yup.ObjectSchema<BusinessForm>;
   images: Image[];
+  operatingTimes: {
+    label: string;
+    isClosed: boolean;
+    isOpen: boolean;
+    openingTime: Date;
+    closingTime: Date;
+  }[];
+  setOperatingTimes: Dispatch<
+    SetStateAction<
+      {
+        label: string;
+        isClosed: boolean;
+        isOpen: boolean;
+        openingTime: Date;
+        closingTime: Date;
+      }[]
+    >
+  >;
   setImages: (images: Image[]) => void;
   handleSubmitBasic: (
     form: BasicForm,

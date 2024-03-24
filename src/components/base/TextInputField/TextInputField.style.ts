@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
   label: {
     marginBottom: 8,
   },
-  leftIconContainer: {
-    paddingRight: 8,
-  },
   textInputFieldContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -17,13 +14,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: t.Border.neutral,
+    gap: 8,
   },
   textInputField: {
     flex: 1,
     flexGrow: 1,
     fontSize: 16,
   },
-  rightIconContainer: { paddingLeft: 8 },
   error: {
     marginTop: 8,
     paddingHorizontal: 8,
