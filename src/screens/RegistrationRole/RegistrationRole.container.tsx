@@ -16,10 +16,15 @@ const RegistrationRole = () => {
     }
   };
 
+  const handleCancel = () => {
+    NavigationService.goBack();
+  };
+
   const generatedProps = {
     selectedRole,
     setSelectedRole,
     handleContinue,
+    handleCancel,
   };
   return <RegistrationRoleView {...generatedProps} />;
 };
