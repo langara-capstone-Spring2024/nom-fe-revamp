@@ -8,6 +8,7 @@ import Typography from "../../components/base/Typography";
 import Button from "../../components/base/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import LoadingAnimation from "../../components/base/LoadingAnimation";
 
 const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
   const {
@@ -53,14 +54,14 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
 
   return (
     <>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 16,
-          alignItems: "center",
-          paddingBottom: 32,
-        }}
-      >
-        {consumerDiscount && (
+      {consumerDiscount ? (
+        <ScrollView
+          contentContainerStyle={{
+            padding: 16,
+            alignItems: "center",
+            paddingBottom: 32,
+          }}
+        >
           <View style={{ gap: 16 }}>
             <Card>
               <View
@@ -110,7 +111,7 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                         <Typography>{consumerDiscount.status}</Typography>
                       </View>
                     </View>
-                    <View style={[styles.itemContainer, { marginBottom: -16 }]}>
+                    <View style={styles.itemContainer}>
                       <Typography color="subtle">Date</Typography>
                       <Typography>
                         {
@@ -134,34 +135,6 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                         {", "}
                         {new Date(
                           consumerDiscount.discount.validFromDate
-                        ).getFullYear()}
-                      </Typography>
-                    </View>
-                    <View style={styles.itemContainer}>
-                      <Typography color="subtle"> </Typography>
-                      <Typography>
-                        {" ~ "}
-                        {
-                          days[
-                            new Date(
-                              consumerDiscount.discount.validToDate
-                            ).getDay()
-                          ]
-                        }
-                        {", "}
-                        {
-                          months[
-                            new Date(
-                              consumerDiscount.discount.validToDate
-                            ).getMonth()
-                          ]
-                        }{" "}
-                        {new Date(
-                          consumerDiscount.discount.validToDate
-                        ).getDate()}
-                        {", "}
-                        {new Date(
-                          consumerDiscount.discount.validToDate
                         ).getFullYear()}
                       </Typography>
                     </View>
@@ -266,8 +239,10 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
               )}
             </View>
           </View>
-        )}
-      </ScrollView>
+        </ScrollView>
+      ) : (
+        <LoadingAnimation />
+      )}
       <Modal presentationStyle="pageSheet" visible={isVisible}>
         <View style={styles.modal}>
           <Pressable onPress={handleClose} style={{ alignSelf: "flex-end" }}>
