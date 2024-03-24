@@ -148,7 +148,14 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               variant="chip"
               buttonSize="chipSize"
               iconPosition="left"
-              icon={<View style={styles.primarySquare} />}
+              icon={
+                <View
+                  style={[
+                    styles.primarySquare,
+                    { backgroundColor: selectedPrimaryColor },
+                  ]}
+                />
+              }
             />
             <Button
               onPress={handlePresentAccentPress}
@@ -156,7 +163,14 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
               variant="chip"
               buttonSize="chipSize"
               iconPosition="left"
-              icon={<View style={styles.accentSquare} />}
+              icon={
+                <View
+                  style={[
+                    styles.accentSquare,
+                    { backgroundColor: selectedAccentColor },
+                  ]}
+                />
+              }
             />
           </View>
           <ScrollView style={{ marginLeft: -36 }}>
@@ -212,7 +226,7 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
                   primary={selectedPrimaryColor}
                   secondary={selectedAccentColor}
                   style={
-                    selectedTemplate === 2
+                    selectedTemplate === 3
                       ? { borderWidth: 2, borderColor: "#E51E35" }
                       : {}
                   }
@@ -468,9 +482,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
     }
   };
 
-  // console.log(localImage);
-  // console.log(page);
-
   return (
     <View style={container}>
       <Progress.Bar
@@ -666,11 +677,11 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           </BottomSheetModal>
         </BottomSheetModalProvider>
       )}
-
       <Portal>
         <Modal
-          style={{ backgroundColor: "#0000004D", flex: 1 }}
+          style={styles.modalBg}
           dismissable={false}
+          // visible={true}
           visible={openSuccess}
           onDismiss={() => setOpenSuccess(false)}
           contentContainerStyle={styles.successModalContainer}>
@@ -696,7 +707,6 @@ const AdMaker = (props: AdMakerGeneratedProps) => {
           />
         </Modal>
       </Portal>
-
       {(aiIsLoading || isConfirmLoading) && (
         <View style={styles.loading}>
           <LoadingAnimation />
