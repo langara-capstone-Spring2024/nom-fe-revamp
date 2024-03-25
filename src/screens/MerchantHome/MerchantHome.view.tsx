@@ -68,6 +68,7 @@ const MerchantHome = (props: MerchantHomeGeneratedProps) => {
             <TouchableOpacity
               style={styles.menuNavigation}
               onPress={() => NavigationService.navigate("Orders")}
+              disabled
             >
               <View style={styles.menuNavImage}>
                 <Image source={OrdersImg} />
@@ -104,13 +105,14 @@ const MerchantHome = (props: MerchantHomeGeneratedProps) => {
             <TouchableOpacity
               style={styles.menuNavigation}
               onPress={() => NavigationService.navigate("RestaurantProfile")}
+              disabled
             >
               <View style={styles.menuNavImage}>
                 <Image source={Profile} />
               </View>
               <Typography variant="label2">Profile</Typography>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuNavigation}>
+            <TouchableOpacity style={styles.menuNavigation} disabled>
               <View style={styles.menuNavImage}>
                 <Image source={Insight} />
               </View>
