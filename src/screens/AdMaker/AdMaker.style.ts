@@ -169,13 +169,13 @@ const createStyles = (theme: Theme) =>
     primarySquare: {
       height: 24,
       width: 24,
-      backgroundColor: t.Content["brand-medium"],
+      // backgroundColor: t.Content["brand-medium"],
       borderRadius: 8,
     },
     accentSquare: {
       height: 24,
       width: 24,
-      backgroundColor: t.Content["accent-medium"],
+      // backgroundColor: t.Content["accent-medium"],
       borderRadius: 8,
     },
     editAdTextImageContainer: {
@@ -300,7 +300,13 @@ const createStyles = (theme: Theme) =>
       fontFamily: "PublicSansBold",
       marginTop: 26,
     },
-
+    modalBg: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: -1,
+    },
     loading: {
       position: "absolute",
       borderWidth: 1,

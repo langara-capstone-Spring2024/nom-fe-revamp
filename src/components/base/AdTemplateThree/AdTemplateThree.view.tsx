@@ -21,7 +21,7 @@ const AdTemplateOne = (props: AdTemplateThreeProps) => {
     width,
     height,
     style,
-    onSelectTemplate
+    onSelectTemplate,
   } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -29,7 +29,7 @@ const AdTemplateOne = (props: AdTemplateThreeProps) => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() => onSelectTemplate(2)}
+      onPress={() => onSelectTemplate(3)}
       style={[styles.container, { ...style }]}>
       {image && (
         <Image

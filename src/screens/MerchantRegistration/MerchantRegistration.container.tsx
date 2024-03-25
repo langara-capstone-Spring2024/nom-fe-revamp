@@ -58,6 +58,66 @@ const MerchantRegistration = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
+  const [operatingTimes, setOperatingTimes] = useState<
+    {
+      label: string;
+      isClosed: boolean;
+      isOpen: boolean;
+      openingTime: Date;
+      closingTime: Date;
+    }[]
+  >([
+    {
+      label: "Monday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+    {
+      label: "Tuesday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+    {
+      label: "Wednesday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+    {
+      label: "Thursday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+    {
+      label: "Friday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+    {
+      label: "Saturday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+    {
+      label: "Sunday",
+      isClosed: false,
+      isOpen: false,
+      openingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+      closingTime: new Date("1970-01-01T00:00:00.000-08:00"),
+    },
+  ]);
+
   const {
     data: user,
     mutate: mutateRegister,
@@ -237,36 +297,17 @@ const MerchantRegistration = () => {
         address: additionalInitialValues.address,
         cuisineType: additionalInitialValues.category || "Others",
         cost: 3,
-        operatingTimes: [
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-          {
-            openingTime: new Date("1970-01-01T08:00:00.000-08:00"),
-            closingTime: new Date("1970-01-01T20:00:00.000-08:00"),
-          },
-        ],
+        operatingTimes: operatingTimes.map((operatingTimeMapItem) => ({
+          openingTime:
+            operatingTimeMapItem.isClosed || operatingTimeMapItem.isOpen
+              ? new Date("1970-01-01T00:00:00.000-08:00")
+              : operatingTimeMapItem.openingTime,
+          closingTime: operatingTimeMapItem.isClosed
+            ? new Date("1970-01-01T00:00:00.000-08:00")
+            : operatingTimeMapItem.isOpen
+            ? new Date("1970-01-02T00:00:00.000-08:00")
+            : operatingTimeMapItem.closingTime,
+        })),
         isVerified: true,
         userId: user._id,
       });
@@ -289,6 +330,8 @@ const MerchantRegistration = () => {
     additionalValidationSchema,
     businessValidationSchema,
     images,
+    operatingTimes,
+    setOperatingTimes,
     setImages,
     handleSubmitBasic,
     handleSubmitAdditional,

@@ -8,7 +8,7 @@ import Button from "../../components/base/Button";
 import Typography from "../../components/base/Typography";
 
 const RegistrationRole = (props: RegistrationRoleGeneratedProps) => {
-  const { selectedRole, setSelectedRole, handleContinue } = props;
+  const { selectedRole, setSelectedRole, handleContinue, handleCancel } = props;
 
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -173,6 +173,13 @@ const RegistrationRole = (props: RegistrationRoleGeneratedProps) => {
             buttonSize="lg"
             onPress={handleContinue}
             isDisabled={!selectedRole && true}
+            takeFullWidth
+          />
+          <Button
+            text="Cancel"
+            buttonSize="lg"
+            variant="ghost"
+            onPress={handleCancel}
             takeFullWidth
           />
         </View>
