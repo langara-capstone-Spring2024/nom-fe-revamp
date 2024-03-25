@@ -210,7 +210,13 @@ const PromoDetails = () => {
       hasRightIcon: false,
       hasRightComponent: true,
       hiddenComponent: (
-        <DatePicker onSelectDates={handleSelectDates} singleDate />
+        <DatePicker
+          onSelectDates={handleSelectDates}
+          singleDate
+          futureScrollRange={0}
+          pastScrollRange={0}
+          calendarWidth={320}
+        />
       ),
       handleRightComponentClick: handleHideShowCalendar,
       hiddenComponentIsVisible: calendarIsVisible,
