@@ -8,7 +8,6 @@ const createStyles = (theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      gap: 16,
     },
     menuImage: {
       width: 60,
@@ -33,6 +32,7 @@ const createStyles = (theme: Theme) =>
       justifyContent: "space-between",
       borderBottomColor: t.Border.default,
       paddingVertical: 24,
+      marginLeft: 16,
     },
     menuDetailsContainer: {
       display: "flex",

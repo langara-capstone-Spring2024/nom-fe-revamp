@@ -6,10 +6,12 @@ const createStyles = (theme: Theme) =>
   StyleSheet.create({
     itemContainer: {
       flex: 1,
+      backgroundColor: t.Surface.overlay,
     },
     itemList: {
       paddingHorizontal: 16,
-      paddingVertical: 32,
+      paddingTop: 8,
+      paddingBottom: 32,
     },
     itemButton: {
       position: "absolute",
@@ -20,6 +22,8 @@ const createStyles = (theme: Theme) =>
       paddingHorizontal: 16,
       paddingTop: 16,
       paddingBottom: 32,
+      borderTopWidth: 1,
+      borderTopColor: t.Border.default,
     },
   });
 
