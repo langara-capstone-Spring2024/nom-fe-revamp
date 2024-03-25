@@ -94,16 +94,19 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
         </View>
       </ScrollView>
       {!selectedItem && (
-        <View style={styles.promoFooter}>
-          <Button
-            text="Create Promo"
-            variant="primary"
-            buttonSize="md"
-            takeFullWidth
-            onPress={handleSubmitDiscount}
-            isDisabled={selectedMenuItemIds.length < 1 && true}
-          />
-        </View>
+        <>
+          <View style={styles.spacer}></View>
+          <View style={styles.promoFooter}>
+            <Button
+              text="Create Promo"
+              variant="primary"
+              buttonSize="md"
+              takeFullWidth
+              onPress={handleSubmitDiscount}
+              isDisabled={selectedMenuItemIds.length < 1 && true}
+            />
+          </View>
+        </>
       )}
     </View>
   );
