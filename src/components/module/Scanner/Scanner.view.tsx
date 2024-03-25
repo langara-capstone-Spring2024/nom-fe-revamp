@@ -29,6 +29,7 @@ const Scanner = (props: ScannerProps) => {
   const navigation = useNavigation();
   const viewRef = useRef<View | null>(null);
   const ref = useRef<Camera | null>(null);
+  const [focus, setFocus] = useState<boolean>(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [isFlashing, setIsFlashing] = useState<boolean>(false);
   const [result, setResult] = useState<string>("");
@@ -92,11 +93,30 @@ const Scanner = (props: ScannerProps) => {
     setIsFlashing(false);
   };
 
+  const handleLayout = () => {
+    if (viewRef.current) {
+      viewRef.current.measure((_, y, __, h) => {
+        setX1((y + bias) / height);
+        setX2((y - bias / 2 + h) / height);
+      });
+    }
+  };
+
   useEffect(() => {
     navigation.setOptions({ headerShown: false, useHeaderHeight: 1 });
 
     return () => {
       navigation.setOptions({ headerShown: undefined });
+    };
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFocus((oldValue) => !oldValue);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
     };
   }, []);
 
@@ -121,15 +141,6 @@ const Scanner = (props: ScannerProps) => {
     }
   }, [status]);
 
-  const handleLayout = () => {
-    if (viewRef.current) {
-      viewRef.current.measure((_, y, __, h) => {
-        setX1((y + bias) / height);
-        setX2((y - bias / 2 + h) / height);
-      });
-    }
-  };
-
   return (
     <View style={styles.container}>
       {permission ? (
@@ -138,6 +149,7 @@ const Scanner = (props: ScannerProps) => {
             <StatusBar hidden={true} />
             <Camera
               ref={ref}
+              autoFocus={focus}
               flashMode={isFlashing ? FlashMode.torch : FlashMode.off}
               barCodeScannerSettings={{
                 barCodeTypes: ["org.iso.QRCode"],
