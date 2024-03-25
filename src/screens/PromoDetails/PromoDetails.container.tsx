@@ -260,13 +260,19 @@ const PromoDetails = () => {
             gap: 3,
           }}
         >
-          <TouchableWithoutFeedback onPress={() => handleHideShowTime("start")}>
+          <TouchableWithoutFeedback
+            onPress={() => handleHideShowTime("start")}
+            disabled={selectedItem}
+          >
             <View>
               <StartTimeRightComponent />
             </View>
           </TouchableWithoutFeedback>
           <Text>-</Text>
-          <TouchableWithoutFeedback onPress={() => handleHideShowTime("end")}>
+          <TouchableWithoutFeedback
+            onPress={() => handleHideShowTime("end")}
+            disabled={selectedItem}
+          >
             <View>
               <EndTimeRightComponent />
             </View>

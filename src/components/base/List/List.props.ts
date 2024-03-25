@@ -19,4 +19,5 @@ export interface ListProps {
   hiddenComponentIsVisible?: string | boolean | null;
   style?: ViewStyle;
   titleColor?: string;
+  disabled?: boolean;
 }

@@ -23,6 +23,7 @@ const List = (props: ListProps) => {
     hiddenComponentIsVisible,
     style,
     titleColor,
+    disabled,
   } = props;
 
   const theme = useTheme();
@@ -48,7 +49,10 @@ const List = (props: ListProps) => {
 
           <View style={styles.contentRight}>
             {hasRightComponent && (
-              <TouchableOpacity onPress={handleRightComponentClick}>
+              <TouchableOpacity
+                onPress={handleRightComponentClick}
+                disabled={disabled}
+              >
                 {typeof rightComponent === "function"
                   ? rightComponent()
                   : rightComponent}

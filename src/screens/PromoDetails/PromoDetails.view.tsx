@@ -35,9 +35,13 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
       <ScrollView style={styles.scrollView}>
         <View style={styles.promoMain}>
           <Accordion title="Details" expanded={expandedStatus}>
-            {accordionList.map((item, index) => (
-              <List key={index} {...item} />
-            ))}
+            {!selectedItem
+              ? accordionList.map((item, index) => (
+                  <List key={index} {...item} />
+                ))
+              : accordionList.map((item, index) => (
+                  <List key={index} {...item} disabled />
+                ))}
           </Accordion>
         </View>
         <View style={styles.promoMain}>
