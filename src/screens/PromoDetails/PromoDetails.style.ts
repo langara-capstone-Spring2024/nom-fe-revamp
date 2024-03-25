@@ -24,6 +24,9 @@ const createStyles = (theme: Theme) =>
       paddingTop: 16,
       paddingBottom: 32,
     },
+    spacer: {
+      paddingVertical: 48,
+    },
   });
 
 export default createStyles;

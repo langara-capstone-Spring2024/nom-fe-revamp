@@ -18,7 +18,13 @@ const monthYearString = currentDate.toLocaleString("default", {
 const [month, year] = monthYearString.split(" ");
 
 const DatePicker = (props: DatePickerProps) => {
-  const { onSelectDates, singleDate } = props;
+  const {
+    onSelectDates,
+    singleDate,
+    futureScrollRange,
+    pastScrollRange,
+    calendarWidth,
+  } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
@@ -96,14 +102,15 @@ const DatePicker = (props: DatePickerProps) => {
     <CalendarList
       current={INITIAL_DATE}
       minDate={INITIAL_DATE}
-      pastScrollRange={1}
-      futureScrollRange={2}
+      pastScrollRange={pastScrollRange}
+      futureScrollRange={futureScrollRange}
       markedDates={markedDates}
       onDayPress={handleDayPress}
       theme={calendarTheme}
       horizontal
       pagingEnabled
       staticHeader
+      calendarWidth={calendarWidth}
       // customHeaderTitle={CustomHeaderTitle}
     />
   );

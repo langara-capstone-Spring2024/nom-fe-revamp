@@ -43,7 +43,7 @@ const PromoDetails = () => {
   const [timeIsVisible, setTimeIsVisible] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [pickerSelectedValue, pickerSetSelectedValue] = useState(
-    Array.from({ length: 100 }, (_, index) => `${(index + 1) * 10}`)[0]
+    Array.from({ length: 100 }, (_, index) => `${(index + 1) * 10} %`)[0]
   );
   const selectedItem = useStore((state) => state.selectedItem);
   console.log("selectedItem: ", selectedItem);
@@ -182,10 +182,11 @@ const PromoDetails = () => {
   const handleSubmitDiscount = async () => {
     try {
       setIsLoading(true);
+      let pickerSelectedRate = pickerSelectedValue.replace("%", "");
       const discountPayload = {
         label: "test",
         description: "test",
-        percentDiscount: parseFloat(pickerSelectedValue) / 100,
+        percentDiscount: parseFloat(pickerSelectedRate) / 100,
         validFromTime: selectedStartDateTime.toISOString(),
         validToTime: selectedEndDateTime.toISOString(),
         validFromDate: storedDate,
@@ -210,7 +211,13 @@ const PromoDetails = () => {
       hasRightIcon: false,
       hasRightComponent: true,
       hiddenComponent: (
-        <DatePicker onSelectDates={handleSelectDates} singleDate />
+        <DatePicker
+          onSelectDates={handleSelectDates}
+          singleDate
+          futureScrollRange={0}
+          pastScrollRange={0}
+          calendarWidth={320}
+        />
       ),
       handleRightComponentClick: handleHideShowCalendar,
       hiddenComponentIsVisible: calendarIsVisible,
@@ -253,13 +260,19 @@ const PromoDetails = () => {
             gap: 3,
           }}
         >
-          <TouchableWithoutFeedback onPress={() => handleHideShowTime("start")}>
+          <TouchableWithoutFeedback
+            onPress={() => handleHideShowTime("start")}
+            disabled={selectedItem}
+          >
             <View>
               <StartTimeRightComponent />
             </View>
           </TouchableWithoutFeedback>
           <Text>-</Text>
-          <TouchableWithoutFeedback onPress={() => handleHideShowTime("end")}>
+          <TouchableWithoutFeedback
+            onPress={() => handleHideShowTime("end")}
+            disabled={selectedItem}
+          >
             <View>
               <EndTimeRightComponent />
             </View>
@@ -279,7 +292,7 @@ const PromoDetails = () => {
         <WheelPicker
           pickerData={Array.from(
             { length: 10 },
-            (_, index) => `${(index + 1) * 10}`
+            (_, index) => `${(index + 1) * 10} %`
           )}
           onValueChange={pickerValueChange}
           selectedValue={pickerSelectedValue}

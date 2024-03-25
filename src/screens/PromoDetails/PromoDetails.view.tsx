@@ -35,14 +35,19 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
       <ScrollView style={styles.scrollView}>
         <View style={styles.promoMain}>
           <Accordion title="Details" expanded={expandedStatus}>
-            {accordionList.map((item, index) => (
-              <List key={index} {...item} />
-            ))}
+            {!selectedItem
+              ? accordionList.map((item, index) => (
+                  <List key={index} {...item} />
+                ))
+              : accordionList.map((item, index) => (
+                  <List key={index} {...item} disabled />
+                ))}
           </Accordion>
         </View>
         <View style={styles.promoMain}>
           <Accordion
             title="Items"
+            expanded
             hasRightItem={true}
             rightItem={
               <View>
@@ -94,16 +99,19 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
         </View>
       </ScrollView>
       {!selectedItem && (
-        <View style={styles.promoFooter}>
-          <Button
-            text="Create Promo"
-            variant="primary"
-            buttonSize="md"
-            takeFullWidth
-            onPress={handleSubmitDiscount}
-            isDisabled={selectedMenuItemIds.length < 1 && true}
-          />
-        </View>
+        <>
+          <View style={styles.spacer}></View>
+          <View style={styles.promoFooter}>
+            <Button
+              text="Create Promo"
+              variant="primary"
+              buttonSize="md"
+              takeFullWidth
+              onPress={handleSubmitDiscount}
+              isDisabled={selectedMenuItemIds.length < 1 && true}
+            />
+          </View>
+        </>
       )}
     </View>
   );
