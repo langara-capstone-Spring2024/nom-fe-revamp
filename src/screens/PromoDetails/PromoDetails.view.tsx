@@ -43,6 +43,7 @@ const PromoDetails = (props: PromoDetailsGeneratedProps) => {
         <View style={styles.promoMain}>
           <Accordion
             title="Items"
+            expanded
             hasRightItem={true}
             rightItem={
               <View>
