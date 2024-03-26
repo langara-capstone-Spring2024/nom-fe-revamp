@@ -14,6 +14,8 @@ import Orders from "../../../screens/Orders";
 import MerchantHome from "../../../screens/MerchantHome";
 import ConsumerAccount from "../../../screens/ConsumerAccount";
 import MerchantAccount from "../../../screens/MerchantAccount";
+import HamburgerScreen from "../../../screens/HamburgerScreen";
+
 import {
   AccountTab,
   HomeFilledTab,
@@ -151,15 +153,12 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                 }}
               />
               <Tab.Screen
-                name="MerchantAccount"
-                component={MerchantAccount}
+                name="HamburgerScreen"
+                component={HamburgerScreen}
                 options={{
                   tabBarLabel: "Acount",
-                  tabBarIcon: ({ focused }) => (
+                  tabBarIcon: ({ color, size, focused }) => (
                     <AccountTab fill={focused ? "black" : "#939393"} />
-                  ),
-                  tabBarButton: ({ children, style }) => (
-                    <Pressable style={style}>{children}</Pressable>
                   ),
                 }}
               />
