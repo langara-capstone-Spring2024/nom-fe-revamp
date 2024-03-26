@@ -103,7 +103,7 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                   ),
                 }}
               />
-              <Tab.Screen
+              {/* <Tab.Screen
                 name="ConsumerAccount"
                 component={ConsumerAccount}
                 options={{
@@ -124,6 +124,16 @@ const BottomNavigation = (props: BottomNavigationProps) => {
                   ),
                   tabBarButton: ({ children, style }) => (
                     <Pressable style={style}>{children}</Pressable>
+                  ),
+                }}
+              /> */}
+              <Tab.Screen
+                name="HamburgerScreen"
+                component={HamburgerScreen}
+                options={{
+                  tabBarLabel: "Acount",
+                  tabBarIcon: ({ color, size, focused }) => (
+                    <AccountTab fill={focused ? "black" : "#939393"} />
                   ),
                 }}
               />

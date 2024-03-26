@@ -4,6 +4,7 @@ export interface UserToken {
   firstName: string;
   lastName: string;
   merchantId: string;
+  consumerId: string;
 }
 
 export interface LoginPayload {

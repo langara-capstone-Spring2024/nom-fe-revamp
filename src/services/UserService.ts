@@ -37,4 +37,14 @@ export class UserService extends BaseService {
 
     return response;
   }
+
+  async getConsumer(consumerId: string) {
+    const response = await apiClient.get("api/consumer", {
+      params: {
+        consumerId: consumerId,
+      },
+    });
+
+    return response;
+  }
 }
