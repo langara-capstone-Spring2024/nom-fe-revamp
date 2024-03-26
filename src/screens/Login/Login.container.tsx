@@ -6,11 +6,13 @@ import { LoginForm } from "./Login.props";
 import * as Yup from "yup";
 
 const Login = (): JSX.Element => {
-  const { setIsLoggedIn, setTokens } = useStore((state) => ({
+  const { setIsLoggedIn, setTokens, setMerchantId } = useStore((state) => ({
     setIsLoggedIn: state.setIsLoggedIn,
     setTokens: state.setTokens,
+    setMerchantId: state.setMerchantId,
   }));
 
+  //const test = useStore.getState().displayAsyncStorageData();
   const [initialValues, setInitialValues] = useState<LoginForm>({
     email: "",
     password: "",
@@ -32,6 +34,7 @@ const Login = (): JSX.Element => {
         onSuccess: (data) => {
           setTokens(data.accessToken, data.refreshToken);
           setIsLoggedIn(true);
+          setMerchantId(data.merchantId);
         },
       }
     );

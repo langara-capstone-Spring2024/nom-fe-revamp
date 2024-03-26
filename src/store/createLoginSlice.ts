@@ -7,6 +7,8 @@ export interface ILoginSlice {
   refreshToken: string | null;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   setTokens: (accessToken: string, refreshToken: string) => void;
+  merchantId: string;
+  setMerchantId: (merchantId: string) => void;
 }
 
 export const createLoginSlice: StateCreator<ILoginSlice> = (set) => ({
@@ -19,6 +21,10 @@ export const createLoginSlice: StateCreator<ILoginSlice> = (set) => ({
   },
   setTokens: (accessToken, refreshToken): void => {
     set({ accessToken, refreshToken });
+  },
+  merchantId: "",
+  setMerchantId: (merchantId): void => {
+    set({ merchantId });
   },
 });
 
