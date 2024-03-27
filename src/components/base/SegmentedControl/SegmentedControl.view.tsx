@@ -29,14 +29,18 @@ const SegmentedControl = (props: SegmentedControlProps) => {
             styles.segmentOption,
             {
               backgroundColor:
-                option === selectedOption ? t.Surface.sunken : "transparent",
+                option.value === selectedOption.value
+                  ? t.Surface.sunken
+                  : "transparent",
             },
           ]}
         >
           <View>
             <Typography
               variant="label2"
-              color={option === selectedOption ? "info-dark" : "inactive"}
+              color={
+                option.value === selectedOption.value ? "info-dark" : "inactive"
+              }
             >
               {option.label}
             </Typography>
