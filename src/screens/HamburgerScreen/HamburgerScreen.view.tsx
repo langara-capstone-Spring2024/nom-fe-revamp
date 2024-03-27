@@ -13,15 +13,34 @@ import { Switch } from "react-native-switch";
 const HamburgerScreen = (props: HamburgerScreenGeneratedProps) => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const { onLogout, merchantName, merchantImg } = props;
+  const {
+    onLogout,
+    merchantName,
+    merchantImg,
+    consumerFirstName,
+    consumerLastName,
+    role,
+  } = props;
   return (
     <View style={styles.container}>
-      <View style={[styles.content, styles.header]}>
-        <View>
-          <Typography variant="title2">{merchantName}</Typography>
-          {/* <Typography variant="title2">Edwards</Typography> */}
-        </View>
-        <UserAvatar source={merchantImg} sizing="large" />
+      <View style={styles.content}>
+        {role === "merchant" ? (
+          <View style={styles.header}>
+            <View>
+              <Typography variant="title2">{merchantName}</Typography>
+              {/* <Typography variant="title2">Edwards</Typography> */}
+            </View>
+            <UserAvatar source={merchantImg} sizing="large" />
+          </View>
+        ) : role === "consumer" ? (
+          <View style={styles.header}>
+            <View>
+              <Typography variant="title2">{consumerFirstName}</Typography>
+              <Typography variant="title2">{consumerLastName}</Typography>
+            </View>
+            <UserAvatar source={merchantImg} sizing="large" />
+          </View>
+        ) : null}
       </View>
       <View style={styles.content}>
         <List
