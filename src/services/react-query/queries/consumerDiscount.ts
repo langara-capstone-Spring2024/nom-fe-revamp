@@ -53,6 +53,7 @@ export const GetConsumerDiscount = (consumerDiscountId?: string) => {
         }
       }
     },
+    refetchInterval: 1000,
   });
 };
 
