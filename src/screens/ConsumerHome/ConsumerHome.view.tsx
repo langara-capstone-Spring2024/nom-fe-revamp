@@ -169,16 +169,25 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                     }
                   >
                     {ads.map((adMapItem, adMapItemIndex) => (
-                      <View style={{ width: width }} key={adMapItemIndex}>
-                        <Ad
-                          template={adMapItem.template}
-                          primary={adMapItem.primary}
-                          accent={adMapItem.accent}
-                          imageUrl={adMapItem.imageUrl}
-                          headline={adMapItem.headline}
-                          tagline={adMapItem.tagline}
-                        />
-                      </View>
+                      <Pressable
+                        onPress={() =>
+                          NavigationService.navigate("RestaurantProfile", {
+                            merchantId: adMapItem.merchantId._id,
+                          })
+                        }
+                        key={adMapItemIndex}
+                      >
+                        <View style={{ width: width }}>
+                          <Ad
+                            template={adMapItem.template}
+                            primary={adMapItem.primary}
+                            accent={adMapItem.accent}
+                            imageUrl={adMapItem.imageUrl}
+                            headline={adMapItem.headline}
+                            tagline={adMapItem.tagline}
+                          />
+                        </View>
+                      </Pressable>
                     ))}
                   </ScrollView>
                 ) : (
