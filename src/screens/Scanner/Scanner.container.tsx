@@ -10,9 +10,6 @@ const Scanner = () => {
   const handleChange = (result: string): boolean => {
     try {
       const scannedData = JSON.parse(result);
-      console.log(`merchant: ${scannedData.merchant}`);
-      console.log(`discount: ${scannedData.discount}`);
-      console.log(`consumer: ${scannedData.consumer}`);
 
       const merchant = scannedData.merchant;
       const discount = scannedData.discount;
