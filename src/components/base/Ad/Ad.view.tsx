@@ -104,7 +104,43 @@ const Ad = (props: AdProps) => {
           </View>
         </>
       ) : (
-        <></>
+        <>
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Image
+            source={require("../../../../assets/template/1_S.png")}
+            tintColor={accent}
+            style={styles.image}
+          />
+          <Image
+            source={require("../../../../assets/template/1_P.png")}
+            tintColor={primary}
+            style={styles.image}
+          />
+          <View
+            style={[
+              styles.typography,
+              {
+                top: "20%",
+                right: "58%",
+                left: "13%",
+              },
+            ]}
+          >
+            <Typography variant="title5">{headline}</Typography>
+          </View>
+          <View
+            style={[
+              styles.typography,
+              {
+                right: "58%",
+                left: "13%",
+                bottom: "20%",
+              },
+            ]}
+          >
+            <Typography variant="bodyXs">{tagline}</Typography>
+          </View>
+        </>
       )}
     </View>
   );
