@@ -7,20 +7,22 @@ const Scanner = () => {
   const [discountId, setDiscountId] = useState<string>("");
   const [consumerId, setConsumerId] = useState<string>("");
 
-  const handleChange = (result: string) => {
-    console.log(result);
-    const scannedData = JSON.parse(result);
-    console.log(`merchant: ${scannedData.merchant}`);
-    console.log(`discount: ${scannedData.merchant}`);
-    console.log(`consumer: ${scannedData.merchant}`);
-    const merchant = scannedData.merchant;
-    const discount = scannedData.discount;
-    const consumer = scannedData.consumer;
-    setMerchantId(merchant);
-    setDiscountId(discount);
-    setConsumerId(consumer);
+  const handleChange = (result: string): boolean => {
+    try {
+      const scannedData = JSON.parse(result);
 
-    return true;
+      const merchant = scannedData.merchant;
+      const discount = scannedData.discount;
+      const consumer = scannedData.consumer;
+
+      setMerchantId(merchant);
+      setDiscountId(discount);
+      setConsumerId(consumer);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   };
 
   console.log(merchantId);
@@ -46,7 +48,6 @@ const Scanner = () => {
     discountId,
   };
   return <ScannerView {...generatedProps} />;
-  
 };
 
 export default Scanner;

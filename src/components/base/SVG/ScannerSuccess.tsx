@@ -13,16 +13,16 @@ const ScannerSuccess = (props: SVGProps) => {
 </g>
 <defs>
 <radialGradient id="paint0_radial_3307_12011" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(41.5386 65.8148) rotate(-130.601) scale(23.0808 21.5762)">
-<stop stop-color="#C9081E"/>
-<stop offset="1" stop-color="#EF394E"/>
+<stop stop-color="#07BB39"/>
+<stop offset="1" stop-color="#07BB39"/>
 </radialGradient>
 <radialGradient id="paint1_radial_3307_12011" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(67.5725 64.6606) rotate(-130.598) scale(36.0575 33.7063)">
-<stop stop-color="#C9081E"/>
-<stop offset="1" stop-color="#EF394E"/>
+<stop stop-color="#07BB39"/>
+<stop offset="1" stop-color="#07BB39"/>
 </radialGradient>
 <radialGradient id="paint2_radial_3307_12011" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(77.7875 89.425) rotate(-130.601) scale(95.9985 89.7404)">
-<stop stop-color="#C9081E"/>
-<stop offset="1" stop-color="#EF394E"/>
+<stop stop-color="#07BB39"/>
+<stop offset="1" stop-color="#07BB39"/>
 </radialGradient>
 <clipPath id="clip0_3307_12011">
 <rect width="98" height="98" fill="white"/>
