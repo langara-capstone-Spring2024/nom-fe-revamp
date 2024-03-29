@@ -17,8 +17,8 @@ const Login = (): JSX.Element => {
 
   //const test = useStore.getState().displayAsyncStorageData();
   const [initialValues, setInitialValues] = useState<LoginForm>({
-    email: "merchant@nom.com",
-    password: "test123",
+    email: "",
+    password: "",
   });
 
   const validationSchema = Yup.object({
