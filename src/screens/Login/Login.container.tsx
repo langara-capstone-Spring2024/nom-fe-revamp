@@ -12,8 +12,8 @@ const Login = (): JSX.Element => {
   }));
 
   const [initialValues, setInitialValues] = useState<LoginForm>({
-    email: "merchant@nom.com",
-    password: "test123",
+    email: "",
+    password: "",
   });
 
   const validationSchema = Yup.object({
