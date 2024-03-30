@@ -60,10 +60,7 @@ const Ad = (props: AdProps) => {
         </>
       ) : template === "2" ? (
         <>
-          <Image
-            source={{ uri: "https://picsum.photos/360?random=1" }}
-            style={styles.image}
-          />
+          <Image source={{ uri: imageUrl }} style={styles.image} />
           <Image
             source={require("../../../../assets/template/2_P.png")}
             tintColor={primary}
