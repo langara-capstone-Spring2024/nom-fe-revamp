@@ -101,7 +101,9 @@ const PromoDetails = () => {
     //setSelectedStartDateTime(selectedStartDateTime || currentDateTime);
     if (selectedStartDateTime) {
       const endTime = new Date(selectedStartDateTime.getTime() + 30 * 60000);
-      setSelectedEndDateTime(endTime);
+      setSelectedEndDateTime(
+        new Date(`${storedDate}T${endTime.toISOString().split("T")[1]}`)
+      );
 
       setSelectedStartDateTime(
         new Date(
@@ -125,18 +127,27 @@ const PromoDetails = () => {
   ) => {
     if (selectedEndDateTime) {
       // filter for end time not to be before start time
-      if (
-        selectedStartDateTime &&
-        selectedEndDateTime < selectedStartDateTime
-      ) {
-        Alert.alert("Error", "End time cannot be before start time");
-        return;
-      }
       setSelectedEndDateTime(
         new Date(
           `${storedDate}T${selectedEndDateTime.toISOString().split("T")[1]}`
         )
       );
+      if (
+        selectedStartDateTime &&
+        selectedEndDateTime < selectedStartDateTime
+      ) {
+        Alert.alert("Error", "End time cannot be before start time");
+        let oldSelectedEndTime = new Date(
+          selectedStartDateTime.getTime() + 30 * 60000
+        );
+
+        setSelectedEndDateTime(
+          new Date(
+            `${storedDate}T${oldSelectedEndTime.toISOString().split("T")[1]}`
+          )
+        );
+        return;
+      }
     }
     if (
       selectedEndDateTime &&
@@ -214,7 +225,7 @@ const PromoDetails = () => {
         <DatePicker
           onSelectDates={handleSelectDates}
           singleDate
-          futureScrollRange={0}
+          futureScrollRange={1}
           pastScrollRange={0}
           calendarWidth={320}
         />
