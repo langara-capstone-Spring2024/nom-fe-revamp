@@ -4,7 +4,7 @@ import { theme as t } from "../../../utils/Theme";
 
 const windowWidth = Dimensions.get("window").width;
 
-const createStyles = (theme: Theme) =>
+const createStyles = (theme: Theme, color: string) =>
   StyleSheet.create({
     container: {
       position: "relative",
@@ -17,7 +17,7 @@ const createStyles = (theme: Theme) =>
       position: "absolute",
       top: 0,
       left: 0,
-      right: 0,
+      right: 117,
       bottom: 0,
     },
     primary: {
@@ -34,15 +34,15 @@ const createStyles = (theme: Theme) =>
     },
     headline: {
       position: "absolute",
-      top: "22.5%",
+      top: "25%",
       right: "8%",
       zIndex: 3,
       width: 130,
       height: 48,
       fontFamily: "PublicSansBold",
-      color: "#3C3C3C",
       textAlign: "right",
       fontSize: 18,
+      color,
     },
     tagline: {
       position: "absolute",
@@ -50,9 +50,9 @@ const createStyles = (theme: Theme) =>
       right: "8%",
       zIndex: 3,
       width: 100,
-      color: "#3C3C3C",
       textAlign: "right",
       fontSize: 9,
+      color,
     },
   });
 

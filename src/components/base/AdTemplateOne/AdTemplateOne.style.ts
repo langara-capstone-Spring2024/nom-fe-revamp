@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { Theme } from "../../../config/theme-config";
 import { theme as t } from "../../../utils/Theme";
 
-const createStyles = (theme: Theme) =>
+const createStyles = (theme: Theme, color: string) =>
   StyleSheet.create({
     container: {
       position: "relative",
@@ -14,7 +14,7 @@ const createStyles = (theme: Theme) =>
     image: {
       position: "absolute",
       top: 0,
-      left: 0,
+      left: 131,
       right: 0,
       bottom: 0,
     },
@@ -22,7 +22,7 @@ const createStyles = (theme: Theme) =>
       width: 166,
       height: 150,
       marginTop: 15,
-      marginLeft: 28,
+      marginLeft: 10,
       zIndex: 1,
     },
     secondary: {
@@ -35,20 +35,22 @@ const createStyles = (theme: Theme) =>
     headline: {
       position: "absolute",
       top: "20%",
-      left: "16%",
+      left: "11%",
       width: 120,
       zIndex: 2,
       fontFamily: "PublicSansBold",
-      color: "#3C3C3C",
+      // color: "#3C3C3C",
+      color,
       fontSize: 19,
     },
     tagline: {
       position: "absolute",
       top: "55%",
-      left: "16%",
+      left: "11%",
       width: 120,
       zIndex: 2,
-      color: "#3C3C3C",
+      // color: "#3C3C3C",
+      color
     },
   });
 
