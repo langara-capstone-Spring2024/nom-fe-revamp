@@ -17,7 +17,7 @@ const createStyles = (theme: Theme, color: string) =>
       position: "absolute",
       top: 0,
       left: 0,
-      right: 120,
+      right: 117,
       bottom: 0,
     },
     primary: {
@@ -34,7 +34,7 @@ const createStyles = (theme: Theme, color: string) =>
     },
     headline: {
       position: "absolute",
-      top: "22.5%",
+      top: "25%",
       right: "8%",
       zIndex: 3,
       width: 130,
