@@ -7,7 +7,7 @@ const createStyles = (theme: Theme) =>
     container: {
       flex: 1,
     },
-    addressContainer: { marginBottom: -32 },
+    addressContainer: { flexDirection: "row", gap: 4, marginBottom: -32 },
     serchContainer: {
       marginHorizontal: -16,
       padding: 16,

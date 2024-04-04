@@ -12,4 +12,6 @@ export interface Ad {
   primary: string;
   accent: string;
   merchantId: Merchant;
+  createdAt: Date;
+  updatedAt: Date;
 }
