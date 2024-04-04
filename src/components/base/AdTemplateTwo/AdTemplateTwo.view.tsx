@@ -21,10 +21,13 @@ const AdTemplateTwo = (props: AdTemplateTwoProps) => {
     width,
     height,
     style,
-    onSelectTemplate
+    onSelectTemplate,
   } = props;
   const theme = useTheme();
-  const styles = useMemo(() => createStyles(theme), [theme]);
+  const styles = useMemo(
+    () => createStyles(theme, secondary),
+    [theme, secondary]
+  );
   const windowWidth = useWindowDimensions().width;
 
   return (

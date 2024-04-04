@@ -20,7 +20,7 @@ const AdTemplateOne = (props: AdTemplateOneProps) => {
     onSelectTemplate,
   } = props;
   const theme = useTheme();
-  const styles = useMemo(() => createStyles(theme), [theme]);
+  const styles = useMemo(() => createStyles(theme, secondary), [theme, secondary]);
   return (
     <TouchableWithoutFeedback
       onPress={() => onSelectTemplate(1)}

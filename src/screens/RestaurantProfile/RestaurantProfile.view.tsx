@@ -268,58 +268,64 @@ const RestaurantProfile = (props: RestaurantProfileGeneratedProps) => {
                   : true
               ).length !== 0 ? (
                 <View style={styles.sectionBodyContainer}>
-                  {menuDiscounts
-                    .filter((menuDiscountFilterItem) =>
-                      selectedCoupon
-                        ? menuDiscountFilterItem.discount._id ===
-                          selectedCoupon?._id
-                        : true
-                    )
-                    .map((menuDiscountMapItem, menuDiscountMapItemIndex) => (
-                      <View
-                        style={[
-                          styles.menuContainer,
-                          menuDiscountMapItemIndex !==
-                            menuDiscounts.length - 1 && {
-                            borderBottomWidth: 1,
-                          },
-                        ]}
-                        key={menuDiscountMapItemIndex}
-                      >
-                        <View style={{ flex: 7, gap: 4 }}>
-                          <Typography>
-                            {menuDiscountMapItem.menu.name}
-                          </Typography>
-                          <View style={{ flexDirection: "row", gap: 16 }}>
-                            <Typography
-                              variant="bodySm"
-                              color="subtle"
-                              otherStyle={{
-                                textDecorationLine: "line-through",
-                              }}
-                            >
-                              ${menuDiscountMapItem.menu.originalPrice}
+                  <View>
+                    {menuDiscounts
+                      .filter((menuDiscountFilterItem) =>
+                        selectedCoupon
+                          ? menuDiscountFilterItem.discount._id ===
+                            selectedCoupon?._id
+                          : true
+                      )
+                      .map((menuDiscountMapItem, menuDiscountMapItemIndex) => (
+                        <View
+                          style={[
+                            styles.menuContainer,
+                            menuDiscountMapItemIndex !==
+                              menuDiscounts.length - 1 && {
+                              borderBottomWidth: 1,
+                            },
+                          ]}
+                          key={menuDiscountMapItemIndex}
+                        >
+                          <View style={{ flex: 7, gap: 4 }}>
+                            <Typography>
+                              {menuDiscountMapItem.menu.name}
                             </Typography>
+                            <View style={{ flexDirection: "row", gap: 16 }}>
+                              <Typography
+                                variant="bodySm"
+                                color="subtle"
+                                otherStyle={{
+                                  textDecorationLine: "line-through",
+                                }}
+                              >
+                                ${menuDiscountMapItem.menu.originalPrice}
+                              </Typography>
+                              <Typography variant="bodySm" color="subtle">
+                                $
+                                {(
+                                  menuDiscountMapItem.menu.originalPrice *
+                                  (1 -
+                                    menuDiscountMapItem.discount
+                                      .percentDiscount)
+                                ).toFixed(2)}
+                              </Typography>
+                            </View>
                             <Typography variant="bodySm" color="subtle">
-                              $
-                              {(
-                                menuDiscountMapItem.menu.originalPrice *
-                                menuDiscountMapItem.discount.percentDiscount
-                              ).toFixed(2)}
+                              {menuDiscountMapItem.menu.description}
                             </Typography>
                           </View>
-                          <Typography variant="bodySm" color="subtle">
-                            {menuDiscountMapItem.menu.description}
-                          </Typography>
+                          <View style={{ flex: 3 }}>
+                            <Image
+                              source={{
+                                uri: menuDiscountMapItem.menu.imageUrl,
+                              }}
+                              style={styles.menuImage}
+                            />
+                          </View>
                         </View>
-                        <View style={{ flex: 3 }}>
-                          <Image
-                            source={{ uri: menuDiscountMapItem.menu.imageUrl }}
-                            style={styles.menuImage}
-                          />
-                        </View>
-                      </View>
-                    ))}
+                      ))}
+                  </View>
                 </View>
               ) : (
                 <Typography>No results</Typography>

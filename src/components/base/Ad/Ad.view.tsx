@@ -22,7 +22,10 @@ const Ad = (props: AdProps) => {
     <View style={styles.container}>
       {template === "1" ? (
         <>
-          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Image
+            source={{ uri: imageUrl }}
+            style={[styles.image, { width: undefined, left: "25%", right: 0 }]}
+          />
           <Image
             source={require("../../../../assets/template/1_S.png")}
             tintColor={accent}
@@ -43,7 +46,9 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="title5">{headline}</Typography>
+            <Typography variant="title5" otherStyle={{ color: accent }}>
+              {headline}
+            </Typography>
           </View>
           <View
             style={[
@@ -55,14 +60,16 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="bodyXs">{tagline}</Typography>
+            <Typography variant="bodyXs" otherStyle={{ color: accent }}>
+              {tagline}
+            </Typography>
           </View>
         </>
       ) : template === "2" ? (
         <>
           <Image
-            source={{ uri: "https://picsum.photos/360?random=1" }}
-            style={styles.image}
+            source={{ uri: imageUrl }}
+            style={[styles.image, { width: undefined, left: 0, right: "25%" }]}
           />
           <Image
             source={require("../../../../assets/template/2_P.png")}
@@ -84,7 +91,11 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="title5" alignment="right">
+            <Typography
+              variant="title5"
+              alignment="right"
+              otherStyle={{ color: accent }}
+            >
               {headline}
             </Typography>
           </View>
@@ -98,13 +109,60 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="bodyXs" alignment="right">
+            <Typography
+              variant="bodyXs"
+              alignment="right"
+              otherStyle={{ color: accent }}
+            >
               {tagline}
             </Typography>
           </View>
         </>
       ) : (
-        <></>
+        <>
+          <Image
+            source={{ uri: imageUrl }}
+            style={[styles.image, { width: undefined, left: "25%", right: 0 }]}
+          />
+          <Image
+            source={require("../../../../assets/template/1_S.png")}
+            tintColor={accent}
+            style={styles.image}
+          />
+          <Image
+            source={require("../../../../assets/template/1_P.png")}
+            tintColor={primary}
+            style={styles.image}
+          />
+          <View
+            style={[
+              styles.typography,
+              {
+                top: "20%",
+                right: "58%",
+                left: "13%",
+              },
+            ]}
+          >
+            <Typography variant="title5" otherStyle={{ color: accent }}>
+              {headline}
+            </Typography>
+          </View>
+          <View
+            style={[
+              styles.typography,
+              {
+                right: "58%",
+                left: "13%",
+                bottom: "20%",
+              },
+            ]}
+          >
+            <Typography variant="bodyXs" otherStyle={{ color: accent }}>
+              {tagline}
+            </Typography>
+          </View>
+        </>
       )}
     </View>
   );

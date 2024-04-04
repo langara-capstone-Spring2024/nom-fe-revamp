@@ -14,7 +14,7 @@ import { useTheme } from "react-native-paper";
 import RestaurantCard from "../../components/base/RestaurantCard";
 import TextInputField from "../../components/base/TextInputField";
 import { ScrollView } from "react-native-gesture-handler";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import Typography from "../../components/base/Typography";
 import DishCard from "../../components/base/DishCard";
 import { Arrow } from "../../components/base/SVG";
@@ -62,8 +62,10 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
         }
       >
         <View style={styles.addressContainer}>
-          <Typography>
-            Langara College, West 49th Avenue, Vancouver, BC, Canada
+          <Ionicons name="location-outline" size={16} color="black" />
+          <Typography otherStyle={{ flex: 1, lineHeight: undefined }}>
+            {process.env.EXPO_PUBLIC_LOCATION ||
+              "Langara College, West 49th Avenue, Vancouver, BC, Canada"}
           </Typography>
         </View>
         <View style={styles.serchContainer}>
@@ -168,18 +170,33 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                       setWidth(event.nativeEvent.layout.width)
                     }
                   >
-                    {ads.map((adMapItem, adMapItemIndex) => (
-                      <View style={{ width: width }} key={adMapItemIndex}>
-                        <Ad
-                          template={adMapItem.template}
-                          primary={adMapItem.primary}
-                          accent={adMapItem.accent}
-                          imageUrl={adMapItem.imageUrl}
-                          headline={adMapItem.headline}
-                          tagline={adMapItem.tagline}
-                        />
-                      </View>
-                    ))}
+                    {ads
+                      .sort(
+                        (previousAd, nextAd) =>
+                          new Date(nextAd.createdAt).getTime() -
+                          new Date(previousAd.createdAt).getTime()
+                      )
+                      .map((adMapItem, adMapItemIndex) => (
+                        <Pressable
+                          onPress={() =>
+                            NavigationService.navigate("RestaurantProfile", {
+                              merchantId: adMapItem.merchantId._id,
+                            })
+                          }
+                          key={adMapItemIndex}
+                        >
+                          <View style={{ width: width }}>
+                            <Ad
+                              template={adMapItem.template}
+                              primary={adMapItem.primary}
+                              accent={adMapItem.accent}
+                              imageUrl={adMapItem.imageUrl}
+                              headline={adMapItem.headline}
+                              tagline={adMapItem.tagline}
+                            />
+                          </View>
+                        </Pressable>
+                      ))}
                   </ScrollView>
                 ) : (
                   <Typography alignment="center">No results</Typography>

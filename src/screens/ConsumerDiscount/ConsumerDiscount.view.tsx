@@ -274,7 +274,7 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                         $
                         {(
                           menuDiscountMapItem.menu.originalPrice *
-                          menuDiscountMapItem.discount.percentDiscount
+                          (1 - menuDiscountMapItem.discount.percentDiscount)
                         ).toFixed(2)}
                       </Typography>
                     </View>
