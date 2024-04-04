@@ -22,7 +22,10 @@ const Ad = (props: AdProps) => {
     <View style={styles.container}>
       {template === "1" ? (
         <>
-          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Image
+            source={{ uri: imageUrl }}
+            style={[styles.image, { width: undefined, left: "25%", right: 0 }]}
+          />
           <Image
             source={require("../../../../assets/template/1_S.png")}
             tintColor={accent}
@@ -64,7 +67,10 @@ const Ad = (props: AdProps) => {
         </>
       ) : template === "2" ? (
         <>
-          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Image
+            source={{ uri: imageUrl }}
+            style={[styles.image, { width: undefined, left: 0, right: "25%" }]}
+          />
           <Image
             source={require("../../../../assets/template/2_P.png")}
             tintColor={primary}
@@ -114,7 +120,10 @@ const Ad = (props: AdProps) => {
         </>
       ) : (
         <>
-          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Image
+            source={{ uri: imageUrl }}
+            style={[styles.image, { width: undefined, left: "25%", right: 0 }]}
+          />
           <Image
             source={require("../../../../assets/template/1_S.png")}
             tintColor={accent}
