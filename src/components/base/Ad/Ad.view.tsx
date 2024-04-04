@@ -122,7 +122,7 @@ const Ad = (props: AdProps) => {
         <>
           <Image
             source={{ uri: imageUrl }}
-            style={[styles.image, { width: undefined, left: "30%", right: 0 }]}
+            style={[styles.image, { width: undefined, left: "25%", right: 0 }]}
           />
           <Image
             source={require("../../../../assets/template/1_S.png")}
