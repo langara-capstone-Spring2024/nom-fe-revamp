@@ -43,7 +43,9 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="title5">{headline}</Typography>
+            <Typography variant="title5" otherStyle={{ color: accent }}>
+              {headline}
+            </Typography>
           </View>
           <View
             style={[
@@ -55,7 +57,9 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="bodyXs">{tagline}</Typography>
+            <Typography variant="bodyXs" otherStyle={{ color: accent }}>
+              {tagline}
+            </Typography>
           </View>
         </>
       ) : template === "2" ? (
@@ -81,7 +85,11 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="title5" alignment="right">
+            <Typography
+              variant="title5"
+              alignment="right"
+              otherStyle={{ color: accent }}
+            >
               {headline}
             </Typography>
           </View>
@@ -95,7 +103,11 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="bodyXs" alignment="right">
+            <Typography
+              variant="bodyXs"
+              alignment="right"
+              otherStyle={{ color: accent }}
+            >
               {tagline}
             </Typography>
           </View>
@@ -123,7 +135,9 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="title5">{headline}</Typography>
+            <Typography variant="title5" otherStyle={{ color: accent }}>
+              {headline}
+            </Typography>
           </View>
           <View
             style={[
@@ -135,7 +149,9 @@ const Ad = (props: AdProps) => {
               },
             ]}
           >
-            <Typography variant="bodyXs">{tagline}</Typography>
+            <Typography variant="bodyXs" otherStyle={{ color: accent }}>
+              {tagline}
+            </Typography>
           </View>
         </>
       )}

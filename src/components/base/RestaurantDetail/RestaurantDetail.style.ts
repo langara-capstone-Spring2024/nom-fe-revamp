@@ -17,6 +17,7 @@ const createStyles = (theme: Theme) =>
       aspectRatio: 2,
     },
     typography: {
+      flex: 1,
       lineHeight: undefined,
     },
   });
