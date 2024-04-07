@@ -4,6 +4,7 @@ import createStyles from "./OrderCard.style";
 import React, { useMemo } from "react";
 import { useTheme } from "react-native-paper";
 import Typography from "../Typography";
+import { theme as t } from "../../../utils//Theme";
 
 const OrderCard = (props: OrderCardProps) => {
   const {
@@ -87,9 +88,20 @@ const OrderCard = (props: OrderCardProps) => {
           <Typography variant="body" alignment="left" color="subtle">
             Status
           </Typography>
-          <Typography variant="body" alignment="left" color="warning-strong">
-            {capitalizeFirstLetter(status)}
-          </Typography>
+          <View
+            style={{
+              backgroundColor:
+                status === "upcoming"
+                  ? t.Surface["warning-light"]
+                  : status === "redeemed"
+                  ? t.Surface["success-light"]
+                  : t.Surface["error-light"],
+            }}
+          >
+            <Typography variant="body" alignment="left">
+              {capitalizeFirstLetter(status)}
+            </Typography>
+          </View>
         </View>
         <View>
           <Typography variant="body" alignment="left" color="subtle">
