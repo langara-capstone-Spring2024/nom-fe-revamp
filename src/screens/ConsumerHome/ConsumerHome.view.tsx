@@ -366,9 +366,6 @@ const ConsumerHome = (props: ConsumerHomeGeneratedProps) => {
                                           ratingsData[merchantItemIndex].data
                                             .length || 0
                                       }
-                                      cuisineType={
-                                        menuDiscountMapItem.menu.cuisineType
-                                      }
                                       cityName="Vancouver"
                                       discountAmount={discountAmount * 100}
                                       cost={menuDiscountMapItem.merchant.cost}

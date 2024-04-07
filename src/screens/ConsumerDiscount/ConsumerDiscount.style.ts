@@ -29,6 +29,7 @@ const createStyles = (theme: Theme) =>
     qrcode: {
       width: "50%",
       aspectRatio: 1,
+      alignSelf: "center",
     },
     listContainer: { gap: 16 },
     itemContainer: {
@@ -36,7 +37,6 @@ const createStyles = (theme: Theme) =>
       justifyContent: "space-between",
     },
     statusContainer: {
-      backgroundColor: t.Surface["warning-light"],
       paddingHorizontal: 8,
     },
     menuContainer: {
