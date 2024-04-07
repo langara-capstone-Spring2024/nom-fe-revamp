@@ -121,7 +121,11 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                           },
                         ]}
                       >
-                        <Typography>{consumerDiscount.status}</Typography>
+                        <Typography
+                          otherStyle={{ textTransform: "capitalize" }}
+                        >
+                          {consumerDiscount.status}
+                        </Typography>
                       </View>
                     </View>
                     <View style={styles.itemContainer}>
