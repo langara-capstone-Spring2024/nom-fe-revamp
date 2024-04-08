@@ -9,6 +9,7 @@ import Button from "../../components/base/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import LoadingAnimation from "../../components/base/LoadingAnimation";
+import { theme as t } from "../../utils/Theme";
 
 const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
   const {
@@ -92,7 +93,7 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                       style={styles.qrcode}
                     />
                     <Typography variant="title5" alignment="center">
-                      Nom Bites!
+                      {consumerDiscount.merchant.name}
                     </Typography>
                   </View>
                 </Card>
@@ -107,8 +108,24 @@ const ConsumerDiscount = (props: ConsumerDiscountGeneratedProps) => {
                     </View>
                     <View style={styles.itemContainer}>
                       <Typography color="subtle">Status</Typography>
-                      <View style={styles.statusContainer}>
-                        <Typography>{consumerDiscount.status}</Typography>
+                      <View
+                        style={[
+                          styles.statusContainer,
+                          {
+                            backgroundColor:
+                              consumerDiscount.status === "upcoming"
+                                ? t.Surface["warning-light"]
+                                : consumerDiscount.status === "redeemed"
+                                ? t.Surface["success-light"]
+                                : t.Surface["error-light"],
+                          },
+                        ]}
+                      >
+                        <Typography
+                          otherStyle={{ textTransform: "capitalize" }}
+                        >
+                          {consumerDiscount.status}
+                        </Typography>
                       </View>
                     </View>
                     <View style={styles.itemContainer}>

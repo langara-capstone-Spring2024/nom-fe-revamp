@@ -11,7 +11,6 @@ const DishCard = (props: DishCardProps) => {
     imageUrl,
     dishName,
     rating,
-    cuisineType,
     distance,
     cityName,
     discountAmount,
@@ -48,12 +47,6 @@ const DishCard = (props: DishCardProps) => {
             ratingColor="orange"
             readonly
           />
-          <Typography variant="bodySm" color="subtle">
-            ・
-          </Typography>
-          <Typography variant="bodySm" color="subtle">
-            {cuisineType}
-          </Typography>
         </View>
         <View style={{ flexDirection: "row", gap: 4 }}>
           {distance && (
