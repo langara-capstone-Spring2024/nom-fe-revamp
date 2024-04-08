@@ -6,14 +6,41 @@ import { BasicForm } from './CustomerRegistration.props';
 import NavigationService from "../../navigation/NavigationService";
 import { AddMerchant, Register, Signin } from '../../services/react-query/queries/auth';
 import * as Yup from "yup";
+import { Pressable } from 'react-native';
+import { AntDesign } from "@expo/vector-icons";
+
+
 
 const CustomerRegistration = () => {
-  const navigation = useNavigation
+  const navigation = useNavigation();
+
+  const { mutate: mutateSignin } = Signin();
+  const { mutate: mutateRegister } = Register();
+  
 
   const { setIsLoggedIn, setTokens } = useStore((state) => ({
     setIsLoggedIn: state.setIsLoggedIn,
     setTokens: state.setTokens,
   }));
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerTitle: "Verify your business",
+      headerLeft: () => {
+        return (
+          <Pressable
+            onPress={() => {
+              NavigationService.goBack();
+            }}
+            style={{ paddingLeft: 16, margin: 8 }}
+          >
+            <AntDesign name="arrowleft" size={24} color="black" />
+          </Pressable>
+        );
+      },
+    });
+  });
 
   const [basicInitialValues, setBasicInitialValues] = useState<BasicForm>({
     firstName: "",
@@ -22,21 +49,6 @@ const CustomerRegistration = () => {
     password: "",
     confirmPassword: "",
   });
-
-
-  const {
-    data: user,
-    mutate: mutateRegister,
-    isError: isErrorRegister,
-  } = Register();
-  const { data: merchant, mutate: mutateMerchant } = AddMerchant();
-  const { mutate: mutateSignin } = Signin();
-
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     headerShown: true,
-  //   });
-  // });
 
   const basicValidationSchema = Yup.object({
     firstName: Yup.string().required("Your first name is required"),
@@ -63,6 +75,24 @@ const CustomerRegistration = () => {
       firstName: basicInitialValues.firstName,
       lastName: basicInitialValues.lastName,
       role: "customer",
+    }, {
+      onSuccess: (data) => {
+        mutateSignin({
+          email: values.email,
+          password: values.password,
+        }, {
+          onSuccess: (loginData) => {
+            setTokens(loginData.accessToken, loginData.refreshToken);
+            setIsLoggedIn(true);
+          },
+          onError: (error) => {
+            console.error("Sign-in Error:", error);
+          }
+        });
+      },
+      onError: (error) => {
+        console.error("Registration Error:", error);
+      }
     });
   };
 
@@ -70,7 +100,6 @@ const CustomerRegistration = () => {
     basicInitialValues,
     basicValidationSchema,
     handleSubmit
-    // generated props here
   };
   return <CustomerRegistrationView {...generatedProps} />;
 };

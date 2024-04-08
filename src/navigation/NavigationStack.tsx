@@ -149,6 +149,7 @@ const PrivateNavigator = () => {
       customName: "Merchant Registration",
       custom: false,
     },
+    { func: CustomerRegistration, customName: "Customer Registration", custom: false },
   ];
   const {
     isAdScreen,
