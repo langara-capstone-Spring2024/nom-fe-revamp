@@ -1,22 +1,23 @@
-import { useNavigation, } from '@react-navigation/native';
-import CustomerRegistrationView from './CustomerRegistration.view';
-import { useStore } from '../../store';
-import { useEffect, useState } from 'react';
-import { BasicForm } from './CustomerRegistration.props';
+import { useNavigation } from "@react-navigation/native";
+import CustomerRegistrationView from "./CustomerRegistration.view";
+import { useStore } from "../../store";
+import { useEffect, useState } from "react";
+import { BasicForm } from "./CustomerRegistration.props";
 import NavigationService from "../../navigation/NavigationService";
-import { AddMerchant, Register, Signin } from '../../services/react-query/queries/auth';
+import {
+  AddMerchant,
+  Register,
+  Signin,
+} from "../../services/react-query/queries/auth";
 import * as Yup from "yup";
-import { Pressable } from 'react-native';
+import { Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
-
 
 const CustomerRegistration = () => {
   const navigation = useNavigation();
 
   const { mutate: mutateSignin } = Signin();
   const { mutate: mutateRegister } = Register();
-  
 
   const { setIsLoggedIn, setTokens } = useStore((state) => ({
     setIsLoggedIn: state.setIsLoggedIn,
@@ -69,37 +70,45 @@ const CustomerRegistration = () => {
   });
 
   const handleSubmit = (values: BasicForm) => {
-    mutateRegister({
-      email: basicInitialValues.email,
-      password: basicInitialValues.password,
-      firstName: basicInitialValues.firstName,
-      lastName: basicInitialValues.lastName,
-      role: "customer",
-    }, {
-      onSuccess: (data) => {
-        mutateSignin({
-          email: values.email,
-          password: values.password,
-        }, {
-          onSuccess: (loginData) => {
-            setTokens(loginData.accessToken, loginData.refreshToken);
-            setIsLoggedIn(true);
-          },
-          onError: (error) => {
-            console.error("Sign-in Error:", error);
-          }
-        });
+    console.log(values);
+    setBasicInitialValues(values);
+    mutateRegister(
+      {
+        email: values.email,
+        password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        role: "consumer",
       },
-      onError: (error) => {
-        console.error("Registration Error:", error);
+      {
+        onSuccess: (data) => {
+          mutateSignin(
+            {
+              email: values.email,
+              password: values.password,
+            },
+            {
+              onSuccess: (loginData) => {
+                setTokens(loginData.accessToken, loginData.refreshToken);
+                setIsLoggedIn(true);
+              },
+              onError: (error) => {
+                console.error("Sign-in Error:", error);
+              },
+            }
+          );
+        },
+        onError: (error) => {
+          console.error("Registration Error:", error);
+        },
       }
-    });
+    );
   };
 
   const generatedProps = {
     basicInitialValues,
     basicValidationSchema,
-    handleSubmit
+    handleSubmit,
   };
   return <CustomerRegistrationView {...generatedProps} />;
 };
