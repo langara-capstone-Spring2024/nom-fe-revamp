@@ -10,9 +10,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Button from "../../components/base/Button";
 
 const CustomerRegistration = (props: CustomerRegistrationGeneratedProps) => {
-  const { basicInitialValues,
-  basicValidationSchema,
-handleSubmit } = props;
+  const { basicInitialValues, basicValidationSchema, handleSubmit } = props;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   return (

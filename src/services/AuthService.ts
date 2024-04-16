@@ -82,4 +82,18 @@ export class AuthService extends BaseService {
 
     return response;
   }
+
+  async addConsumer(
+    name: string,
+    userId: string
+  ) {
+    const response = await apiClient.post("auth/consumer", {
+      name: name,
+      userId: userId,
+    });
+
+    return response;
+  }
 }
+
+

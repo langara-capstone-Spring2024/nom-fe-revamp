@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { BasicForm } from "./CustomerRegistration.props";
 import NavigationService from "../../navigation/NavigationService";
 import {
-  AddMerchant,
+  AddConsumer,
   Register,
   Signin,
 } from "../../services/react-query/queries/auth";
@@ -18,6 +18,7 @@ const CustomerRegistration = () => {
 
   const { mutate: mutateSignin } = Signin();
   const { mutate: mutateRegister } = Register();
+  const { mutate: mutateAddConsumer } = AddConsumer();
 
   const { setIsLoggedIn, setTokens } = useStore((state) => ({
     setIsLoggedIn: state.setIsLoggedIn,
@@ -27,7 +28,7 @@ const CustomerRegistration = () => {
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Verify your business",
+      headerTitle: "Create your account",
       headerLeft: () => {
         return (
           <Pressable
