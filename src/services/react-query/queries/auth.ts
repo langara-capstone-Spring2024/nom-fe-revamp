@@ -129,9 +129,9 @@ export const AddConsumer = () => {
   const authService = new AuthService();
   authService.cancelRequests();
 
-  return useMutation<Consumer, Error, { name: string; userId: string }>({
-    mutationFn: async (props: { name: string; userId: string }) => {
-      const response = await authService.addConsumer(props.name, props.userId);
+  return useMutation<Consumer, Error, { userId: string }>({
+    mutationFn: async (props: { userId: string }) => {
+      const response = await authService.addConsumer(props.userId);
       return response.data;
     },
   });
