@@ -83,18 +83,30 @@ const CustomerRegistration = () => {
       },
       {
         onSuccess: (data) => {
-          mutateSignin(
+          mutateAddConsumer(
             {
-              email: values.email,
-              password: values.password,
+              userId: data._id,
             },
             {
-              onSuccess: (loginData) => {
-                setTokens(loginData.accessToken, loginData.refreshToken);
-                setIsLoggedIn(true);
+              onSuccess: () => {
+                mutateSignin(
+                  {
+                    email: values.email,
+                    password: values.password,
+                  },
+                  {
+                    onSuccess: (loginData) => {
+                      setTokens(loginData.accessToken, loginData.refreshToken);
+                      setIsLoggedIn(true);
+                    },
+                    onError: (error) => {
+                      console.error("Sign-in Error:", error);
+                    },
+                  }
+                );
               },
               onError: (error) => {
-                console.error("Sign-in Error:", error);
+                console.error("AddConsumer Error:", error);
               },
             }
           );
