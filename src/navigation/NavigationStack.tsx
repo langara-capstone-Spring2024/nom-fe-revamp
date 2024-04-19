@@ -70,6 +70,7 @@ import RestaurantProfile from "../screens/RestaurantProfile";
 import OrderDetails from "../screens/OrderDetails";
 import ConsumerDiscount from "../screens/ConsumerDiscount";
 import MerchantRegistration from "../screens/MerchantRegistration";
+import CustomerRegistration from "../screens/CustomerRegistration";
 import MerchantHome from "../screens/MerchantHome";
 import RegistrationRole from "../screens/RegistrationRole";
 
@@ -146,6 +147,11 @@ const PrivateNavigator = () => {
     {
       func: MerchantRegistration,
       customName: "Merchant Registration",
+      custom: false,
+    },
+    {
+      func: CustomerRegistration,
+      customName: "Customer Registration",
       custom: false,
     },
   ];
@@ -231,6 +237,11 @@ const PublicNavigator = () => {
       <Stack.Screen
         name="MerchantRegistration"
         component={MerchantRegistration}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CustomerRegistration"
+        component={CustomerRegistration}
         options={{ headerShown: false }}
       />
     </PublicStack.Navigator>

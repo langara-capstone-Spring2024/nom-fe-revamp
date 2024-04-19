@@ -1,6 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosResponse, AxiosError } from "axios";
-import { LoginPayload, Merchant, User, UserToken } from "../../../types";
+import {
+  Consumer,
+  LoginPayload,
+  Merchant,
+  User,
+  UserToken,
+} from "../../../types";
 import { AuthService } from "../../AuthService";
 import { OperatingTime } from "../../../types/OperatingTime";
 
@@ -114,6 +120,18 @@ export const AddMerchant = () => {
         props.userId
       );
 
+      return response.data;
+    },
+  });
+};
+
+export const AddConsumer = () => {
+  const authService = new AuthService();
+  authService.cancelRequests();
+
+  return useMutation<Consumer, Error, { userId: string }>({
+    mutationFn: async (props: { userId: string }) => {
+      const response = await authService.addConsumer(props.userId);
       return response.data;
     },
   });
