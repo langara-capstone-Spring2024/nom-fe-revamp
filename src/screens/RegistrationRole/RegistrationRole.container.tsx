@@ -9,9 +9,8 @@ const RegistrationRole = () => {
   const handleContinue = () => {
     if (selectedRole === "merchant") {
       NavigationService.navigate("MerchantRegistration");
-    } else if (selectedRole === "consumer") {
-      // TODO
-      // Navigate to consumer
+    } else if (selectedRole === "customer") {
+      NavigationService.navigate("CustomerRegistration");
     } else {
     }
   };
